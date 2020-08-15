@@ -1,10 +1,20 @@
 import React, { Fragment } from 'react';
+import avatar from '../../../Icons/Avatars/avatar.png';
+import './header.css'
 
 const Header = () => {
   return (
     <Fragment>
-      <h1 id="title">מועצת הורים</h1>
-      <img class="avatar" src="https://example.com/images/avatar.jpg"></img>
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col align-self-end">
+            <img className="avatar" src={avatar} />
+          </div>
+          <div className="col text-right">
+            <h1 id="title">מועצת הורים</h1>
+          </div>
+        </div>
+      </div>
     </Fragment>
   );
 };

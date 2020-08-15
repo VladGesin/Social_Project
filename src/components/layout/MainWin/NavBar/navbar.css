@@ -1,0 +1,7 @@
+
+@media (max-width < 991.98px) {
+    .navbar {
+        align-self: start;
+        justify-content: start;
+    }
+}
