@@ -1,9 +1,9 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Login from './components/layout/Login/Login';
 
-function App() {
-  return <h1>Hello</h1>;
-}
+const App = () => {
+  return <Login />;
+};
 
 export default App;
