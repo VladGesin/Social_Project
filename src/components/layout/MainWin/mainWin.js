@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import Header from './HeaderLine/header';
-import NavBar from '../MainWin/NavBar/navbar'
+import NavBar from '../MainWin/NavBar/navbar';
+import WelcomPage from './WelcomPage/WelcomPage';
 
 export class mainWin extends Component {
   render() {
@@ -8,6 +9,7 @@ export class mainWin extends Component {
       <Fragment>
         <Header />
         <NavBar />
+        <WelcomPage />
       </Fragment>
     );
   }

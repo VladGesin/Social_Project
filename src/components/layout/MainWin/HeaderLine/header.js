@@ -1,14 +1,14 @@
 import React, { Fragment } from 'react';
 import avatar from '../../../Icons/Avatars/avatar.png';
-import './header.css'
+import './header.css';
 
 const Header = () => {
   return (
     <Fragment>
-      <div className="container-fluid">
-        <div className="row">
+      <div className="container">
+        <div className="row ">
           <div className="col align-self-end">
-            <img className="avatar" src={avatar} />
+            <img className="avatar" alt="avatar" src={avatar}></img>
           </div>
           <div className="col text-right">
             <h1 id="title">מועצת הורים</h1>
