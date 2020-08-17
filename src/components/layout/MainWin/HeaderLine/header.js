@@ -5,8 +5,8 @@ import './header.css';
 const Header = () => {
   return (
     <Fragment>
-      <div className="container">
-        <div className="row ">
+      <div className="container-fluid">
+        <div className="row">
           <div className="col align-self-end">
             <img className="avatar" alt="avatar" src={avatar}></img>
           </div>

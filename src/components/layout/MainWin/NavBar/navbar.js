@@ -6,14 +6,15 @@ const navbar = () => {
   return (
     <Fragment>
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light" dir="rtl">
-        <Navbar.Toggle aria-controls="responsive-navbar-nav " />
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="mr-auto ">
+          <Nav className="m-auto">
             <NavDropdown
               title="יושב ראש"
               id="collasible-nav-dropdown"
               dir="rtl"
-              className="ml-auto"
+              className="ml-auto text-right"
+
             >
               <NavDropdown.Item href="#action/3.1">
                 יושב ראש לדוגמא
@@ -38,10 +39,10 @@ const navbar = () => {
               <NavDropdown.Item href="#action/3.3">ועדה שלישי</NavDropdown.Item>
             </NavDropdown>
             <Nav.Link className="ml-auto" href="#features">
-              אודות
+              מפות
             </Nav.Link>
             <Nav.Link className="ml-auto" href="#pricing">
-              מפות
+              אודות
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
