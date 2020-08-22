@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import './InfoCard.css';
 const InfoCard = () => {
   return (
     <Fragment>
