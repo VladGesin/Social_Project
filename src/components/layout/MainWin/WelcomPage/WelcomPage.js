@@ -3,7 +3,8 @@ import Slider from './Slider/Slider';
 import Container from 'react-bootstrap/Container';
 import GoodWord from '../WelcomPage/GoodWord/GoodWord';
 import News from '../WelcomPage/News/News';
-
+import Birthday from '../WelcomPage/Birthdays/Birthday';
+import Teachers from '../WelcomPage/PrivateTeacher/PrivateTeacher';
 // import Row from 'react-bootstrap/Row';
 // import Col from 'react-bootstrap/Col';
 // import InfoCard from '../WelcomPage/InfoCard/InfoCard';
@@ -25,8 +26,8 @@ const WelcomPage = () => {
 
           <div className="col">
             <News />
-            {/* <InfoCard /> */}
-            {/* <InfoCard /> */}
+            <Birthday />
+            <Teachers />
           </div>
         </div>
       </Container>

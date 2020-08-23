@@ -1,12 +1,12 @@
 import React from 'react';
-import Card from 'react-bootstrap/Card';
+// import Card from 'react-bootstrap/Card';
 
-const CardText = (props) => {
+const CardData = (props) => {
   return (
     <div>
-      <Card.Text>{this.props}</Card.Text>
+      <li dir="rtl">{props.value.text}</li>
     </div>
   );
 };
 
-export default CardText;
+export default CardData;
