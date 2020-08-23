@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
@@ -22,9 +23,11 @@ export class LoginCard extends Component {
           <Form.Group controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="השאר אותי מחובר" />
           </Form.Group>
-          <Button variant="primary" type="submit">
-            כניסה
-          </Button>
+          <Link to="/MainWin">
+            <Button variant="primary" type="submit" onClick={() => {}}>
+              כניסה
+            </Button>
+          </Link>
         </Form>
       </Fragment>
     );
