@@ -1,18 +1,25 @@
 import React, { Fragment } from 'react';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
 import './InfoCard.css';
-const InfoCard = () => {
+import CardText from '../InfoCard/cardText';
+
+const InfoCard = (props) => {
+  const header = props.header;
+  const data = props.data;
+  const listdata = data.map((news) => (
+    // Correct! Key should be specified inside the array.
+    <CardText key={news.toString()} value={news} />
+  ));
   return (
     <Fragment>
       <Card className="text-right">
-        <Card.Header as="h5">מבזקים</Card.Header>
+        <Card.Header as="h5">{header}</Card.Header>
         <Card.Body>
           <Card.Title>כותרת המבזק</Card.Title>
-          <Card.Text>
-            מידע שייצוג במבזק מידע שייצוג במבזק מידע שייצוג במבזק
-          </Card.Text>
-          <Button variant="primary"> אופציונלי </Button>
+          {/* <Card.Text>
+            מידע שייצוג במבזק מידע שייצוג במבזק מידע שייצוג במבזק מידע שייצוג
+          </Card.Text> */}
+          {listdata}
         </Card.Body>
       </Card>
     </Fragment>

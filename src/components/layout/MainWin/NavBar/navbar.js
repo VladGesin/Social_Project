@@ -8,13 +8,12 @@ const navbar = () => {
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light" dir="rtl">
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="m-auto">
+          <Nav className="m-auto ">
             <NavDropdown
               title="יושב ראש"
               id="collasible-nav-dropdown"
               dir="rtl"
-              className="ml-auto text-right"
-
+              className="ml-auto text-right "
             >
               <NavDropdown.Item href="#action/3.1">
                 יושב ראש לדוגמא
