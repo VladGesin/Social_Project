@@ -1,9 +1,13 @@
 import React, { Fragment } from 'react';
 import Slider from './Slider/Slider';
 import Container from 'react-bootstrap/Container';
+import GoodWord from '../WelcomPage/GoodWord/GoodWord';
+import News from '../WelcomPage/News/News';
+import Birthday from '../WelcomPage/Birthdays/Birthday';
+import Teachers from '../WelcomPage/PrivateTeacher/PrivateTeacher';
 // import Row from 'react-bootstrap/Row';
 // import Col from 'react-bootstrap/Col';
-import InfoCard from '../WelcomPage/InfoCard/InfoCard';
+// import InfoCard from '../WelcomPage/InfoCard/InfoCard';
 import './WelcomPage.css';
 
 const WelcomPage = () => {
@@ -16,14 +20,14 @@ const WelcomPage = () => {
               <Slider />
             </div>
             <div className="row d-block  ">
-              <InfoCard />
+              <GoodWord />
             </div>
           </div>
 
           <div className="col">
-            <InfoCard />
-            <InfoCard />
-            <InfoCard />
+            <News />
+            <Birthday />
+            <Teachers />
           </div>
         </div>
       </Container>
