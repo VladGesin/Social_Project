@@ -9,11 +9,11 @@ export class mainWin extends Component {
   render() {
     return (
       <Fragment>
+        
         <Header />
         <NavBar />
-        
         <Router>
-          <Switch>
+            <Switch>
             <Route path="/" component={WelcomPage} />
           </Switch>
         </Router>
