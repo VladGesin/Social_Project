@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import avatar from '../../../Icons/Avatars/avatar.png';
 import './header.css';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
@@ -11,7 +12,9 @@ const Header = () => {
             <img className="avatar" alt="avatar" src={avatar}></img>
           </div>
           <div className="col text-right">
-            <h1 id="title">מועצת הורים</h1>
+            <Link to="/MainWin">
+              <h1 id="title">מועצת הורים</h1>
+            </Link>
           </div>
         </div>
       </div>

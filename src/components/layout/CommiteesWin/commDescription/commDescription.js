@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
-function CommDescription(props){
+function CommDescription() {
   return (
     <Fragment>
       <Card className="text-right">
@@ -17,6 +17,6 @@ function CommDescription(props){
       </Card>
     </Fragment>
   );
-};
+}
 
 export default CommDescription;

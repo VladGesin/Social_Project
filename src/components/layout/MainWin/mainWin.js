@@ -1,21 +1,19 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './HeaderLine/header';
 import NavBar from '../MainWin/NavBar/navbar';
-import WelcomPage from './WelcomPage/WelcomPage';
-
+import welcomPage from './WelcomPage/welcomPage';
+import commiteesWin from '../CommiteesWin/commiteesWin';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 export class mainWin extends Component {
   render() {
     return (
       <Fragment>
-        
-        <Header />
-        <NavBar />
         <Router>
-            <Switch>
-            <Route path="/" component={WelcomPage} />
-          </Switch>
+          <Header />
+          <NavBar />
+          <Route path="/MainWin" component={welcomPage} />
+          <Route path="/commiteesWin" component={commiteesWin} />
         </Router>
       </Fragment>
     );

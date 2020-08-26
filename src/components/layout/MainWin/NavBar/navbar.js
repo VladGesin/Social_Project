@@ -1,7 +1,9 @@
 import React, { Fragment } from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
+// import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './navbar.css';
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom';
 
 const navbar = () => {
   return (
@@ -15,11 +17,11 @@ const navbar = () => {
               id="collasible-nav-dropdown"
               dir="rtl"
               className="ml-auto text-right"
-
             >
               <NavDropdown.Item href="#action/3.1">
                 יושב ראש לדוגמא
               </NavDropdown.Item>
+
               <NavDropdown.Item href="#action/3.2">
                 יושב ראש שני
               </NavDropdown.Item>
@@ -33,11 +35,9 @@ const navbar = () => {
               id="collasible-nav-dropdown"
               dir="rtl"
             >
-              <Link to="/commiteesWin">
-              <NavDropdown.Item href="/commiteesWin">
-                ועדה לדוגמא
-              </NavDropdown.Item>
-              </Link>
+              {/***************************** Here Example for nav link ******************************/}
+              <NavLink to="/commiteesWin">ועדה לדוגמא</NavLink>
+
               <NavDropdown.Item href="#action/3.2">ועדה שני</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.3">ועדה שלישי</NavDropdown.Item>
             </NavDropdown>
