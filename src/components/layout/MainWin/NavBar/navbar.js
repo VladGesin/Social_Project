@@ -35,8 +35,11 @@ const navbar = () => {
               id="collasible-nav-dropdown"
               dir="rtl"
             >
-              {/***************************** Here Example for nav link ******************************/}
-              <NavLink to="/commiteesWin">ועדה לדוגמא</NavLink>
+              {/******* Here Example for nav link *******/}
+              <NavDropdown.Item className="text-right">
+                <NavLink to="/commiteesWin">ועדה לדוגמא</NavLink>
+              </NavDropdown.Item>
+              {/******* Here Example for nav link *******/}
 
               <NavDropdown.Item href="#action/3.2">ועדה שני</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.3">ועדה שלישי</NavDropdown.Item>
