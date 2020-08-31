@@ -8,8 +8,6 @@ import Teachers from '../WelcomPage/PrivateTeacher/PrivateTeacher';
 // import Row from 'react-bootstrap/Row';
 // import Col from 'react-bootstrap/Col';
 
-import InfoCard from './InfoCard/InfoCard';
-
 import './WelcomPage.css';
 
 const WelcomPage = () => {

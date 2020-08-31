@@ -16,9 +16,7 @@ const navbar = () => {
               title="יושב ראש"
               id="collasible-nav-dropdown"
               dir="rtl"
-
               className="ml-auto text-right"
-
             >
               <NavDropdown.Item href="#action/3.1">
                 יושב ראש לדוגמא

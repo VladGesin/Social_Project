@@ -1,9 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import Header from './HeaderLine/header';
 import NavBar from '../MainWin/NavBar/navbar';
-import WelcomPage from './WelcomPage/WelcomPage';
-import commiteesWin from '../CommiteesWin/commiteesWin';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Routes from './Routes';
 
 export class mainWin extends Component {
   render() {
@@ -12,8 +11,7 @@ export class mainWin extends Component {
         <Router>
           <Header />
           <NavBar />
-          <Route path="/MainWin" component={WelcomPage} />
-          <Route path="/commiteesWin" component={commiteesWin} />
+          <Routes />
         </Router>
       </Fragment>
     );
