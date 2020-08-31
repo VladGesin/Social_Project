@@ -7,7 +7,9 @@ import Birthday from '../WelcomPage/Birthdays/Birthday';
 import Teachers from '../WelcomPage/PrivateTeacher/PrivateTeacher';
 // import Row from 'react-bootstrap/Row';
 // import Col from 'react-bootstrap/Col';
-// import InfoCard from '../WelcomPage/InfoCard/InfoCard';
+
+import InfoCard from './InfoCard/InfoCard';
+
 import './WelcomPage.css';
 
 const WelcomPage = () => {
