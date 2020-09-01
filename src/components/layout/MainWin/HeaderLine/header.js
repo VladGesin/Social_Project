@@ -9,7 +9,10 @@ const Header = () => {
       <div className="container-fluid">
         <div className="row">
           <div className="col align-self-end">
-            <img className="avatar" alt="avatar" src={avatar}></img>
+            {/* ‎Here put api to personal page */}
+            <Link to="/personal">
+              <img className="avatar" alt="avatar" src={avatar}></img>
+            </Link>
           </div>
           <div className="col text-right">
             <Link to="/MainWin">

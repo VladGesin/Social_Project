@@ -6,6 +6,8 @@ import './navbar.css';
 // import { Link } from 'react-router-dom';
 
 const navbar = () => {
+  const commiteeItems = [{ name: 'ניסוי', path: '/commiteesWin' }];
+  const chairmanItems = [{ name: 'ניסוי', path: '/commiteesWin' }];
   return (
     <Fragment>
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light" dir="rtl">
@@ -16,19 +18,14 @@ const navbar = () => {
               title="יושב ראש"
               id="collasible-nav-dropdown"
               dir="rtl"
-
               className="ml-auto text-right"
-
             >
-              <NavDropdown.Item href="#action/3.1">
-                יושב ראש לדוגמא
-              </NavDropdown.Item>
+              {/******* Here Links For Chairman *******/}
 
-              <NavDropdown.Item href="#action/3.2">
-                יושב ראש שני
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">
-                יושב ראש שלישי
+              <NavDropdown.Item className="text-right">
+                {chairmanItems.map((item) => (
+                  <NavLink to={item.path}>{item.name}</NavLink>
+                ))}
               </NavDropdown.Item>
             </NavDropdown>
             <NavDropdown
@@ -37,20 +34,18 @@ const navbar = () => {
               id="collasible-nav-dropdown"
               dir="rtl"
             >
-              {/******* Here Example for nav link *******/}
+              {/******* Here Links For Commitees *******/}
               <NavDropdown.Item className="text-right">
-                <NavLink to="/commiteesWin">ועדה לדוגמא</NavLink>
+                {commiteeItems.map((item) => (
+                  <NavLink to={item.path}>{item.name}</NavLink>
+                ))}
               </NavDropdown.Item>
-              {/******* Here Example for nav link *******/}
-
-              <NavDropdown.Item href="#action/3.2">ועדה שני</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">ועדה שלישי</NavDropdown.Item>
             </NavDropdown>
             <Nav.Link className="ml-auto" href="#features">
-              מפות
+              <NavLink to="/maps">מפות</NavLink>
             </Nav.Link>
             <Nav.Link className="ml-auto" href="#pricing">
-              אודות
+              <NavLink to="/commiteesWin">אודות</NavLink>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
