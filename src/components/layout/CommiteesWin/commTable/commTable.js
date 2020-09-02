@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
+import avatar from '../../../Icons/Avatars/avatar.png';
 
 function CommTable() {
   return (
@@ -24,6 +25,7 @@ function CommTable() {
               </thead>
               <tbody>
                 <tr>
+                <img className="avatar" alt="avatar" src={avatar}></img>
                   <td>1</td>
                   <td>ישראל ישראלי</td>
                   <td>יו"ר הוועדה</td>
@@ -35,6 +37,7 @@ function CommTable() {
                   </td>
                 </tr>
                 <tr>
+                <img className="avatar" alt="avatar" src={avatar}></img> 
                   <td>2</td>
                   <td>פלוני אלמוני</td>
                   <td>סגן יו"ר הוועדה</td>
@@ -46,6 +49,7 @@ function CommTable() {
                   </td>
                 </tr>
                 <tr>
+                <img className="avatar" alt="avatar" src={avatar}></img>
                   <td>3</td>
                   <td>ג'יין דו</td>
                   <td>גזברית</td>

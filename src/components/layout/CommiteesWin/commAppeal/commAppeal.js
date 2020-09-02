@@ -1,10 +1,22 @@
 import React, { Fragment } from "react";
-import { Form, Col, Button, Card } from "react-bootstrap";
+import { Form, Col, Button, Card, Collapse } from "react-bootstrap";
+import { useState } from 'react';
 
 function CommAppeal() {
+    const [open, setOpen] = useState(false);
   return (
     <Fragment>
-      <Card className="text-right h-auto">
+      <Button
+        onClick={() => setOpen(!open)}
+        aria-controls="example-collapse-text"
+        aria-expanded={open}
+        variant="primary float-right"
+      >
+        פנייה לוועדה
+      </Button>
+      <Collapse in={open}>
+        <div id="example-collapse-text">
+        <Card className="text-right h-auto">
         <Card.Header as="h5" dir="rtl">
           פנייה לועדה:
         </Card.Header>
@@ -22,17 +34,20 @@ function CommAppeal() {
               <Form.Group as={Col} controlId="formGridAppeaKind">
                 <Form.Label>סוג הפנייה:</Form.Label>
                 <Form.Control as="select" defaultValue="בחר">
-                  <option>סוג א'</option>
-                  <option>סוג ב'</option>
+                  <option>בקשה</option>
+                  <option>הצעה</option>
+                  <option>תלונה</option>
+                  <option>דיווח</option>
                 </Form.Control>
               </Form.Group>
 
               <Form.Group as={Col} controlId="formGridAppealUrgent">
                 <Form.Label>דחיפות:</Form.Label>
                 <Form.Control as="select" defaultValue="בחר">
-                  <option>דחוף מאוד</option>
-                  <option>דחוף</option>
                   <option>לא דחוף</option>
+                  <option>דחוף</option>
+                  <option>דחוף מאוד</option>
+                  <option>קריטי</option>
                 </Form.Control>
               </Form.Group>
             </Form.Row>
@@ -78,7 +93,6 @@ function CommAppeal() {
           </Form>
         </Card.Body>
       </Card>
-
       <Card>
         <Card.Header as="h5" dir="rtl" className="text-right">
           צפייה בפנייה קודמת:
@@ -95,6 +109,8 @@ function CommAppeal() {
           </Form>
         </Card.Body>
       </Card>
+        </div>
+      </Collapse>
     </Fragment>
   );
 }
