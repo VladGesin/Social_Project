@@ -51,23 +51,23 @@ function CommAppeal() {
             </Form.Group>
 
             <Form.Row>
-              <Form.Group as={Col} controlId="formGridCity">
+              <Form.Group as={Col} controlId="formGridName">
                 <Form.Label>שם איש קשר:</Form.Label>
                 <Form.Control />
               </Form.Group>
 
-              <Form.Group as={Col} controlId="formGridCity">
+              <Form.Group as={Col} controlId="formGridPhone">
                 <Form.Label>טלפון ליצירת קשר:</Form.Label>
                 <Form.Control />
               </Form.Group>
 
-              <Form.Group as={Col} controlId="formGridCity">
+              <Form.Group as={Col} controlId="formGridContactMail">
                 <Form.Label>Email address</Form.Label>
                 <Form.Control type="email" placeholder="name@example.com" />
               </Form.Group>
             </Form.Row>
 
-            <Form.Group controlId="formGridAppealSubject">
+            <Form.Group controlId="formGridAppealKeywords">
               <Form.Label>מילות מפתח:</Form.Label>
               <Form.Control placeholder="מילות מפתח" />
             </Form.Group>
@@ -79,21 +79,19 @@ function CommAppeal() {
         </Card.Body>
       </Card>
 
-      <Card dir="rtl">
+      <Card>
         <Card.Header as="h5" dir="rtl" className="text-right">
           צפייה בפנייה קודמת:
         </Card.Header>
         <Card.Body>
-          <Form>
-            <Form.Row>
-              <Form.Group as={Col} controlId="formGridCity">
-                <Form.Label className="text-right">מספר פנייה:</Form.Label>
-                <Form.Control placeholder="מספר פנייה לפתיחה" />
-                <Button variant="primary float-right" type="submit">
-                  פתח
-                </Button>
-              </Form.Group>
-            </Form.Row>
+          <Form dir="rtl" className="text-right">
+            <Form.Group controlId="formGridAppealKeywords">
+              <Form.Label>מספר פנייה:</Form.Label>
+              <Form.Control placeholder="מספר פנייה..." />
+              <Button variant="primary float-right" type="submit">
+                פתח
+              </Button>
+            </Form.Group>
           </Form>
         </Card.Body>
       </Card>
