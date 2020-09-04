@@ -17,7 +17,7 @@ const navbar = () => {
     ],
   };
   const ChairmanItems = {
-    link: [{ name: 'ניסוי', path: '/commiteesWin' }],
+    link: [{ name: 'יושב ראש דניאלה', path: '/chairmanItems' }],
   };
   return (
     <Fragment>

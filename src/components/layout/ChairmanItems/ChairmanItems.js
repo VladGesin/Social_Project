@@ -1,9 +1,13 @@
-import React, { Component } from 'react';
+import React, { Fragment } from 'react';
+import CommDescription from '../CommiteesWin/commDescription/commDescription';
+const chairmanItems = () => {
+  return (
+    <Fragment>
+      <div className="container w-100">
+        <CommDescription />
+      </div>
+    </Fragment>
+  );
+};
 
-export class ChairmanItems extends Component {
-  render() {
-    return <div></div>;
-  }
-}
-
-export default ChairmanItems;
+export default chairmanItems;
