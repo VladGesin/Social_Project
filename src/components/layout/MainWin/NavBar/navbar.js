@@ -4,10 +4,21 @@ import { NavLink } from 'react-router-dom';
 // import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './navbar.css';
 // import { Link } from 'react-router-dom';
+import NavMapLinks from './NavBarMapping/NavMapLinks';
 
 const navbar = () => {
-  const commiteeItems = [{ name: 'ניסוי', path: '/commiteesWin' }];
-  const chairmanItems = [{ name: 'ניסוי', path: '/commiteesWin' }];
+  const CommiteeItems = {
+    link: [
+      { name: 'ניסוי', path: '/commiteesWin' },
+      {
+        name: 'ועדת חינוך',
+        path: '/commiteesWin',
+      },
+    ],
+  };
+  const ChairmanItems = {
+    link: [{ name: 'ניסוי', path: '/commiteesWin' }],
+  };
   return (
     <Fragment>
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light" dir="rtl">
@@ -22,11 +33,9 @@ const navbar = () => {
             >
               {/******* Here Links For Chairman *******/}
 
-              <NavDropdown.Item className="text-right">
-                {chairmanItems.map((item) => (
-                  <NavLink to={item.path}>{item.name}</NavLink>
-                ))}
-              </NavDropdown.Item>
+              {ChairmanItems.link.map((item) => (
+                <NavMapLinks link={item} key={item.name} />
+              ))}
             </NavDropdown>
             <NavDropdown
               className="ml-auto"
@@ -35,11 +44,10 @@ const navbar = () => {
               dir="rtl"
             >
               {/******* Here Links For Commitees *******/}
-              <NavDropdown.Item className="text-right">
-                {commiteeItems.map((item) => (
-                  <NavLink to={item.path}>{item.name}</NavLink>
-                ))}
-              </NavDropdown.Item>
+
+              {CommiteeItems.link.map((item) => (
+                <NavMapLinks link={item} key={item.name} />
+              ))}
             </NavDropdown>
             <Nav.Link className="ml-auto" href="#features">
               <NavLink to="/maps">מפות</NavLink>
