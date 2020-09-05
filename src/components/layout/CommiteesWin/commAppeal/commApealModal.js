@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
-import { Form, Col, Button, Card } from 'react-bootstrap';
-import { useState } from 'react';
-import Modal from 'react-bootstrap/Modal';
+import React, { Fragment } from "react";
+import { Form, Col, Button, Card } from "react-bootstrap";
+import { useState } from "react";
+import Modal from "react-bootstrap/Modal";
 
-const CommApealModal = () => {
+const CommApealModal = (props) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -25,11 +25,7 @@ const CommApealModal = () => {
             <Form dir="rtl">
               <Form.Row>
                 <Form.Group as={Col} controlId="formGridAppealTo">
-                  <Form.Label>פנייה אל:</Form.Label>
-                  <Form.Control as="select" defaultValue="בחר">
-                    <option>ועדה א'</option>
-                    <option>וועדה ב'</option>
-                  </Form.Control>
+                  <Form.Label>פניה אל: {props.name}</Form.Label>
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridAppeaKind">
