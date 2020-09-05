@@ -10,9 +10,8 @@ const InfoCardMap = (props) => {
         <td>{props.card.name}</td>
         <td>{props.card.position}</td>
         <td>{props.card.phone}</td>
-        <td>
-          {/* <a href="mailto:israel_israeli@gmail.com">israel_israeli@gmail.com</a> */}
-          <a href="mailto:israel_israeli@gmail.com">{props.card.mail}</a>
+        <td>         
+         <a href={`mailto:${props.card.mail}`}>{props.card.mail}</a>
         </td>
       </tr>
     </Fragment>
