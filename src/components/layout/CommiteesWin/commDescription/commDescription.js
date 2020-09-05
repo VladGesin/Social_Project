@@ -1,20 +1,20 @@
-import React, { Fragment } from "react";
-import Card from "react-bootstrap/Card";
-import CommApealModal from "../commAppeal/commApealModal";
+import React, { Fragment } from 'react';
+import Card from 'react-bootstrap/Card';
+import CommApealModal from '../commAppeal/commApealModal';
 
-const CommDescription=(props)=> {
+const CommDescription = (props) => {
   return (
     <Fragment>
       <Card className="text-right w-100">
-        <Card.Header as="h2">'{props.CommItem.name}'</Card.Header>
+        <Card.Header as="h2">{props.commItem.name}</Card.Header>
         <Card.Body>
           <Card.Title>קצת על הוועדה</Card.Title>
-          <Card.Text>{props.CommItem.desc}</Card.Text>
+          <Card.Text>{props.commItem.desc}</Card.Text>
           <CommApealModal />
         </Card.Body>
       </Card>
     </Fragment>
   );
-}
+};
 
 export default CommDescription;
