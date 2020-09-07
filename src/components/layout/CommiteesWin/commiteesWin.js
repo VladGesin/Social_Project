@@ -1,23 +1,32 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import CommDescription from './commDescription/commDescription';
 import CommTable from './commTable/commTable';
 
-export class CommiteesWin extends Component {
-  render() {
-    return (
-      <Fragment>
-        <div className="container">
-          <div className="row">
-            <CommDescription />
-          </div>
+const CommiteesWin = () => {
+  const CommList = {
+    education: {
+      name: 'ועדת חינוך',
+      desc: 'פירוט רחב על כלל המידע הנוגע לועדה',
+    },
 
-          <div className="row">
-            <CommTable />
-          </div>
+    sport: {
+      name: 'ועדת ספורט',
+      desc: 'פירוט רחב על כלל המידע הנוגע לועדה',
+    },
+  };
+  return (
+    <Fragment>
+      <div className="container">
+        <div className="row">
+          <CommDescription commItem={CommList.education} />
         </div>
-      </Fragment>
-    );
-  }
-}
+
+        <div className="row">
+          <CommTable />
+        </div>
+      </div>
+    </Fragment>
+  );
+};
 
 export default CommiteesWin;
