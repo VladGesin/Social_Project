@@ -1,8 +1,9 @@
 import React, { Fragment } from 'react';
 import CommDescription from './commDescription/commDescription';
 import CommTable from './commTable/commTable';
+import { useLocation } from 'react-router-dom';
 
-const CommiteesWin = () => {
+const CommiteesWin = (props) => {
   const CommList = {
     education: {
       name: 'ועדת חינוך',
@@ -14,11 +15,14 @@ const CommiteesWin = () => {
       desc: 'פירוט רחב על כלל המידע הנוגע לועדה',
     },
   };
+
+  const location = useLocation();
   return (
     <Fragment>
+      {console.log(CommList[location.state.item])}
       <div className="container">
         <div className="row">
-          <CommDescription commItem={CommList.education} />
+          <CommDescription commItem={CommList[location.state.item]} />
         </div>
 
         <div className="row">

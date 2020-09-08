@@ -9,15 +9,16 @@ import NavMapLinks from './NavBarMapping/NavMapLinks';
 const navbar = () => {
   const CommiteeItems = {
     link: [
-      { name: 'ניסוי', path: '/commiteesWin' },
+      { name: 'ועדת ספורט', path: '/commiteesWin', item: 'sport' },
       {
         name: 'ועדת חינוך',
         path: '/commiteesWin',
+        item: 'education',
       },
     ],
   };
   const ChairmanItems = {
-    link: [{ name: 'יושב ראש דניאלה', path: '/chairmanItems' }],
+    link: [{ name: 'יושב ראש דניאלה', path: '/chairmanItems/', item: 'test' }],
   };
   return (
     <Fragment>

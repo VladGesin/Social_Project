@@ -4,11 +4,6 @@ import commiteesWin from '../../CommiteesWin/commiteesWin';
 import { Route } from 'react-router-dom';
 import chairmanItems from '../../ChairmanItems/ChairmanItems';
 
-const menuItems = [
-  { name: 'WelcomPage', path: '/MainWin' },
-  { name: 'commiteesWin', path: '/commiteesWin' },
-  { name: 'chairmanItems', path: '/chairmanItems' },
-];
 const COMPONENT_MAP = {
   WelcomPage: WelcomPage,
   commiteesWin: commiteesWin,
@@ -18,6 +13,12 @@ const COMPONENT_MAP = {
 // const COMPONENT_MAP = menuItems.map((item)=>)
 
 const Routes = () => {
+  const menuItems = [
+    { name: 'WelcomPage', path: '/MainWin' },
+    { name: 'commiteesWin', path: '/commiteesWin/:education' },
+    { name: 'commiteesWin', path: '/commiteesWin/:sport' },
+    { name: 'chairmanItems', path: '/chairmanItems/:item' },
+  ];
   return (
     <Fragment>
       {menuItems.map((item) => (
