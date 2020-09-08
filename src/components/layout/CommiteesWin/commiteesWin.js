@@ -1,27 +1,36 @@
-import React, { Component, Fragment } from "react";
-import CommDescription from "./commDescription/commDescription";
-import CommTable from "./commTable/commTable";
-import CommAppeal from "./commAppeal/commAppeal";
+import React, { Fragment } from 'react';
+import CommDescription from './commDescription/commDescription';
+import CommTable from './commTable/commTable';
+import { useLocation } from 'react-router-dom';
 
-export class CommiteesWin extends Component {
-  render() {
-    return (
-      <Fragment>
-        <div className="col">
-          <CommDescription />
+const CommiteesWin = (props) => {
+  const CommList = {
+    education: {
+      name: 'ועדת חינוך',
+      desc: 'פירוט רחב על כלל המידע הנוגע לועדה',
+    },
+
+    sport: {
+      name: 'ועדת ספורט',
+      desc: 'פירוט רחב על כלל המידע הנוגע לועדה',
+    },
+  };
+
+  const location = useLocation();
+  return (
+    <Fragment>
+      {console.log(CommList[location.state.item])}
+      <div className="container">
+        <div className="row">
+          <CommDescription commItem={CommList[location.state.item]} />
         </div>
 
         <div className="row">
-          <div className="col">
-            <CommAppeal />
-          </div>
-          <div className="col">
-            <CommTable />
-          </div>
+          <CommTable />
         </div>
-      </Fragment>
-    );
-  }
-}
+      </div>
+    </Fragment>
+  );
+};
 
 export default CommiteesWin;

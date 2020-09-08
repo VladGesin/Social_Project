@@ -1,21 +1,21 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import Header from './HeaderLine/header';
 import NavBar from '../MainWin/NavBar/navbar';
-import { BrowserRouter as Router } from 'react-router-dom';
-import Routes from './Routes';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import Routes from './Routes/Routes';
 
-export class mainWin extends Component {
-  render() {
-    return (
-      <Fragment>
-        <Router>
-          <Header />
-          <NavBar />
+const mainWin = () => {
+  return (
+    <Fragment>
+      <Router>
+        <Header />
+        <NavBar />
+        <Switch>
           <Routes />
-        </Router>
-      </Fragment>
-    );
-  }
-}
+        </Switch>
+      </Router>
+    </Fragment>
+  );
+};
 
 export default mainWin;

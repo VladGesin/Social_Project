@@ -1,11 +1,44 @@
-import React, { Fragment } from "react";
-import Card from "react-bootstrap/Card";
-import Table from "react-bootstrap/Table";
+import React, { Fragment } from 'react';
+import Card from 'react-bootstrap/Card';
+import Table from 'react-bootstrap/Table';
+import InfoCardMap from '../commTable/infoCardMap';
 
-function CommTable() {
+function CommTable(props) {
+  const PplArr = {
+    card: [
+      {
+        index: 1,
+        img: 'avatar',
+        name: 'ישראל ישראלי',
+        position: 'יו״ר וועדה',
+        phone: '054222222',
+        mail: 'gas@gfdv.com',
+      },
+      {
+        index: 2,
+        img: 'avatar',
+        name: 'ילוני אלמוני',
+        position: 'יו״ר וועדהגן יו"ר הוועדה',
+        phone: '054222222',
+        mail: 'HHHH@MMm.com',
+      },
+      {
+        index: 3,
+        img: 'avatar',
+        name: 'גודי גודיד',
+        position: 'מזכירת היו״ר',
+        phone: '054222222',
+        mail: 'cofi@xmxm.com',
+      },
+    ],
+  };
+
+  const PplArrMap = PplArr.card.map((card) => (
+    <InfoCardMap card={card} key={card.name.toString} />
+  ));
   return (
     <Fragment>
-      <Card className="text-right h-auto">
+      <Card className="text-right h-auto w-100">
         <Card.Header as="h5" dir="rtl">
           חברי הוועדה:
         </Card.Header>
@@ -22,39 +55,7 @@ function CommTable() {
                   <th>E-mail:</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>ישראל ישראלי</td>
-                  <td>יו"ר הוועדה</td>
-                  <td>052-111111</td>
-                  <td>
-                    <a href="mailto:israel_israeli@gmail.com">
-                      israel_israeli@gmail.com
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>פלוני אלמוני</td>
-                  <td>סגן יו"ר הוועדה</td>
-                  <td>052-2222222</td>
-                  <td>
-                    <a href="mailto:ploni_almoni@gmail.com">
-                      ploni_almoni@gmail.com
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>ג'יין דו</td>
-                  <td>גזברית</td>
-                  <td>052-3333333</td>
-                  <td>
-                    <a href="mailto:Jane_Doe@gmail.com">Jane_Doe@gmail.com</a>
-                  </td>
-                </tr>
-              </tbody>
+              <tbody>{PplArrMap}</tbody>
             </Table>
           </Card.Text>
         </Card.Body>

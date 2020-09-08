@@ -4,8 +4,22 @@ import { NavLink } from 'react-router-dom';
 // import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './navbar.css';
 // import { Link } from 'react-router-dom';
+import NavMapLinks from './NavBarMapping/NavMapLinks';
 
 const navbar = () => {
+  const CommiteeItems = {
+    link: [
+      { name: 'ועדת ספורט', path: '/commiteesWin', item: 'sport' },
+      {
+        name: 'ועדת חינוך',
+        path: '/commiteesWin',
+        item: 'education',
+      },
+    ],
+  };
+  const ChairmanItems = {
+    link: [{ name: 'יושב ראש דניאלה', path: '/chairmanItems/', item: 'test' }],
+  };
   return (
     <Fragment>
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light" dir="rtl">
@@ -18,16 +32,11 @@ const navbar = () => {
               dir="rtl"
               className="ml-auto text-right"
             >
-              <NavDropdown.Item href="#action/3.1">
-                יושב ראש לדוגמא
-              </NavDropdown.Item>
+              {/******* Here Links For Chairman *******/}
 
-              <NavDropdown.Item href="#action/3.2">
-                יושב ראש שני
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">
-                יושב ראש שלישי
-              </NavDropdown.Item>
+              {ChairmanItems.link.map((item) => (
+                <NavMapLinks link={item} key={item.name} />
+              ))}
             </NavDropdown>
             <NavDropdown
               className="ml-auto"
@@ -35,20 +44,17 @@ const navbar = () => {
               id="collasible-nav-dropdown"
               dir="rtl"
             >
-              {/******* Here Example for nav link *******/}
-              <NavDropdown.Item className="text-right">
-                <NavLink to="/commiteesWin">ועדה לדוגמא</NavLink>
-              </NavDropdown.Item>
-              {/******* Here Example for nav link *******/}
+              {/******* Here Links For Commitees *******/}
 
-              <NavDropdown.Item href="#action/3.2">ועדה שני</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">ועדה שלישי</NavDropdown.Item>
+              {CommiteeItems.link.map((item) => (
+                <NavMapLinks link={item} key={item.name} />
+              ))}
             </NavDropdown>
             <Nav.Link className="ml-auto" href="#features">
-              מפות
+              <NavLink to="/maps">מפות</NavLink>
             </Nav.Link>
             <Nav.Link className="ml-auto" href="#pricing">
-              אודות
+              <NavLink to="/commiteesWin">אודות</NavLink>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

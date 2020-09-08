@@ -10,7 +10,6 @@ const InfoCard = (props) => {
         <Card.Header as="h5">{props.dataItem.header}</Card.Header>
         <Card.Body>
           <Card.Title>כותרת המבזק</Card.Title>
-
           <Card.Text>
             {props.dataItem.NewsCard.map((news) => (
               <CardData key={news.toString()} value={news} />
