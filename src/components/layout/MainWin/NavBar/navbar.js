@@ -57,6 +57,9 @@ const navbar = () => {
               <NavLink to="/commiteesWin">אודות</NavLink>
             </Nav.Link>
           </Nav>
+          <Nav.Link className="justify-content-end" href="#pricing">
+              <NavLink to="/SecreturyWin">מסך ניהול</NavLink>
+            </Nav.Link>
         </Navbar.Collapse>
       </Navbar>
     </Fragment>

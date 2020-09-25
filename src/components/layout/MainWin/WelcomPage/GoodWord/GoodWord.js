@@ -35,6 +35,7 @@ const GoodWord = () => {
         </Modal.Header>
         <Modal.Body>
           <div>
+            
             <form>
             <div class="form-group">
     <label for="exampleFormControlSelect1">אל יו"ר :</label>

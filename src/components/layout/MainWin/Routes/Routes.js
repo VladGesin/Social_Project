@@ -3,11 +3,13 @@ import WelcomPage from '../../MainWin/WelcomPage/WelcomPage';
 import commiteesWin from '../../CommiteesWin/commiteesWin';
 import { Route } from 'react-router-dom';
 import chairmanItems from '../../ChairmanItems/ChairmanItems';
+import secreturywin from '../../SecretaryWin/SecreturyWin'
 
 const COMPONENT_MAP = {
   WelcomPage: WelcomPage,
   commiteesWin: commiteesWin,
   chairmanItems: chairmanItems,
+  secreturywin:secreturywin
 };
 
 // const COMPONENT_MAP = menuItems.map((item)=>)
@@ -18,6 +20,7 @@ const Routes = () => {
     { name: 'commiteesWin', path: '/commiteesWin/:education' },
     { name: 'commiteesWin', path: '/commiteesWin/:sport' },
     { name: 'chairmanItems', path: '/chairmanItems/:item' },
+    { name: 'secreturywin', path: '/secreturywin' },
   ];
   return (
     <Fragment>
