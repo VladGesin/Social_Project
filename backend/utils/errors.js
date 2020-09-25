@@ -5,4 +5,3 @@ module.exports = (message, statusCode) => {
   error.statusCode = statusCode;
   return error;
 };
-ß;

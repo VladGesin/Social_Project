@@ -1,4 +1,4 @@
-const express = require('express'); 
+const express = require('express');
 const authorization = require('../middleware/authorization');
 const inboxController = require('../controllers/inbox');
 
@@ -6,7 +6,17 @@ const inboxController = require('../controllers/inbox');
 const router = express.Router();
 
 /* Handles inbox applications */
-router.get('/inbox/:id', authorization.formatAndSetToken, authorization.verifyToken, inboxController.getApplication);
-router.post('/inbox', authorization.formatAndSetToken, authorization.verifyToken, inboxController.createNewApplication);
+router.get(
+  '/inbox/:id',
+  authorization.formatAndSetToken,
+  authorization.verifyToken,
+  inboxController.getApplication
+);
+router.post(
+  '/inbox',
+  authorization.formatAndSetToken,
+  authorization.verifyToken,
+  inboxController.createNewApplication
+);
 
 module.exports = router;

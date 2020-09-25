@@ -2,7 +2,7 @@ require('dotenv').config();
 
 /* Requires */
 const express = require('express');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 const usersRoutes = require('./routes/users');
 const committeeRoutes = require('./routes/committee');
 const inboxRoutes = require('./routes/inbox');
@@ -20,11 +20,11 @@ app.use(committeeRoutes);
 app.use(inboxRoutes);
 
 app.use((error, req, res, next) => {
-    console.log(error);
-    const status = error.statusCode || 500;
-    const message = error.message;
+  console.log(error);
+  const status = error.statusCode || 500;
+  const message = error.message;
 
-    res.status(status).json({ message: message });
+  res.status(status).json({ message: message });
 });
 
 /* Listening */
