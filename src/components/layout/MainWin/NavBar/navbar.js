@@ -78,10 +78,11 @@ const navbar = () => {
                         <NavMapLinks link={item} key={item.name} />
                      ))}
                   </NavDropdown>
-               </Nav>
-               <Nav.Link className="justify-content-end" href="#pricing">
+                  <Nav.Link className="ml-auto" href="#pricing">
                   <NavLink to="/SecreturyWin">מסך ניהול</NavLink>
                </Nav.Link>
+               </Nav>
+      
             </Navbar.Collapse>
          </Navbar>
       </Fragment>
