@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import InfoCard from '../InfoCard/InfoCard';
+import BirthdayCard from '../Birthdays/BirthdayCard'
 
 export class Birthday extends Component {
-
-  
 
   state = {
     header: ['ימי הולדת'],
@@ -20,10 +19,14 @@ export class Birthday extends Component {
     ],
   };
 
-  render() {
+  render() {  
+    const userBirthday=this.props.users.map((user)=>(
+      <BirthdayCard user={user} key={user.id} />
+      ))
     return (
       <div>
-        <InfoCard dataItem={this.state} />
+    {userBirthday}
+        {/* <InfoCard dataItem={userBirthday}  /> */}
       </div>
     );
   }
