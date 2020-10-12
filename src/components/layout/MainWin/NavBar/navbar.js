@@ -54,12 +54,12 @@ const navbar = () => {
               <NavLink to="/maps">מפות</NavLink>
             </Nav.Link>
             <Nav.Link className="ml-auto" href="#pricing">
-              <NavLink to="/commiteesWin">אודות</NavLink>
+              <NavLink to="/commiteesWin">xpertesy</NavLink>
             </Nav.Link>
-          </Nav>
-          <Nav.Link className="justify-content-end" href="#pricing">
+            <Nav.Link className="ml-auto" href="#pricing">
               <NavLink to="/SecreturyWin">מסך ניהול</NavLink>
             </Nav.Link>
+          </Nav>
         </Navbar.Collapse>
       </Navbar>
     </Fragment>
