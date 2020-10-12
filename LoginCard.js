@@ -19,19 +19,29 @@ export class LoginCard extends Component {
      let isValidPassword = validator.isValidPassword(this.inputPassword);
     if(isValidId && isValidPassword)
     {
-     checkUserDetails();
+     this.checkUserDetails();
     }
   }
-  checkUserDetails = () => {
-    const response = fetch('http://localhost:8080/login', {
-    method: 'POST',
-    body: JSON.stringify({
-      password: this.inputPassword,
-      userID: this.inputId
-      })
-    });
-    const token = response.json();
-    console.log(token);
+  checkUserDetails = async () => {
+    try{
+      const response = await fetch('http://localhost:8080/loginManager/login', {
+      headers:{
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        password: this.inputPassword,
+        userID: this.inputId
+        })
+      });
+      console.log(response);
+      console.log(this.inputId, this.inputPassword); 
+      const token = await response.json();
+      console.log(token);
+    }
+    catch(error){
+      console.log(error);
+    }
 }
 
   render(){
@@ -63,7 +73,7 @@ export class LoginCard extends Component {
             <Form.Check type="checkbox" label="השאר אותי מחובר" />
           </Form.Group>
           <Link to="/MainWin">
-            <button variant="primary" type="submit" onClick={this. ValidetionInputIdAndPassword} >
+            <button variant="primary" type="submit" onClick={this.ValidetionInputIdAndPassword} >
               כניסה
             </button>
           </Link>
