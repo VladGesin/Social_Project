@@ -16,12 +16,12 @@ const GoodWord = () => {
   return (
     <Fragment>
       <Card className="text-right">
-        <Card.Header as="h5">מבזקים</Card.Header>
+        <Card.Header as="h5">מילה טובה</Card.Header>
         <Card.Body>
           <Card.Title>כותרת המבזק</Card.Title>
           <Card.Text>
-            מידע שייצוג במבזק מידע שייצוג במבזק מידע שייצוג במבזק מידע שייצוג
-          </Card.Text>
+           מילה טובה תרוץ כאן
+                      </Card.Text>
 
           <Button variant="primary" onClick={handleShow}>
             הכנס מילה טובה
