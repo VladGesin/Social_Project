@@ -2,9 +2,34 @@ import Modal from "react-bootstrap/Modal";
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import { Button } from "react-bootstrap";
+import {Validation} from "../../Validation/Validation";
 
-const DeleteuserModal = (props) => {
- 
+class deleteuserModal {
+
+
+  handleInputID = (e) =>{
+    this.inputId = e.target.value;
+  }
+  ValidationInputNewUser = () => {
+    let validator = new Validation();
+    let isValidId = validator.isValidId(this.inputId);
+   if(isValidId){
+    DeleteUser();
+    }
+
+ function DeleteUser()
+  {
+       const response = fetch('http://localhost:8080/users/:id', {
+        method: 'DELETE',
+        body: JSON.stringify({
+        })
+      });
+      const token = response.json();
+      console.log(token);
+    }
+  }
+}
+  const DeleteuserModal = (props) => {
    return(
     <Modal
             onHide = {props.onHide}
@@ -20,16 +45,17 @@ const DeleteuserModal = (props) => {
                 <Form>
                   <Form.Group controlId="Id">
                     <Form.Label>הכנס תעודת זהות</Form.Label>
-                    <Form.Control type="New_Id" placeholder="123456789" />
+                    <Form.Control  placeholder='ת"ז המכילה ספרות 0-9 כולל ספרת ביקורת' onChange={e => this.handleInputID(e)}  type="text"/>
+                    <span id="IDError"></span>
                   </Form.Group>
                 </Form>
-                <Button variant="primary" type="submit" onClick={props.onHide}>
+                <Button variant="primary" type="submit" onClick={this.ValidationInputNewUser}> {/*props.onHide*/}
                   מחק משתמש מהמערכת
                 </Button>
               </Modal.Body>
             </Modal>
    )
      
-}
+  }
 
 export default DeleteuserModal;

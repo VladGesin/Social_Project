@@ -2,14 +2,25 @@ import React, { Fragment,useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
+import {Validation} from "../../Validation/Validation";
 
+class commiteerowmap{
 
-const Commiteerowmap = (props) =>{
-
-    const [lgShow1, setLgShow1] = useState(false);
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-
+    DeleteUser = () =>
+    {
+        const response = fetch('http://localhost:8080/users/:id', {
+         method: 'DELETE',
+         body: JSON.stringify({
+         })
+       });
+       const token = response.json();
+       console.log(token);
+     }
+    }
+    const Commiteerowmap = (props) =>{
+        const [lgShow1, setLgShow1] = useState(false);
+        const [show, setShow] = useState(false);
+        const handleClose = () => setShow(false);
         return (
             <Fragment>
                  <tr>
@@ -30,15 +41,14 @@ const Commiteerowmap = (props) =>{
                         <p></p>
                         <>{props.item.name}</>
                         <p></p>
-                        <Button onClick={handleClose}>כן</Button>
+                        <Button onClick={this.DeleteUser()}>כן</Button>
                      </Modal.Body>
 
                 </Modal>
             </Fragment>
         )
-    
-}
+    }
 
-export default Commiteerowmap
+export default Commiteerowmap;
 
 
