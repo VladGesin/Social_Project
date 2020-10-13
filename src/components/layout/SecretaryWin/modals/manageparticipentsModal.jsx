@@ -1,7 +1,5 @@
 import Modal from "react-bootstrap/Modal";
-import React, { Button } from "react";
-import Form from "react-bootstrap/Form";
-
+import React from "react";
 import Table from "react-bootstrap/Table";
 import Commiteerowmap from './commiteerowmap'
 
@@ -27,7 +25,7 @@ const ManageparticipentsModal = (props) => {
                 show = {props.show}
                 size="lg"  
                aria-labelledby="Restart_Pass"
-               dir="rtl"
+            dir="rtl"
             >
                 <Modal.Header closeButton>
                   <Modal.Title id="ManageParticipent">
@@ -35,12 +33,13 @@ const ManageparticipentsModal = (props) => {
                   </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  <Table responsive="lg" dir="rtl">
+                  <Table responsive="lg" className="text-right">
                     <thead>
                       <tr>
                         <th>#</th>
                         <th>שם משתמש</th>
                         <th>אימייל</th>
+                        <th>תפקיד</th>
                         <th>מחיקת משתמש</th>
                       </tr>
                     </thead>

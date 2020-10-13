@@ -1,5 +1,5 @@
 import Modal from "react-bootstrap/Modal";
-import React, { useState } from "react";
+import React from "react";
 import Form from "react-bootstrap/Form";
 import { Button } from "react-bootstrap";
 
@@ -11,25 +11,25 @@ const RestartModal = (props) => {
         show = {props.show}
         size="lg"  
        aria-labelledby="Restart_Pass"
-       dir="rtl"
+       className="text-right"
      >
-       <Modal.Header closeButton>
+       <Modal.Header dir="rtl">
          <Modal.Title id="Restart_Pass">איפוס סיסמא</Modal.Title>
        </Modal.Header>
        <Modal.Body>
          <Form>
            <Form.Group controlId="EnterID1">
-             <Form.Label>תעודת זהות</Form.Label>
-             <Form.Control type="ID" placeholder="123456789" />
+             <Form.Label >תעודת זהות</Form.Label>
+             <Form.Control type="ID" placeholder="123456789" dir="rtl" />
              <Form.Text className="ID_Pass_new"> </Form.Text>
            </Form.Group>
 
            <Form.Group controlId="EnterPass1">
              <Form.Label>סיסמא חדשה</Form.Label>
-             <Form.Control type="New_Pass" placeholder="סיסמא חדשה" />
+             <Form.Control type="New_Pass" placeholder="סיסמא חדשה" dir="rtl"/>
            </Form.Group>
            <Button variant="primary" type="submit" onClick={props.onHide}>
-             שמור וסגור
+             שמור
            </Button>
          </Form>
        </Modal.Body>

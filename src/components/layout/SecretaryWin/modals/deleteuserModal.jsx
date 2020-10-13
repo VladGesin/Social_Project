@@ -1,32 +1,51 @@
 import Modal from "react-bootstrap/Modal";
-import React, { useState } from "react";
+import React,{useState} from "react";
 import Form from "react-bootstrap/Form";
 import { Button } from "react-bootstrap";
 
+
+
+
 const DeleteuserModal = (props) => {
- 
+const [lgShow12, setLgShow12] = useState(false);
    return(
     <Modal
             onHide = {props.onHide}
             show = {props.show}
-            size="lg"  
-        aria-labelledby="Restart_Pass"
-        dir="rtl"
-            >
-              <Modal.Header closeButton>
-                <Modal.Title id="Delete_Account">מחיקת משתמש קיים</Modal.Title>
+            aria-labelledby="Delete_user"
+            className="text-right"
+     >
+              <Modal.Header dir="rtl">
+                <Modal.Title id="Delete_Account" >מחיקת משתמש קיים</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <Form>
-                  <Form.Group controlId="Id">
-                    <Form.Label>הכנס תעודת זהות</Form.Label>
-                    <Form.Control type="New_Id" placeholder="123456789" />
+                <Form >
+                  <Form.Group controlId="Id" >
+                    <Form.Label dir="rtl">הכנס תעודת זהות</Form.Label>
+                    <Form.Control type="New_Id" placeholder="123456789" dir="rtl" />
                   </Form.Group>
                 </Form>
-                <Button variant="primary" type="submit" onClick={props.onHide}>
+                <Button onClick={setLgShow12} variant="primary" block >
                   מחק משתמש מהמערכת
                 </Button>
+               
+                <Modal 
+                    size="xl"
+                    show={lgShow12}
+                    onHide={() => setLgShow12(false)}
+                    className="text-right"
+                    
+              >
+                <Modal.Title dir="rtl">מחיקת המשתמש</Modal.Title>
+                <Modal.Header dir="rtl">האם את/ה בטוח/ה שנדרש למחוק את המשתמש</Modal.Header>
+                <Modal.Body >
+                <Button variant="primary" block>כן</Button>
+                <Button variant="secondary" block>לא</Button>
+                </Modal.Body>
+
+              </Modal>
               </Modal.Body>
+           
             </Modal>
    )
      

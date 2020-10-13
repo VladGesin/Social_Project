@@ -14,7 +14,7 @@ const GoodWord = () => {
 
 
   return (
-    <Fragment>
+    <Fragment >
       <Card className="text-right">
         <Card.Header as="h5">מילה טובה</Card.Header>
         <Card.Body>
@@ -29,26 +29,25 @@ const GoodWord = () => {
         </Card.Body>
       </Card>
 
-      <Modal show={show} onHide={handleClose} animation={false}>
-        <Modal.Header closeButton>
-          <Modal.Title>מילה טובה חדשה</Modal.Title>
+      <Modal show={show} onHide={handleClose} animation={false} className="text-right">
+        <Modal.Header  dir="rtl">
+          <Modal.Title >מילה טובה חדשה</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div>
-            
-            <form>
-            <div class="form-group">
-    <label for="exampleFormControlSelect1">אל יו"ר :</label>
-    <select class="form-control" id="exampleFormControlSelect1">
-      <option>יו"ר 1</option>
-      <option>יו"ר 2</option>
-      <option>יו"ר 3</option>
-    </select>
-  </div>
-    <div class="form-group">
-    <label for="exampleFormControlTextarea1">אנא הכנס תוכן של מילה טובה :</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
-  </div>
+             <form dir="rtl">
+               <div class="form-group">
+                <label for="exampleFormControlSelect1">לאיזה יו"ר ברצונך לשלוח מילה </label>
+                <select class="form-control" id="exampleFormControlSelect1" >
+                  <option>יו"ר 1</option>
+                  <option>יו"ר 2</option>
+                  <option>יו"ר 3</option>
+                </select>
+              </div>
+                <div class="form-group">
+                <label for="exampleFormControlTextarea1">אנא הכנס תוכן של מילה טובה :</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
+              </div>
             </form>
           </div>
  

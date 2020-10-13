@@ -1,7 +1,5 @@
 import Modal from "react-bootstrap/Modal";
-import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-import { Button } from "react-bootstrap";
+import React from "react";
 import Demo from './graphsceomap';
 
 const GraphsForCeo = [

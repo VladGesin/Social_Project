@@ -1,5 +1,5 @@
 import Modal from "react-bootstrap/Modal";
-import React, { useState } from "react";
+import React from "react";
 import Form from "react-bootstrap/Form";
 import { Button } from "react-bootstrap";
 
@@ -11,27 +11,31 @@ const NewuserModal = (props) => {
     show = {props.show}
     size="lg"  
    aria-labelledby="Restart_Pass"
-   dir="rtl"
+   className="text-right"
             >
-              <Modal.Header closeButton>
+              <Modal.Header dir="rtl">
                 <Modal.Title id="New_Account">יצירת משתמש חדש</Modal.Title>
               </Modal.Header>
-              <Modal.Body>
+              <Modal.Body >
                 <Form>
                   <Form.Group controlId="New_Id">
                     <Form.Label>תעודת זהות</Form.Label>
-                    <Form.Control type="New_Id" placeholder="123456789" />
+                    <Form.Control 
+                    type="New_Id" 
+                    placeholder="123456789" dir="rtl"
+                    />
                   </Form.Group>
                   <Form.Group controlId="exampleForm.ControlInput1">
                     <Form.Label>כתובת מייל</Form.Label>
                     <Form.Control
                       type="emailNew"
                       placeholder="name@example.com"
+                      dir="rtl"
                     />
                   </Form.Group>
                   <Form.Group controlId="Pass">
                     <Form.Label>סיסמא ראשונית</Form.Label>
-                    <Form.Control type="password" placeholder="סיסמא ראשונית" />
+                    <Form.Control type="password" placeholder="סיסמא ראשונית" dir="rtl" />
                   </Form.Group>
                 </Form>
                 <Button variant="primary" type="submit" onClick={props.onHide}>
