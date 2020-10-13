@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect,useState } from 'react';
 import InfoCard from '../InfoCard/InfoCard';
 import BirthdayCard from '../Birthdays/BirthdayCard'
 import Carousel from 'react-bootstrap/esm/Carousel';
@@ -7,33 +7,43 @@ import CardData from '../InfoCard/cardText';
 
 
 
-export class Birthday extends Component {
+const Birthday =(props)=> {
 
-  render() {  
+  const [userList,setList]= useState([]);
+  const [users,setUsers]=useState([props['users']]);
+  
+  console.log(props);
+  console.log(users);
 
-     const getThreeItems = () => {
-        var newData = [];
-        var setOfThree = [];
 
-        for (let i = 0; i < this.props.users.length; i++) {
-          setOfThree.push(this.props.users[i]);
+  useEffect(() => {
+    console.log(users);
+    getThreeItems(props.users);
+    console.log('2')
+
+  }, []);
+
+
+     const getThreeItems = (users) => {
+      
+      var newData = [];
+      var setOfThree = [];
+
+
+        for (let i = 0; i < users.length; i++) {
+          setOfThree.push(users[i]);
 
           if (i % 3 == 1) {
             newData.push(setOfThree);
             setOfThree = [];
+          }
+        }
+        
 
-        return (setOfThree)
-  }
-}
-      } 
-    
-    const userBirthday=this.props.users.map((user)=>(
-      <Carousel.Item>
-      <BirthdayCard user={user} key={user.id} />
-      </Carousel.Item>
-      ))
+        setList(newData)
+        return (newData)
+      }
 
-    let setOfThree = getThreeItems()
     return (
 
       <div>
@@ -42,16 +52,20 @@ export class Birthday extends Component {
         <Card.Body>
           <Card.Text>
             <Carousel>
-              {setOfThree}
+              {userList.map((userList)=>(
+                    userList.map((user)=>(
+                    <Carousel.Item>
+                    <BirthdayCard user={user} key={user.id} />
+                    </Carousel.Item>
+              ))))}
             </Carousel>
           </Card.Text>
         </Card.Body>
       </Card>
         
-        {/* <InfoCard dataItem={userBirthday}  /> */}
       </div>
     );
   }
-}
+
 
 export default Birthday;

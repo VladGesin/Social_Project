@@ -16,7 +16,6 @@ const WelcomPage = () => {
   const [users, setUsers] =useState([]); //hook 
   
   useEffect(() => {
-    // login();
     getUsers();
 
   }, []);
@@ -29,9 +28,10 @@ const WelcomPage = () => {
   // }
 
   async function getUsers() {
+
     axios.get('http://localhost:8080/users',{
       headers: {
-        Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjMyMSwiaWF0IjoxNjAyNjA2OTU0fQ.pnLra1Aec6V2N6JaDeTernsNC2Pioaqsn1USPb9GWUA' //the token is a variable which holds the token
+        Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjExMTExMTExMSwiaWF0IjoxNjAyNjEyNzkxfQ.s4Y2kCZiIGs9Ize1Vj-TPXG-gym8lfSJK8txQN8Qt9E'
       }
   }).then(res => setUsers(res.data))
   }
@@ -49,7 +49,6 @@ const WelcomPage = () => {
               <GoodWord />
             </div>
           </div>
-          {console.log(users)}
           <div className="col">
             <News />
             <Birthday users={users}/>
