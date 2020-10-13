@@ -8,7 +8,6 @@ function CommTable(props) {
     card: [
       {
         index: 1,
-        img: 'avatar',
         name: 'ישראל ישראלי',
         position: 'יו״ר וועדה',
         phone: '054222222',
@@ -16,7 +15,6 @@ function CommTable(props) {
       },
       {
         index: 2,
-        img: 'avatar',
         name: 'ילוני אלמוני',
         position: 'יו״ר וועדהגן יו"ר הוועדה',
         phone: '054222222',
@@ -24,7 +22,6 @@ function CommTable(props) {
       },
       {
         index: 3,
-        img: 'avatar',
         name: 'גודי גודיד',
         position: 'מזכירת היו״ר',
         phone: '054222222',

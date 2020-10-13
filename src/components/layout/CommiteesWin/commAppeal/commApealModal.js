@@ -13,7 +13,7 @@ const CommApealModal = (props) => {
         פניה לוועדה/צפייה בפניה קודמת
       </Button>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} dir="rtl" size="lg">
         <Modal.Header closeButton>
           <Modal.Title dir="rtl"> פניה לוועדה/צפייה בפניה קודמת</Modal.Title>
         </Modal.Header>
