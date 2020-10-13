@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Context from "./Context";
-import axios from "axios";
 import api from "../api";
 import setAuthToken from "../utils/setAuthToken";
 
