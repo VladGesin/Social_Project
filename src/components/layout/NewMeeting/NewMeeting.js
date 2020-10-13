@@ -151,7 +151,7 @@ const NewMeeting = () => {
                         <div>
                            <textarea
                               ref={urlRef}
-                              value={e.link}
+                              defaultValue={e.link}
                               style={{
                                  width: "80%",
                                  display: "block",
