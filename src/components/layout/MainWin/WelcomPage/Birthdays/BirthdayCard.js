@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 
 
+
 const BirthdayCard =(props)=> {
 
    const dateConvert=()=>{
@@ -10,13 +11,15 @@ const BirthdayCard =(props)=> {
     return date
   }
 
+ 
     return (
       <Fragment>
           {/* {console.log(props.user.first_name)} */}
-    <h6>{props.user.first_name+' '+props.user.last_name}</h6>
-    <h7>{dateConvert()}</h7>
+        <h6>{props.user.first_name+' '+props.user.last_name}</h6>
+        <h7>{dateConvert()}</h7>
       </Fragment>
     )
+    
   }
 
 
