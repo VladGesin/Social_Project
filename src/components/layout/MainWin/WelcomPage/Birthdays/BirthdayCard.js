@@ -4,25 +4,23 @@ import React, { Fragment } from 'react'
 
 const BirthdayCard =(props)=> {
 
-  const {users} = props
-   const dateConvert=()=>{
+  const {users} = props;
+  const dateConvert=(user)=>{
     
-    let d = props.user.birth_date.toString().slice(0, 10).split('-');   
-    let date = d[1] +'/'+ d[2] +'/'+ d[0] // 10/30/2010
+    let d = user.birth_date.toString().slice(0, 10).split('-');   
+    let date = d[0] // 10/30/2010
     return date
   }
 
-    console.log(users.map(user => user))
-    return (
+  return (
     users.map(user => (
       <Fragment>
           {/* {console.log(props.user.first_name)} */}
-        <h6>{user.first_name+' '+user.last_name}</h6>
-        {/* <h7>{dateConvert()}</h7> */}
+        <h5><li dir='rtl'>{user.first_name+' '+user.last_name+ ' '+ dateConvert(user)}</li></h5>
+        {/* <h7>{dateConvert(user)}</h7> */}
       </Fragment>
     ))
     )
-    
   }
 
 

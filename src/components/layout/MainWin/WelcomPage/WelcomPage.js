@@ -31,7 +31,7 @@ const WelcomPage = () => {
 
     axios.get('http://localhost:8080/users',{
       headers: {
-        Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjExMTExMTExMSwiaWF0IjoxNjAyNjEyNzkxfQ.s4Y2kCZiIGs9Ize1Vj-TPXG-gym8lfSJK8txQN8Qt9E'
+        Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjMyMSwiaWF0IjoxNjAyNjg5NTY3fQ.Dd7PS5MsC0OBuo1br8rwV__ISSfh50akpBgDf7n9Whc'
       }
   }).then(res => 
     setUsers(res.data))
