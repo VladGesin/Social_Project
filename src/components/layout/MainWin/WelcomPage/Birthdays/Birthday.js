@@ -9,40 +9,44 @@ import CardData from '../InfoCard/cardText';
 
 export class Birthday extends Component {
 
-  render() {  
+  getThreeItems = (userList) => {
+        console.log(userList)
+        let newData = [];
+        let setOfThree = [];
 
-     const getThreeItems = () => {
-        var newData = [];
-        var setOfThree = [];
-
-        for (let i = 0; i < this.props.users.length; i++) {
-          setOfThree.push(this.props.users[i]);
-
+        for (let i = 0; i <= userList.length; i++) {
+          setOfThree.push(userList[i]);
+          
           if (i % 3 == 1) {
+            console.log(setOfThree);
             newData.push(setOfThree);
             setOfThree = [];
+          }
+        }
 
-        return (setOfThree)
+        return (newData)
   }
-}
-      } 
-    
-    const userBirthday=this.props.users.map((user)=>(
-      <Carousel.Item>
-      <BirthdayCard user={user} key={user.id} />
-      </Carousel.Item>
-      ))
-
-    let setOfThree = getThreeItems()
+  
+  render() {  
+    let userList = this.props.users;
+    let three= this.getThreeItems(userList)
+    const userBirthday=three.map(users=>{
+      return (
+        <Carousel.Item>
+        <BirthdayCard users={users} />
+        </Carousel.Item>
+      )
+    }
+      )
+    console.log('userBirthday',userBirthday)
     return (
-
       <div>
         <Card className="text-right">
         <Card.Header as="h5">ימי הולדת</Card.Header>
         <Card.Body>
           <Card.Text>
-            <Carousel>
-              {setOfThree}
+            <Carousel>  
+              {userBirthday}
             </Carousel>
           </Card.Text>
         </Card.Body>

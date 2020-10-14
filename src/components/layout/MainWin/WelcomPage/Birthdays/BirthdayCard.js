@@ -4,6 +4,7 @@ import React, { Fragment } from 'react'
 
 const BirthdayCard =(props)=> {
 
+  const {users} = props
    const dateConvert=()=>{
     
     let d = props.user.birth_date.toString().slice(0, 10).split('-');   
@@ -11,13 +12,15 @@ const BirthdayCard =(props)=> {
     return date
   }
 
- 
+    console.log(users.map(user => user))
     return (
+    users.map(user => (
       <Fragment>
           {/* {console.log(props.user.first_name)} */}
-        <h6>{props.user.first_name+' '+props.user.last_name}</h6>
-        <h7>{dateConvert()}</h7>
+        <h6>{user.first_name+' '+user.last_name}</h6>
+        {/* <h7>{dateConvert()}</h7> */}
       </Fragment>
+    ))
     )
     
   }

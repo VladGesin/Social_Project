@@ -33,7 +33,8 @@ const WelcomPage = () => {
       headers: {
         Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjMyMSwiaWF0IjoxNjAyNjA2OTU0fQ.pnLra1Aec6V2N6JaDeTernsNC2Pioaqsn1USPb9GWUA' //the token is a variable which holds the token
       }
-  }).then(res => setUsers(res.data))
+  }).then(res => 
+    setUsers(res.data))
   }
   
 
@@ -49,7 +50,6 @@ const WelcomPage = () => {
               <GoodWord />
             </div>
           </div>
-          {console.log(users)}
           <div className="col">
             <News />
             <Birthday users={users}/>
