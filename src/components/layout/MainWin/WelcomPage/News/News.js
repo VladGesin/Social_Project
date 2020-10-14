@@ -1,21 +1,22 @@
-import React, { Component } from 'react';
+import React, { useState,useEffect } from 'react';
 import InfoCard from '../InfoCard/InfoCard';
 import Carousel from 'react-bootstrap/esm/Carousel';
 import Card from 'react-bootstrap/Card';
 
 
-export class News extends Component {
+const News =({news})=> {
 
-render() {  
-    let breakingNews = this.props.news['news'];
-    const singleNewsReport=breakingNews.map(news=>{
-      return (
-        <Carousel.Item>
-          <a href={this.props.news.link}>{this.props.news.name}</a>
-        </Carousel.Item>
-      )
-    }
-      )
+  const [newsList,setNewsList]= useState([])
+
+  useEffect(() => {
+    setNewsList(news['news'])
+  }, [news])
+
+    // let breakingNews = news['news'];
+    console.log(news)
+    console.log(newsList)
+    
+      
     return (
       <div>
         <Card className="text-right">
@@ -23,7 +24,15 @@ render() {
           <Card.Body>
             <Card.Text>
               <Carousel controls={false} indicators={false}>  
-                {singleNewsReport}
+              {newsList&&newsList.map(news=>(
+                  <Carousel.Item>
+                  <a href={news.link}>{news.name}</a>
+                  <div>
+                  <h7>{news.summary}</h7>
+                  <h8>{news.date}</h8>
+                  </div>
+                    </Carousel.Item>
+                ))}
               </Carousel>
             </Card.Text>
           </Card.Body>
@@ -32,6 +41,6 @@ render() {
       </div>
     );
   }
-}
+
 
 export default News;
