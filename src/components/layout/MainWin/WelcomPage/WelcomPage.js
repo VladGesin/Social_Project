@@ -14,9 +14,11 @@ import './WelcomPage.css';
 
 const WelcomPage = () => {
   const [users, setUsers] =useState([]); //hook 
+  const [news, setNews] = useState([]); // hook news
   
   useEffect(() => {
     getUsers();
+    getNews('תלמיד');
 
   }, []);
 
@@ -36,8 +38,20 @@ const WelcomPage = () => {
   }).then(res => 
     setUsers(res.data))
   }
-  
 
+  async function getNews(key) {
+
+    await axios.get(`http://localhost:8080/news?filterBy=${key}`,{
+      headers: {
+        Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjMyMSwiaWF0IjoxNjAyNjg5NTY3fQ.Dd7PS5MsC0OBuo1br8rwV__ISSfh50akpBgDf7n9Whc'
+      }
+  }).then(res => 
+    setNews(res.data))
+  }
+
+
+  
+  console.log(news);
   return (
     <Fragment>
       <Container>
@@ -51,7 +65,7 @@ const WelcomPage = () => {
             </div>
           </div>
           <div className="col">
-            <News />
+            <News news={news}/>
             <Birthday users={users}/>
             <Teachers />
           </div>
