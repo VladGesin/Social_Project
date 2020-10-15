@@ -13,13 +13,11 @@ const BirthdayCard =(props)=> {
   }
 
   return (
-    users.map(user => (
+    // users.map(user => (
       <Fragment>
-          {/* {console.log(props.user.first_name)} */}
-        <h5><li dir='rtl'>{user.first_name+' '+user.last_name+ ' '+ dateConvert(user)}</li></h5>
-        {/* <h7>{dateConvert(user)}</h7> */}
+        <h5>{props.users.first_name+' '+props.users.last_name+ ' '+ dateConvert(users)}</h5>
       </Fragment>
-    ))
+    // ))
     )
   }
 

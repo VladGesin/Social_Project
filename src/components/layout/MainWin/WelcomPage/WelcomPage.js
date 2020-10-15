@@ -7,8 +7,6 @@ import Birthday from '../WelcomPage/Birthdays/Birthday';
 import Teachers from '../WelcomPage/PrivateTeacher/PrivateTeacher';
 import axios from 'axios';
 
-// import Row from 'react-bootstrap/Row';
-// import Col from 'react-bootstrap/Col';
 
 import './WelcomPage.css';
 
@@ -22,18 +20,12 @@ const WelcomPage = () => {
 
   }, []);
 
-  // async function login() {
-  //   axios.post('http://localhost:8080/login',{
-  //     password:"1234",
-  //     userID:111111111
-  //   }).then(res => setToken(res.data.token[0].token))
-  // }
 
   async function getUsers() {
 
     axios.get('http://localhost:8080/users',{
       headers: {
-        Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjEyMzQ1Njc4OSwiaWF0IjoxNjAyNzA0MTYzfQ.L1wfZPiirA4yB2bILG-gx89XBDprnmNOO7ZnujOVez0'
+        Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjMyMSwiaWF0IjoxNjAyNjg5NTY3fQ.Dd7PS5MsC0OBuo1br8rwV__ISSfh50akpBgDf7n9Whc'
       }
   }).then(res => 
     setUsers(res.data))
@@ -43,15 +35,12 @@ const WelcomPage = () => {
 
     await axios.get(`http://localhost:8080/news?filterBy=${key}`,{
       headers: {
-        Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjEyMzQ1Njc4OSwiaWF0IjoxNjAyNzA0MTYzfQ.L1wfZPiirA4yB2bILG-gx89XBDprnmNOO7ZnujOVez0'
+        Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjMyMSwiaWF0IjoxNjAyNjg5NTY3fQ.Dd7PS5MsC0OBuo1br8rwV__ISSfh50akpBgDf7n9Whc'
       }
   }).then(res => 
     setNews(res.data))
   }
 
-
-  
-  // console.log(news);
   return (
     <Fragment>
       <Container>

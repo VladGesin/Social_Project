@@ -1,7 +1,6 @@
 import React, { useState,useEffect } from 'react';
-import InfoCard from '../InfoCard/InfoCard';
-import Carousel from 'react-bootstrap/esm/Carousel';
 import Card from 'react-bootstrap/Card';
+import Spinner from 'react-bootstrap/Spinner'
 
 
 const News =({news})=> {
@@ -9,33 +8,49 @@ const News =({news})=> {
   const [newsList,setNewsList]= useState([])
 
   useEffect(() => {
-    setNewsList(news['news'])
+    setNewsList(news['news']);
+    spinnerOrNews();
   }, [news])
 
-    // let breakingNews = news['news'];
-    console.log(news)
-    console.log(newsList)
-    
-      
-    return (
-      <div>
-        <Card className="text-right">
-        <Card.Header as="h5">מבזקי חדשות</Card.Header>
+  // Put spinner while loading the news, put the news in the card when loaded
+  const spinnerOrNews = () =>{
+    if (!newsList){
+      return (<Card.Body className="align-items-center d-flex justify-content-center">
+            <Card.Text dir="rtl">
+            <div className="justify-content-center d-flex">
+      <h4 className="pl-4">טוען</h4>
+            <Spinner animation="border" />
+            </div>
+           </Card.Text>
+          </Card.Body>)
+    }
+    else {
+      return (
+        <marquee behavior="scroll" direction="up" Scrollamount="4" loop="" overflow="hidden" display="inline-block">
           <Card.Body>
             <Card.Text dir="rtl">
-                {newsList&&newsList.map(news=>(
-                  <marquee behavior="scroll" direction="up" Scrollamount="4" loop="" overflow="hidden">
-                    <div class="marquee">
-                      <a href={news.link}>{news.name}</a>
+            {newsList.map(news=>(
+                    <div>
+                      <p></p>
+                      <a href={news.link}><h5>{news.name}</h5></a>
                       <div>
                       <h7>{news.summary}</h7>
                       <h8>{news.date}</h8>
                       </div>
                     </div>
-                  </marquee>
                   ))}
-            </Card.Text>
+           </Card.Text>
           </Card.Body>
+        </marquee>
+      )
+      }
+    }
+    
+    return (
+      <div>
+        <Card className="text-right">
+        <Card.Header as="h5">מבזקי חדשות</Card.Header>
+           {spinnerOrNews()}
         </Card>
         
       </div>
