@@ -23,7 +23,10 @@ const navbar = () => {
       ],
    };
    const XpertesyItems = {
-      link: [{ name: "יצירת פגישה חדשה", path: "/newmeeting", item: "test" }],
+      link: [
+         { name: "יצירת פגישה חדשה", path: "/newmeeting", item: "test" },
+         { name: "הפגישות שלי", path: "/mymeetings", item: "test" },
+      ],
    };
    return (
       <Fragment>
@@ -57,7 +60,6 @@ const navbar = () => {
                   >
                      {/******* Here Links For Commitees *******/}
 
-
                      {CommiteeItems.link.map((item) => (
                         <NavMapLinks link={item} key={item.name} />
                      ))}
@@ -79,10 +81,9 @@ const navbar = () => {
                      ))}
                   </NavDropdown>
                   <Nav.Link className="ml-auto" href="#pricing">
-                  <NavLink to="/SecreturyWin">מסך ניהול</NavLink>
-               </Nav.Link>
+                     <NavLink to="/SecreturyWin">מסך ניהול</NavLink>
+                  </Nav.Link>
                </Nav>
-      
             </Navbar.Collapse>
          </Navbar>
       </Fragment>

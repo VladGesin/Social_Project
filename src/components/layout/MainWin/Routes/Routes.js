@@ -4,7 +4,8 @@ import commiteesWin from "../../CommiteesWin/commiteesWin";
 import { Route } from "react-router-dom";
 import chairmanItems from "../../ChairmanItems/ChairmanItems";
 import secreturywin from "../../SecretaryWin/SecreturyWin";
-import NewMeeting from "../../NewMeeting/NewMeeting";
+import NewMeeting from "../../xpertesy/NewMeeting/NewMeeting";
+import MyMeetings from "../../xpertesy/MyMeetings/MyMeetings";
 
 const COMPONENT_MAP = {
    WelcomPage: WelcomPage,
@@ -12,6 +13,7 @@ const COMPONENT_MAP = {
    chairmanItems: chairmanItems,
    secreturywin: secreturywin,
    NewMeeting: NewMeeting,
+   MyMeetings: MyMeetings,
 };
 
 // const COMPONENT_MAP = menuItems.map((item)=>)
@@ -24,6 +26,7 @@ const Routes = () => {
       { name: "chairmanItems", path: "/chairmanItems/:item" },
       { name: "secreturywin", path: "/secreturywin" },
       { name: "NewMeeting", path: "/newmeeting" },
+      { name: "MyMeetings", path: "/mymeetings" },
    ];
    return (
       <Fragment>

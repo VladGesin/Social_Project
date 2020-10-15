@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -18,6 +18,7 @@ const NewMeeting = () => {
    });
    const [participants, setParticipants] = useState([]);
    const [messages, setMessages] = useState([]);
+   const urlRef = useRef(null);
 
    const onChangeHandler = (e) => {
       setFormData({
@@ -33,7 +34,10 @@ const NewMeeting = () => {
             { msg: "האמייל שהוזן אינו חוקי", type: "danger" },
          ]);
          setTimeout(() => {
-            setMessages([]);
+            setMessages((cur) => {
+               const msgs = cur.slice(1);
+               return msgs;
+            });
          }, 3000);
 
          return;
@@ -66,7 +70,10 @@ const NewMeeting = () => {
             { msg: "הזמן 2-4 משתתפים", type: "danger" },
          ]);
          setTimeout(() => {
-            setMessages([]);
+            setMessages((cur) => {
+               const msgs = cur.slice(1);
+               return msgs;
+            });
          }, 3000);
 
          return false;
@@ -76,10 +83,12 @@ const NewMeeting = () => {
 
    const createNewMeeting = async (data) => {
       try {
+         console.log("data", data);
          const res = await axios.post(
-            "http://localhost:4000/xpertesy/createroom",
-            JSON.stringify(data)
+            "http://localhost:8080/xpertesy/createroom",
+            data
          );
+         return res;
       } catch (e) {
          console.log(e);
       }
@@ -91,21 +100,38 @@ const NewMeeting = () => {
          const req = {
             roomName: formData.roomName,
             hostName: formData.hostName,
-            date: formData.startDate,
+            date: formData.startDate + " " + formData.startTime,
             participants: participants,
          };
+         try {
+            const res = await createNewMeeting(req);
+            const url = res.data.link;
 
-         const url = await createNewMeeting(req);
+            setMessages([
+               ...messages,
+               { msg: `פגישה נוצרה בהצלחה`, link: url, type: "success" },
+            ]);
 
-         setMessages([
-            ...messages,
-            { msg: "פגישה נוצרה בהצלחה", type: "success" },
-         ]);
-         // setTimeout(() => {
-         //    setMessages([]);
-         // }, 3000);
+            setFormData({
+               roomName: "",
+               hostName: "",
+               startDate: "",
+               startTime: "",
+               participants: "",
+            });
+            setParticipants([]);
+         } catch (e) {
+            console.log(e);
+         }
       }
    };
+
+   function copyToClipboard(e) {
+      urlRef.current.select();
+      document.execCommand("copy");
+      e.target.focus();
+   }
+
    return (
       <>
          <h2 className="text-right m-3">יצירת פגישה חדשה</h2>
@@ -119,6 +145,28 @@ const NewMeeting = () => {
                      key={e}
                   >
                      {e.msg}
+                     {e.link && (
+                        <div>
+                           <textarea
+                              ref={urlRef}
+                              defaultValue={e.link}
+                              style={{
+                                 width: "80%",
+                                 display: "block",
+                                 margin: "1rem auto",
+                                 textAlign: "center",
+                                 resize: "none",
+                              }}
+                           />
+                           <Button
+                              className="submitBtn"
+                              variant="success"
+                              onClick={copyToClipboard}
+                           >
+                              העתק קישור
+                           </Button>
+                        </div>
+                     )}
                   </Alert>
                ))}
             </Container>
