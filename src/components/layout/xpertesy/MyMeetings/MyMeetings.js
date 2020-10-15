@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import axios from "axios";
 import MeetingsTable from "./MeetingsTable";
 import PaginationComp from "./PaginationComp";
 import "./MyMeetings.css";
@@ -50,10 +48,7 @@ const MyMeetings = () => {
             filterForm.fromDate === "" ? currentDate : filterForm.fromDate,
       };
       if (filterForm.toDate !== "") reqObj.toDate = filterForm.toDate;
-      const res = await axios.post(
-         "http://localhost:8080/xpertesy/showrooms",
-         reqObj
-      );
+      const res = await api.post("/xpertesy/showrooms", reqObj);
       setTableData(res.data.Data);
    };
 
