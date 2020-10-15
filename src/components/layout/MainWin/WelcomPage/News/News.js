@@ -22,18 +22,18 @@ const News =({news})=> {
         <Card className="text-right">
         <Card.Header as="h5">מבזקי חדשות</Card.Header>
           <Card.Body>
-            <Card.Text>
-              <Carousel controls={false} indicators={false}>  
-              {newsList&&newsList.map(news=>(
-                  <Carousel.Item>
-                  <a href={news.link}>{news.name}</a>
-                  <div>
-                  <h7>{news.summary}</h7>
-                  <h8>{news.date}</h8>
-                  </div>
-                    </Carousel.Item>
-                ))}
-              </Carousel>
+            <Card.Text dir="rtl">
+                {newsList&&newsList.map(news=>(
+                  <marquee behavior="scroll" direction="up" Scrollamount="4" loop="" overflow="hidden">
+                    <div class="marquee">
+                      <a href={news.link}>{news.name}</a>
+                      <div>
+                      <h7>{news.summary}</h7>
+                      <h8>{news.date}</h8>
+                      </div>
+                    </div>
+                  </marquee>
+                  ))}
             </Card.Text>
           </Card.Body>
         </Card>
