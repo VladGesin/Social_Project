@@ -129,8 +129,6 @@ const NewMeeting = () => {
    function copyToClipboard(e) {
       urlRef.current.select();
       document.execCommand("copy");
-      // This is just personal preference.
-      // I prefer to not show the whole text area selected.
       e.target.focus();
    }
 
