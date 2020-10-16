@@ -1,12 +1,9 @@
 import React, { Fragment,useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import {Validation} from "../../Validation/Validation";
 
-class commiteerowmap{
-
-    DeleteUser = () =>
+ DeleteUser = () =>
     {
         const response = fetch('http://localhost:8080/users/:id', {
          method: 'DELETE',
@@ -17,12 +14,15 @@ class commiteerowmap{
        console.log(token);
      }
     }
-    const Commiteerowmap = (props) =>{
-        const [lgShow1, setLgShow1] = useState(false);
-        const [show, setShow] = useState(false);
-        const handleClose = () => setShow(false);
+
+const Commiteerowmap = (props) =>{
+    const [show, setShow] = useState(false);
+    const [lgShow1, setLgShow1] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
         return (
-            <Fragment>
+            <Fragment show={show} onHide={handleShow} animation={false}>
                  <tr>
                     <li className='list-unstyled'>{props.item.index}</li>
                     <td>{props.item.name}</td>
@@ -35,20 +35,24 @@ class commiteerowmap{
                 <Modal size="lg"
                     show={lgShow1}
                     onHide={() => setLgShow1(false)}
-                     dir="rtl">
-                    <Modal.Header>מחיקת המשתמש</Modal.Header>
-                    <Modal.Body >האם אתה בטוח שאתה רוצה למחוק את המשתמש :
-                        <p></p>
+                     className="text-right">
+                    <Modal.Header dir="rtl" >מחיקת המשתמש</Modal.Header>
+                    <Modal.Body >האם אתה בטוח שאתה רוצה למחוק את המשתמש                        <p></p>
                         <>{props.item.name}</>
                         <p></p>
-                        <Button onClick={this.DeleteUser()}>כן</Button>
                      </Modal.Body>
+                     <Modal.Footer>
+                     <Button variant="primary" onClick={handleShow}>שמור וסגור</Button>
+                     <Button variant="secondary" onClick={handleClose}>ביטול</Button>
+
+                     </Modal.Footer>
 
                 </Modal>
             </Fragment>
         )
-    }
+    
+}
 
-export default Commiteerowmap;
+export default Commiteerowmap
 
 
