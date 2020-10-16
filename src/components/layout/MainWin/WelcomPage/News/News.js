@@ -32,7 +32,7 @@ const News =({news})=> {
             {newsList.map(news=>(
                     <div>
                       <p></p>
-                      <a href={news.link}><h5>{news.name}</h5></a>
+                      <a href={news.link}><h5><u>{news.name}</u></h5></a>
                       <div>
                       <h7>{news.summary}</h7>
                       <h8>{news.date}</h8>
