@@ -1,6 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import Spinner from 'react-bootstrap/Spinner'
+import $ from 'jquery';
 
 
 const News =({news})=> {
@@ -34,8 +35,10 @@ const News =({news})=> {
                       <p></p>
                       <a href={news.link}><h5><u>{news.name}</u></h5></a>
                       <div>
-                      <h7>{news.summary}</h7>
-                      <h8>{news.date}</h8>
+                        <h7>{news.summary}</h7>
+                        <div>
+                          <h8>{news.date}</h8>
+                        </div>
                       </div>
                     </div>
                   ))}
