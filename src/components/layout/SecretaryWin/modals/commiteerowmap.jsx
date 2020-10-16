@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import { Button } from 'react-bootstrap';
 import {Validation} from "../../Validation/Validation";
 
- DeleteUser = () =>
+const DeleteUser = () =>
     {
         const response = fetch('http://localhost:8080/users/:id', {
          method: 'DELETE',
@@ -13,7 +13,7 @@ import {Validation} from "../../Validation/Validation";
        const token = response.json();
        console.log(token);
      }
-    }
+    
 
 const Commiteerowmap = (props) =>{
     const [show, setShow] = useState(false);
