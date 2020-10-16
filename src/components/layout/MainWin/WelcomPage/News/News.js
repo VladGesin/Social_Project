@@ -26,7 +26,7 @@ const News =({news})=> {
     }
     else {
       return (
-        <marquee behavior="scroll" direction="up" Scrollamount="4" loop="" overflow="hidden" display="inline-block">
+        <marquee behavior="scroll" direction="up" Scrollamount="2" loop="" overflow="hidden" display="inline-block">
           <Card.Body>
             <Card.Text dir="rtl">
             {newsList.map(news=>(
