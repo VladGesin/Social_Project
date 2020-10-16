@@ -1,9 +1,35 @@
+
 import Modal from "react-bootstrap/Modal";
 import React,{useState} from "react";
 import Form from "react-bootstrap/Form";
 import { Button } from "react-bootstrap";
+import {Validation} from "../../Validation/Validation";
+
+class deleteuserModal {
 
 
+  handleInputID = (e) =>{
+    this.inputId = e.target.value;
+  }
+  ValidationInputNewUser = () => {
+    let validator = new Validation();
+    let isValidId = validator.isValidId(this.inputId);
+   if(isValidId){
+    DeleteUser();
+    }
+
+ function DeleteUser()
+  {
+       const response = fetch('http://localhost:8080/users/:id', {
+        method: 'DELETE',
+        body: JSON.stringify({
+        })
+      });
+      const token = response.json();
+      console.log(token);
+    }
+  }
+}
 
 
 const DeleteuserModal = (props) => {

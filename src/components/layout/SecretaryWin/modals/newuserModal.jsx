@@ -2,6 +2,55 @@ import Modal from "react-bootstrap/Modal";
 import React from "react";
 import Form from "react-bootstrap/Form";
 import { Button } from "react-bootstrap";
+import {Validation} from "../../Validation/Validation";
+
+export class newUserModalClass {
+
+static handleInputID = (e) =>
+  {
+    this.inputId = e.target.value;
+  }
+static handleInputPassword = (e) => 
+  {
+    this.inputPassword = e.target.value;
+  }
+
+static  handleInputEmail = (e) => 
+  {
+    this.inputEmail = e.target.value;
+  }
+
+static ValidationInputNewUser = () => 
+  {
+    let validator = new Validation();
+    let isValidId = validator.isValidId(this.inputId);
+    let isValidPassword = validator.isValidPassword(this.inputPassword);
+    let isValidEmail = validator.isValidEmail(this.inputEmail);
+    if(isValidId && isValidPassword && isValidEmail)
+    {
+      this.openNewUser();
+    }
+  }
+  
+static  openNewUser = () =>{
+   const response = fetch('http://localhost:8080/users/:id', 
+   {
+      method: 'POST',
+      body: JSON.stringify({
+      userID: this.inputId,
+      email: this.inputEmail,
+      password: this.inputPassword
+    })
+  });
+
+  const token = response.json();
+  console.log(token);
+  }
+
+}
+
+
+
 
 const NewuserModal = (props) => {
  

@@ -1,9 +1,41 @@
-import Modal from "react-bootstrap/Modal";
 import React from "react";
+import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import { Button } from "react-bootstrap";
+import validator from 'validator';
+import {Validation} from "../../Validation/Validation";
 
-const RestartModal = (props) => {
+class restartModal{
+  
+  leInputID = e => {
+    this.inputId = e.target.value;
+  }
+  handleInputPassword = e => {
+    this.inputPassword = e.target.value;
+  }
+  ValidetionInputIdAndPassword = () => {
+     let validator = new Validation();
+     let isValidId = validator.isValidId(this.inputId);
+     let isValidPassword = validator.isValidPassword(this.inputPassword);
+    if(isValidId && isValidPassword)
+    {
+      this.changeDetails();
+    }
+  }
+  changeDetails()
+  {
+    const response = fetch('http://localhost:8080/users/:id', {
+     method: 'PATCH',
+     body: JSON.stringify({
+      password: this.inputPassword,
+      userID: this.inputId
+     })
+   });
+   const token = response.json();
+   console.log(token);
+ }
+}
+ const RestartModal = (props) => {
  
    return(
     <Modal

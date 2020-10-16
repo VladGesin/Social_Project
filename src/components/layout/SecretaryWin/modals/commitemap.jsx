@@ -1,42 +1,47 @@
-import React from "react";
-import { Container, Table}  from 'react-bootstrap';
-import Commiteefriendmap from './commiteefriendmap'
-
-const listArr = [
-    {
-      index: "1",
-      commitee: "ועדת ספורט",
-      name: "ישראל ישראל",
-    },
-    {
-      index: "2",
-      commitee: "ועדת חינוך",
-      name: "יוני כץ",
-    },
-  ];
+import React, { Fragment,useState } from 'react';
+import Modal from 'react-bootstrap/Modal';
+import { Button } from 'react-bootstrap';
 
 
-export default function  Commitemap (props) {
-  return (
-    <Container 
-      dir="rtl"
-      >
-      <Table>
-        <thead>
-        <th>#</th>
-        <th>שם הועדה</th>
-        <th>שם היו"ר</th>
-      </thead>
-      <tbody>
-      {listArr.map((item) => (
-                        <Commiteefriendmap
-                          key={item.name.toString()}
-                          item={item}
-                        />
-                      ))}
-      </tbody>
-      </Table>
-    </Container>
-  );
-};
+
+const Commiteerowmap = (props) =>{
+    const [show, setShow] = useState(false);
+    const [lgShow1, setLgShow1] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+        return (
+            <Fragment show={show} onHide={handleShow} animation={false}>
+                 <tr>
+                    <li className='list-unstyled'>{props.item.index}</li>
+                    <td>{props.item.name}</td>
+                    <td>{props.item.Email}</td>
+                    <td>{props.item.Usertype}</td>
+                    <td>
+                        <Button onClick={setLgShow1}>מחיקת משתמש</Button>
+                    </td>
+                </tr>
+                <Modal size="lg"
+                    show={lgShow1}
+                    onHide={() => setLgShow1(false)}
+                     className="text-right">
+                    <Modal.Header dir="rtl" >מחיקת המשתמש</Modal.Header>
+                    <Modal.Body >האם אתה בטוח שאתה רוצה למחוק את המשתמש                        <p></p>
+                        <>{props.item.name}</>
+                        <p></p>
+                     </Modal.Body>
+                     <Modal.Footer>
+                     <Button variant="primary" onClick={handleShow}>שמור וסגור</Button>
+                     <Button variant="secondary" onClick={handleClose}>ביטול</Button>
+
+                     </Modal.Footer>
+
+                </Modal>
+            </Fragment>
+        )
+    
+}
+
+export default Commiteerowmap
+
 
