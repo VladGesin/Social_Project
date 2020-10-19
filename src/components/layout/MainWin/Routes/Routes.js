@@ -22,7 +22,7 @@ const Routes = () => {
    const menuItems = [
       { name: "WelcomPage", path: "/MainWin" },
       { name: "commiteesWin", path: "/commiteesWin/:education" },
-      { name: "commiteesWin", path: "/commiteesWin/:sport" },
+    //  { name: "commiteesWin", path: "/commiteesWin/:sport" },
       { name: "chairmanItems", path: "/chairmanItems/:item" },
       { name: "secreturywin", path: "/secreturywin" },
       { name: "NewMeeting", path: "/newmeeting" },
