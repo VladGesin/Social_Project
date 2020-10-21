@@ -30,9 +30,9 @@ const Routes = () => {
    ];
    return (
       <Fragment>
-         {menuItems.map((item) => (
+         {menuItems.map((item, i) => (
             //COMPONENT_MAP[item.name] returns componentName
-            <Route path={item.path} component={COMPONENT_MAP[item.name]} />
+            <Route key={i} path={item.path} component={COMPONENT_MAP[item.name]} />
          ))}
       </Fragment>
    );

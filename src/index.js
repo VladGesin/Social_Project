@@ -6,10 +6,8 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import ContextProvider from "./store/ContextProvider";
 
 ReactDOM.render(
-   <React.StrictMode>
       <ContextProvider>
          <App />
       </ContextProvider>
-   </React.StrictMode>,
-   document.getElementById("root")
+   , document.getElementById("root")
 );

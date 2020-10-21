@@ -1,9 +1,7 @@
 import React, { Fragment } from "react";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
-// import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import "./navbar.css";
-// import { Link } from 'react-router-dom';
 import NavMapLinks from "./NavBarMapping/NavMapLinks";
 
 const navbar = () => {
@@ -29,7 +27,6 @@ const navbar = () => {
       ],
    };
    return (
-      <Fragment>
          <Navbar
             collapseOnSelect
             expand="lg"
@@ -86,7 +83,6 @@ const navbar = () => {
                </Nav>
             </Navbar.Collapse>
          </Navbar>
-      </Fragment>
    );
 };
 
