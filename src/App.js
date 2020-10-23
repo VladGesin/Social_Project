@@ -7,14 +7,12 @@ import './css/commitmap.css';
 
 const App = () => {
   return (
-    <Fragment>
       <Router>
         <Switch>
           <Route path="/" exact component={Login} />
           <Route path="/MainWin" component={MainWin} />
         </Switch>
       </Router>
-    </Fragment>
   );
 };
 

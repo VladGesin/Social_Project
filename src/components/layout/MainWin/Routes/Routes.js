@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import WelcomPage from "../../MainWin/WelcomPage/WelcomPage";
 import commiteesWin from "../../CommiteesWin/commiteesWin";
 import { Route } from "react-router-dom";
@@ -6,36 +6,20 @@ import chairmanItems from "../../ChairmanItems/ChairmanItems";
 import secreturywin from "../../SecretaryWin/SecreturyWin";
 import NewMeeting from "../../xpertesy/NewMeeting/NewMeeting";
 import MyMeetings from "../../xpertesy/MyMeetings/MyMeetings";
+import {PersonalPage} from "../../PersonalPage/PersonalPage";
 
-const COMPONENT_MAP = {
-   WelcomPage: WelcomPage,
-   commiteesWin: commiteesWin,
-   chairmanItems: chairmanItems,
-   secreturywin: secreturywin,
-   NewMeeting: NewMeeting,
-   MyMeetings: MyMeetings,
-};
+const routesData =
+    [
+       {component: WelcomPage, path: "/MainWin"},
+       {component: commiteesWin, path: "/commiteesWin/:education"},
+       //  { name: "commiteesWin", path: "/commiteesWin/:sport" },
+       {component: chairmanItems, path: "/chairmanItems/:item"},
+       {component: secreturywin, path: "/secreturywin"},
+       {component: NewMeeting, path: "/newmeeting"},
+       {component: MyMeetings, path: "/mymeetings"},
+       {component: PersonalPage, path: "/personal"},
+    ]
 
-// const COMPONENT_MAP = menuItems.map((item)=>)
-
-const Routes = () => {
-   const menuItems = [
-      { name: "WelcomPage", path: "/MainWin" },
-      { name: "commiteesWin", path: "/commiteesWin/:education" },
-    //  { name: "commiteesWin", path: "/commiteesWin/:sport" },
-      { name: "chairmanItems", path: "/chairmanItems/:item" },
-      { name: "secreturywin", path: "/secreturywin" },
-      { name: "NewMeeting", path: "/newmeeting" },
-      { name: "MyMeetings", path: "/mymeetings" },
-   ];
-   return (
-      <Fragment>
-         {menuItems.map((item, i) => (
-            //COMPONENT_MAP[item.name] returns componentName
-            <Route key={i} path={item.path} component={COMPONENT_MAP[item.name]} />
-         ))}
-      </Fragment>
-   );
-};
+const Routes = () => routesData.map(route => <Route key={route.path} {...route}/>);
 
 export default Routes;
