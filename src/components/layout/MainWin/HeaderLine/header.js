@@ -1,12 +1,11 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import avatar from '../../../Icons/Avatars/avatar.png';
 import './header.css';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
-    <Fragment>
-      <div className="container-fluid">
+      <header className="container-fluid">
         <div className="row">
           <div className="col align-self-end">
             {/* ‎Here put api to personal page */}
@@ -20,8 +19,7 @@ const Header = () => {
             </Link>
           </div>
         </div>
-      </div>
-    </Fragment>
+      </header>
   );
 };
 
