@@ -1,7 +1,6 @@
 import React, { Fragment,useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { Button } from 'react-bootstrap';
-import {Validation} from "../../Validation/Validation";
 
 const DeleteUser = () =>
     {
