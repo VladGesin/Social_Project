@@ -8,9 +8,8 @@ const Header = () => {
       <header className="container-fluid">
         <div className="row">
           <div className="col align-self-end">
-            {/* ‎Here put api to personal page */}
             <Link to="/personal">
-              <img className="avatar" alt="avatar" src={avatar}></img>
+              <img className="avatar" alt="avatar" src={avatar}/>
             </Link>
           </div>
           <div className="col text-right">
