@@ -8,12 +8,12 @@ const Header = () => {
       <header className="container-fluid">
         <div className="row">
           <div className="col align-self-end">
-            <Link to="/personal">
+            <Link to="/Social_Project/personal">
               <img className="avatar" alt="avatar" src={avatar}/>
             </Link>
           </div>
           <div className="col text-right">
-            <Link to="/MainWin">
+            <Link to="/Social_Project/MainWin">
               <h1 id="title">מועצת הורים</h1>
             </Link>
           </div>

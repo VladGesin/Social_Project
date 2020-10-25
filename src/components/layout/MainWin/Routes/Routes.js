@@ -10,14 +10,14 @@ import {PersonalPage} from "../../PersonalPage/PersonalPage";
 
 const routesData =
     [
-       {component: WelcomPage, path: "/MainWin"},
-       {component: commiteesWin, path: "/commiteesWin/:education"},
-       //  { name: "commiteesWin", path: "/commiteesWin/:sport" },
-       {component: chairmanItems, path: "/chairmanItems/:item"},
-       {component: secreturywin, path: "/secreturywin"},
-       {component: NewMeeting, path: "/newmeeting"},
-       {component: MyMeetings, path: "/mymeetings"},
-       {component: PersonalPage, path: "/personal"},
+       {component: WelcomPage, path: "/Social_Project/MainWin"},
+       {component: commiteesWin, path: "/Social_Project/commiteesWin/:education"},
+       //  { name: "commiteesWin", path: "/Social_Project/commiteesWin/:sport" },
+       {component: chairmanItems, path: "/Social_Project/chairmanItems/:item"},
+       {component: secreturywin, path: "/Social_Project/secreturywin"},
+       {component: NewMeeting, path: "/Social_Project/newmeeting"},
+       {component: MyMeetings, path: "/Social_Project/mymeetings"},
+       {component: PersonalPage, path: "/Social_Project/personal"},
     ]
 
 const Routes = () => routesData.map(route => <Route key={route.path} {...route}/>);

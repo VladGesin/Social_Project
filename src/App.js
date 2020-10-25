@@ -10,8 +10,8 @@ const App = () => {
       <ContextProvider>
           <Router>
               <Switch>
-                  <Route path="/" exact component={Login} />
-                  <Route path="/MainWin" component={MainWin} />
+                  <Route path="/Social_Project/" exact component={Login} />
+                  <Route path="/Social_Project/MainWin" component={MainWin} />
               </Switch>
           </Router>
       </ContextProvider>

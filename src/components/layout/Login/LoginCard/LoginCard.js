@@ -80,7 +80,7 @@ export class LoginCard extends Component {
                <Form.Group controlId="formBasicCheckbox">
                   <Form.Check type="checkbox" label="השאר אותי מחובר" />
                </Form.Group>
-               <Link to="/MainWin">
+               <Link to="/Social_Project/MainWin">
                   <button
                      variant="primary"
                      type="submit"

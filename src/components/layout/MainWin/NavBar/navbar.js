@@ -62,10 +62,10 @@ const navbar = () => {
                      ))}
                   </NavDropdown>
                   <Nav.Link className="ml-auto" href="#features">
-                     <NavLink to="/maps">מפות</NavLink>
+                     <NavLink to="/Social_Project/maps">מפות</NavLink>
                   </Nav.Link>
                   <Nav.Link className="ml-auto" href="#pricing">
-                     <NavLink to="/commiteesWin">אודות</NavLink>
+                     <NavLink to="/Social_Project/commiteesWin">אודות</NavLink>
                   </Nav.Link>
                   <NavDropdown
                      title="Xpertesy"
@@ -78,7 +78,7 @@ const navbar = () => {
                      ))}
                   </NavDropdown>
                   <Nav.Link className="ml-auto" href="#pricing">
-                     <NavLink to="/SecreturyWin">מסך ניהול</NavLink>
+                     <NavLink to="/Social_Project/SecreturyWin">מסך ניהול</NavLink>
                   </Nav.Link>
                </Nav>
             </Navbar.Collapse>
