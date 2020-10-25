@@ -149,7 +149,11 @@ const MyMeetings = () => {
                         placeholder="חיפוש"
                         onChange={searchHandler}
                      />
-                     <img src={searchIcon} className="search-icon" />
+                     <img
+                        src={searchIcon}
+                        alt="search"
+                        className="search-icon"
+                     />
                   </Col>
                </Col>
             </Row>

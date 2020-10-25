@@ -37,10 +37,11 @@ const MeetingsTable = ({
                   <td>{m.value_date.slice(11, 16)}</td>
 
                   <td>
-                     <a href={m.link} target="_blank">
+                     <a href={m.link} target="_blank" rel="noopener noreferrer">
                         <img
                            style={{ width: "2rem", height: "2rem" }}
                            src={urlIcon}
+                           alt="url icon"
                         />
                      </a>
                   </td>
