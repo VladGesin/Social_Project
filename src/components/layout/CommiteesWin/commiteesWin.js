@@ -1,36 +1,28 @@
-import React, { Fragment } from 'react';
+import React, {Fragment} from 'react';
 import CommDescription from './commDescription/commDescription';
 import CommTable from './commTable/commTable';
-import { useLocation } from 'react-router-dom';
+import {useParams} from 'react-router-dom';
+import {committeesConfig} from "../MainCommitteesPage/committeesConfig";
 
-const CommiteesWin = (props) => {
-  const CommList = {
-    education: {
-      name: 'ועדת חינוך',
-      desc: 'פירוט רחב על כלל המידע הנוגע לועדה',
-    },
 
-    sport: {
-      name: 'ועדת ספורט',
-      desc: 'פירוט רחב על כלל המידע הנוגע לועדה',
-    },
-  };
+const CommiteesWin = () => {
 
-  const location = useLocation();
-  return (
-    <Fragment>
-      {console.log(CommList[location.state.item])}
-      <div className="container">
-        <div className="row">
-          <CommDescription commItem={CommList[location.state.item]} />
-        </div>
+    const {type} = useParams();
+    const committeeData = committeesConfig.find(({paramKey}) => paramKey === type);
 
-        <div className="row">
-          <CommTable />
-        </div>
-      </div>
-    </Fragment>
-  );
+    return (
+        <Fragment>
+            <div className="container">
+                <div className="row">
+                    <CommDescription commItem={committeeData}/>
+                </div>
+
+                <div className="row">
+                    <CommTable/>
+                </div>
+            </div>
+        </Fragment>
+    );
 };
 
 export default CommiteesWin;
