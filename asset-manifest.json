@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/Social_Project/static/css/main.b94ebaf4.chunk.css",
-    "main.js": "/Social_Project/static/js/main.698e2bcf.chunk.js",
-    "main.js.map": "/Social_Project/static/js/main.698e2bcf.chunk.js.map",
+    "main.css": "/Social_Project/static/css/main.f41bc389.chunk.css",
+    "main.js": "/Social_Project/static/js/main.df900539.chunk.js",
+    "main.js.map": "/Social_Project/static/js/main.df900539.chunk.js.map",
     "runtime-main.js": "/Social_Project/static/js/runtime-main.53aa5759.js",
     "runtime-main.js.map": "/Social_Project/static/js/runtime-main.53aa5759.js.map",
     "static/css/2.5f3790ad.chunk.css": "/Social_Project/static/css/2.5f3790ad.chunk.css",
-    "static/js/2.b8a18223.chunk.js": "/Social_Project/static/js/2.b8a18223.chunk.js",
-    "static/js/2.b8a18223.chunk.js.map": "/Social_Project/static/js/2.b8a18223.chunk.js.map",
+    "static/js/2.fff74f90.chunk.js": "/Social_Project/static/js/2.fff74f90.chunk.js",
+    "static/js/2.fff74f90.chunk.js.map": "/Social_Project/static/js/2.fff74f90.chunk.js.map",
     "index.html": "/Social_Project/index.html",
-    "precache-manifest.31d3edc228ed80842e9daf07baebb3f7.js": "/Social_Project/precache-manifest.31d3edc228ed80842e9daf07baebb3f7.js",
+    "precache-manifest.e1d404529d8c504baec8757560f3781d.js": "/Social_Project/precache-manifest.e1d404529d8c504baec8757560f3781d.js",
     "service-worker.js": "/Social_Project/service-worker.js",
     "static/css/2.5f3790ad.chunk.css.map": "/Social_Project/static/css/2.5f3790ad.chunk.css.map",
-    "static/css/main.b94ebaf4.chunk.css.map": "/Social_Project/static/css/main.b94ebaf4.chunk.css.map",
-    "static/js/2.b8a18223.chunk.js.LICENSE.txt": "/Social_Project/static/js/2.b8a18223.chunk.js.LICENSE.txt",
+    "static/css/main.f41bc389.chunk.css.map": "/Social_Project/static/css/main.f41bc389.chunk.css.map",
+    "static/js/2.fff74f90.chunk.js.LICENSE.txt": "/Social_Project/static/js/2.fff74f90.chunk.js.LICENSE.txt",
     "static/media/Pic1.jpeg": "/Social_Project/static/media/Pic1.1d0855d1.jpeg",
     "static/media/Pic2.jpg": "/Social_Project/static/media/Pic2.9fc978ce.jpg",
     "static/media/Pic3.jpg": "/Social_Project/static/media/Pic3.0824bc36.jpg",
@@ -25,8 +25,8 @@
   "entrypoints": [
     "static/js/runtime-main.53aa5759.js",
     "static/css/2.5f3790ad.chunk.css",
-    "static/js/2.b8a18223.chunk.js",
-    "static/css/main.b94ebaf4.chunk.css",
-    "static/js/main.698e2bcf.chunk.js"
+    "static/js/2.fff74f90.chunk.js",
+    "static/css/main.f41bc389.chunk.css",
+    "static/js/main.df900539.chunk.js"
   ]
 }
