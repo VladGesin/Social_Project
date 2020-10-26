@@ -40,7 +40,7 @@ const ContextProvider = (props) => {
          });
    };
 
-   const login = async (userID, password) => {
+   const login = async (userID, password, cb = false) => {
       try {
          // Get token if credentials are valid
          const res = await api.post("/loginManager/login/", {
@@ -52,10 +52,12 @@ const ContextProvider = (props) => {
 
          // Set the token in the localStorage
          localStorage.setItem("token", token);
-
          loadUser();
       } catch (e) {
          console.log(e);
+         if (cb !== false) {
+            cb();
+         }
       }
    };
 
