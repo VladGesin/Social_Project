@@ -1,4 +1,4 @@
-import React, { Fragment,useEffect , useState} from 'react';
+import React, { Fragment,useEffect , useState ,useContext} from 'react';
 import Slider from './Slider/Slider';
 import Container from 'react-bootstrap/Container';
 import GoodWord from '../WelcomPage/GoodWord/GoodWord';
@@ -6,6 +6,7 @@ import News from '../WelcomPage/News/News';
 import Birthday from '../WelcomPage/Birthdays/Birthday';
 import Teachers from '../WelcomPage/PrivateTeacher/PrivateTeacher';
 import axios from 'axios';
+import Context from '../../../../store/Context'
 
 
 import './WelcomPage.css';
@@ -13,29 +14,36 @@ import './WelcomPage.css';
 const WelcomPage = () => {
   const [users, setUsers] =useState([]); //hook 
   const [news, setNews] = useState([]); // hook news
+  const context = useContext(Context)
+
+  console.log(`Bearer  ${context.userState.token}`)
+
   
+
   useEffect(() => {
     getUsers();
     getNews('תלמיד');
 
-  }, []);
+  }, [users,news]);
 
 
   async function getUsers() {
 
     axios.get('http://localhost:8080/users',{
       headers: {
-        Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjMyMSwiaWF0IjoxNjAyNjg5NTY3fQ.Dd7PS5MsC0OBuo1br8rwV__ISSfh50akpBgDf7n9Whc'
+        Authorization: `Bearer ${context.userState.token} `
       }
   }).then(res => 
-    setUsers(res.data))
+    setUsers(res.data),
+    console.log(users)
+    )
   }
 
   async function getNews(key) {
 
     await axios.get(`http://localhost:8080/news?filterBy=${key}`,{
       headers: {
-        Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjMyMSwiaWF0IjoxNjAyNjg5NTY3fQ.Dd7PS5MsC0OBuo1br8rwV__ISSfh50akpBgDf7n9Whc'
+        Authorization: `Bearer ${context.userState.token} `
       }
   }).then(res => 
     setNews(res.data))
