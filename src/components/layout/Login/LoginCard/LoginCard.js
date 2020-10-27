@@ -63,6 +63,7 @@ export class LoginCard extends Component {
                   </Form.Text>
                </Form.Group>
 
+<<<<<<< Updated upstream
                <Form.Group controlId="formBasicPassword">
                   <Form.Label>סיסמא</Form.Label>
                   <Form.Control
@@ -82,6 +83,26 @@ export class LoginCard extends Component {
                </Form.Group>
                <Link to="/Social_Project/MainWin">
                   <button
+=======
+                  <Form.Group controlId="formBasicPassword">
+                     <Form.Label>סיסמא</Form.Label>
+                     <Form.Control
+                        type="password"
+                        placeholder="הקלד את סיסמתך"
+                        onChange={(e) => this.handleInputPassword(e)}
+                     />
+                     <span id="passError"></span>
+                     <Form.Text className="text-muted">
+                        דרישות לסיסמא : *לא תכיל שם פרטי / משפחה *אורך 6 תווים
+                        לפחות *תכיל לפחות ספרה אחת, לפחות אות גדולה ואות קטנה
+                        באנגלית ותו מיוחד *תוקף הסיסמא 180 ימים
+                     </Form.Text>
+                  </Form.Group>
+                  {!this.state.isValid && (
+                     <p style={{ color: "red" }}>שם משתמש או סיסמא שגויים</p>
+                  )}
+                  <Button
+>>>>>>> Stashed changes
                      variant="primary"
                      type="submit"
                      onClick={this.ValidetionInputIdAndPassword}
