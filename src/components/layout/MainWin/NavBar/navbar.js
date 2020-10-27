@@ -23,39 +23,36 @@ const navbar = () => {
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light" dir="rtl">
          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="m-auto ">
+            <Nav className="m-auto links-container">
+
                <NavDropdown
                   title="יושב ראש"
                   id="collasible-nav-dropdown"
                   dir="rtl"
-                  className="ml-auto text-right"
+                  className="text-right"
                >
                   {ChairmanItems.link.map((item) => (
                      <NavMapLinks link={item} key={item.name} />
                   ))}
                </NavDropdown>
-               <Nav.Link className="ml-auto" href="#features">
-                  <NavLink to="/Social_Project/committees">וועדות</NavLink>
-               </Nav.Link>
-               <Nav.Link className="ml-auto" href="#features">
-                  <NavLink to="/Social_Project/maps">מפות</NavLink>
-               </Nav.Link>
-               <Nav.Link className="ml-auto" href="#pricing">
-                  <NavLink to="/Social_Project/commiteesWin">אודות</NavLink>
-               </Nav.Link>
+
+               <NavLink to="/Social_Project/committees">וועדות</NavLink>
+               <NavLink to="/Social_Project/maps">מפות</NavLink>
+               <NavLink to="/Social_Project/commiteesWin">אודות</NavLink>
+
                <NavDropdown
                   title="Xpertesy"
                   id="collasible-nav-dropdown"
                   dir="rtl"
-                  className="ml-auto text-right"
+                  className="text-right"
                >
                   {XpertesyItems.link.map((item) => (
                      <NavMapLinks link={item} key={item.name} />
                   ))}
                </NavDropdown>
-               <Nav.Link className="ml-auto" href="#pricing">
-                  <NavLink to="/Social_Project/SecreturyWin">מסך ניהול</NavLink>
-               </Nav.Link>
+
+               <NavLink to="/Social_Project/SecreturyWin">מסך ניהול</NavLink>
+
             </Nav>
          </Navbar.Collapse>
       </Navbar>
