@@ -1,6 +1,15 @@
-.rootMainCommitteesPage{
+.rootMainCommitteesPage {
 
-  h1{
+  h2 {
     text-align: center;
+  }
+
+  .tableWrapper {
+    width: 50%;
+    margin: 0 auto;
+
+    @media screen and (max-width: 500px) {
+      width: 100%;
+    }
   }
 }
