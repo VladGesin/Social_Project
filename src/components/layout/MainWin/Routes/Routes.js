@@ -8,9 +8,10 @@ import NewMeeting from "../../xpertesy/NewMeeting/NewMeeting";
 import MyMeetings from "../../xpertesy/MyMeetings/MyMeetings";
 import {PersonalPage} from "../../PersonalPage/PersonalPage";
 import {MainCommitteesPage} from "../../MainCommitteesPage/MainCommitteesPage";
-
+import Login from "../../Login/Login"
 const routesData =
     [
+        {component: Login, path: "/Social_Project/"},
         {component: WelcomPage, path: "/Social_Project/MainWin"},
 
         // //  { name: "commiteesWin", path: "/Social_Project/commiteesWin/:sport" },
@@ -23,6 +24,6 @@ const routesData =
         {component: commiteesWin, path: "/Social_Project/committees/:type"},
     ]
 
-const Routes = () => routesData.map(route => <Route key={route.path} {...route}/>);
+const Routes = () => routesData.map(route => route.path==="/Social_Project/"?<Route key={route.path} exact {...route}/>:<Route key={route.path} {...route}/>);
 
 export default Routes;

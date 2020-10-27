@@ -70,7 +70,6 @@ function isValidIsraeliID(id) {
         }
       else
       {
-      alert('!סיסמא תקינה');
       isValid = true;
       }
       if(!isValid)
