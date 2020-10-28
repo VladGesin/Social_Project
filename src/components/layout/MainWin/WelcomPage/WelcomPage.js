@@ -16,9 +16,8 @@ const WelcomPage = () => {
   const [news, setNews] = useState([]); // hook news
   const context = useContext(Context)
 
-  console.log(`Bearer  ${context.userState.token}`)
+  console.log(`Bearer ${context.userState.token}`)
 
-  
 
   useEffect(() => {
     getUsers();
@@ -27,24 +26,23 @@ const WelcomPage = () => {
   }, [users,news]);
 
 
-  async function getUsers() {
+  function getUsers() {
 
-    axios.get('http://localhost:8080/users',{
-      headers: {
-        Authorization: `Bearer ${context.userState.token} `
-      }
+    axios.get('http://127.0.0.1:8080/users',{
+      // headers: {
+      //   Authorization: context.userState.token
+      // }
   }).then(res => 
     setUsers(res.data),
-    console.log(users)
     )
   }
 
   async function getNews(key) {
 
-    await axios.get(`http://localhost:8080/news?filterBy=${key}`,{
-      headers: {
-        Authorization: `Bearer ${context.userState.token} `
-      }
+    await axios.get(`http://127.0.0.1:8080/news?filterBy=${key}`,{
+      // headers: {
+      //   Authorization: context.userState.token
+      // }
   }).then(res => 
     setNews(res.data))
   }
