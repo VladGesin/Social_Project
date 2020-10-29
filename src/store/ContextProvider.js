@@ -21,10 +21,8 @@ const ContextProvider = (props) => {
          //Set the token in the headers request
          setAuthToken(token);
          //Get all user details by the token in the header
-         console.log("here");
          const res = await api.get("user");
          const user = res.data;
-         console.log("here", user);
          const updatedUser = {
             id: user.id,
             firstName: user.firstName,
@@ -40,7 +38,7 @@ const ContextProvider = (props) => {
          });
    };
 
-   const login = async (userID, password, cb = false) => {
+   const login = async (userID, password, onError = false) => {
       try {
          // Get token if credentials are valid
          const res = await api.post("/loginManager/login/", {
@@ -55,19 +53,20 @@ const ContextProvider = (props) => {
          loadUser();
       } catch (e) {
          console.log(e);
-         if (cb !== false) {
-            cb();
+         if (onError !== false) {
+            onError();
          }
       }
    };
 
    const logout = async () => {
       localStorage.removeItem("token");
+      sessionStorage.removeItem("tempUser");
       setUserState(initialUserState);
    };
 
    return (
-      <Context.Provider value={{ userState, login, logout }}>
+      <Context.Provider value={{ userState, login, loadUser, logout }}>
          {props.children}
       </Context.Provider>
    );

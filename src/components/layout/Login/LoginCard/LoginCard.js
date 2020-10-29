@@ -28,15 +28,24 @@ export class LoginCard extends Component {
          this.checkUserDetails();
       }
    };
+   invalidCredentials = () => {
+      this.setState({ isValid: false });
+   };
    checkUserDetails = async () => {
       try {
-         if (
-            !this.context.login(
-               this.inputId,
-               this.inputPassword,
-               this.setState({ isValid: false })
-            )
+         this.context.login(
+            this.inputId,
+            this.inputPassword,
+            this.invalidCredentials
          );
+         sessionStorage.setItem(
+            "tempUser",
+            JSON.stringify({
+               id: this.inputId,
+               password: this.inputPassword,
+            })
+         );
+
          //  const response = await fetch(
          //     "http://localhost:8080/loginManager/login",
          //     {
