@@ -113,9 +113,6 @@ export class LoginCard extends Component {
                         </p>
                      )}
                      <span id="IDError"></span>
-                     <Form.Text className="text-muted">
-                        אתר זה לא ישתף את פרטיך לעולם
-                     </Form.Text>
                   </Form.Group>
 
                   <Form.Group controlId="formBasicPassword">
@@ -136,9 +133,6 @@ export class LoginCard extends Component {
                         לפחות *תכיל לפחות ספרה אחת, לפחות אות גדולה ואות קטנה
                         באנגלית ותו מיוחד *תוקף הסיסמא 180 ימים
                      </Form.Text>
-                  </Form.Group>
-                  <Form.Group controlId="formBasicCheckbox">
-                     <Form.Check type="checkbox" label="השאר אותי מחובר" />
                   </Form.Group>
                   {!this.state.isValidIdAndPassword && (
                      <p style={{ color: "red" }}>שם משתמש או סיסמא שגויים</p>
