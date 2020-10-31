@@ -8,7 +8,13 @@ import Context from "../../../../store/Context";
 export class LoginCard extends Component {
    constructor(props) {
       super(props);
-      this.state = { isValid: true };
+      this.state = {
+         isValidIdAndPassword: true,
+         password: {
+            isValid: true,
+            msg: "",
+         },
+      };
    }
 
    static contextType = Context;
@@ -23,7 +29,15 @@ export class LoginCard extends Component {
       e.preventDefault();
       let validator = new Validation();
       let isValidId = validator.isValidId(this.inputId);
-      let isValidPassword = validator.isValidPassword(this.inputPassword);
+      let [isValidPassword, msg] = validator.isValidPassword(
+         this.inputPassword
+      );
+      this.setState({
+         password: {
+            isValid: isValidPassword,
+            msg,
+         },
+      });
       if (isValidId && isValidPassword) {
          this.checkUserDetails();
       }
@@ -96,6 +110,11 @@ export class LoginCard extends Component {
                         placeholder="הקלד את סיסמתך"
                         onChange={(e) => this.handleInputPassword(e)}
                      />
+                     {!this.state.password.isValid && (
+                        <p style={{ color: "red" }}>
+                           {this.state.password.msg}
+                        </p>
+                     )}
                      <span id="passError"></span>
                      <Form.Text className="text-muted">
                         דרישות לסיסמא : *לא תכיל שם פרטי / משפחה *אורך 6 תווים
@@ -106,7 +125,7 @@ export class LoginCard extends Component {
                   <Form.Group controlId="formBasicCheckbox">
                      <Form.Check type="checkbox" label="השאר אותי מחובר" />
                   </Form.Group>
-                  {!this.state.isValid && (
+                  {!this.state.isValidIdAndPassword && (
                      <p style={{ color: "red" }}>שם משתמש או סיסמא שגויים</p>
                   )}
                   <Button
