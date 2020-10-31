@@ -8,22 +8,46 @@ import Context from "../../../../store/Context";
 export class LoginCard extends Component {
    constructor(props) {
       super(props);
-      this.state = { isValid: true };
+      this.state = {
+         isValidIdAndPassword: true,
+         id: {
+            isValid: true,
+            msg: "",
+         },
+         password: {
+            isValid: true,
+            msg: "",
+         },
+      };
    }
 
    static contextType = Context;
 
    handleInputID = (e) => {
+     
       this.inputId = e.target.value;
    };
    handleInputPassword = (e) => {
+     
       this.inputPassword = e.target.value;
    };
    ValidetionInputIdAndPassword = (e) => {
       e.preventDefault();
+      
       let validator = new Validation();
-      let isValidId = validator.isValidId(this.inputId);
-      let isValidPassword = validator.isValidPassword(this.inputPassword);
+      let [isValidId,msgId] = validator.isValidId(this.inputId);
+      let [isValidPassword,msgPass] = validator.isValidPassword(this.inputPassword);
+      this.setState({
+         id: {
+            isValid: isValidId,
+            msgId,
+         },
+         password: {
+            isValid: isValidPassword,
+            msgPass,
+         },
+      });
+      
       if (isValidId && isValidPassword) {
          this.checkUserDetails();
       }
@@ -69,7 +93,7 @@ export class LoginCard extends Component {
    };
 
    render() {
-      if (this.context.userState.isAuth) {
+       if (this.context.userState.isAuth) {
          return <Redirect to="/Social_Project/MainWin" />;
       } else {
          return (
@@ -83,6 +107,11 @@ export class LoginCard extends Component {
                         onChange={(e) => this.handleInputID(e)}
                         type="text"
                      />
+                     {!this.state.id.isValid && (
+                        <p style={{ color: "red" }}>
+                           {this.state.id.msgId}
+                        </p>
+                     )}
                      <span id="IDError"></span>
                      <Form.Text className="text-muted">
                         אתר זה לא ישתף את פרטיך לעולם
@@ -96,6 +125,11 @@ export class LoginCard extends Component {
                         placeholder="הקלד את סיסמתך"
                         onChange={(e) => this.handleInputPassword(e)}
                      />
+                     {!this.state.password.isValid && (
+                        <p style={{ color: "red" }}>
+                           {this.state.password.msgPass}
+                        </p>
+                     )}
                      <span id="passError"></span>
                      <Form.Text className="text-muted">
                         דרישות לסיסמא : *לא תכיל שם פרטי / משפחה *אורך 6 תווים
@@ -106,7 +140,7 @@ export class LoginCard extends Component {
                   <Form.Group controlId="formBasicCheckbox">
                      <Form.Check type="checkbox" label="השאר אותי מחובר" />
                   </Form.Group>
-                  {!this.state.isValid && (
+                  {!this.state.isValidIdAndPassword && (
                      <p style={{ color: "red" }}>שם משתמש או סיסמא שגויים</p>
                   )}
                   <Button
