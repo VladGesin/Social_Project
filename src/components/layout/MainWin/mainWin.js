@@ -8,16 +8,12 @@ import Routes from './Routes/Routes';
 function MainWin() {
     return (
         <Router>
-
             <Header/>
-            <NavBar/>
-
             <main>
                 <Switch>
                     <Routes/>
                 </Switch>
             </main>
-
         </Router>
     );
 }

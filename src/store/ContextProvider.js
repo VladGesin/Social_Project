@@ -46,7 +46,6 @@ const ContextProvider = (props) => {
             userID,
          });
          const token = res.data.token[0].token;
-         console.log(token);
 
          // Set the token in the localStorage
          localStorage.setItem("token", token);

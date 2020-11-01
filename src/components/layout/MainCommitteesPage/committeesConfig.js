@@ -8,5 +8,10 @@ export const committeesConfig = [
         paramKey: "education",
         name: 'ועדת חינוך',
         desc: 'פירוט רחב על כלל המידע הנוגע לועדה',
+    },
+    {
+        paramKey: "education",
+        name: 'ועדת תרבות',
+        desc: 'פירוט רחב על כלל המידע הנוגע לועדה',
     }
 ]
