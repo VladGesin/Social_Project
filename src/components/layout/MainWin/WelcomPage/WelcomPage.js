@@ -6,7 +6,7 @@ import News from '../WelcomPage/News/News';
 import Birthday from '../WelcomPage/Birthdays/Birthday';
 import Teachers from '../WelcomPage/PrivateTeacher/PrivateTeacher';
 import axios from 'axios';
-import Context from '../../../../store/Context'
+
 
 
 import './WelcomPage.css';
@@ -14,17 +14,19 @@ import './WelcomPage.css';
 const WelcomPage = () => {
   const [users, setUsers] =useState([]); //hook 
   const [news, setNews] = useState([]); // hook news
-  const context = useContext(Context)
-
-  console.log(`Bearer ${context.userState.token}`)
-
+  
 
   useEffect(() => {
     getUsers();
     getNews('תלמיד');
 
-  }, [users,news]);
+  }, []);
 
+    // function getCommities(){
+
+    //   axios.get
+
+    // }
 
   function getUsers() {
 
