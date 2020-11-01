@@ -1,29 +1,23 @@
+import Axios from 'axios';
 import React, { Component } from 'react';
 import InfoCard from '../InfoCard/InfoCard';
+import axios from 'axios';
 
-export class Teachers extends Component {
-  state = {
-    header: ['מורים פרטיים'],
-    NewsCard: [
-      {
-        text: ['מורה תותח '],
-      },
-      {
-        text: ['מורה מלך '],
-      },
-      {
-        text: ['מורה שמלמד קורס באלגוריטמים '],
-      },
-    ],
-  };
 
-  render() {
+const Teachers =()=> {
+ 
+  // function getTeacher(){
+  //   axios.get('')
+    
+
+  // }
+
     return (
       <div>
-        <InfoCard dataItem={this.state} />
+        {/* <InfoCard dataItem={this.state} /> */}
       </div>
     );
   }
-}
+
 
 export default Teachers;
