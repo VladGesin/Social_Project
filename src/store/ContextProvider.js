@@ -38,7 +38,7 @@ const ContextProvider = (props) => {
          });
    };
 
-   const login = async (userID, password, cb = false) => {
+   const login = async (userID, password, onError = false) => {
       try {
          // Get token if credentials are valid
          const res = await api.post("/loginManager/login/", {
@@ -52,19 +52,20 @@ const ContextProvider = (props) => {
          loadUser();
       } catch (e) {
          console.log(e);
-         if (cb !== false) {
-            cb();
+         if (onError !== false) {
+            onError();
          }
       }
    };
 
    const logout = async () => {
       localStorage.removeItem("token");
+      sessionStorage.removeItem("tempUser");
       setUserState(initialUserState);
    };
 
    return (
-      <Context.Provider value={{ userState, login, logout }}>
+      <Context.Provider value={{ userState, login, loadUser, logout }}>
          {props.children}
       </Context.Provider>
    );

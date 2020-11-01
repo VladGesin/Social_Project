@@ -8,7 +8,17 @@ import Context from "../../../../store/Context";
 export class LoginCard extends Component {
    constructor(props) {
       super(props);
-      this.state = { isValid: true };
+      this.state = {
+         isValidIdAndPassword: true,
+         id: {
+            isValid: true,
+            msg: "",
+         },
+         password: {
+            isValid: true,
+            msg: "",
+         },
+      };
    }
 
    static contextType = Context;
@@ -21,22 +31,45 @@ export class LoginCard extends Component {
    };
    ValidetionInputIdAndPassword = (e) => {
       e.preventDefault();
+
       let validator = new Validation();
-      let isValidId = validator.isValidId(this.inputId);
-      let isValidPassword = validator.isValidPassword(this.inputPassword);
+      let [isValidId, msgId] = validator.isValidId(this.inputId);
+      let [isValidPassword, msgPass] = validator.isValidPassword(
+         this.inputPassword
+      );
+      this.setState({
+         id: {
+            isValid: isValidId,
+            msgId,
+         },
+         password: {
+            isValid: isValidPassword,
+            msgPass,
+         },
+      });
+
       if (isValidId && isValidPassword) {
          this.checkUserDetails();
       }
    };
+   invalidCredentials = () => {
+      this.setState({ isValidIdAndPassword: false });
+   };
    checkUserDetails = async () => {
       try {
-         if (
-            !this.context.login(
-               this.inputId,
-               this.inputPassword,
-               this.setState({ isValid: false })
-            )
+         this.context.login(
+            this.inputId,
+            this.inputPassword,
+            this.invalidCredentials
          );
+         sessionStorage.setItem(
+            "tempUser",
+            JSON.stringify({
+               id: this.inputId,
+               password: this.inputPassword,
+            })
+         );
+
          //  const response = await fetch(
          //     "http://localhost:8080/loginManager/login",
          //     {
@@ -74,10 +107,10 @@ export class LoginCard extends Component {
                         onChange={(e) => this.handleInputID(e)}
                         type="text"
                      />
+                     {!this.state.id.isValid && (
+                        <p style={{ color: "red" }}>{this.state.id.msgId}</p>
+                     )}
                      <span id="IDError"></span>
-                     <Form.Text className="text-muted">
-                        אתר זה לא ישתף את פרטיך לעולם
-                     </Form.Text>
                   </Form.Group>
 
                   <Form.Group controlId="formBasicPassword">
@@ -87,6 +120,11 @@ export class LoginCard extends Component {
                         placeholder="הקלד את סיסמתך"
                         onChange={(e) => this.handleInputPassword(e)}
                      />
+                     {!this.state.password.isValid && (
+                        <p style={{ color: "red" }}>
+                           {this.state.password.msgPass}
+                        </p>
+                     )}
                      <span id="passError"></span>
                      <Form.Text className="text-muted">
                         דרישות לסיסמא : *לא תכיל שם פרטי / משפחה *אורך 6 תווים
@@ -94,10 +132,7 @@ export class LoginCard extends Component {
                         באנגלית ותו מיוחד *תוקף הסיסמא 180 ימים
                      </Form.Text>
                   </Form.Group>
-                  <Form.Group controlId="formBasicCheckbox">
-                     <Form.Check type="checkbox" label="השאר אותי מחובר" />
-                  </Form.Group>
-                  {!this.state.isValid && (
+                  {!this.state.isValidIdAndPassword && (
                      <p style={{ color: "red" }}>שם משתמש או סיסמא שגויים</p>
                   )}
                   <Button

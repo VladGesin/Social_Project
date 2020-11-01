@@ -44,11 +44,7 @@ function isValidIsraeliID(id) {
       {
         message = 'ת"ז לא תקינה';
       }
-      if(!isValid)
-      {
-        alert(message);
-      }
-      return isValid;
+      return [isValid, message];
 
     }
 
@@ -72,11 +68,7 @@ function isValidIsraeliID(id) {
       {
       isValid = true;
       }
-      if(!isValid)
-      {
-        alert(message);
-      }
-      return isValid;
+      return [isValid, message];
     }
 
     isValidEmail(inputEmail) {
@@ -88,10 +80,7 @@ function isValidIsraeliID(id) {
       else {
           message="כתובת מייל לא תקינה, נא הזן שנית";
        }
-      if(!isValid){
-        alert(message);
-      }
-      return isValid;
+      return [isValid, message];
   }
 
 }
