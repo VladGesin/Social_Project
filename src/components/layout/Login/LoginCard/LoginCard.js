@@ -24,19 +24,19 @@ export class LoginCard extends Component {
    static contextType = Context;
 
    handleInputID = (e) => {
-     
       this.inputId = e.target.value;
    };
    handleInputPassword = (e) => {
-     
       this.inputPassword = e.target.value;
    };
    ValidetionInputIdAndPassword = (e) => {
       e.preventDefault();
-      
+
       let validator = new Validation();
-      let [isValidId,msgId] = validator.isValidId(this.inputId);
-      let [isValidPassword,msgPass] = validator.isValidPassword(this.inputPassword);
+      let [isValidId, msgId] = validator.isValidId(this.inputId);
+      let [isValidPassword, msgPass] = validator.isValidPassword(
+         this.inputPassword
+      );
       this.setState({
          id: {
             isValid: isValidId,
@@ -47,13 +47,13 @@ export class LoginCard extends Component {
             msgPass,
          },
       });
-      
+
       if (isValidId && isValidPassword) {
          this.checkUserDetails();
       }
    };
    invalidCredentials = () => {
-      this.setState({ isValid: false });
+      this.setState({ isValidIdAndPassword: false });
    };
    checkUserDetails = async () => {
       try {
@@ -93,7 +93,7 @@ export class LoginCard extends Component {
    };
 
    render() {
-       if (this.context.userState.isAuth) {
+      if (this.context.userState.isAuth) {
          return <Redirect to="/Social_Project/MainWin" />;
       } else {
          return (
@@ -108,9 +108,7 @@ export class LoginCard extends Component {
                         type="text"
                      />
                      {!this.state.id.isValid && (
-                        <p style={{ color: "red" }}>
-                           {this.state.id.msgId}
-                        </p>
+                        <p style={{ color: "red" }}>{this.state.id.msgId}</p>
                      )}
                      <span id="IDError"></span>
                   </Form.Group>
