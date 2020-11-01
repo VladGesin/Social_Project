@@ -29,9 +29,6 @@ const WelcomPage = () => {
   function getUsers() {
 
     axios.get('http://127.0.0.1:8080/users',{
-      // headers: {
-      //   Authorization: context.userState.token
-      // }
   }).then(res => 
     setUsers(res.data),
     )
@@ -40,9 +37,6 @@ const WelcomPage = () => {
   async function getNews(key) {
 
     await axios.get(`http://127.0.0.1:8080/news?filterBy=${key}`,{
-      // headers: {
-      //   Authorization: context.userState.token
-      // }
   }).then(res => 
     setNews(res.data))
   }
