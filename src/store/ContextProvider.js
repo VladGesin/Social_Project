@@ -21,10 +21,8 @@ const ContextProvider = (props) => {
          //Set the token in the headers request
          setAuthToken(token);
          //Get all user details by the token in the header
-         console.log("here");
          const res = await api.get("user");
          const user = res.data;
-         console.log("here", user);
          const updatedUser = {
             id: user.id,
             firstName: user.firstName,
@@ -48,7 +46,6 @@ const ContextProvider = (props) => {
             userID,
          });
          const token = res.data.token[0].token;
-         console.log(token);
 
          // Set the token in the localStorage
          localStorage.setItem("token", token);
