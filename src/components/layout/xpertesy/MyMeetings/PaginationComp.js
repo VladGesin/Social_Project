@@ -19,6 +19,7 @@ const PaginationComp = ({
    for (let i = 0; i < pagesAmount; i++) {
       pages.push(
          <Pagination.Item
+            key={i}
             active={activePage === i + 1}
             onClick={() => {
                setActivePage(i + 1);
