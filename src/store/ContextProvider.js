@@ -64,8 +64,39 @@ const ContextProvider = (props) => {
       setUserState(initialUserState);
    };
 
+   const register = async ({
+      id,
+      firstName,
+      lastName,
+      email,
+      password,
+      type,
+      birthday,
+      contactUser,
+      phone,
+   }) => {
+      try {
+         const res = await api.post("/users", {
+            id,
+            firstName,
+            lastName,
+            email,
+            password,
+            type,
+            birthday,
+            contactUser,
+            phone,
+         });
+         return res;
+      } catch (e) {
+         console.log(e);
+      }
+   };
+
    return (
-      <Context.Provider value={{ userState, login, loadUser, logout }}>
+      <Context.Provider
+         value={{ userState, login, loadUser, logout, register }}
+      >
          {props.children}
       </Context.Provider>
    );
