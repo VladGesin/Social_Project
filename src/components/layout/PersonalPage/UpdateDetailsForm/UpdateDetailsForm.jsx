@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styles from "./UpdateDetailsForm.module.scss";
 import {Button, Form, Input, InputNumber} from 'antd';
+import Context from "../../../../store/Context";
 
 
 const layout = {
@@ -22,16 +23,31 @@ const validateMessages = {
     },
 };
 
-export const UpdateDetailsForm = (props) => {
+export const UpdateDetailsForm = () => {
+
+    const context = useContext(Context);
+
     const onFinish = (values) => {
-        console.log(values);
+        alert(values)
     };
 
     return (
         <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
             <Form.Item
                 name={['user', 'name']}
-                label="שם מלא"
+                label="שם פרטי"
+                rules={[
+                    {
+                        required: true,
+                    },
+                ]}
+            >
+                <Input />
+            </Form.Item>
+
+            <Form.Item
+                name={['user', 'name']}
+                label="שם משפחה"
                 rules={[
                     {
                         required: true,
@@ -71,17 +87,9 @@ export const UpdateDetailsForm = (props) => {
                 <InputNumber />
             </Form.Item>
 
-            {/*<Form.Item name={['user', 'website']} label="Website">*/}
-            {/*    <Input />*/}
-            {/*</Form.Item>*/}
-
-            {/*<Form.Item name={['user', 'introduction']} label="Introduction">*/}
-            {/*    <Input.TextArea />*/}
-            {/*</Form.Item>*/}
-
             <Form.Item wrapperCol={{...layout.wrapperCol, offset: 8}}>
                 <Button type="primary" htmlType="submit">
-                    Submit
+                    עדכן
                 </Button>
             </Form.Item>
         </Form>

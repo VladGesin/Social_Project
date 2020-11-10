@@ -9,7 +9,11 @@ export const PersonalPage = () =>{
 
             <div className={styles.container}>
                 <h2>עריכת פרטים אישיים:</h2>
-                <UpdateDetailsForm/>
+
+                <div className={styles.formWrapper}>
+                    <UpdateDetailsForm/>
+                </div>
+
             </div>
 
             <div className={styles.container}>
