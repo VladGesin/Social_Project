@@ -22,7 +22,7 @@ class API {
    };
 
    delete = async (path, data) => {
-      const response_data = await axios.delete(`${this.base_url}\\${path}`);
+      const response_data = await axios.delete(`${this.base_url}${path}`);
 
       return response_data;
    };

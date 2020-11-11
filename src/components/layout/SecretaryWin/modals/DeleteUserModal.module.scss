@@ -1,0 +1,33 @@
+.deleteWindow {
+   padding: 1rem 3rem;
+   h3 {
+      font-size: 1.5rem;
+      text-align: start;
+      direction: rtl;
+      color: rgb(100, 100, 100);
+      span {
+         color: rgb(25, 171, 216);
+      }
+   }
+   p {
+      text-align: right;
+   }
+   .btnContainer {
+      display: flex;
+      justify-content: center;
+   }
+   button {
+      height: 2.5rem;
+      margin: 1rem;
+      width: 12rem;
+      border: none;
+      border-radius: 0.5rem;
+      color: #fff;
+   }
+   .deleteBtn {
+      background-color: red;
+   }
+   .cancelBtn {
+      background-color: rgb(100, 100, 100);
+   }
+}

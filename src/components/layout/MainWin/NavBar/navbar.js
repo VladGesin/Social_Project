@@ -24,7 +24,6 @@ const navbar = () => {
          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
          <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="m-auto links-container">
-
                <NavDropdown
                   title="יושב ראש"
                   id="collasible-nav-dropdown"
@@ -51,8 +50,7 @@ const navbar = () => {
                   ))}
                </NavDropdown>
 
-               <NavLink to="/Social_Project/SecreturyWin">מסך ניהול</NavLink>
-
+               <NavLink to="/Social_Project/SecretaryWin">מסך ניהול</NavLink>
             </Nav>
          </Navbar.Collapse>
       </Navbar>

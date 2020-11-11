@@ -1,0 +1,56 @@
+.table {
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+   background-color: rgb(246, 252, 252);
+   .item {
+      margin: 0 auto 1rem auto;
+      height: 5rem;
+      width: 90%;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: space-around;
+      .userData {
+         width: 85%;
+         display: flex;
+         justify-content: space-around;
+         flex-direction: row-reverse;
+      }
+      .col:first-child {
+         margin-right: 1rem;
+      }
+      .col {
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         align-items: flex-end;
+         margin: 0 2rem;
+         p:first-child {
+            color: rgb(204, 204, 204);
+            font-size: 0.9rem;
+         }
+         p {
+            color: rgb(150, 150, 150);
+            padding: 0;
+            margin: 0;
+         }
+      }
+      .actions {
+         display: flex;
+         width: 15%;
+         justify-content: space-around;
+         flex-direction: row-reverse;
+      }
+      i {
+         line-height: 5rem;
+         color: rgb(150, 150, 150);
+         font-size: 1.5rem;
+         &:hover {
+            color: rgb(110, 110, 110);
+            cursor: pointer;
+         }
+      }
+   }
+}

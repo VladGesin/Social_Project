@@ -96,26 +96,42 @@
 
 // export default SecreturyWin;
 
-import React, { useState } from "react";
-import Accordion from "react-bootstrap/Accordion";
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import SecretaryWinSideBar from "./SideBar/SideBar";
+import TopBar from "./TopBar/TopBar";
+import Table from "./Table/Table";
+import style from "./SecretaryWin.module.scss";
+import api from "../../../api";
 
-import RestartModal from "./modals/restartModal";
-import NewuserModal from "./modals/newuserModal";
-import DeleteuserModal from "./modals/deleteuserModal";
-import DatacommiteesModal from "./modals/datacommiteesModal";
-import ManageparticipentsModal from "./modals/manageparticipentsModal";
-import Commitemap from "./modals/commitemap";
-import style from "./SecreturyWin.module.scss";
-const SecreturyWin = () => {
+const SecretaryWin = () => {
+   const [users, setUsers] = useState([]);
+   useEffect(() => {
+      (async function () {
+         const res = await api.get("users/");
+         const users = res.data.sort((a, b) =>
+            a.first_name > b.first_name
+               ? 1
+               : a.first_name < b.first_name
+               ? -1
+               : 0
+         );
+         setUsers(users);
+      })();
+   }, []);
    return (
       <div className={style.rootSecretaryWindow}>
-         <div className={style.sideBar}></div>
+         <div className={style.sideBar}>
+            <SecretaryWinSideBar />
+         </div>
          <div className={style.main}>
-            <div className={style.topBar}></div>
-            <div className={style.table}></div>
+            <div className={style.topBar}>
+               <TopBar />
+            </div>
+            <div className={style.table}>
+               <Table users={users} setUsers={setUsers} />
+            </div>
          </div>
       </div>
    );
 };
-export default SecreturyWin;
+export default SecretaryWin;
