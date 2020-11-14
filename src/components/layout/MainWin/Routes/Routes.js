@@ -9,6 +9,7 @@ import MyMeetings from "../../xpertesy/MyMeetings/MyMeetings";
 import {PersonalPage} from "../../PersonalPage/PersonalPage";
 import {MainCommitteesPage} from "../../MainCommitteesPage/MainCommitteesPage";
 import Login from "../../Login/Login"
+import {MapsPage} from "../../MapsPage/MapsPage";
 
 const routesData =
     [
@@ -19,6 +20,7 @@ const routesData =
         {component: NewMeeting, path: "/Social_Project/newmeeting"},
         {component: MyMeetings, path: "/Social_Project/mymeetings"},
         {component: PersonalPage, path: "/Social_Project/personal"},
+        {component: MapsPage, path: "/Social_Project/maps"},
         {component: MainCommitteesPage, path: "/Social_Project/committees", exact: true},
         {component: commiteesWin, path: "/Social_Project/committees/:type"},
     ]
