@@ -1,8 +1,7 @@
-import React, {useContext} from 'react';
-import styles from "./UpdateDetailsForm.module.scss";
+import React from 'react';
+// import styles from "./UpdateDetailsForm.module.scss";
 import {Button, Form, Input, InputNumber} from 'antd';
-import Context from "../../../../store/Context";
-
+// import Context from "../../../../store/Context";
 
 const layout = {
     labelCol: {
@@ -25,7 +24,7 @@ const validateMessages = {
 
 export const UpdateDetailsForm = () => {
 
-    const context = useContext(Context);
+    // const context = React.useContext(Context);
 
     const onFinish = (values) => {
         alert(values)
@@ -36,6 +35,7 @@ export const UpdateDetailsForm = () => {
             <Form.Item
                 name={['user', 'name']}
                 label="שם פרטי"
+                initialValue={'tttt'}
                 rules={[
                     {
                         required: true,
