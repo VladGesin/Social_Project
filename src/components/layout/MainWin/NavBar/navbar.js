@@ -4,9 +4,9 @@ import { NavLink } from "react-router-dom";
 import "./navbar.css";
 import NavMapLinks from "./NavBarMapping/NavMapLinks";
 
-const ChairmanItems = {
-   link: [{ name: "יושב ראש דניאלה", path: "/chairmanItems/", item: "test" }],
-};
+// const ChairmanItems = {
+//    link: [{ name: "יושב ראש דניאלה", path: "/chairmanItems/", item: "test" }],
+// };
 const XpertesyItems = {
    link: [
       {
@@ -25,16 +25,16 @@ const navbar = () => {
          <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="m-auto links-container">
 
-               <NavDropdown
-                  title="יושב ראש"
-                  id="collasible-nav-dropdown"
-                  dir="rtl"
-                  className="text-right"
-               >
-                  {ChairmanItems.link.map((item) => (
-                     <NavMapLinks link={item} key={item.name} />
-                  ))}
-               </NavDropdown>
+               {/*<NavDropdown*/}
+               {/*   title="יושב ראש"*/}
+               {/*   id="collasible-nav-dropdown"*/}
+               {/*   dir="rtl"*/}
+               {/*   className="text-right"*/}
+               {/*>*/}
+               {/*   {ChairmanItems.link.map((item) => (*/}
+               {/*      <NavMapLinks link={item} key={item.name} />*/}
+               {/*   ))}*/}
+               {/*</NavDropdown>*/}
 
                <NavLink to="/Social_Project/committees">וועדות</NavLink>
                <NavLink to="/Social_Project/maps">מפות</NavLink>
