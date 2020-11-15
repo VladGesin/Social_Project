@@ -64,6 +64,21 @@ const NewMeeting = () => {
       return re.test(email);
    };
    const validateForm = () => {
+      if (
+         new Date(`${formData.startDate}:${formData.startTime}`) < new Date()
+      ) {
+         setMessages([
+            ...messages,
+            { msg: "אין אפשרות ליצור פגישה בעבר", type: "danger" },
+         ]);
+         setTimeout(() => {
+            setMessages((cur) => {
+               const msgs = cur.slice(1);
+               return msgs;
+            });
+         }, 3000);
+         return false;
+      }
       if (participants.length > 4 || participants.length < 2) {
          setMessages([
             ...messages,
@@ -100,7 +115,7 @@ const NewMeeting = () => {
          const req = {
             roomName: formData.roomName,
             hostName: formData.hostName,
-            date: formData.startDate + " " + formData.startTime,
+            date: formData.startDate + " " + formData.startTime + ":00",
             participants: participants,
          };
          try {
@@ -208,6 +223,7 @@ const NewMeeting = () => {
                      value={formData.startDate}
                      name="startDate"
                      onChange={onChangeHandler}
+                     min={new Date().toISOString().slice(0, 10)}
                      type="date"
                      style={{
                         width: "100%",

@@ -1,0 +1,157 @@
+.editUser {
+   border: none !important;
+   .header {
+      background-color: rgb(84, 111, 122);
+      h3 {
+         line-height: 3.5rem;
+         font-size: 1.5rem;
+         text-align: center;
+         direction: rtl;
+         color: rgb(221, 231, 241);
+      }
+      i {
+         position: absolute;
+         top: 1rem;
+         left: 1rem;
+         color: rgb(221, 231, 241);
+         cursor: pointer;
+      }
+   }
+   .body {
+      padding: 1rem 7rem 0 7rem;
+      text-align: right;
+      display: flex;
+      flex-direction: row;
+      flex-direction: row-reverse;
+      .rightSection,
+      .leftSection {
+         div {
+            display: flex;
+            flex-direction: column;
+            label {
+               margin-top: 1.5rem;
+               font-weight: bold;
+               color: rgb(150, 150, 150);
+               font-size: 0.9rem;
+            }
+            input {
+               border: 1px solid rgb(100, 100, 100);
+               padding: 0.1rem 0.5rem;
+               color: rgb(61, 61, 61);
+            }
+            input[type="file"] {
+               display: none;
+            }
+            .imageUpload {
+               background-color: rgb(228, 228, 228);
+               border-radius: 0.2rem;
+               display: inline-block;
+               padding: 6px 12px;
+               cursor: pointer;
+               i {
+                  padding-left: 0.5rem;
+               }
+            }
+            p {
+               font-size: 0.8rem;
+            }
+         }
+      }
+      .rightSection {
+         margin: 0;
+         padding: 0;
+         margin-left: 10rem;
+         border-left: 1px solid rgba(150, 150, 150, 0.4);
+         padding-bottom: 2rem;
+         padding-left: 3rem;
+         .userType {
+            padding: 0;
+            display: flex;
+            flex-direction: row !important;
+            div {
+               display: flex;
+               flex-direction: column;
+               justify-content: flex-end;
+               margin-left: 1rem;
+               div {
+                  flex-direction: row;
+                  align-items: center;
+
+                  label {
+                     margin: 0;
+                     padding: 0;
+                  }
+                  input {
+                     padding: 0;
+                     margin: 0.5rem !important;
+                  }
+               }
+            }
+            .userTypeCheckBox {
+               margin: 1rem 2rem;
+            }
+         }
+      }
+      .leftSection {
+         div {
+            align-items: flex-end;
+         }
+
+         select {
+            width: 15rem;
+         }
+      }
+   }
+   .committeesBox {
+      height: 10rem;
+      width: 25rem;
+      margin: 2rem 0;
+      border: 1px solid rgb(100, 100, 100);
+      border-radius: 0.2rem;
+      padding: 1rem;
+      display: flex;
+      flex-direction: row !important;
+      justify-content: flex-end;
+      overflow-y: auto;
+      flex-wrap: wrap;
+      .item {
+         display: flex;
+         align-self: start;
+         flex-direction: row !important;
+         justify-content: space-between;
+         background-color: rgb(176, 191, 198);
+         padding: 0.5rem;
+         margin: 0.5rem;
+         min-width: 8rem;
+         border-radius: 0.5rem;
+         line-height: 1.5rem;
+         i {
+            color: rgb(221, 231, 241);
+            margin-top: 0.1rem;
+            align-self: center;
+            padding-right: 0.5rem;
+         }
+         span {
+            color: rgb(221, 231, 241);
+         }
+      }
+   }
+   .footer {
+      border-top: 1px solid rgba(150, 150, 150, 0.4);
+      .btnContainer {
+         button {
+            height: 2.5rem;
+            margin: 2rem 0 2rem 2rem;
+            border: none;
+            border-radius: 0.2rem;
+            background-color: rgb(128, 199, 131);
+            width: 20%;
+            color: rgb(255, 255, 255);
+            font-weight: bold;
+         }
+         .prevPage {
+            background-color: rgb(150, 150, 150);
+         }
+      }
+   }
+}

@@ -12,7 +12,6 @@ const RestPasswordModal = ({ isOpen, close, id }) => {
    });
 
    const handlePassword = (e) => {
-      console.log(e);
       setNewPassword({ ...newPassword, [e.target.name]: e.target.value });
       if (e.target.value !== "") setPasswordIsEmpty(false);
       else setPasswordIsEmpty(true);

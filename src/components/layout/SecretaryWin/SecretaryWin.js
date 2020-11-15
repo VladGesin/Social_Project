@@ -101,10 +101,12 @@ import SecretaryWinSideBar from "./SideBar/SideBar";
 import TopBar from "./TopBar/TopBar";
 import Table from "./Table/Table";
 import style from "./SecretaryWin.module.scss";
+import MsgBox from "./MsgBox/MsgBox";
 import api from "../../../api";
 
 const SecretaryWin = () => {
    const [users, setUsers] = useState([]);
+   const [msg, setMsg] = useState("");
    useEffect(() => {
       (async function () {
          const res = await api.get("users/");
@@ -120,6 +122,15 @@ const SecretaryWin = () => {
    }, []);
    return (
       <div className={style.rootSecretaryWindow}>
+         {msg !== "" && (
+            <MsgBox
+               name={msg}
+               clear={() => {
+                  setMsg("");
+               }}
+            />
+         )}
+
          <div className={style.sideBar}>
             <SecretaryWinSideBar />
          </div>
@@ -128,7 +139,12 @@ const SecretaryWin = () => {
                <TopBar />
             </div>
             <div className={style.table}>
-               <Table users={users} setUsers={setUsers} />
+               <Table
+                  users={users}
+                  setUsers={setUsers}
+                  msg={msg}
+                  setMsg={setMsg}
+               />
             </div>
          </div>
       </div>

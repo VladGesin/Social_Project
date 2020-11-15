@@ -5,8 +5,9 @@ import PaginationComp from "../../xpertesy/MyMeetings/PaginationComp";
 import style from "./Table.module.scss";
 import DeleteUserModal from "../modals/DeleteUserModal";
 import RestPasswordModal from "../modals/RestPasswordModal";
+import EditUserModal from "../modals/EditUserModal";
 
-const Table = ({ users, setUsers }) => {
+const Table = ({ users, setUsers, msg, setMsg }) => {
    const [sortByIsOpen, setSortByIsOpen] = useState(false);
    const [sortBy, setSortBy] = useState("שם פרטי");
    const [orderIsOpen, setOrderIsOpen] = useState(false);
@@ -17,6 +18,7 @@ const Table = ({ users, setUsers }) => {
    const [activePage, setActivePage] = useState(1);
    const [deleteWindowIsOpen, setDeleteWindowIsOpen] = useState(false);
    const [resetPasswordIsOpen, setResetPasswordIsOpen] = useState(false);
+   const [editUserIsOpen, setEditUserIsOpen] = useState(false);
    const [currentUser, setCurrentUser] = useState({});
 
    const handleSortBy = (e) => {
@@ -91,10 +93,17 @@ const Table = ({ users, setUsers }) => {
             isOpen={deleteWindowIsOpen}
             name={`${currentUser.first_name} ${currentUser.last_name}`}
             user_id={currentUser.user_id}
+            setUsers={setUsers}
+            setMsg={setMsg}
          />
          <RestPasswordModal
             close={() => setResetPasswordIsOpen(false)}
             isOpen={resetPasswordIsOpen}
+            id={currentUser.user_id}
+         />
+         <EditUserModal
+            close={() => setEditUserIsOpen(false)}
+            isOpen={editUserIsOpen}
             id={currentUser.user_id}
          />
 
@@ -142,6 +151,7 @@ const Table = ({ users, setUsers }) => {
                   user={user}
                   setDeleteWindowIsOpen={setDeleteWindowIsOpen}
                   setResetPasswordIsOpen={setResetPasswordIsOpen}
+                  setEditUserIsOpen={setEditUserIsOpen}
                   setCurrentUser={setCurrentUser}
                />
             );

@@ -6,6 +6,7 @@ const UserItem = ({
    setDeleteWindowIsOpen,
    setResetPasswordIsOpen,
    setCurrentUser,
+   setEditUserIsOpen,
 }) => {
    return (
       <div className={style.table}>
@@ -33,9 +34,19 @@ const UserItem = ({
                </div>
             </div>
             <div className={style.actions}>
-               <i class="fas fa-edit"></i>
                <i
-                  class="fas fa-lock"
+                  className="fas fa-edit"
+                  title={"עריכת פרטי משתמש"}
+                  onClick={() => {
+                     setEditUserIsOpen(true);
+                     setCurrentUser({
+                        user_id: user.user_id,
+                     });
+                  }}
+               ></i>
+               <i
+                  title={"שינוי סיסמא"}
+                  className="fas fa-lock"
                   onClick={() => {
                      setResetPasswordIsOpen(true);
                      setCurrentUser({
@@ -44,6 +55,7 @@ const UserItem = ({
                   }}
                ></i>
                <i
+                  title={"מחיקת משתמש"}
                   className="far fa-trash-alt"
                   onClick={() => {
                      setDeleteWindowIsOpen(true);

@@ -2,12 +2,33 @@ import React from "react";
 import Modal from "react-bootstrap/Modal";
 import api from "../../../../api";
 import style from "./DeleteUserModal.module.scss";
-const DeleteUserModal = ({ isOpen, close, name, user_id }) => {
+const DeleteUserModal = ({
+   isOpen,
+   close,
+   name,
+   user_id,
+   setUsers,
+   setMsg,
+}) => {
    const deleteHandle = async () => {
       const res = await api.delete(`/users/${user_id}`);
-      console.log(res);
+
+      if (res.data) {
+         const users = await api.get("users/");
+         const usersSorted = users.data.sort((a, b) =>
+            a.first_name > b.first_name
+               ? 1
+               : a.first_name < b.first_name
+               ? -1
+               : 0
+         );
+         setUsers(usersSorted);
+         setMsg(`${name} נמחק בהצלחה`);
+      }
+
       close();
    };
+
    return (
       <Modal
          show={isOpen}
