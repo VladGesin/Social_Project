@@ -5,12 +5,6 @@ import axios from 'axios';
 
 
 const Teachers =()=> {
- 
-  // function getTeacher(){
-  //   axios.get('')
-    
-
-  // }
 
     return (
       <div>

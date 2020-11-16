@@ -10,6 +10,7 @@ const initialUserState = {
    token: null,
    isAuth: false,
    loading: true,
+   email: null
 };
 
 const ContextProvider = (props) => {
@@ -24,6 +25,7 @@ const ContextProvider = (props) => {
          const res = await api.get("user");
          const user = res.data;
          const updatedUser = {
+            email: user.email,
             id: user.id,
             firstName: user.firstName,
             lastName: user.lastName,

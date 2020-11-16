@@ -10,6 +10,7 @@ import axios from 'axios';
 
 
 import './WelcomPage.css';
+import api from "../../../../api";
 
 const WelcomPage = () => {
   const [users, setUsers] =useState([]); //hook 
@@ -22,25 +23,12 @@ const WelcomPage = () => {
 
   }, []);
 
-    // function getCommities(){
-
-    //   axios.get
-
-    // }
-
   function getUsers() {
-
-    axios.get('http://127.0.0.1:8080/users',{
-  }).then(res => 
-    setUsers(res.data),
-    )
+    api.get('users').then(res => setUsers(res.data));
   }
 
-  async function getNews(key) {
-
-    await axios.get(`http://127.0.0.1:8080/news?filterBy=${key}`,{
-  }).then(res => 
-    setNews(res.data))
+  function getNews(key) {
+    api.get(`news?filterBy=${key}`).then(res => setNews(res.data));
   }
 
   return (
