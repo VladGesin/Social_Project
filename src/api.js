@@ -28,6 +28,6 @@ class API {
    };
 }
 
-const api = new API("http://127.0.0.1:8080");
+const api = new API("https://www.hitprojectscenter.com/social-API/");
 
 export default api;

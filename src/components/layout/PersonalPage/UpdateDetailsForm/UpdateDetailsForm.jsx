@@ -1,7 +1,7 @@
 import React from 'react';
 // import styles from "./UpdateDetailsForm.module.scss";
 import {Button, Form, Input, InputNumber} from 'antd';
-// import Context from "../../../../store/Context";
+import Context from "../../../../store/Context";
 
 const layout = {
     labelCol: {
@@ -24,8 +24,8 @@ const validateMessages = {
 
 export const UpdateDetailsForm = () => {
 
-    // const context = React.useContext(Context);
-
+    const {userState} = React.useContext(Context);
+    console.log('111111', userState)
     const onFinish = (values) => {
         alert(values)
     };
@@ -33,34 +33,36 @@ export const UpdateDetailsForm = () => {
     return (
         <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
             <Form.Item
-                name={['user', 'name']}
+                name={['user', 'firstName']}
                 label="שם פרטי"
-                initialValue={'tttt'}
+                initialValue={userState.firstName}
                 rules={[
                     {
                         required: true,
                     },
                 ]}
             >
-                <Input />
+                <Input/>
             </Form.Item>
 
             <Form.Item
-                name={['user', 'name']}
+                name={['user', 'lastName']}
                 label="שם משפחה"
+                initialValue={userState.lastName}
                 rules={[
                     {
                         required: true,
                     },
                 ]}
             >
-                <Input />
+                <Input/>
             </Form.Item>
 
 
             <Form.Item
                 name={['user', 'email']}
                 label="אימייל"
+                initialValue={userState.email}
                 rules={[
                     {
                         required: true,
@@ -68,7 +70,7 @@ export const UpdateDetailsForm = () => {
                     },
                 ]}
             >
-                <Input />
+                <Input/>
             </Form.Item>
 
 
@@ -84,7 +86,7 @@ export const UpdateDetailsForm = () => {
                     },
                 ]}
             >
-                <InputNumber />
+                <InputNumber/>
             </Form.Item>
 
             <Form.Item wrapperCol={{...layout.wrapperCol, offset: 8}}>
