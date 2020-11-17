@@ -1,0 +1,37 @@
+.rootPersonalDetails {
+  box-sizing: border-box;
+  padding: 20px 30px;
+
+  .header {
+    display: flex;
+    margin-bottom: 30px;
+
+    .avatarImg {
+      border: 1px solid;
+      margin-left: 30px;
+      width: 80px;
+      height: 80px;
+      text-align: center;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      .name {
+        font-size: 22px;
+      }
+
+      .changeImgBtn {
+        background: none;
+        border: none;
+      }
+    }
+
+  }
+
+  .main {
+
+  }
+}

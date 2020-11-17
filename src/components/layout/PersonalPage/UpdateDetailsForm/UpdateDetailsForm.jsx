@@ -74,24 +74,24 @@ export const UpdateDetailsForm = () => {
             </Form.Item>
 
 
-            <Form.Item
-                name={['user', 'age']}
-                label="גיל"
-                rules={[
-                    {
-                        required: true,
-                        type: 'number',
-                        min: 6,
-                        max: 99,
-                    },
-                ]}
-            >
-                <InputNumber/>
-            </Form.Item>
+            {/*<Form.Item*/}
+            {/*    name={['user', 'age']}*/}
+            {/*    label="גיל"*/}
+            {/*    rules={[*/}
+            {/*        {*/}
+            {/*            required: true,*/}
+            {/*            type: 'number',*/}
+            {/*            min: 6,*/}
+            {/*            max: 99,*/}
+            {/*        },*/}
+            {/*    ]}*/}
+            {/*>*/}
+            {/*    <InputNumber/>*/}
+            {/*</Form.Item>*/}
 
             <Form.Item wrapperCol={{...layout.wrapperCol, offset: 8}}>
                 <Button type="primary" htmlType="submit">
-                    עדכן
+                    שמירה
                 </Button>
             </Form.Item>
         </Form>
