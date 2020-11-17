@@ -13,6 +13,11 @@
     background: #ffffff;
     max-width: 260px;
 
+    @media screen and (max-width: 900px) {
+      max-width: initial;
+      width: 30%;
+    }
+
     h2 {
       margin: 0 0 20px;
       line-height: 1;
@@ -34,12 +39,9 @@
         }
 
         .icon {
-          font-size: 8px;
-          border: 1px solid;
-          height: 20px;
-          width: 20px;
           margin-left: 15px;
-          display: block;
+          display: flex;
+          align-items: center;
         }
       }
     }

@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./PersonalPage.module.scss";
-import {UpdateDetailsForm} from "./UpdateDetailsForm/UpdateDetailsForm";
 import {PersonalDetails} from "./PersonalDetails/PersonalDetails";
+import { SettingOutlined, FileTextOutlined } from '@ant-design/icons';
 
 export const PersonalPage = () => {
     const [indexCurrentMode, setIndexCurrentMode] = React.useState(0);
@@ -10,14 +10,14 @@ export const PersonalPage = () => {
         {
             menu: {
                 label: 'פרטים איישים',
-                iconSrc: ''
+                icon: () => <SettingOutlined />
             },
             mainComp: () => <PersonalDetails/>
         },
         {
             menu: {
                 label: 'הפניות שלי',
-                iconSrc: ''
+                icon: () => <FileTextOutlined />
             },
             mainComp: () => <div>הפניות שלי</div>
         },
@@ -32,7 +32,7 @@ export const PersonalPage = () => {
                     {data.map(({menu}, i) => {
                         return (
                             <li key={i} onClick={() => setIndexCurrentMode(i)} className={`${indexCurrentMode === i? styles.selected: ''}`}>
-                                <span className={styles.icon}>icon</span>
+                                <span className={styles.icon}>{menu.icon()}</span>
                                 {menu.label}
                             </li>
                         );

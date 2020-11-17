@@ -1,7 +1,4 @@
-//:global .ant-form-item-label{
-//  flex: none;
-//  width: 150px;
-//}
+
 
 :global #UpdateDetailsForm {
   input {
@@ -11,5 +8,6 @@
 
   .ant-form-item-label{
     font-weight: bold;
+    width: 150px;
   }
 }

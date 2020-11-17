@@ -28,7 +28,7 @@ export const UpdateDetailsForm = () => {
                 name={['user', 'firstName']}
                 label="שם פרטי"
                 labelAlign={'right'}
-                labelCol={{span: 2, offset: 0}}
+                labelCol={{span: 0, offset: 0}}
                 wrapperCol={{span: 8, offset: 0}}
                 initialValue={userState.firstName}
                 rules={[
@@ -44,7 +44,7 @@ export const UpdateDetailsForm = () => {
                 name={['user', 'lastName']}
                 label="שם משפחה"
                 initialValue={userState.lastName}
-                labelCol={{span: 2, offset: 0}}
+                labelCol={{span: 0, offset: 0}}
                 wrapperCol={{span: 8, offset: 0}}
                 rules={[
                     {
@@ -60,7 +60,7 @@ export const UpdateDetailsForm = () => {
                 name={['user', 'email']}
                 label="אימייל"
                 initialValue={userState.email}
-                labelCol={{span: 2, offset: 0}}
+                labelCol={{span: 0, offset: 0}}
                 wrapperCol={{span: 8, offset: 0}}
                 rules={[
                     {
