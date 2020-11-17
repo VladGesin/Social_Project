@@ -1,4 +1,15 @@
-:global .ant-form-item-label{
-  flex: none;
-  width: 150px;
+//:global .ant-form-item-label{
+//  flex: none;
+//  width: 150px;
+//}
+
+:global #UpdateDetailsForm {
+  input {
+    height: 45px;
+    border-radius: 6px;
+  }
+
+  .ant-form-item-label{
+    font-weight: bold;
+  }
 }

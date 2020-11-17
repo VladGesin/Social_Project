@@ -31,7 +31,7 @@ export const PersonalPage = () => {
                 <ul>
                     {data.map(({menu}, i) => {
                         return (
-                            <li key={i} onClick={() => setIndexCurrentMode(i)}>
+                            <li key={i} onClick={() => setIndexCurrentMode(i)} className={`${indexCurrentMode === i? styles.selected: ''}`}>
                                 <span className={styles.icon}>icon</span>
                                 {menu.label}
                             </li>

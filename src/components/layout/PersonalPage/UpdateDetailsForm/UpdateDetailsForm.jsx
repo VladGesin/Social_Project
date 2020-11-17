@@ -1,5 +1,5 @@
 import React from 'react';
-// import styles from "./UpdateDetailsForm.module.scss";
+import styles from "./UpdateDetailsForm.module.scss";
 import {Button, Form, Input} from 'antd';
 import Context from "../../../../store/Context";
 
@@ -23,7 +23,7 @@ export const UpdateDetailsForm = () => {
     };
 
     return (
-        <Form name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
+        <Form id={'UpdateDetailsForm'} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
             <Form.Item
                 name={['user', 'firstName']}
                 label="שם פרטי"
