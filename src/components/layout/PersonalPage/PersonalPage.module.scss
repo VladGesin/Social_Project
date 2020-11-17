@@ -1,10 +1,52 @@
 .rootPersonalPage {
-  text-align: center;
+  display: flex;
   direction: rtl;
+  text-align: right;
+  padding: 30px;
+  justify-content: space-between;
 
-  h1 {
-    margin-bottom: 30px;
+  .menu {
+    padding: 15px;
+    border: 1px solid #635f5f59;
+    width: 20%;
+    height: 500px;
+    background: #ffffff;
+
+    h2 {
+      margin: 0 0 20px;
+      line-height: 1;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+
+      li {
+        cursor: pointer;
+        margin-bottom: 20px;
+        list-style: none;
+        display: flex;
+
+        .icon {
+          font-size: 8px;
+          border: 1px solid;
+          height: 20px;
+          width: 20px;
+          margin-left: 15px;
+          display: block;
+        }
+      }
+    }
   }
+
+  .main {
+    border: 1px solid #635f5f59;
+    height: 500px;
+    flex: 1;
+    margin-right: 10px;
+    background: #f6fcfc;
+  }
+
 
   .container {
     padding: 20px;
