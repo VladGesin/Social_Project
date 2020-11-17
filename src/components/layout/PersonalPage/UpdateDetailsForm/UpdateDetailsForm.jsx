@@ -1,16 +1,8 @@
 import React from 'react';
 // import styles from "./UpdateDetailsForm.module.scss";
-import {Button, Form, Input, InputNumber} from 'antd';
+import {Button, Form, Input} from 'antd';
 import Context from "../../../../store/Context";
 
-const layout = {
-    labelCol: {
-        span: 8,
-    },
-    wrapperCol: {
-        span: 16,
-    },
-};
 const validateMessages = {
     required: '${label} - שדה חובה ',
     types: {
@@ -31,7 +23,7 @@ export const UpdateDetailsForm = () => {
     };
 
     return (
-        <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
+        <Form name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
             <Form.Item
                 name={['user', 'firstName']}
                 label="שם פרטי"
@@ -45,7 +37,7 @@ export const UpdateDetailsForm = () => {
                     },
                 ]}
             >
-                <Input/>
+                <Input />
             </Form.Item>
 
             <Form.Item
@@ -60,7 +52,7 @@ export const UpdateDetailsForm = () => {
                     },
                 ]}
             >
-                <Input/>
+                <Input />
             </Form.Item>
 
 
@@ -77,14 +69,15 @@ export const UpdateDetailsForm = () => {
                     },
                 ]}
             >
-                <Input/>
+                <Input />
             </Form.Item>
 
-            <Form.Item wrapperCol={{...layout.wrapperCol, offset: 8}}>
-                <Button type="primary" htmlType="submit">
-                    שמירה
-                </Button>
+
+            <Form.Item wrapperCol={{span: 10, offset: 0}}>
+                <Button type="primary" htmlType="submit">שמירה</Button>
             </Form.Item>
+
+
         </Form>
     );
 };
