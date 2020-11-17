@@ -17,7 +17,7 @@ const validateMessages = {
 export const UpdateDetailsForm = () => {
 
     const {userState} = React.useContext(Context);
-    console.log('111111', userState)
+
     const onFinish = (values) => {
         alert(values)
     };

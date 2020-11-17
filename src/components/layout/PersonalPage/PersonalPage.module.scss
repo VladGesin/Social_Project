@@ -4,12 +4,13 @@
   text-align: right;
   padding: 30px;
   justify-content: space-between;
+  min-height: 500px;
 
   .menu {
+    height: 100%;
     padding: 15px;
     border: 1px solid #635f5f59;
     width: 20%;
-    height: 500px;
     background: #ffffff;
     max-width: 260px;
 
@@ -48,8 +49,8 @@
   }
 
   .main {
+    height: 100%;
     border: 1px solid #635f5f59;
-    height: 500px;
     flex: 1;
     margin-right: 10px;
     background: #f6fcfc;
