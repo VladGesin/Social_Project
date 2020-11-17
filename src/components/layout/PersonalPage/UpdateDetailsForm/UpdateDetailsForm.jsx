@@ -35,6 +35,9 @@ export const UpdateDetailsForm = () => {
             <Form.Item
                 name={['user', 'firstName']}
                 label="שם פרטי"
+                labelAlign={'right'}
+                labelCol={{span: 2, offset: 0}}
+                wrapperCol={{span: 8, offset: 0}}
                 initialValue={userState.firstName}
                 rules={[
                     {
@@ -49,6 +52,8 @@ export const UpdateDetailsForm = () => {
                 name={['user', 'lastName']}
                 label="שם משפחה"
                 initialValue={userState.lastName}
+                labelCol={{span: 2, offset: 0}}
+                wrapperCol={{span: 8, offset: 0}}
                 rules={[
                     {
                         required: true,
@@ -63,6 +68,8 @@ export const UpdateDetailsForm = () => {
                 name={['user', 'email']}
                 label="אימייל"
                 initialValue={userState.email}
+                labelCol={{span: 2, offset: 0}}
+                wrapperCol={{span: 8, offset: 0}}
                 rules={[
                     {
                         required: true,
@@ -72,22 +79,6 @@ export const UpdateDetailsForm = () => {
             >
                 <Input/>
             </Form.Item>
-
-
-            {/*<Form.Item*/}
-            {/*    name={['user', 'age']}*/}
-            {/*    label="גיל"*/}
-            {/*    rules={[*/}
-            {/*        {*/}
-            {/*            required: true,*/}
-            {/*            type: 'number',*/}
-            {/*            min: 6,*/}
-            {/*            max: 99,*/}
-            {/*        },*/}
-            {/*    ]}*/}
-            {/*>*/}
-            {/*    <InputNumber/>*/}
-            {/*</Form.Item>*/}
 
             <Form.Item wrapperCol={{...layout.wrapperCol, offset: 8}}>
                 <Button type="primary" htmlType="submit">
