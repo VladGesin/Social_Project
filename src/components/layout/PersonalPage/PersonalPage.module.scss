@@ -46,32 +46,4 @@
     margin-right: 10px;
     background: #f6fcfc;
   }
-
-
-  .container {
-    padding: 20px;
-    border: 1px solid #c3bdbd;
-    min-height: 300px;
-    width: 60%;
-    margin: 0 auto 30px;
-    border-radius: 4px;
-
-    @media screen and (max-width: 500px) {
-      width: 95%;
-    }
-
-    h2 {
-      text-align: right;
-      font-size: 22px;
-      margin-bottom: 20px;
-
-      @media screen and (max-width: 500px) {
-        font-size: 5vw;
-      }
-    }
-
-    .formWrapper {
-      width: 400px;
-    }
-  }
 }

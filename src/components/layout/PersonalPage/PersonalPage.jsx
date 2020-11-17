@@ -1,9 +1,27 @@
 import React from "react";
 import styles from "./PersonalPage.module.scss";
 import {UpdateDetailsForm} from "./UpdateDetailsForm/UpdateDetailsForm";
+import {PersonalDetails} from "./PersonalDetails/PersonalDetails";
 
 export const PersonalPage = () => {
-    const [isDetailsMode, setIsDetailsMode] = React.useState(true)
+    const [indexCurrentMode, setIndexCurrentMode] = React.useState(0);
+
+    const data = [
+        {
+            menu: {
+                label: 'פרטים איישים',
+                iconSrc: ''
+            },
+            mainComp: () => <PersonalDetails/>
+        },
+        {
+            menu: {
+                label: 'הפניות שלי',
+                iconSrc: ''
+            },
+            mainComp: () => <div>הפניות שלי</div>
+        },
+    ]
 
     return (
         <div className={styles.rootPersonalPage}>
@@ -11,37 +29,20 @@ export const PersonalPage = () => {
             <div className={styles.menu}>
                 <h2>איזור אישי</h2>
                 <ul>
-                    <li onClick={() => setIsDetailsMode(true)}>
-                        <span className={styles.icon}>icon</span>
-                        פרטים איישים
-                    </li>
-                    <li onClick={() => setIsDetailsMode(false)}>
-                        <span className={styles.icon}>icon</span>
-                        הפניות שלי
-                    </li>
+                    {data.map(({menu}, i) => {
+                        return (
+                            <li key={i} onClick={() => setIndexCurrentMode(i)}>
+                                <span className={styles.icon}>icon</span>
+                                {menu.label}
+                            </li>
+                        );
+                    })}
                 </ul>
             </div>
 
             <div className={styles.main}>
-                {isDetailsMode ?
-                    <div>שינוי פרטים</div>
-                    :
-                    <div>הפניות שלי</div>
-                }
+                {data[indexCurrentMode].mainComp()}
             </div>
-
-            {/*<div className={styles.container}>*/}
-            {/*    <h2>עריכת פרטים אישיים:</h2>*/}
-
-            {/*    <div className={styles.formWrapper}>*/}
-            {/*        <UpdateDetailsForm/>*/}
-            {/*    </div>*/}
-
-            {/*</div>*/}
-
-            {/*<div className={styles.container}>*/}
-            {/*    <h2>הפניות שלי:</h2>*/}
-            {/*</div>*/}
         </div>
     );
 }
