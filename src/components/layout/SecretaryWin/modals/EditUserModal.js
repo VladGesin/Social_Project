@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Modal from "react-bootstrap/Modal";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import api from "../../../../api";
 import style from "./EditUserModal.module.scss";
-const EditUserModal = ({ isOpen, close, id }) => {
+const EditUserModal = ({ isOpen, close, id, setUsers, users }) => {
    const [stage, setStage] = useState(1);
+   const [emailIsValid, setEmailIsValid] = useState(true);
+   const [phoneIsValid, setPhoneIsValid] = useState(true);
    const [committeesBoxItem, setCommitteesBoxItem] = useState([]);
    const [formDetails, setFormDetails] = useState({
       firstName: "",
@@ -12,19 +14,99 @@ const EditUserModal = ({ isOpen, close, id }) => {
       email: "",
       phone: "",
       id: "",
-      birthDate: "",
-      type: "",
+      birthday: "",
+      userType: "a",
    });
-
+   const [userType, setUserType] = useState({
+      parent: false,
+      committeeMember: false,
+      committeeHead: false,
+      admin: false,
+   });
+   const emailRef = useRef(null);
+   const phoneRef = useRef(null);
    useEffect(() => {
       (async function () {
          if (id !== undefined) {
             const res = await api.get(`user/${id}`);
-            console.log(res);
-            console.log(id);
+            console.log(res.data[0]);
+            const {
+               firstName,
+               lastName,
+               userType,
+               email,
+               birthday,
+               phoneNumber,
+            } = res.data[0];
+            setFormDetails((cur) => ({
+               ...cur,
+               firstName,
+               lastName,
+               userType,
+               email,
+               birthday,
+               id,
+               phone: phoneNumber,
+            }));
+            setStage(1);
          }
       })();
    }, [id]);
+   useEffect(() => {
+      if (!emailIsValid) emailRef.current.focus();
+   }, [emailIsValid]);
+   const onChange = (e) => {
+      setFormDetails({ ...formDetails, [e.target.name]: e.target.value });
+   };
+   const onUserTypeChange = (e) => {
+      setUserType({ ...userType, [e.target.name]: e.target.checked });
+      console.log(e.target.checked);
+   };
+   const validateEmail = (email) => {
+      var re = /\S+@\S+\.\S+/;
+      return re.test(email);
+   };
+
+   const onNextStage = () => {
+      if (!validateEmail(formDetails.email)) {
+         setEmailIsValid(false);
+         return;
+      }
+      if (isNaN(+formDetails.phone) || formDetails.phone.length !== 10) {
+         setPhoneIsValid(false);
+         return;
+      }
+      setEmailIsValid(true);
+      setPhoneIsValid(true);
+      setStage(2);
+   };
+   const onSave = async (e) => {
+      const reqObj = {
+         firstName: formDetails.firstName,
+         lastName: formDetails.lastName,
+         email: formDetails.email,
+         type: formDetails.userType,
+         birthday: formDetails.birthday,
+         phone: formDetails.phone,
+         contactUser: true,
+      };
+      const res = await api.patch(`users/${id}`, reqObj);
+
+      const user = res.data[0];
+      const userIndex = users.findIndex((i) => i.user_id === user.ID);
+      const updateUsers = [...users];
+      updateUsers[userIndex] = {
+         birth_date: user.birthDay,
+         contacts: user.contactUser,
+         email: user.email,
+         first_name: user.firstName,
+         last_name: user.lastName,
+         phone: user.phone,
+         user_id: user.ID,
+      };
+      setUsers(updateUsers);
+      close();
+   };
    return (
       <Modal
          show={isOpen}
@@ -45,19 +127,41 @@ const EditUserModal = ({ isOpen, close, id }) => {
                   <>
                      <div>
                         <label>שם פרטי</label>
-                        <input type="text" />
+                        <input
+                           value={formDetails.firstName}
+                           name="firstName"
+                           onChange={onChange}
+                           type="text"
+                        />
                      </div>
                      <div>
                         <label>שם משפחה</label>
-                        <input type="text" />
+                        <input
+                           value={formDetails.lastName}
+                           name="lastName"
+                           onChange={onChange}
+                           type="text"
+                        />
                      </div>
                      <div>
                         <label>תעודת זהות</label>
-                        <input type="text" />
+                        <input
+                           value={formDetails.id}
+                           name="id"
+                           type="text"
+                           onChange={onChange}
+                           disabled
+                        />
                      </div>
                      <div>
                         <label>תאריך לידה</label>
-                        <input type="text" />
+                        <input
+                           type="text"
+                           value={formDetails.birthday}
+                           name="birthday"
+                           onChange={onChange}
+                           disabled
+                        />
                      </div>
                   </>
                ) : (
@@ -70,6 +174,9 @@ const EditUserModal = ({ isOpen, close, id }) => {
                               <input
                                  className={style.userTypeCheckBox}
                                  type="checkbox"
+                                 onChange={onUserTypeChange}
+                                 name="admin"
+                                 checked={userType.admin}
                               />
                            </div>
 
@@ -78,6 +185,9 @@ const EditUserModal = ({ isOpen, close, id }) => {
                               <input
                                  className={style.userTypeCheckBox}
                                  type="checkbox"
+                                 onChange={onUserTypeChange}
+                                 name="committeeHead"
+                                 checked={userType.committeeHead}
                               />
                            </div>
                         </div>
@@ -87,13 +197,19 @@ const EditUserModal = ({ isOpen, close, id }) => {
                               <input
                                  className={style.userTypeCheckBox}
                                  type="checkbox"
+                                 onChange={onUserTypeChange}
+                                 name="parent"
+                                 checked={userType.parent}
                               />
                            </div>
                            <div>
                               <label>חבר ועדה</label>
                               <input
+                                 checked={userType.committeeMember}
                                  className={style.userTypeCheckBox}
                                  type="checkbox"
+                                 onChange={onUserTypeChange}
+                                 name="committeeMember"
                               />
                            </div>
                         </div>
@@ -107,12 +223,30 @@ const EditUserModal = ({ isOpen, close, id }) => {
                      {" "}
                      <div>
                         <label>כתובת מייל</label>
-                        <input type="text" />
+                        <input
+                           value={formDetails.email}
+                           name="email"
+                           type="text"
+                           onChange={onChange}
+                           ref={emailRef}
+                        />
                      </div>
+                     {!emailIsValid && (
+                        <p className={style.invalidEmail}>* אימייל לא תקין</p>
+                     )}
                      <div>
                         <label>טלפון נייד</label>
-                        <input type="text" />
-                     </div>
+                        <input
+                           value={formDetails.phone}
+                           name="phone"
+                           type="text"
+                           onChange={onChange}
+                           ref={phoneRef}
+                        />
+                     </div>{" "}
+                     {!phoneIsValid && (
+                        <p className={style.invalidEmail}>* טלפון לא תקין</p>
+                     )}
                      <div>
                         <label className={style.imageUpload}>
                            העלאת תמונת פרופיל
@@ -187,14 +321,14 @@ const EditUserModal = ({ isOpen, close, id }) => {
             {stage === 1 ? (
                <>
                   <div className={style.btnContainer}>
-                     <button onClick={() => setStage(2)}>לעמוד הבא</button>
+                     <button onClick={onNextStage}>לעמוד הבא</button>
                   </div>
                </>
             ) : (
                <>
                   <>
                      <div className={style.btnContainer}>
-                        <button>שמירה</button>
+                        <button onClick={onSave}>שמירה</button>
                         <button
                            className={style.prevPage}
                            onClick={() => setStage(1)}

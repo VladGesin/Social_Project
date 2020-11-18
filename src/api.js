@@ -16,7 +16,8 @@ class API {
 
    patch = async (path, data) => {
       const response_data = await axios.patch(
-         `${this.base_url}\\${path}\\${data}`
+         `${this.base_url}\\${path}`,
+         data
       );
       return response_data;
    };

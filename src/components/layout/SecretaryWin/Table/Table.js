@@ -6,8 +6,16 @@ import style from "./Table.module.scss";
 import DeleteUserModal from "../modals/DeleteUserModal";
 import RestPasswordModal from "../modals/RestPasswordModal";
 import EditUserModal from "../modals/EditUserModal";
+import CreateNewUser from "../modals/CreateNewUser";
 
-const Table = ({ users, setUsers, msg, setMsg }) => {
+const Table = ({
+   users,
+   setUsers,
+   msg,
+   setMsg,
+   isNewUserOpen,
+   setIsNewUserOpen,
+}) => {
    const [sortByIsOpen, setSortByIsOpen] = useState(false);
    const [sortBy, setSortBy] = useState("שם פרטי");
    const [orderIsOpen, setOrderIsOpen] = useState(false);
@@ -104,7 +112,16 @@ const Table = ({ users, setUsers, msg, setMsg }) => {
          <EditUserModal
             close={() => setEditUserIsOpen(false)}
             isOpen={editUserIsOpen}
+            setUsers={setUsers}
             id={currentUser.user_id}
+            users={users}
+         />
+         <CreateNewUser
+            close={() => setIsNewUserOpen(false)}
+            isOpen={isNewUserOpen}
+            setUsers={setUsers}
+            id={currentUser.user_id}
+            users={users}
          />
 
          <div className={style.sort}>

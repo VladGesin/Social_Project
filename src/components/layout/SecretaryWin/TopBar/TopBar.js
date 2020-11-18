@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import SearchUsers from "./SearchUsers/SearchUsers";
 import NewUserBtn from "./NewUserBtn/NewUserBtn";
 import style from "./TopBar.module.scss";
-const TopBar = () => {
+const TopBar = ({ setIsNewUserOpen }) => {
    return (
       <div className={style.topBar}>
          <SearchUsers />
-         <NewUserBtn />
+
+         <NewUserBtn
+            onClick={() => {
+               setIsNewUserOpen(true);
+            }}
+         />
       </div>
    );
 };
