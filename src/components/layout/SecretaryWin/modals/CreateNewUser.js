@@ -10,12 +10,14 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users }) => {
       firstNameIsValid: true,
       lastNameIsValid: true,
       idIsValid: true,
+      idIsAlreadyExist: false,
       birthDateIsValid: true,
       passwordIsValid: true,
    });
 
    const [passwordIsShown, setPasswordIsShown] = useState(false);
    const [committeesBoxItem, setCommitteesBoxItem] = useState([]);
+   const [userAlreadyExist, setUserAlreadyExist] = useState(false);
    const [formDetails, setFormDetails] = useState({
       firstName: "",
       lastName: "",
@@ -135,34 +137,61 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users }) => {
       }
    };
    const onSave = async (e) => {
-      e.preventDefault();
-      const isValid = validateForm();
+      try {
+         e.preventDefault();
+         const isValid = validateForm();
+         if (!isValid) return;
 
-      const userTypes = Object.keys(userType);
-      const checkedUserType = userTypes.filter((u) => userType[u]);
+         const userTypes = Object.keys(userType);
+         const checkedUserType = userTypes.filter((u) => userType[u]);
 
-      const reqObj = {
-         id: formDetails.id,
-         firstName: formDetails.firstName,
-         lastName: formDetails.lastName,
-         email: formDetails.email,
-         password: formDetails.password,
-         type: checkedUserType[0],
-         contactUser: true,
-         birthday: formDetails.birthday,
-         phone: formDetails.phone,
-      };
-      const res = await api.post(`/users`, reqObj);
-      const updatedUsers = await api.get("users/");
-      setUsers(updatedUsers.data);
-      setStage(1);
-      close();
+         const reqObj = {
+            id: formDetails.id,
+            firstName: formDetails.firstName,
+            lastName: formDetails.lastName,
+            email: formDetails.email,
+            password: formDetails.password,
+            type: checkedUserType[0],
+            contactUser: true,
+            birthday: formDetails.birthday,
+            phone: formDetails.phone,
+         };
+         const res = await api.post(`/users`, reqObj);
+         setValidation((cur) => ({ ...cur, idIsAlreadyExist: false }));
+         const updatedUsers = await api.get("users/");
+         setUsers(updatedUsers.data);
+         setStage(1);
+         setFormDetails({
+            firstName: "",
+            lastName: "",
+            email: "",
+            phone: "",
+            id: "",
+            birthday: "",
+            userType: "",
+            password: "",
+         });
+         close();
+      } catch (e) {
+         setValidation((cur) => ({ ...cur, idIsAlreadyExist: true }));
+         setStage(1);
+      }
    };
    return (
       <Modal
          show={isOpen}
          onHide={() => {
             close();
+            setFormDetails({
+               firstName: "",
+               lastName: "",
+               email: "",
+               phone: "",
+               id: "",
+               birthday: "",
+               userType: "",
+               password: "",
+            });
             setStage(1);
          }}
          contentClassName={style.newUser}
@@ -248,6 +277,11 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users }) => {
                               {!validation.idIsValid && (
                                  <span className={style.invalidEmail}>
                                     * ת.ז חייבת להכיל 9 ספרות
+                                 </span>
+                              )}
+                              {validation.idIsAlreadyExist && (
+                                 <span className={style.invalidEmail}>
+                                    * ת.ז זאת כבר קיימת במערכת
                                  </span>
                               )}
                            </div>

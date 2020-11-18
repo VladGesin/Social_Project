@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
+import api from "../../../../api";
 import style from "./RestPassword.module.scss";
 const RestPasswordModal = ({ isOpen, close, id }) => {
    const [passwordIsShown, setPasswordIsShown] = useState(false);
@@ -10,11 +11,48 @@ const RestPasswordModal = ({ isOpen, close, id }) => {
       password1: "",
       password2: "",
    });
+   const [isValidPassword, setIsValidPassword] = useState(true);
+   const [isPasswordMatch, setIsPasswordMatch] = useState(true);
 
    const handlePassword = (e) => {
       setNewPassword({ ...newPassword, [e.target.name]: e.target.value });
       if (e.target.value !== "") setPasswordIsEmpty(false);
       else setPasswordIsEmpty(true);
+   };
+
+   const validatePassword = (password) => {
+      var regularExpression =
+         "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])([a-zA-Z0-9@$!%*?&])";
+      if (!password.match(regularExpression) || password.length < 8)
+         return false;
+      return true;
+   };
+
+   const onSave = async () => {
+      if (newPassword.password1 !== newPassword.password2) {
+         setIsPasswordMatch(false);
+         return;
+      } else {
+         setIsPasswordMatch(true);
+      }
+      if (!validatePassword(newPassword.password1)) {
+         setIsValidPassword(false);
+         return;
+      } else {
+         setIsValidPassword(true);
+      }
+      try {
+         const res = await api.post(`/changePassword/${id}`, {
+            password: newPassword.password1,
+         });
+         setNewPassword({
+            password1: "",
+            password2: "",
+         });
+         close();
+      } catch (e) {
+         console.log(e);
+      }
    };
    return (
       <Modal
@@ -100,9 +138,14 @@ const RestPasswordModal = ({ isOpen, close, id }) => {
                   onChange={handlePassword}
                />
             </div>
-
+            <div className={style.errors}>
+               {!isPasswordMatch && <p>* הסיסמאות אינם תואמות</p>}
+               {!isValidPassword && <p>* הסיסמא אינה עומדת בדרישות</p>}
+            </div>
             <div className={style.btnContainer}>
-               <button className={style.saveBtn}>שמור סיסמא</button>
+               <button className={style.saveBtn} onClick={onSave}>
+                  שמור סיסמא
+               </button>
             </div>
          </div>
       </Modal>
