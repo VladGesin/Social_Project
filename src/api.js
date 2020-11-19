@@ -5,7 +5,7 @@ class API {
       this.base_url = base_url;
    }
    get = async (path) => {
-      const response_data = await axios.get(`${this.base_url}\\${path}`);
+      const response_data = await axios.get(`${this.base_url}${path}`);
       return response_data;
    };
 
@@ -16,13 +16,14 @@ class API {
 
    patch = async (path, data) => {
       const response_data = await axios.patch(
-         `${this.base_url}\\${path}\\${data}`
+         `${this.base_url}\\${path}`,
+         data
       );
       return response_data;
    };
 
    delete = async (path, data) => {
-      const response_data = await axios.delete(`${this.base_url}\\${path}`);
+      const response_data = await axios.delete(`${this.base_url}${path}`);
 
       return response_data;
    };

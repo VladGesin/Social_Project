@@ -1,0 +1,254 @@
+.newUser {
+   border: none !important;
+   background-color: transparent !important;
+   .header {
+      background-color: #ffffff;
+      height: 8rem;
+      border-radius: 0.5rem;
+      margin: 0.5rem 0;
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: center;
+      align-items: center;
+      .stageContainer {
+         margin-top: 1rem;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         p {
+            color: rgb(150, 150, 150);
+            font-weight: bold;
+         }
+      }
+      .stage {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         width: 4.5rem;
+         height: 4.5rem;
+         border-radius: 50%;
+         border: 4px solid rgb(201, 201, 201);
+         text-align: center;
+         font-size: 1.8rem;
+         font-weight: bold;
+         color: rgb(201, 201, 201);
+         cursor: pointer;
+      }
+
+      .line {
+         width: 10rem;
+         height: 4px;
+         background-color: rgb(201, 201, 201);
+         margin-bottom: 1.25rem;
+      }
+      .activeStage {
+         .stage {
+            border: 4px solid rgb(95, 111, 114);
+            color: rgb(95, 111, 114);
+         }
+         p {
+            color: rgb(95, 111, 114) !important;
+            font-size: 1rem;
+         }
+      }
+   }
+   .body {
+      position: relative;
+      border-radius: 0.5rem 0.5rem 0 0;
+      background-color: #ffffff;
+      padding: 1rem 4rem 0 4em;
+      text-align: right;
+      display: flex;
+      flex-direction: row;
+      flex-direction: row-reverse;
+      height: 27rem;
+      .invalidEmail {
+         direction: rtl;
+         color: red;
+         font-size: 0.8rem;
+      }
+      .rightSection,
+      .leftSection {
+         div {
+            display: flex;
+            flex-direction: column;
+            label {
+               margin-top: 1.5rem;
+               font-weight: bold;
+               color: rgb(150, 150, 150);
+               font-size: 0.9rem;
+            }
+            input {
+               border: 1px solid rgb(100, 100, 100);
+               padding: 0.1rem 0.5rem;
+               color: rgb(61, 61, 61);
+            }
+            input[type="file"] {
+               display: none;
+            }
+            .imageUpload {
+               background-color: rgb(228, 228, 228);
+               border-radius: 0.2rem;
+               display: inline-block;
+               padding: 6px 12px;
+               cursor: pointer;
+               i {
+                  padding-left: 0.5rem;
+               }
+            }
+            p {
+               font-size: 0.8rem;
+            }
+         }
+      }
+      .rightSection {
+         margin: 0;
+         padding: 0 0 2rem 4rem;
+         border-left: 1px solid rgba(150, 150, 150, 0.4);
+         width: 40%;
+         p {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: rgb(110, 110, 110);
+         }
+         justify-self: flex-end;
+         .userType {
+            padding: 0;
+            display: flex;
+            flex-direction: row !important;
+            justify-content: flex-end;
+
+            div {
+               display: flex;
+               flex-direction: column;
+               justify-content: flex-end;
+
+               div {
+                  flex-direction: row;
+                  align-items: center;
+                  label {
+                     font-size: 1.1rem;
+                     margin: 0;
+                     padding: 0;
+                  }
+                  input {
+                     padding: 0;
+                     margin: 0.5rem !important;
+                     border-radius: 0.8rem;
+                  }
+               }
+            }
+            .userTypeCheckBox {
+               margin: 1rem 2rem;
+            }
+            .paddingLeft {
+               padding-left: 1rem;
+            }
+         }
+      }
+      .leftSection {
+         padding-right: 3rem;
+         align-items: flex-end;
+         div {
+            align-items: flex-end;
+         }
+
+         select {
+            width: 15rem;
+         }
+      }
+      .password {
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         display: flex;
+         flex-direction: column;
+
+         label {
+            margin: 0;
+            padding: 0;
+            color: rgb(150, 150, 150);
+            font-weight: bold;
+         }
+         input {
+            border: 1px solid rgb(150, 150, 150);
+            margin: 0.5rem 0;
+            width: 17rem;
+            height: 2.5rem;
+            border-radius: 0.2rem;
+            padding: 0 0 0 2.5rem;
+         }
+         p {
+            direction: rtl;
+            padding: 0;
+            margin: 0;
+            color: rgb(150, 150, 150);
+         }
+      }
+      .eye {
+         position: absolute;
+         top: 2.9rem;
+         left: 1rem;
+         color: rgb(150, 150, 150);
+         cursor: pointer;
+      }
+   }
+   .committeesBox {
+      height: 10rem;
+      width: 33rem;
+      margin: 2rem 0;
+      border: 1px solid rgb(100, 100, 100);
+      border-radius: 0.2rem;
+      padding: 1rem;
+      display: flex;
+      flex-direction: row !important;
+      justify-content: flex-end;
+      overflow-y: auto;
+      flex-wrap: wrap;
+      .item {
+         display: flex;
+         align-self: start;
+         flex-direction: row !important;
+         justify-content: space-between;
+         background-color: rgb(176, 191, 198);
+         padding: 0.5rem;
+         margin: 0.5rem;
+         min-width: 8rem;
+         border-radius: 0.5rem;
+         line-height: 1.5rem;
+         i {
+            color: rgb(255, 255, 255);
+            margin-top: 0.1rem;
+            align-self: center;
+            padding-right: 0.5rem;
+         }
+         span {
+            color: rgb(255, 255, 255);
+         }
+      }
+   }
+   .footer {
+      border-top: 1px solid rgba(150, 150, 150, 0.4);
+      background-color: #ffffff;
+
+      .btnContainer {
+         display: flex;
+         align-items: center;
+         height: 5rem;
+         button {
+            height: 2.5rem;
+            margin-left: 2rem;
+            border: none;
+            border-radius: 0.2rem;
+            background-color: rgb(128, 199, 131);
+            width: 20%;
+            color: rgb(255, 255, 255);
+            font-weight: bold;
+         }
+         .prevPage {
+            background-color: rgb(150, 150, 150);
+         }
+      }
+   }
+}
