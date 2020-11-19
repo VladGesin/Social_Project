@@ -28,7 +28,10 @@
         "react-router-dom": "^5.2.0",
         "react-scripts": "^3.4.3",
         "typescript": "^3.9.7",
-        "validator": "^13.1.17"
+        "validator": "^13.1.17",
+        "leaflet": "^1.6.0",
+        "leaflet.awesome-markers": "^2.0.5",
+        "react-leaflet": "^2.7.0"
     },
     "scripts": {
         "start": "react-scripts start",
