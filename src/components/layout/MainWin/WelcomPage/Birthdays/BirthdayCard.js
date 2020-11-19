@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 
 
 
@@ -13,11 +13,7 @@ const BirthdayCard =(props)=> {
   }
 
   return (
-    // users.map(user => (
-      <Fragment>
         <h5>{props.users.first_name+' '+props.users.last_name+ ' '+ dateConvert(users)}</h5>
-      </Fragment>
-    // ))
     )
   }
 
