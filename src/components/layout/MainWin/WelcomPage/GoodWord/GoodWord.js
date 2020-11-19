@@ -14,7 +14,7 @@ const GoodWord = () => {
   const [input,setInput] = useState(false);
 
   const handleSend =()=>{
-    if(document.getElementById('goodWordData').value != ''){
+    if(document.getElementById('goodWordData').value !== ''){
       handleClose()
       setInput(false)
   }
@@ -48,9 +48,9 @@ const GoodWord = () => {
         <Modal.Body id='modalBody'>
           <div>
              <form dir="rtl">
-               <div class="form-group">
-                <label for="exampleFormControlSelect1">לאיזה יו"ר ברצונך לשלוח מילה </label>
-                <select class="form-control" id="exampleFormControlSelect1" >
+               <div className="form-group">
+                <label htmlFor="exampleFormControlSelect1">לאיזה יו"ר ברצונך לשלוח מילה </label>
+                <select className="form-control" id="exampleFormControlSelect1" >
 
 
                   <option>יו"ר 1</option>
@@ -58,9 +58,9 @@ const GoodWord = () => {
                   <option>יו"ר 3</option>
                 </select>
               </div>
-                <div class="form-group">
-                <label for="exampleFormControlTextarea1">אנא הכנס תוכן של מילה טובה :</label>
-                <textarea class="form-control" id="goodWordData" rows="10"></textarea>
+                <div className="form-group">
+                <label htmlFor="exampleFormControlTextarea1">אנא הכנס תוכן של מילה טובה :</label>
+                <textarea className="form-control" id="goodWordData" rows="10"></textarea>
               </div>
             </form>
           </div>

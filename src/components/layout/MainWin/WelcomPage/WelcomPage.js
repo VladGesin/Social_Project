@@ -28,7 +28,7 @@ const WelcomPage = () => {
   }
 
   function getNews(key) {
-    api.get(`news?filterBy=${key}`).then(res => setNews(res.data));
+    api.get('news?filterBy=${key}').then(res => setNews(res.data));
   }
 
   return (
