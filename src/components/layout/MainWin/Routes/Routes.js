@@ -16,7 +16,7 @@ const routesData = [
    { component: Login, path: "/Social_Project/", exact: true },
    { component: WelcomPage, path: "/Social_Project/MainWin" },
    { component: chairmanItems, path: "/Social_Project/chairmanItems/:item" },
-   { component: secreturywin, path: "/Social_Project/secreturywin" },
+   { component: SecretaryWin, path: "/Social_Project/secreturywin" },
    { component: NewMeeting, path: "/Social_Project/newmeeting" },
    { component: MyMeetings, path: "/Social_Project/mymeetings" },
    { component: PersonalPage, path: "/Social_Project/personal" },
