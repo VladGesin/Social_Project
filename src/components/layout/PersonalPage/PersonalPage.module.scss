@@ -20,6 +20,7 @@
     }
 
     h2 {
+
       margin: 0 0 20px;
       line-height: 1;
       font-size: 21px;
@@ -35,7 +36,7 @@
         list-style: none;
         display: flex;
 
-        &.selected{
+        &.selected {
           font-weight: bold;
         }
 
