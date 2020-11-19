@@ -1,35 +1,59 @@
 .rootPersonalPage {
-  text-align: center;
+  display: flex;
   direction: rtl;
+  text-align: right;
+  padding: 30px;
+  justify-content: space-between;
+  min-height: 500px;
 
-  h1 {
-    margin-bottom: 30px;
-  }
+  .menu {
+    height: 100%;
+    padding: 15px;
+    border: 1px solid #635f5f59;
+    width: 20%;
+    background: #ffffff;
+    max-width: 260px;
 
-  .container {
-    padding: 20px;
-    border: 1px solid #c3bdbd;
-    min-height: 300px;
-    width: 60%;
-    margin: 0 auto 30px;
-    border-radius: 4px;
-
-    @media screen and (max-width: 500px) {
-      width: 95%;
+    @media screen and (max-width: 900px) {
+      max-width: initial;
+      width: 30%;
     }
 
     h2 {
-      text-align: right;
-      font-size: 22px;
-      margin-bottom: 20px;
 
-      @media screen and (max-width: 500px) {
-        font-size: 5vw;
+      margin: 0 0 20px;
+      line-height: 1;
+      font-size: 21px;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+
+      li {
+        cursor: pointer;
+        margin-bottom: 20px;
+        list-style: none;
+        display: flex;
+
+        &.selected {
+          font-weight: bold;
+        }
+
+        .icon {
+          margin-left: 15px;
+          display: flex;
+          align-items: center;
+        }
       }
     }
+  }
 
-    .formWrapper {
-      width: 400px;
-    }
+  .main {
+    height: 100%;
+    border: 1px solid #635f5f59;
+    flex: 1;
+    margin-right: 10px;
+    background: #f6fcfc;
   }
 }

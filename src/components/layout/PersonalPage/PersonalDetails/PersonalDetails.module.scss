@@ -1,0 +1,44 @@
+.rootPersonalDetails {
+  box-sizing: border-box;
+  padding: 20px 30px;
+
+  .header {
+    display: flex;
+    margin-bottom: 30px;
+
+    .avatarImg {
+      width: 100px;
+      height: 100px;
+      text-align: center;
+      margin: 0 0 0 30px;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      .name {
+        font-size: 22px;
+      }
+
+      .changeImgBtn {
+        background: none;
+        border: none;
+        padding: 0;
+        color: #31c6ff;
+        font-weight: 500;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+  }
+
+  .main {
+    //max-width: 700px;
+    //width: 90%;
+  }
+}
