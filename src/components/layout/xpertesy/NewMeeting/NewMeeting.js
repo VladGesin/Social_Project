@@ -6,7 +6,7 @@ import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import EmailList from "./EmailList";
-import axios from "axios";
+import api from "../../../../api";
 
 const NewMeeting = () => {
    const [formData, setFormData] = useState({
@@ -64,6 +64,21 @@ const NewMeeting = () => {
       return re.test(email);
    };
    const validateForm = () => {
+      if (
+         new Date(`${formData.startDate}:${formData.startTime}`) < new Date()
+      ) {
+         setMessages([
+            ...messages,
+            { msg: "אין אפשרות ליצור פגישה בעבר", type: "danger" },
+         ]);
+         setTimeout(() => {
+            setMessages((cur) => {
+               const msgs = cur.slice(1);
+               return msgs;
+            });
+         }, 3000);
+         return false;
+      }
       if (participants.length > 4 || participants.length < 2) {
          setMessages([
             ...messages,
@@ -84,10 +99,7 @@ const NewMeeting = () => {
    const createNewMeeting = async (data) => {
       try {
          console.log("data", data);
-         const res = await axios.post(
-            "http://localhost:8080/xpertesy/createroom",
-            data
-         );
+         const res = await api.post("/xpertesy/createroom", data);
          return res;
       } catch (e) {
          console.log(e);
@@ -100,7 +112,7 @@ const NewMeeting = () => {
          const req = {
             roomName: formData.roomName,
             hostName: formData.hostName,
-            date: formData.startDate + " " + formData.startTime,
+            date: formData.startDate + " " + formData.startTime + ":00",
             participants: participants,
          };
          try {
@@ -208,6 +220,7 @@ const NewMeeting = () => {
                      value={formData.startDate}
                      name="startDate"
                      onChange={onChangeHandler}
+                     min={new Date().toISOString().slice(0, 10)}
                      type="date"
                      style={{
                         width: "100%",
