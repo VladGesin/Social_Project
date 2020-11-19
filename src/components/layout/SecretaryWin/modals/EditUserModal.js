@@ -29,7 +29,7 @@ const EditUserModal = ({ isOpen, close, id, setUsers, users }) => {
       (async function () {
          if (id !== undefined) {
             const res = await api.get(`user/${id}`);
-            console.log(res.data[0]);
+            console.log(res.data);
             const {
                firstName,
                lastName,
@@ -38,6 +38,7 @@ const EditUserModal = ({ isOpen, close, id, setUsers, users }) => {
                birthday,
                phoneNumber,
             } = res.data[0];
+
             setFormDetails((cur) => ({
                ...cur,
                firstName,

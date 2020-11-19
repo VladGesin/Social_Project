@@ -6,7 +6,7 @@ import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import EmailList from "./EmailList";
-import axios from "axios";
+import api from "../../../../api";
 
 const NewMeeting = () => {
    const [formData, setFormData] = useState({
@@ -99,10 +99,7 @@ const NewMeeting = () => {
    const createNewMeeting = async (data) => {
       try {
          console.log("data", data);
-         const res = await axios.post(
-            "http://localhost:8080/xpertesy/createroom",
-            data
-         );
+         const res = await api.post("/xpertesy/createroom", data);
          return res;
       } catch (e) {
          console.log(e);

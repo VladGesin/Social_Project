@@ -42,7 +42,7 @@ const RestPasswordModal = ({ isOpen, close, id }) => {
          setIsValidPassword(true);
       }
       try {
-         const res = await api.post(`/changePassword/${id}`, {
+         const res = await api.post(`changePassword/${id}`, {
             password: newPassword.password1,
          });
          setNewPassword({
@@ -50,6 +50,7 @@ const RestPasswordModal = ({ isOpen, close, id }) => {
             password2: "",
          });
          close();
+         console.log(res);
       } catch (e) {
          console.log(e);
       }

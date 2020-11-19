@@ -5,7 +5,7 @@ class API {
       this.base_url = base_url;
    }
    get = async (path) => {
-      const response_data = await axios.get(`${this.base_url}\\${path}`);
+      const response_data = await axios.get(`${this.base_url}${path}`);
       return response_data;
    };
 
@@ -29,6 +29,6 @@ class API {
    };
 }
 
-const api = new API("http://127.0.0.1:5010");
+const api = new API("https://www.hitprojectscenter.com/social-API/");
 
 export default api;
