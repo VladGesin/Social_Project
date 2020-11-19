@@ -2,6 +2,7 @@ import React from 'react';
 import styles from "./UpdateDetailsForm.module.scss";
 import {Button, Form, Input} from 'antd';
 import Context from "../../../../store/Context";
+import api from "../../../../api";
 
 const validateMessages = {
     required: '${label} - שדה חובה ',
@@ -18,8 +19,13 @@ export const UpdateDetailsForm = () => {
 
     const {userState} = React.useContext(Context);
 
+    console.log('22222222', userState)
+
     const onFinish = (values) => {
-        alert(values)
+        api.patch('users/' + userState.id, values.user)
+            .then((res) =>{
+                debugger
+            })
     };
 
     return (

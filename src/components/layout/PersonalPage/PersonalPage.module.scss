@@ -4,10 +4,9 @@
   text-align: right;
   padding: 30px;
   justify-content: space-between;
-  min-height: 500px;
+  min-height: 80vh;
 
   .menu {
-    height: 100%;
     padding: 15px;
     border: 1px solid #635f5f59;
     width: 20%;
@@ -50,10 +49,7 @@
   }
 
   .main {
-    height: 100%;
-    border: 1px solid #635f5f59;
     flex: 1;
     margin-right: 10px;
-    background: #f6fcfc;
   }
 }

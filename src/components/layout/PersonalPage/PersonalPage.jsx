@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./PersonalPage.module.scss";
 import {PersonalDetails} from "./PersonalDetails/PersonalDetails";
 import { SettingOutlined, FileTextOutlined } from '@ant-design/icons';
+import {UsersContacts} from "./UsersContacts/UsersContacts";
 
 export const PersonalPage = () => {
     const [indexCurrentMode, setIndexCurrentMode] = React.useState(0);
@@ -19,7 +20,7 @@ export const PersonalPage = () => {
                 label: 'הפניות שלי',
                 icon: () => <FileTextOutlined />
             },
-            mainComp: () => <div>הפניות שלי</div>
+            mainComp: () => <UsersContacts/>
         },
     ]
 
