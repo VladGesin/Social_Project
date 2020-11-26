@@ -10,7 +10,8 @@ const initialUserState = {
    token: null,
    isAuth: false,
    loading: true,
-   email: null
+   email: null,
+   birthday: null
 };
 
 const ContextProvider = (props) => {
@@ -24,7 +25,10 @@ const ContextProvider = (props) => {
          //Get all user details by the token in the header
          const res = await api.get("user");
          const user = res.data;
+
+         debugger
          const updatedUser = {
+            birthday: user.birthday,
             email: user.email,
             id: user.id,
             firstName: user.firstName,

@@ -22,7 +22,11 @@ export const UpdateDetailsForm = () => {
     console.log('22222222', userState)
 
     const onFinish = (values) => {
-        api.patch('users/' + userState.id, values.user)
+        const reqObj = {
+            ...userState,
+            ...values.user
+        };
+        api.patch('users/' + userState.id, reqObj)
             .then((res) =>{
                 debugger
             })
