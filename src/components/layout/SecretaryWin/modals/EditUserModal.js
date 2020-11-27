@@ -29,7 +29,6 @@ const EditUserModal = ({ isOpen, close, id, setUsers, users }) => {
       (async function () {
          if (id !== undefined) {
             const res = await api.get(`user/${id}`);
-            console.log(res.data);
             const {
                firstName,
                lastName,
@@ -91,7 +90,10 @@ const EditUserModal = ({ isOpen, close, id, setUsers, users }) => {
          phone: formDetails.phone,
          contactUser: true,
       };
+      debugger
       const res = await api.patch(`users/${id}`, reqObj);
+
+      debugger
 
       const user = res.data[0];
       const userIndex = users.findIndex((i) => i.user_id === user.ID);

@@ -25,8 +25,6 @@ const ContextProvider = (props) => {
          //Get all user details by the token in the header
          const res = await api.get("user");
          const user = res.data;
-
-         debugger
          const updatedUser = {
             birthday: user.birthday,
             email: user.email,
