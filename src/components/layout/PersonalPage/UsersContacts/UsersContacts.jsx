@@ -47,40 +47,72 @@ const mock_data = [
     },
 ]
 
+const itemIncludeInCurrentSearch = (item, searchQuery) => {
+    if (searchQuery === '') return true;
+
+    if (item.id.includes(searchQuery) || item.destination.includes(searchQuery) || item.subject.includes(searchQuery)) {
+        return true;
+    }
+    return false;
+}
+
 export const UsersContacts = () => {
 
     const {userState} = React.useContext(Context);
+    const [searchQuery, setSearchQuery] = React.useState('');
     const [pageNumber, setPageNumber] = React.useState(0);
     const [fieldTypeSort, setFieldTypeSort] = React.useState(null);
     const [orderSort, setOrderSort] = React.useState(null);
     const [numberOfRowInPage, setNumberOfRowInPage] = React.useState(4);
 
-    const currentData = mock_data.reduce((acc, item, i) => {
-        const minIndex = pageNumber * numberOfRowInPage;
-        const maxIndex = pageNumber * numberOfRowInPage + numberOfRowInPage
-        if (i >= minIndex && i < maxIndex) {
-            return [...acc, item]
-        }
-        return acc;
-    }, [])
+    const getCurrentPageData = (arr) => {
+        return arr.reduce((acc, item, i) => {
+            const minIndex = pageNumber * numberOfRowInPage;
+            const maxIndex = pageNumber * numberOfRowInPage + numberOfRowInPage
+            if (i >= minIndex && i < maxIndex) {
+                return [...acc, item]
+            }
+            return acc;
+        }, [])
+    }
 
-    const countPages= Array.apply(null, Array(Math.ceil(mock_data.length / numberOfRowInPage)));
+    const allData = searchQuery === '' ?
+        mock_data :
+        mock_data.reduce((acc, item) => {
+            return itemIncludeInCurrentSearch(item, searchQuery) ? [...acc, item] : acc;
+        }, [])
 
-    const handleChangeNumberOfRowInPage = (e) =>{
+    const currentData = getCurrentPageData(allData)
+
+    const getCountPages = () => {
+        return Math.ceil(allData.length / numberOfRowInPage);
+    }
+
+    const countPages = getCountPages();
+    debugger
+
+    const handleChangeNumberOfRowInPage = (e) => {
         setPageNumber(1)
         setNumberOfRowInPage(+e.target.value)
     }
 
+    const handleChangeSearch = (e) => {
+        setSearchQuery(e.target.value)
+    }
+
+    console.log('search', searchQuery)
+
     return (
         <div className={styles.rootUsersContacts}>
-            <input placeholder={'חיפוש פניות'} type={'text'} className={styles.searchInput}/>
+            <input onChange={handleChangeSearch} placeholder={'חיפוש פניות'} type={'text'}
+                   className={styles.searchInput} value={searchQuery}/>
             <div className={styles.main}>
                 <div className={styles.sortContainer}>
                     <label>מיין לפי:</label>
 
                     <div>
                         מספר שורות בעמוד
-                        <select onChange={handleChangeNumberOfRowInPage}>
+                        <select onChange={handleChangeNumberOfRowInPage} value={numberOfRowInPage}>
                             <option value={1}>1</option>
                             <option value={2}>2</option>
                             <option value={3}>3</option>
@@ -89,7 +121,6 @@ export const UsersContacts = () => {
                             <option value={6}>6</option>
                         </select>
                     </div>
-
 
 
                 </div>
@@ -147,15 +178,18 @@ export const UsersContacts = () => {
                 </div>
 
 
-                {countPages.length > 1 && <div className={styles.paginationContainer}>
+                {countPages > 1 && <div className={styles.paginationContainer}>
                     <div className={styles.buttonsList}>
-                        {pageNumber > 0 && <button onClick={() => setPageNumber(prevState => prevState -1)}>אחורה</button>}
-                        {countPages.map((_ , i) =>{
+                        {pageNumber > 0 &&
+                        <button onClick={() => setPageNumber(prevState => prevState - 1)}>אחורה</button>}
+                        {Array.apply(null, Array(countPages)).map((_, i) => {
                             return (
-                                <button onClick={() => setPageNumber(i)} className={i === pageNumber ? styles.currentPage : ''}>{i+ 1}</button>
+                                <button onClick={() => setPageNumber(i)}
+                                        className={i === pageNumber ? styles.currentPage : ''}>{i + 1}</button>
                             );
                         })}
-                        {pageNumber < countPages.length -1 && <button onClick={() => setPageNumber(prevState => prevState +1)}>קדימה</button>}
+                        {pageNumber < countPages- 1 &&
+                        <button onClick={() => setPageNumber(prevState => prevState + 1)}>קדימה</button>}
                     </div>
                 </div>}
             </div>
