@@ -11,9 +11,84 @@
     margin-bottom: 10px;
   }
 
+
   .main {
     background: #f6fcfc;
-    flex: 1;
+    //flex: 1;
     border: 1px solid #635f5f59;
+    box-sizing: border-box;
+    padding: 20px 30px;
+
+
+    .sortContainer {
+      height: 35px;
+      margin-bottom: 30px;
+      background: white;
+      box-sizing: border-box;
+      display: flex;
+      padding: 0 20px;
+      border: 1px solid #635f5f59;
+    }
+
+    .contactsTable {
+      display: flex;
+      flex-direction: column;
+
+      .item {
+        border: 1px solid #635f5f59;
+        margin-bottom: 20px;
+        width: 100%;
+        height: 80px;
+        background: white;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 20px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        .field{
+          width: 15%;
+
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+
+          .label{
+            color: #635f5f59;
+            margin: 0 0 10px;
+            line-height: 1;
+          }
+
+          .value{
+            color: black;
+            margin: 0;
+            line-height: 1;
+          }
+        }
+      }
+    }
   }
+}
+
+.paginationContainer {
+  margin-top: 20px;
+  height: 30px;
+  display: flex;
+  justify-content: flex-end;
+
+  &:active {
+    outline: none;
+  }
+
+
+  button {
+    border: 1px solid #635f5f59;
+    background: white;
+    margin-right: 10px;
+    border-radius: 8px;
+    outline: none;
+  }
+
 }
