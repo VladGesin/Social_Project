@@ -59,6 +59,7 @@ const itemIncludeInCurrentSearch = (item, searchQuery) => {
 export const UsersContacts = () => {
 
     const {userState} = React.useContext(Context);
+
     const [searchQuery, setSearchQuery] = React.useState('');
     const [pageNumber, setPageNumber] = React.useState(0);
     const [fieldTypeSort, setFieldTypeSort] = React.useState(null);
@@ -76,122 +77,140 @@ export const UsersContacts = () => {
         }, [])
     }
 
-    const allData = searchQuery === '' ?
-        mock_data :
-        mock_data.reduce((acc, item) => {
-            return itemIncludeInCurrentSearch(item, searchQuery) ? [...acc, item] : acc;
-        }, [])
+    const getCountPages = (arr) => Math.ceil(arr.length / numberOfRowInPage);
 
-    const currentData = getCurrentPageData(allData)
-
-    const getCountPages = () => {
-        return Math.ceil(allData.length / numberOfRowInPage);
+    const getAllData = () => {
+        return searchQuery === '' ? mock_data :
+            mock_data.reduce((acc, item) => {
+                return itemIncludeInCurrentSearch(item, searchQuery) ? [...acc, item] : acc;
+            }, [])
     }
 
-    const countPages = getCountPages();
-    debugger
-
     const handleChangeNumberOfRowInPage = (e) => {
-        setPageNumber(1)
+        setPageNumber(0)
         setNumberOfRowInPage(+e.target.value)
     }
 
-    const handleChangeSearch = (e) => {
-        setSearchQuery(e.target.value)
+    const handleChangeSearch = (e) => setSearchQuery(e.target.value);
+
+    const renderSortContainer = () => {
+        return (
+            <div className={styles.sortContainer}>
+                <label>מיין לפי:</label>
+
+                <div>
+                    מספר שורות בעמוד
+                    <select onChange={handleChangeNumberOfRowInPage} value={numberOfRowInPage}>
+                        <option value={1}>1</option>
+                        <option value={2}>2</option>
+                        <option value={3}>3</option>
+                        <option value={4}>4</option>
+                        <option value={5}>5</option>
+                        <option value={6}>6</option>
+                    </select>
+                </div>
+
+
+            </div>
+        );
     }
 
-    console.log('search', searchQuery)
+    const renderContactsTable = () => {
+        return (
+            <div className={styles.contactsTable}>
+                {currentData.length > 0 ? currentData.map((item, i) => {
+                    return (
+                        <div key={i} className={styles.item}>
+                            <div className={styles.field}>
+                                <label className={styles.label}>
+                                    מספר פנייה
+                                </label>
+                                <label className={styles.value}>
+                                    {item.id}
+                                </label>
+                            </div>
+
+                            <div className={styles.field}>
+                                <label className={styles.label}>
+                                    נמען
+                                </label>
+                                <label className={styles.value}>
+                                    {item.destination}
+                                </label>
+                            </div>
+
+                            <div className={styles.field}>
+                                <label className={styles.label}>
+                                    נושא פניה
+                                </label>
+                                <label className={styles.value}>
+                                    {item.subject}
+                                </label>
+                            </div>
+
+                            <div className={styles.field}>
+                                <label className={styles.label}>
+                                    תאריך ושעת פניה
+                                </label>
+                                <label className={styles.value}>
+                                    {item.time}
+                                </label>
+                            </div>
+
+                            <div className={styles.field}>
+                                <label className={styles.label}>
+                                    סטטוס
+                                </label>
+                                <label className={styles.value}>
+                                    {item.status}
+                                </label>
+                            </div>
+                        </div>
+                    );
+                })
+                :
+                    <div style={{textAlign: 'center'}}> לא נמצאו פניות!</div>
+                }
+            </div>
+        );
+    }
+
+    const renderPagination = () => {
+        return (
+            <div className={styles.paginationContainer}>
+                <div className={styles.buttonsList}>
+                    {pageNumber > 0 &&
+                    <button onClick={() => setPageNumber(prevState => prevState - 1)}>אחורה</button>}
+                    {Array.apply(null, Array(countPages)).map((_, i) => {
+                        return (
+                            <button onClick={() => setPageNumber(i)}
+                                    className={i === pageNumber ? styles.currentPage : ''}>{i + 1}</button>
+                        );
+                    })}
+                    {pageNumber < countPages - 1 &&
+                    <button onClick={() => setPageNumber(prevState => prevState + 1)}>קדימה</button>}
+                </div>
+            </div>
+        );
+    }
+
+    const allData = getAllData();
+    const currentData = getCurrentPageData(allData)
+    const countPages = getCountPages(allData);
 
     return (
         <div className={styles.rootUsersContacts}>
-            <input onChange={handleChangeSearch} placeholder={'חיפוש פניות'} type={'text'}
-                   className={styles.searchInput} value={searchQuery}/>
+            <input
+                onChange={handleChangeSearch}
+                placeholder={'חיפוש פניות'} type={'text'}
+                className={styles.searchInput}
+                value={searchQuery}
+            />
+
             <div className={styles.main}>
-                <div className={styles.sortContainer}>
-                    <label>מיין לפי:</label>
-
-                    <div>
-                        מספר שורות בעמוד
-                        <select onChange={handleChangeNumberOfRowInPage} value={numberOfRowInPage}>
-                            <option value={1}>1</option>
-                            <option value={2}>2</option>
-                            <option value={3}>3</option>
-                            <option value={4}>4</option>
-                            <option value={5}>5</option>
-                            <option value={6}>6</option>
-                        </select>
-                    </div>
-
-
-                </div>
-                <div className={styles.contactsTable}>
-                    {currentData.map((item, i) => {
-                        return (
-                            <div key={i} className={styles.item}>
-                                <div className={styles.field}>
-                                    <label className={styles.label}>
-                                        מספר פנייה
-                                    </label>
-                                    <label className={styles.value}>
-                                        {item.id}
-                                    </label>
-                                </div>
-
-                                <div className={styles.field}>
-                                    <label className={styles.label}>
-                                        נמען
-                                    </label>
-                                    <label className={styles.value}>
-                                        {item.destination}
-                                    </label>
-                                </div>
-
-                                <div className={styles.field}>
-                                    <label className={styles.label}>
-                                        נושא פניה
-                                    </label>
-                                    <label className={styles.value}>
-                                        {item.subject}
-                                    </label>
-                                </div>
-
-                                <div className={styles.field}>
-                                    <label className={styles.label}>
-                                        תאריך ושעת פניה
-                                    </label>
-                                    <label className={styles.value}>
-                                        {item.time}
-                                    </label>
-                                </div>
-
-                                <div className={styles.field}>
-                                    <label className={styles.label}>
-                                        סטטוס
-                                    </label>
-                                    <label className={styles.value}>
-                                        {item.status}
-                                    </label>
-                                </div>
-                            </div>
-                        );
-                    })}
-                </div>
-
-
-                {countPages > 1 && <div className={styles.paginationContainer}>
-                    <div className={styles.buttonsList}>
-                        {pageNumber > 0 &&
-                        <button onClick={() => setPageNumber(prevState => prevState - 1)}>אחורה</button>}
-                        {Array.apply(null, Array(countPages)).map((_, i) => {
-                            return (
-                                <button onClick={() => setPageNumber(i)}
-                                        className={i === pageNumber ? styles.currentPage : ''}>{i + 1}</button>
-                            );
-                        })}
-                        {pageNumber < countPages- 1 &&
-                        <button onClick={() => setPageNumber(prevState => prevState + 1)}>קדימה</button>}
-                    </div>
-                </div>}
+                {renderSortContainer()}
+                {renderContactsTable()}
+                {countPages > 1 && renderPagination()}
             </div>
 
         </div>
