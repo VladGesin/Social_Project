@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from "./UsersContacts.module.scss";
 import Context from "../../../../store/Context";
-import {min} from "moment";
 
 const mock_data = [
     {
@@ -34,7 +33,14 @@ const mock_data = [
     },
     {
         id: '1213',
-        destination: 'שם נמען4',
+        destination: 'שם נמען5',
+        subject: 'נושא הפנייה 000',
+        time: '3453453453',
+        status: 'סגור'
+    },
+    {
+        id: '1213',
+        destination: 'שם נמען6',
         subject: 'נושא הפנייה 000',
         time: '3453453453',
         status: 'סגור'
@@ -60,12 +66,32 @@ export const UsersContacts = () => {
 
     const countPages= Array.apply(null, Array(Math.ceil(mock_data.length / numberOfRowInPage)));
 
+    const handleChangeNumberOfRowInPage = (e) =>{
+        setPageNumber(1)
+        setNumberOfRowInPage(+e.target.value)
+    }
+
     return (
         <div className={styles.rootUsersContacts}>
             <input placeholder={'חיפוש פניות'} type={'text'} className={styles.searchInput}/>
             <div className={styles.main}>
                 <div className={styles.sortContainer}>
-                    מיין לפי
+                    <label>מיין לפי:</label>
+
+                    <div>
+                        מספר שורות בעמוד
+                        <select onChange={handleChangeNumberOfRowInPage}>
+                            <option value={1}>1</option>
+                            <option value={2}>2</option>
+                            <option value={3}>3</option>
+                            <option value={4}>4</option>
+                            <option value={5}>5</option>
+                            <option value={6}>6</option>
+                        </select>
+                    </div>
+
+
+
                 </div>
                 <div className={styles.contactsTable}>
                     {currentData.map((item, i) => {
@@ -121,12 +147,12 @@ export const UsersContacts = () => {
                 </div>
 
 
-                {mock_data.length % numberOfRowInPage !== 0 && <div className={styles.paginationContainer}>
+                {countPages.length > 1 && <div className={styles.paginationContainer}>
                     <div className={styles.buttonsList}>
                         {pageNumber > 0 && <button onClick={() => setPageNumber(prevState => prevState -1)}>אחורה</button>}
                         {countPages.map((_ , i) =>{
                             return (
-                                <button onClick={() => setPageNumber(i)}>{i+ 1}</button>
+                                <button onClick={() => setPageNumber(i)} className={i === pageNumber ? styles.currentPage : ''}>{i+ 1}</button>
                             );
                         })}
                         {pageNumber < countPages.length -1 && <button onClick={() => setPageNumber(prevState => prevState +1)}>קדימה</button>}
