@@ -4,15 +4,27 @@
   flex-direction: column;
   direction: rtl;
 
-  .searchInput {
-    width: 100%;
+  .wrapperSearchInput {
+    position: relative;
     margin-bottom: 10px;
 
+    img {
+      position: absolute;
+      height: 1.5rem;
+      width: 1.5rem;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.5;
+    }
 
-    height: 3rem;
-    border: 1px solid #ccc;
-    padding-right: 3rem;
-    outline: none;
+    .searchInput {
+      width: 100%;
+      height: 3rem;
+      border: 1px solid #ccc;
+      padding-right: 3rem;
+      outline: none;
+    }
   }
 
 
@@ -40,6 +52,10 @@
         margin: 0 0 0 20px;
         font-weight: bold;
 
+      }
+
+      .dropdownWrapper{
+        margin-left: 20px;
       }
     }
 

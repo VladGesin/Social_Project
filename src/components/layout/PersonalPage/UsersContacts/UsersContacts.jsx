@@ -1,6 +1,21 @@
 import React from 'react';
 import styles from "./UsersContacts.module.scss";
 import Context from "../../../../store/Context";
+import searchIcon from "../../SecretaryWin/assets/search.svg";
+import {Menu, Dropdown} from 'antd';
+import {DownOutlined} from '@ant-design/icons';
+
+const MIN_numberOfRowInPage = 2;
+const MAX_numberOfRowInPage = 7;
+
+const fields_map = {
+    id: 'מספר פניה',
+    destination: 'נמען',
+    subject: 'נושא הפנייה',
+    time: 'תאריך ושעת פנייה',
+    status: 'סטטוס'
+}
+
 
 const mock_data = [
     {
@@ -62,8 +77,8 @@ export const UsersContacts = () => {
 
     const [searchQuery, setSearchQuery] = React.useState('');
     const [pageNumber, setPageNumber] = React.useState(0);
-    const [fieldTypeSort, setFieldTypeSort] = React.useState(null);
-    const [orderSort, setOrderSort] = React.useState(null);
+    const [fieldTypeSort, setFieldTypeSort] = React.useState('id');
+    const [orderSort, setOrderSort] = React.useState('down');
     const [numberOfRowInPage, setNumberOfRowInPage] = React.useState(4);
 
     const getCurrentPageData = (arr) => {
@@ -86,31 +101,95 @@ export const UsersContacts = () => {
             }, [])
     }
 
-    const handleChangeNumberOfRowInPage = (e) => {
+    const handleChangeNumberOfRowInPage = (value) => {
         setPageNumber(0)
-        setNumberOfRowInPage(+e.target.value)
+        setNumberOfRowInPage(value)
     }
 
     const handleChangeSearch = (e) => setSearchQuery(e.target.value);
 
     const renderSortContainer = () => {
+
+
+        const menuNumberOfRowInPage = (
+            <Menu>
+                {Array.apply(null, Array(MAX_numberOfRowInPage - MIN_numberOfRowInPage + 1)).map((_, i) => {
+                    return (
+                        <Menu.Item key={i}>
+                            <div
+                                style={i + MIN_numberOfRowInPage === numberOfRowInPage ? {fontWeight: 'bold'} : null}
+                                onClick={() => handleChangeNumberOfRowInPage(i + MIN_numberOfRowInPage)}
+                            >
+                                {i + MIN_numberOfRowInPage}
+                            </div>
+                        </Menu.Item>
+                    );
+                })}
+            </Menu>
+        );
+
+        const menuOrder = (
+            <Menu>
+
+                <Menu.Item>
+                    <div onClick={() => setOrderSort('down')} style={orderSort === 'down' ? {fontWeight: 'bold'} : null}>
+                        סדר יורד
+                    </div>
+                </Menu.Item>
+                <Menu.Item>
+                    <div onClick={() => setOrderSort('up')} style={orderSort === 'up' ? {fontWeight: 'bold'} : null}>
+                        סדר עולה
+                    </div>
+                </Menu.Item>
+
+            </Menu>
+        );
+
+        const menuFieldType = (
+            <Menu>
+                {Object.keys(fields_map).map((key, i) =>{
+                    return (
+                        <Menu.Item key={key}>
+                            <div onClick={() => setFieldTypeSort(key)} style={fieldTypeSort === key? {fontWeight: 'bold'} : null}>
+                                {fields_map[key]}
+                            </div>
+                        </Menu.Item>
+                    );
+                })}
+            </Menu>
+        );
+
+
         return (
             <div className={styles.sortContainer}>
                 <label>מיין לפי:</label>
 
-                <div>
-                    מספר שורות בעמוד
-                    <select onChange={handleChangeNumberOfRowInPage} value={numberOfRowInPage}>
-                        <option value={1}>1</option>
-                        <option value={2}>2</option>
-                        <option value={3}>3</option>
-                        <option value={4}>4</option>
-                        <option value={5}>5</option>
-                        <option value={6}>6</option>
-                    </select>
+                <div className={styles.dropdownWrapper}>
+                    <Dropdown overlay={menuFieldType}>
+                        <div>
+                            <DownOutlined/>
+                            <span style={{marginRight: 5}}>{fields_map[fieldTypeSort]}</span>
+                        </div>
+                    </Dropdown>
                 </div>
 
+                <div className={styles.dropdownWrapper}>
+                    <Dropdown overlay={menuOrder}>
+                        <div>
+                            <DownOutlined/>
+                            <span style={{marginRight: 5}}>סדר {orderSort === 'down' ? 'יורד' : 'עולה'}</span>
+                        </div>
+                    </Dropdown>
+                </div>
 
+                <div className={styles.dropdownWrapper}>
+                    <Dropdown overlay={menuNumberOfRowInPage}>
+                        <div>
+                            <DownOutlined/>
+                            <span style={{marginRight: 5}}>מספר שורות בעמוד</span>
+                        </div>
+                    </Dropdown>
+                </div>
             </div>
         );
     }
@@ -119,56 +198,56 @@ export const UsersContacts = () => {
         return (
             <div className={styles.contactsTable}>
                 {currentData.length > 0 ? currentData.map((item, i) => {
-                    return (
-                        <div key={i} className={styles.item}>
-                            <div className={styles.field}>
-                                <label className={styles.label}>
-                                    מספר פנייה
-                                </label>
-                                <label className={styles.value}>
-                                    {item.id}
-                                </label>
-                            </div>
+                        return (
+                            <div key={i} className={styles.item}>
+                                <div className={styles.field}>
+                                    <label className={styles.label}>
+                                        מספר פנייה
+                                    </label>
+                                    <label className={styles.value}>
+                                        {item.id}
+                                    </label>
+                                </div>
 
-                            <div className={styles.field}>
-                                <label className={styles.label}>
-                                    נמען
-                                </label>
-                                <label className={styles.value}>
-                                    {item.destination}
-                                </label>
-                            </div>
+                                <div className={styles.field}>
+                                    <label className={styles.label}>
+                                        נמען
+                                    </label>
+                                    <label className={styles.value}>
+                                        {item.destination}
+                                    </label>
+                                </div>
 
-                            <div className={styles.field}>
-                                <label className={styles.label}>
-                                    נושא פניה
-                                </label>
-                                <label className={styles.value}>
-                                    {item.subject}
-                                </label>
-                            </div>
+                                <div className={styles.field}>
+                                    <label className={styles.label}>
+                                        נושא פניה
+                                    </label>
+                                    <label className={styles.value}>
+                                        {item.subject}
+                                    </label>
+                                </div>
 
-                            <div className={styles.field}>
-                                <label className={styles.label}>
-                                    תאריך ושעת פניה
-                                </label>
-                                <label className={styles.value}>
-                                    {item.time}
-                                </label>
-                            </div>
+                                <div className={styles.field}>
+                                    <label className={styles.label}>
+                                        תאריך ושעת פניה
+                                    </label>
+                                    <label className={styles.value}>
+                                        {item.time}
+                                    </label>
+                                </div>
 
-                            <div className={styles.field}>
-                                <label className={styles.label}>
-                                    סטטוס
-                                </label>
-                                <label className={styles.value}>
-                                    {item.status}
-                                </label>
+                                <div className={styles.field}>
+                                    <label className={styles.label}>
+                                        סטטוס
+                                    </label>
+                                    <label className={styles.value}>
+                                        {item.status}
+                                    </label>
+                                </div>
                             </div>
-                        </div>
-                    );
-                })
-                :
+                        );
+                    })
+                    :
                     <div style={{textAlign: 'center'}}> לא נמצאו פניות!</div>
                 }
             </div>
@@ -200,12 +279,16 @@ export const UsersContacts = () => {
 
     return (
         <div className={styles.rootUsersContacts}>
-            <input
-                onChange={handleChangeSearch}
-                placeholder={'חיפוש פניות'} type={'text'}
-                className={styles.searchInput}
-                value={searchQuery}
-            />
+            <div className={styles.wrapperSearchInput}>
+                <img src={searchIcon}/>
+                <input
+                    onChange={handleChangeSearch}
+                    placeholder={'חיפוש פניות'} type={'text'}
+                    className={styles.searchInput}
+                    value={searchQuery}
+                />
+            </div>
+
 
             <div className={styles.main}>
                 {renderSortContainer()}
