@@ -6,6 +6,7 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users }) => {
    const [stage, setStage] = useState(1);
    const [validation, setValidation] = useState({
       emailIsValid: true,
+      emailIsAlreadyExist: false,
       phoneIsValid: true,
       firstNameIsValid: true,
       lastNameIsValid: true,
@@ -17,7 +18,6 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users }) => {
 
    const [passwordIsShown, setPasswordIsShown] = useState(false);
    const [committeesBoxItem, setCommitteesBoxItem] = useState([]);
-   const [userAlreadyExist, setUserAlreadyExist] = useState(false);
    const [formDetails, setFormDetails] = useState({
       firstName: "",
       lastName: "",
@@ -156,8 +156,13 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users }) => {
             birthday: formDetails.birthday,
             phone: formDetails.phone,
          };
-         const res = await api.post(`/users`, reqObj);
-         setValidation((cur) => ({ ...cur, idIsAlreadyExist: false }));
+         const res = await api.post(`users`, reqObj);
+
+         setValidation((cur) => ({
+            ...cur,
+            idIsAlreadyExist: false,
+            emailIsAlreadyExist: false,
+         }));
          const updatedUsers = await api.get("users/");
          setUsers(updatedUsers.data);
          setStage(1);
@@ -173,7 +178,15 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users }) => {
          });
          close();
       } catch (e) {
-         setValidation((cur) => ({ ...cur, idIsAlreadyExist: true }));
+         if (e.response.data.message == "User already exists")
+            setValidation((cur) => ({ ...cur, idIsAlreadyExist: true }));
+         else
+            setValidation((cur) => ({
+               ...cur,
+               emailIsAlreadyExist: true,
+               idIsAlreadyExist: false,
+            }));
+
          setStage(1);
       }
    };
@@ -317,6 +330,11 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users }) => {
                         {!validation.emailIsValid && (
                            <p className={style.invalidEmail}>
                               * אימייל לא תקין
+                           </p>
+                        )}
+                        {validation.emailIsAlreadyExist && (
+                           <p className={style.invalidEmail}>
+                              * אימייל כבר קיים במערכת
                            </p>
                         )}
                         <div>

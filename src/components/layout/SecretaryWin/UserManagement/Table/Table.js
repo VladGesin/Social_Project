@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import downArrowIcon from "../assets/down-arrow.svg";
+import downArrowIcon from "../../assets/down-arrow.svg";
 import UserItem from "./UserItem/UserItem";
-import PaginationComp from "../../xpertesy/MyMeetings/PaginationComp";
+import PaginationComp from "../../../xpertesy/MyMeetings/PaginationComp";
 import style from "./Table.module.scss";
-import DeleteUserModal from "../modals/DeleteUserModal";
-import RestPasswordModal from "../modals/RestPasswordModal";
-import EditUserModal from "../modals/EditUserModal";
-import CreateNewUser from "../modals/CreateNewUser";
+import DeleteUserModal from "../../modals/DeleteUserModal";
+import RestPasswordModal from "../../modals/RestPasswordModal";
+import EditUserModal from "../../modals/EditUserModal";
+import CreateNewUser from "../../modals/CreateNewUser";
 
 const Table = ({
    users,
