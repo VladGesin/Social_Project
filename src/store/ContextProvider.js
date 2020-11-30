@@ -11,7 +11,7 @@ const initialUserState = {
    isAuth: false,
    loading: true,
    email: null,
-   birthday: null
+   birthday: null,
 };
 
 const ContextProvider = (props) => {
@@ -26,7 +26,6 @@ const ContextProvider = (props) => {
          const res = await api.get("user");
          const user = res.data;
 
-         debugger
          const updatedUser = {
             birthday: user.birthday,
             email: user.email,

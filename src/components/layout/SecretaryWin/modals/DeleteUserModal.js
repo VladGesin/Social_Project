@@ -23,7 +23,7 @@ const DeleteUserModal = ({
                : 0
          );
          setUsers(usersSorted);
-         setMsg(`${name} נמחק בהצלחה`);
+         setMsg({ msg: "המשתמש", name });
       }
 
       close();

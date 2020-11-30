@@ -6,7 +6,7 @@ import ContentManagement from "./ContentManagement/ContentManagement";
 import MsgBox from "./MsgBox/MsgBox";
 
 const SecretaryWin = () => {
-   const [msg, setMsg] = useState("");
+   const [msg, setMsg] = useState({ msg: "" });
    const [activePage, setActivePage] = useState({
       userManagement: true,
       contentManagement: false,
@@ -17,11 +17,12 @@ const SecretaryWin = () => {
    });
    return (
       <div className={style.rootSecretaryWindow}>
-         {msg !== "" && (
+         {msg.msg !== "" && (
             <MsgBox
-               name={msg}
+               name={msg.name}
+               msg={msg.msg}
                clear={() => {
-                  setMsg("");
+                  setMsg({ msg: "" });
                }}
             />
          )}
