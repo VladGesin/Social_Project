@@ -16,7 +16,6 @@ const fields_map = {
     status: 'סטטוס'
 }
 
-
 const mock_data = [
     {
         id: '1234',
@@ -81,6 +80,8 @@ export const UsersContacts = () => {
     const [orderSort, setOrderSort] = React.useState('down');
     const [numberOfRowInPage, setNumberOfRowInPage] = React.useState(4);
 
+    console.log('22222', fieldTypeSort)
+
     const getCurrentPageData = (arr) => {
         return arr.reduce((acc, item, i) => {
             const minIndex = pageNumber * numberOfRowInPage;
@@ -95,10 +96,39 @@ export const UsersContacts = () => {
     const getCountPages = (arr) => Math.ceil(arr.length / numberOfRowInPage);
 
     const getAllData = () => {
-        return searchQuery === '' ? mock_data :
+        const notSortData =  searchQuery === '' ? mock_data :
             mock_data.reduce((acc, item) => {
                 return itemIncludeInCurrentSearch(item, searchQuery) ? [...acc, item] : acc;
             }, [])
+
+            
+        return notSortData.sort((a, b) =>  {
+            if (fieldTypeSort === 'id'){
+                return orderSort === 'down' ? b.id - a.id : a.id - b.id
+            }
+            var nameA = a[fieldTypeSort].toUpperCase(); // ignore upper and lowercase
+            var nameB = b[fieldTypeSort].toUpperCase(); // ignore upper and lowercase
+
+            if (orderSort === 'down' ){
+                if (nameA < nameB) {
+                    return 1;
+                }
+                if (nameA > nameB) {
+                    return -1;
+                }
+                return 0;
+            }else{
+                if (nameA < nameB) {
+                    return -1;
+                }
+                if (nameA > nameB) {
+                    return 1;
+                }
+                return 0;
+            }
+
+            
+        })
     }
 
     const handleChangeNumberOfRowInPage = (value) => {
@@ -167,8 +197,9 @@ export const UsersContacts = () => {
                 <div className={styles.dropdownWrapper}>
                     <Dropdown overlay={menuFieldType}>
                         <div>
+                        
+                            <span>{fields_map[fieldTypeSort]}</span>
                             <DownOutlined/>
-                            <span style={{marginRight: 5}}>{fields_map[fieldTypeSort]}</span>
                         </div>
                     </Dropdown>
                 </div>
@@ -176,8 +207,9 @@ export const UsersContacts = () => {
                 <div className={styles.dropdownWrapper}>
                     <Dropdown overlay={menuOrder}>
                         <div>
+                            
+                            <span>סדר {orderSort === 'down' ? 'יורד' : 'עולה'}</span>
                             <DownOutlined/>
-                            <span style={{marginRight: 5}}>סדר {orderSort === 'down' ? 'יורד' : 'עולה'}</span>
                         </div>
                     </Dropdown>
                 </div>
@@ -185,8 +217,8 @@ export const UsersContacts = () => {
                 <div className={styles.dropdownWrapper}>
                     <Dropdown overlay={menuNumberOfRowInPage}>
                         <div>
+                            <span>מספר שורות בעמוד</span>
                             <DownOutlined/>
-                            <span style={{marginRight: 5}}>מספר שורות בעמוד</span>
                         </div>
                     </Dropdown>
                 </div>
@@ -262,7 +294,7 @@ export const UsersContacts = () => {
                     <button onClick={() => setPageNumber(prevState => prevState - 1)}>אחורה</button>}
                     {Array.apply(null, Array(countPages)).map((_, i) => {
                         return (
-                            <button onClick={() => setPageNumber(i)}
+                            <button key={i} onClick={() => setPageNumber(i)}
                                     className={i === pageNumber ? styles.currentPage : ''}>{i + 1}</button>
                         );
                     })}

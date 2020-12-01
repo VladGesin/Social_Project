@@ -51,11 +51,19 @@
       label {
         margin: 0 0 0 20px;
         font-weight: bold;
-
+        color: #686868;
+        font-weight: 700;
       }
 
       .dropdownWrapper{
         margin-left: 20px;
+
+        span{
+          font-weight: 700;
+          line-height: 3rem;
+          margin-right: 5px;
+          color: #ccc;
+        }
       }
     }
 
