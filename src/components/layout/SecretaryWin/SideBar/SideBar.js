@@ -5,7 +5,7 @@ import style from "./SideBar.module.scss";
 const SecretaryWinSideBar = ({ activePage, setActivePage }) => {
    return (
       <div className={style.SideBar}>
-         <h3>תפריט ניהול</h3>
+         <h3>מסך ניהול</h3>
          <p
             onClick={() =>
                setActivePage({

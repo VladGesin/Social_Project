@@ -3,11 +3,13 @@ import Modal from "react-bootstrap/Modal";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import api from "../../../../api";
 import style from "./EditUserModal.module.scss";
-const EditUserModal = ({ isOpen, close, id, setUsers, users }) => {
+const EditUserModal = ({ isOpen, close, id, setUsers, users, setMsg }) => {
    const [stage, setStage] = useState(1);
    const [emailIsValid, setEmailIsValid] = useState(true);
    const [phoneIsValid, setPhoneIsValid] = useState(true);
    const [committeesBoxItem, setCommitteesBoxItem] = useState([]);
+   const [imageName, setImageName] = useState("");
+
    const [formDetails, setFormDetails] = useState({
       firstName: "",
       lastName: "",
@@ -109,6 +111,10 @@ const EditUserModal = ({ isOpen, close, id, setUsers, users }) => {
       };
       setUsers(updateUsers);
       close();
+      setMsg({ msg: "פרטי המשתמש עודכנו בהצלחה" });
+   };
+   const onSelectImage = (e) => {
+      setImageName(e.target.files[0].name);
    };
    return (
       <Modal
@@ -277,8 +283,11 @@ const EditUserModal = ({ isOpen, close, id, setUsers, users }) => {
                         <label className={style.imageUpload}>
                            העלאת תמונת פרופיל
                            <i className="fa fa-cloud-upload"></i>
-                           <input type="file" />
+                           <input type="file" onChange={onSelectImage} />
                         </label>
+                        <p style={{ direction: "rtl" }}>
+                           {imageName !== "" && `שם התמונה : ${imageName}`}
+                        </p>
                         <p>תמונה זו תוצג בפרופיל המשתמש בלבד</p>
                      </div>
                   </>

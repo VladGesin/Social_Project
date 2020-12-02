@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Modal from "react-bootstrap/Modal";
 import api from "../../../../api";
 import style from "./CreateNewUser.module.scss";
-const CreateNewUser = ({ isOpen, close, id, setUsers, users }) => {
+const CreateNewUser = ({ isOpen, close, id, setUsers, users, setMsg }) => {
    const [stage, setStage] = useState(1);
    const [validation, setValidation] = useState({
       emailIsValid: true,
@@ -13,16 +13,20 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users }) => {
       idIsValid: true,
       idIsAlreadyExist: false,
       birthDateIsValid: true,
+      birthDateIsEmpty: null,
       passwordIsValid: true,
    });
 
    const [passwordIsShown, setPasswordIsShown] = useState(false);
    const [committeesBoxItem, setCommitteesBoxItem] = useState([]);
+   const [imageName, setImageName] = useState("");
+   const [imagePath, setImagePath] = useState("");
    const [formDetails, setFormDetails] = useState({
       firstName: "",
       lastName: "",
       email: "",
       phone: "",
+      phonePrefix: "054",
       id: "",
       birthday: "",
       userType: "",
@@ -58,59 +62,78 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users }) => {
             return false;
          return true;
       };
+      const validateDate = () => {
+         const today = new Date();
+         const birthDate = new Date(formDetails.birthday);
+         let age = today.getFullYear() - birthDate.getFullYear();
+         const m = today.getMonth() - birthDate.getMonth();
+         if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+         }
+         if (age < 18) {
+            return false;
+         } else {
+            return true;
+         }
+      };
+
       let isValid = true;
       if (!validateEmail(formDetails.email)) {
          setValidation((cur) => ({ ...cur, emailIsValid: false }));
          setStage(1);
          isValid = false;
       } else {
-         isValid = true;
          setValidation({ ...validation, emailIsValid: true });
       }
-      if (isNaN(+formDetails.phone) || formDetails.phone.length !== 10) {
+      if (isNaN(+formDetails.phone) || formDetails.phone.length !== 7) {
          setStage(1);
          setValidation((cur) => ({ ...cur, phoneIsValid: false }));
          isValid = false;
       } else {
          setValidation((cur) => ({ ...cur, phoneIsValid: true }));
-         isValid = true;
       }
       if (formDetails.firstName.length === 0) {
+         setStage(1);
          setValidation((cur) => ({ ...cur, firstNameIsValid: false }));
          isValid = false;
       } else {
          setValidation((cur) => ({ ...cur, firstNameIsValid: true }));
-         isValid = true;
       }
 
       if (formDetails.lastName.length === 0) {
+         setStage(1);
          setValidation((cur) => ({ ...cur, lastNameIsValid: false }));
          isValid = false;
       } else {
          setValidation((cur) => ({ ...cur, lastNameIsValid: true }));
-         isValid = true;
       }
       if (formDetails.id.length !== 9) {
+         setStage(1);
          setValidation((cur) => ({ ...cur, idIsValid: false }));
          isValid = false;
       } else {
          setValidation((cur) => ({ ...cur, idIsValid: true }));
-         isValid = true;
       }
 
       if (formDetails.birthday.length === 0) {
-         setValidation((cur) => ({ ...cur, birthDateIsValid: false }));
+         setStage(1);
+         setValidation((cur) => ({ ...cur, birthDateIsEmpty: true }));
          isValid = false;
       } else {
+         setValidation((cur) => ({ ...cur, birthDateIsEmpty: false }));
+      }
+      if (!validateDate()) {
+         setValidation((cur) => ({ ...cur, birthDateIsValid: false }));
+         isValid = false;
+         setStage(1);
+      } else {
          setValidation((cur) => ({ ...cur, birthDateIsValid: true }));
-         isValid = true;
       }
       if (!validatePassword(formDetails.password)) {
          setValidation((cur) => ({ ...cur, passwordIsValid: false }));
          isValid = false;
       } else {
          setValidation((cur) => ({ ...cur, passwordIsValid: true }));
-         isValid = true;
       }
       return isValid;
    };
@@ -136,6 +159,17 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users }) => {
          setStage(3);
       }
    };
+   const onSelectImage = (e) => {
+      setImageName(e.target.files[0].name);
+      console.log(e.target.files);
+      if (e.target.files && e.target.files[0]) {
+         let reader = new FileReader();
+         reader.onload = (e) => {
+            setImagePath(e.target.result);
+         };
+         reader.readAsDataURL(e.target.files[0]);
+      }
+   };
    const onSave = async (e) => {
       try {
          e.preventDefault();
@@ -154,8 +188,9 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users }) => {
             type: checkedUserType[0],
             contactUser: true,
             birthday: formDetails.birthday,
-            phone: formDetails.phone,
+            phone: formDetails.phonePrefix + formDetails.phone,
          };
+         console.log(reqObj.phone);
          const res = await api.post(`users`, reqObj);
 
          setValidation((cur) => ({
@@ -177,6 +212,7 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users }) => {
             password: "",
          });
          close();
+         setMsg({ msg: "המשתמש נוצר בהצלחה" });
       } catch (e) {
          if (e.response.data.message == "User already exists")
             setValidation((cur) => ({ ...cur, idIsAlreadyExist: true }));
@@ -204,6 +240,18 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users }) => {
                birthday: "",
                userType: "",
                password: "",
+            });
+            setValidation({
+               emailIsValid: true,
+               emailIsAlreadyExist: false,
+               phoneIsValid: true,
+               firstNameIsValid: true,
+               lastNameIsValid: true,
+               idIsValid: true,
+               idIsAlreadyExist: false,
+               birthDateIsEmpty: null,
+               birthDateIsValid: true,
+               passwordIsValid: true,
             });
             setStage(1);
          }}
@@ -307,9 +355,14 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users }) => {
                                  onChange={onChange}
                                  required
                               />
-                              {!validation.birthDateIsValid && (
+                              {validation.birthDateIsEmpty == true && (
                                  <span className={style.invalidEmail}>
                                     * שדה חובה
+                                 </span>
+                              )}
+                              {validation.birthDateIsValid == false && (
+                                 <span className={style.invalidEmail}>
+                                    * 18 הוא גיל מינימלי
                                  </span>
                               )}
                            </div>
@@ -339,14 +392,30 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users }) => {
                         )}
                         <div>
                            <label>טלפון נייד</label>
-                           <input
-                              value={formDetails.phone}
-                              name="phone"
-                              type="text"
-                              onChange={onChange}
-                              ref={phoneRef}
-                              required
-                           />
+                           <div className={style.phoneInput}>
+                              <input
+                                 value={formDetails.phone}
+                                 name="phone"
+                                 type="text"
+                                 onChange={onChange}
+                                 ref={phoneRef}
+                              />
+                              <select
+                                 value={formDetails.phonePrefix}
+                                 onChange={onChange}
+                                 name="phonePrefix"
+                              >
+                                 <option>050</option>
+                                 <option>052</option>
+                                 <option>053</option>
+                                 <option>054</option>
+                                 <option>055</option>
+                                 <option>056</option>
+                                 <option>057</option>
+                                 <option>058</option>
+                                 <option>059</option>
+                              </select>
+                           </div>
                         </div>{" "}
                         {!validation.phoneIsValid && (
                            <p className={style.invalidEmail}>* טלפון לא תקין</p>
@@ -355,9 +424,25 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users }) => {
                            <label className={style.imageUpload}>
                               העלאת תמונת פרופיל
                               <i className="fa fa-cloud-upload"></i>
-                              <input type="file" />
+                              <input
+                                 type="file"
+                                 onChange={onSelectImage}
+                                 accept="image/*"
+                              />
                            </label>
                            <p>תמונה זו תוצג בפרופיל המשתמש בלבד</p>
+                           {imageName !== "" && (
+                              <>
+                                 <p style={{ direction: "rtl" }}>
+                                    {`שם התמונה : ${imageName}`}
+                                 </p>
+                                 <img
+                                    src={imagePath}
+                                    alt=""
+                                    className={style.imagePreview}
+                                 />
+                              </>
+                           )}
                         </div>
                      </div>
                   </>

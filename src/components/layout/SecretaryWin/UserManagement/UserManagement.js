@@ -125,6 +125,7 @@ const UserManagement = ({ msg, setMsg }) => {
             setUsers={setUsers}
             id={currentUser.user_id}
             users={users}
+            setMsg={setMsg}
          />
          <CreateNewUser
             close={() => setIsNewUserOpen(false)}
@@ -132,6 +133,7 @@ const UserManagement = ({ msg, setMsg }) => {
             setUsers={setUsers}
             id={currentUser.user_id}
             users={users}
+            setMsg={setMsg}
          />
          <div className={style.topBar}>
             <TopBar setIsNewUserOpen={setIsNewUserOpen} />
