@@ -56,13 +56,13 @@ useEffect(() => {
 
   return (
     <Fragment >
-      <Card className="text-right">
+      <Card className="text-right h-100">
         <Card.Header as="h5">מילה טובה
         </Card.Header>
-        <Card.Body>
+        <Card.Body > 
           <GoodWordCarusel indicators={false}/>
 
-          <Button variant="primary" onClick={handleShow}>
+          <Button id='goodWordBTN' variant="primary" onClick={handleShow}>
             הכנס מילה טובה
           </Button>
         </Card.Body>
