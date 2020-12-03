@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Modal from "react-bootstrap/Modal";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import api from "../../../../api";
+import api from "../../../../../api";
 import style from "./EditUserModal.module.scss";
 const EditUserModal = ({ isOpen, close, id, setUsers, users, setMsg }) => {
    const [stage, setStage] = useState(1);

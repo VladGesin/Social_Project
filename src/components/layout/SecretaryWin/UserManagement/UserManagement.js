@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import TopBar from "./TopBar/TopBar";
 import Table from "../Table/Table";
 import style from "./UserManagement.module.scss";
-import DeleteUserModal from "../modals/DeleteUserModal";
-import RestPasswordModal from "../modals/RestPasswordModal";
-import EditUserModal from "../modals/EditUserModal";
-import CreateNewUser from "../modals/CreateNewUser";
+import DeleteUserModal from "../modals/DeleteUserModal/DeleteUserModal";
+import RestPasswordModal from "../modals/RestPasswordModal/RestPasswordModal";
+import EditUserModal from "../modals/EditUserModal/EditUserModal";
+import CreateNewUser from "../modals/CreateNewUser/CreateNewUser";
 import SortRow from "./SortRow";
 import api from "../../../../api";
 import PaginationComp from "../../xpertesy/MyMeetings/PaginationComp";
@@ -55,6 +55,7 @@ const UserManagement = ({ msg, setMsg }) => {
 
       const rowActions = [
          <i
+            key={"edit"}
             className="fas fa-edit"
             title={"עריכת פרטי משתמש"}
             onClick={() => {
@@ -65,6 +66,7 @@ const UserManagement = ({ msg, setMsg }) => {
             }}
          ></i>,
          <i
+            key={"change"}
             title={"שינוי סיסמא"}
             className="fas fa-lock"
             onClick={() => {
@@ -75,6 +77,7 @@ const UserManagement = ({ msg, setMsg }) => {
             }}
          ></i>,
          <i
+            key={"delete"}
             title={"מחיקת משתמש"}
             className="far fa-trash-alt"
             onClick={() => {

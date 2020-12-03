@@ -7,7 +7,7 @@ const TableItem = ({ row, rowAction, titles }) => {
          <div className={style.item}>
             <div className={style.userData}>
                {titles.map((t) => (
-                  <div className={style.col}>
+                  <div className={style.col} key={t.title}>
                      <p>{t.title}</p>
                      <p>{row[t.value]}</p>
                   </div>
