@@ -1,13 +1,10 @@
-import React, { Fragment,useEffect , useState ,useContext} from 'react';
+import React, { Fragment,useEffect , useState } from 'react';
 import Slider from './Slider/Slider';
 import Container from 'react-bootstrap/Container';
 import GoodWord from '../WelcomPage/GoodWord/GoodWord';
 import News from '../WelcomPage/News/News';
 import Birthday from '../WelcomPage/Birthdays/Birthday';
 import Teachers from '../WelcomPage/PrivateTeacher/PrivateTeacher';
-import axios from 'axios';
-
-
 
 import './WelcomPage.css';
 import api from "../../../../api";
@@ -15,13 +12,12 @@ import api from "../../../../api";
 const WelcomPage = () => {
   const [users, setUsers] =useState([]); //hook 
   const [news, setNews] = useState([]); // hook news
-  
 
   useEffect(() => {
     getUsers();
     getNews('תלמיד');
-
   }, []);
+
 
   function getUsers() {
     api.get('users').then(res => setUsers(res.data));

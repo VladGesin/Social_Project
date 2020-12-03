@@ -20,6 +20,7 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
+      align-items: flex-start;
 
       .name {
         font-size: 22px;
@@ -43,5 +44,49 @@
   .main {
     //max-width: 700px;
     //width: 90%;
+  }
+}
+
+.changeImageModal.changeImageModal {
+  border: none;
+  text-align: center;
+  background: white;
+
+
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    height: 40px;
+    color: black;
+    font-weight: bold;
+    border-bottom: 1px solid #b9bbbe;
+    font-size: 16px;
+
+    &:active{
+      outline: none;
+    }
+
+    &:nth-of-type(1) {
+      cursor: default;
+      font-size: 18px;
+    }
+
+    &:nth-of-type(2) {
+      color: dodgerblue;
+    }
+
+    &:nth-of-type(3) {
+      color: red;
+    }
+
+    &:nth-of-type(4) {
+      color: #b9bbbe;
+    }
+
+    &:last-child{
+      border-bottom: none;
+    }
   }
 }

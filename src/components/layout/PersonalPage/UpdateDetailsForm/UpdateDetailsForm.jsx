@@ -26,7 +26,18 @@ export const UpdateDetailsForm = () => {
             ...userState,
             ...values.user
         };
-        api.patch('users/' + userState.id, reqObj)
+
+        // const reqObj = {
+        //     firstName: formDetails.firstName,
+        //     lastName: formDetails.lastName,
+        //     email: formDetails.email,
+        //     type: formDetails.userType,
+        //     birthday: formDetails.birthday,
+        //     phone: formDetails.phone,
+        //     contactUser: true,
+        // };
+
+        api.patch(`users/${userState.id}`, reqObj)
             .then((res) =>{
                 debugger
             })
