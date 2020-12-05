@@ -9,6 +9,7 @@ const validateMessages = {
     types: {
         email: 'לא כתובת אימייל חוקית',
         number: 'לא מספר חוקי',
+        phone: 'מספר טלפון אינו חוקי'
     },
     number: {
         range: '${label} צריך להיות בין ${min} ל- ${max}',
@@ -77,7 +78,7 @@ export const UpdateDetailsForm = () => {
 
             <Form.Item
                 name={['user', 'email']}
-                label="אימייל"
+                label="כתובת אימייל"
                 initialValue={userState.email}
                 labelCol={{span: 0, offset: 0}}
                 wrapperCol={{span: 8, offset: 0}}
@@ -85,6 +86,21 @@ export const UpdateDetailsForm = () => {
                     {
                         required: true,
                         type: 'email',
+                    },
+                ]}
+            >
+                <Input/>
+            </Form.Item>
+
+            <Form.Item
+                name={['user', 'phone']}
+                label="מספר טלפון"
+                initialValue={userState.phone}
+                labelCol={{span: 0, offset: 0}}
+                wrapperCol={{span: 8, offset: 0}}
+                rules={[
+                    {
+                        required: true,
                     },
                 ]}
             >
