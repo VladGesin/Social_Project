@@ -213,7 +213,6 @@ export const UsersContacts = () => {
                         </div>
                     </Dropdown>
                 </div>
-
                 <div className={styles.dropdownWrapper}>
                     <Dropdown overlay={menuNumberOfRowInPage}>
                         <div>

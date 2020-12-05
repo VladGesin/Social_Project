@@ -19,27 +19,25 @@ export const UpdateDetailsForm = () => {
 
     const {userState} = React.useContext(Context);
 
-    console.log('22222222', userState)
-
     const onFinish = (values) => {
+
         const reqObj = {
-            ...userState,
+            firstName: userState.firstName,
+            lastName: userState.lastName,
+            email: userState.email,
+            type: userState.userType,
+            birthday: userState.birthday,
+            phone: userState.phone,
+            contactUser: userState.contactUser,
             ...values.user
         };
 
-        // const reqObj = {
-        //     firstName: formDetails.firstName,
-        //     lastName: formDetails.lastName,
-        //     email: formDetails.email,
-        //     type: formDetails.userType,
-        //     birthday: formDetails.birthday,
-        //     phone: formDetails.phone,
-        //     contactUser: true,
-        // };
-
         api.patch(`users/${userState.id}`, reqObj)
-            .then((res) =>{
-                debugger
+            .then((res) => {
+                alert('update details!');
+            })
+            .catch(_ => {
+                alert('error!');
             })
     };
 
@@ -58,7 +56,7 @@ export const UpdateDetailsForm = () => {
                     },
                 ]}
             >
-                <Input />
+                <Input/>
             </Form.Item>
 
             <Form.Item
@@ -73,7 +71,7 @@ export const UpdateDetailsForm = () => {
                     },
                 ]}
             >
-                <Input />
+                <Input/>
             </Form.Item>
 
 
@@ -90,7 +88,7 @@ export const UpdateDetailsForm = () => {
                     },
                 ]}
             >
-                <Input />
+                <Input/>
             </Form.Item>
 
 
