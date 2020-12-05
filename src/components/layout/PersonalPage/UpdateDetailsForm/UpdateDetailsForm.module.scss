@@ -23,6 +23,14 @@
       height: 45px;
       border-radius: 6px;
       border: 1px solid #635f5f59;
+
+      &.notValid{
+        border: 1px solid red;
+
+        &:focus{
+          outline: none;
+        }
+      }
     }
 
     .error {
@@ -46,6 +54,10 @@
     width: 150px;
     border: none;
     height: 40px;
+
+    &:disabled{
+      background: #d6d6d6;
+    }
   }
 }
 

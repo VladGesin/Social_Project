@@ -82,6 +82,7 @@ export const UpdateDetailsForm = () => {
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.firstName}
+                            className={errors.firstName && touched.firstName ? styles.notValid : ''}
                         />
                         {errors.firstName && touched.firstName && <span className={styles.error}>
                             {errors.firstName}
@@ -96,6 +97,7 @@ export const UpdateDetailsForm = () => {
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.lastName}
+                            className={errors.lastName && touched.lastName ? styles.notValid : ''}
                         />
                         {errors.lastName && touched.lastName && <span className={styles.error}>
                             {errors.lastName}
@@ -110,6 +112,7 @@ export const UpdateDetailsForm = () => {
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.email}
+                            className={errors.email && touched.email ? styles.notValid : ''}
                         />
                         {errors.email && touched.email && <span className={styles.error}>
                             {errors.email}
@@ -124,13 +127,14 @@ export const UpdateDetailsForm = () => {
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.phone}
+                            className={errors.phone && touched.phone ? styles.notValid : ''}
                         />
                         {errors.phone && touched.phone && <span className={styles.error}>
                            {errors.phone}
                         </span>}
                     </div>
 
-                    <button type="submit" disabled={isSubmitting}>
+                    <button type="submit" disabled={isSubmitting || !(Object.keys(errors).length === 0)}>
                         שמירה
                     </button>
                 </form>
@@ -138,80 +142,4 @@ export const UpdateDetailsForm = () => {
         </Formik>
 
     );
-
-    // return (
-    //     <Form
-    //         id={'UpdateDetailsForm'}
-    //         name="nest-messages"
-    //         onFinish={onFinish}
-    //         validateMessages={validateMessages}
-    //     >
-    //         <Form.Item
-    //             name={['user', 'firstName']}
-    //             label="שם פרטי"
-    //             labelAlign={'right'}
-    //             labelCol={{span: 0, offset: 0}}
-    //             wrapperCol={{span: 8, offset: 0}}
-    //             initialValue={userState.firstName}
-    //             rules={[
-    //                 {
-    //                     required: true,
-    //                 },
-    //             ]}
-    //         >
-    //             <Input/>
-    //         </Form.Item>
-    //
-    //         <Form.Item
-    //             name={['user', 'lastName']}
-    //             label="שם משפחה"
-    //             initialValue={userState.lastName}
-    //             labelCol={{span: 0, offset: 0}}
-    //             wrapperCol={{span: 8, offset: 0}}
-    //             rules={[
-    //                 {
-    //                     required: true,
-    //                 },
-    //             ]}
-    //         >
-    //             <Input/>
-    //         </Form.Item>
-    //
-    //
-    //         <Form.Item
-    //             name={['user', 'email']}
-    //             label="כתובת אימייל"
-    //             initialValue={userState.email}
-    //             labelCol={{span: 0, offset: 0}}
-    //             wrapperCol={{span: 8, offset: 0}}
-    //             rules={[
-    //                 {
-    //                     required: true,
-    //                     type: 'email',
-    //                 },
-    //             ]}
-    //         >
-    //             <Input/>
-    //         </Form.Item>
-    //
-    //         <Form.Item
-    //             name={['user', 'phone']}
-    //             label="מספר טלפון"
-    //             initialValue={userState.phone}
-    //             labelCol={{span: 0, offset: 0}}
-    //             wrapperCol={{span: 8, offset: 0}}
-    //             rules={[
-    //                 {
-    //                     required: true,
-    //                 },
-    //             ]}
-    //         >
-    //             <Input/>
-    //         </Form.Item>
-    //
-    //         <Form.Item wrapperCol={{span: 10, offset: 0}}>
-    //             <Button type="primary" htmlType="submit">שמירה</Button>
-    //         </Form.Item>
-    //     </Form>
-    // );
 };
