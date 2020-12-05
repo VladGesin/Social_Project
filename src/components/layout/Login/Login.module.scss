@@ -1,0 +1,81 @@
+.login{
+    position: absolute;
+    flex-direction: column;
+    justify-content: center;
+    left:40%;
+    img {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 120px;
+    justify-content: center;
+    height: 20rem;
+    width: 35rem;
+    transform: translate(-60%,1%);
+  }
+
+.loginCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height:20rem;
+    width: 17rem;
+    border:1px solid black;
+    border-radius: 5px;
+    position: absolute;
+    left:70%;
+    top:50%;
+    transform: translate(-50%, -30%);
+    h2{
+        color:#095293;
+        text-align: center;
+    }
+}
+
+
+    .inputContainer{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+       
+        input{
+            background-color:#e0dede;
+            margin-top:1rem ;
+            direction: rtl;
+            width:80%;
+            border-radius: 5px;
+            border: none;
+            padding: 0.5rem 1rem;
+
+        }
+    }
+    .btnContainer{
+        display: flex;
+        justify-content: center;
+        button{
+            color: white;
+            margin-top:1rem;
+            background-color:#8ac73e;
+            border:none;
+            padding: 0.5rem 1rem;
+            width:80%;
+            border-radius: 5px;
+
+        }
+    }
+    span{
+        margin-right:2rem ;
+        align-self: flex-end;
+        font-size:0.8rem;
+        direction: rtl;
+    }
+    p{
+        color: red;
+        margin-right:2rem ;
+        align-self: flex-end;
+        font-size:0.8rem;
+        direction: rtl;
+
+    }
+}
