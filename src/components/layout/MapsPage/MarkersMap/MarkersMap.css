@@ -1,6 +1,6 @@
 
 .map {
-   height: 100%;
+    height: 100%;
     width: 100%;
     z-index: 0;
 }
@@ -8,8 +8,9 @@
 .popup .leaflet-popup-content-wrapper {
     /*חלונית המידה לכל נקודה*/
     justify-content: center;
-    background: rgba(256, 256, 256, 0.7);
+    background: rgba(256, 256, 256, 1);
     direction: rtl;
+    text-align: right;
 }
 
 .popup .leaflet-popup-close-button {
@@ -32,9 +33,11 @@
 }
 
 .popup h1 {
-    font-weight: bold;
+    font-size: 18px;
+    display: inline-block;
+    font-weight: 600;
     text-align: right;
-    border-bottom: #454b66 3px solid;
+    border-bottom: #454b66 1px solid;
 }
 
 .filter {
