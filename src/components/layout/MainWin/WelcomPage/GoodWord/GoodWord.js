@@ -38,7 +38,7 @@ useEffect(() => {
       api.post('goodWord',{
         sender_id:context.userState.id, 
          reciever_id:"123456789",
-        committee_name:document.getElementById("committeSelection").value, 
+          committee_name:document.getElementById("committeSelection").value, 
             content:document.getElementById('goodWordData').value 
           })
 

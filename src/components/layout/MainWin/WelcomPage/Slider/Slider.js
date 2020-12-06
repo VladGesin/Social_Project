@@ -1,42 +1,84 @@
-import React, { Component } from 'react';
-import Carousel from 'react-bootstrap/Carousel';
-import pic1 from '../../../../SliderImg/Pic1.jpeg';
-import pic2 from '../../../../SliderImg/Pic2.jpg';
-import pic3 from '../../../../SliderImg/Pic3.jpg';
+import React, { useState,useEffect } from 'react';
+import {
+  Carousel,
+  CarouselItem,
+  CarouselControl
+} from 'reactstrap';
 import './Slider.css';
+import api from "../../../../../api";
 
-export class Slider extends Component {
-  render() {
+const Slider =()=> {
+
+  const [photos,setPhotos] = useState([]);
+  const [goPhotos,setGoPhotos] = useState([]);
+  const apiLink = 'https://www.hitprojectscenter.com/social-API/';
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [animating, setAnimating] = useState(false);
+
+
+useEffect(() => {
+  getPhotos();
+},[]);
+
+useEffect(() => {
+  getEnablePhotos();
+},[photos]);
+
+
+const next = () => {
+  if (animating) return;
+  const nextIndex = activeIndex === slides.length - 1 ? 0 : activeIndex + 1;
+  setActiveIndex(nextIndex);
+}
+
+const previous = () => {
+  if (animating) return;
+  const nextIndex = activeIndex === 0 ? slides.length - 1 : activeIndex - 1;
+  setActiveIndex(nextIndex);
+}
+
+  const getPhotos=()=>{
+  api.get('getAllImages').then(res=>{
+     setPhotos(res.data);
+  })}
+
+  const getEnablePhotos=()=>{
+    if(goPhotos.length == 0){
+   photos.map(photo=>{
+     if(photo.status)
+     {
+      goPhotos.push(photo);
+     }
+    })
+    console.log(goPhotos)
+  }
+  }
+
+  const slides = goPhotos.map(photo => {
+    console.log(`${apiLink}${photo.path}`)
     return (
-      <Carousel>
-        <Carousel.Item>
-          <img className="d-block w-100" src={pic1} alt="First slide" />
-          <Carousel.Caption>
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <img className="d-block w-100" src={pic2} alt="Third slide" />
+      <CarouselItem
+        key={photo.path}
+      >
+        <img className="d-block w-100" src={`${apiLink}${photo.path}`} alt={photo.path} />
+      </CarouselItem>
+    );
+  });
 
-          <Carousel.Caption>
-            <h3>Second slide label</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <img className="d-block w-100" src={pic3} alt="Third slide" />
+    return (
 
-          <Carousel.Caption>
-            <h3>Third slide label</h3>
-            <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-            </p>
-          </Carousel.Caption>
-        </Carousel.Item>
-      </Carousel>
+      <Carousel
+      activeIndex={activeIndex}
+      next={next}
+      previous={previous}
+    >
+      {slides}
+      <CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
+      <CarouselControl direction="next" directionText="Next" onClickHandler={next} />
+    </Carousel>
+
     );
   }
-}
+
 
 export default Slider;
