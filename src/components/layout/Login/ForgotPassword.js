@@ -85,7 +85,16 @@ export class ForgotPassword extends Component {
 							<input
 								id="login"
 								type="password"
-								placeholder=" סיסמה חדשה"
+								placeholder=" הסיסמה החדשה"
+								onChange={(e) => this.handleInputPassword(e)}
+							/>
+							{!this.state.password.isValid && <p className={style.p}>{this.state.password.msgPass}</p>}
+						</div>
+						<div className={style.inputContainer}>
+							<input
+								id="login"
+								type="password"
+								placeholder=" שוב הסיסמה החדשה"
 								onChange={(e) => this.handleInputPassword(e)}
 							/>
 							{!this.state.password.isValid && <p className={style.p}>{this.state.password.msgPass}</p>}

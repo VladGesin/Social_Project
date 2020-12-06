@@ -13,6 +13,7 @@ const App = () => {
          context.loadUser();
       }
    }, []);
+   context.userState.isAuth=false;
    return <Router>{context.userState.isAuth ? <MainWin /> : <Login />}</Router>;
 };
 
