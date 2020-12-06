@@ -6,11 +6,16 @@ import DeleteUserModal from "../modals/DeleteUserModal/DeleteUserModal";
 import RestPasswordModal from "../modals/RestPasswordModal/RestPasswordModal";
 import EditUserModal from "../modals/EditUserModal/EditUserModal";
 import CreateNewUser from "../modals/CreateNewUser/CreateNewUser";
-import SortRow from "./SortRow";
+import SortRow from "../Table/SortRow/SortRow";
 import api from "../../../../api";
-import PaginationComp from "../../xpertesy/MyMeetings/PaginationComp";
 
-import TableItem from "../Table/TableItem/TableItem";
+const columns = [
+   { title: "שם פרטי", variableName: "first_name" },
+   { title: "שם משפחה", variableName: "last_name" },
+   { title: "תעודת זהות", variableName: "user_id" },
+   { title: "כתובת אימייל", variableName: "email" },
+   { title: "טלפון", variableName: "phone" },
+];
 const UserManagement = ({ msg, setMsg }) => {
    const [isNewUserOpen, setIsNewUserOpen] = useState(false);
    const [users, setUsers] = useState([]);
@@ -18,13 +23,40 @@ const UserManagement = ({ msg, setMsg }) => {
    const [resetPasswordIsOpen, setResetPasswordIsOpen] = useState(false);
    const [editUserIsOpen, setEditUserIsOpen] = useState(false);
    const [currentUser, setCurrentUser] = useState({});
-   const [sortBy, setSortBy] = useState("שם פרטי");
-   const [order, setOrder] = useState("סדר עולה");
-   const [numOfRows, setNumOfRows] = useState(5);
-   const [activePage, setActivePage] = useState(1);
 
-   const handleNumOfRows = (e) => {
-      setNumOfRows(e.currentTarget.textContent);
+   const rowAction = {
+      setCurrentData: setCurrentUser,
+      edit: {
+         key: "user_id",
+         name: "עריכת פרטי משתמש",
+         icon: "fas fa-edit",
+         isOpen: editUserIsOpen,
+         setIsOpen: setEditUserIsOpen,
+         onClick: (data) => {
+            setEditUserIsOpen(true);
+            setCurrentUser(data);
+         },
+      },
+      reset: {
+         name: "שינוי סיסמא",
+         icon: "fas fa-lock",
+         isOpen: resetPasswordIsOpen,
+         setIsOpen: setResetPasswordIsOpen,
+         onClick: (data) => {
+            setResetPasswordIsOpen(true);
+            setCurrentUser(data);
+         },
+      },
+      delete: {
+         name: "מחיקת משתמש",
+         icon: "far fa-trash-alt",
+         isOpen: deleteWindowIsOpen,
+         setIsOpen: setDeleteWindowIsOpen,
+         onClick: (data) => {
+            setDeleteWindowIsOpen(true);
+            setCurrentUser(data);
+         },
+      },
    };
 
    useEffect(() => {
@@ -40,72 +72,7 @@ const UserManagement = ({ msg, setMsg }) => {
          setUsers(users);
       })();
    }, []);
-   let indexOfLastItem = activePage * numOfRows;
-   let indexOfFirstItem = indexOfLastItem - numOfRows;
-   let currentPage = users.slice(indexOfFirstItem, indexOfLastItem);
-
-   const PaginationOptions = {
-      indexOfLastItem,
-      indexOfFirstItem,
-      currentPage,
-   };
-
-   const CurrentPageData = PaginationOptions.currentPage.map((row, i) => {
-      if (i >= numOfRows) return;
-
-      const rowActions = [
-         <i
-            key={"edit"}
-            className="fas fa-edit"
-            title={"עריכת פרטי משתמש"}
-            onClick={() => {
-               setEditUserIsOpen(true);
-               setCurrentUser({
-                  user_id: row.user_id,
-               });
-            }}
-         ></i>,
-         <i
-            key={"change"}
-            title={"שינוי סיסמא"}
-            className="fas fa-lock"
-            onClick={() => {
-               setResetPasswordIsOpen(true);
-               setCurrentUser({
-                  user_id: row.user_id,
-               });
-            }}
-         ></i>,
-         <i
-            key={"delete"}
-            title={"מחיקת משתמש"}
-            className="far fa-trash-alt"
-            onClick={() => {
-               setDeleteWindowIsOpen(true);
-               setCurrentUser({
-                  first_name: row.first_name,
-                  last_name: row.last_name,
-                  user_id: row.user_id,
-               });
-            }}
-         ></i>,
-      ];
-
-      return (
-         <TableItem
-            key={row.user_id}
-            row={row}
-            rowAction={rowActions}
-            titles={[
-               { title: "שם פרטי", value: "first_name" },
-               { title: "שם משפחה", value: "last_name" },
-               { title: "תעודת זהות", value: "user_id" },
-               { title: "כתובת אימייל", value: "email" },
-               { title: "טלפון", value: "phone" },
-            ]}
-         />
-      );
-   });
+   console.log(currentUser);
    return (
       <>
          {" "}
@@ -139,35 +106,25 @@ const UserManagement = ({ msg, setMsg }) => {
             setMsg={setMsg}
          />
          <div className={style.topBar}>
-            <TopBar setIsNewUserOpen={setIsNewUserOpen} />
+            <TopBar
+               setIsNewUserOpen={setIsNewUserOpen}
+               users={users}
+               setUsers={setUsers}
+            />
          </div>
          <div className={style.table}>
-            <Table>
-               <SortRow
-                  data={users}
-                  setData={setUsers}
-                  sortBy={sortBy}
-                  setSortBy={setSortBy}
-                  order={order}
-                  setOrder={setOrder}
-                  handleNumOfRows={handleNumOfRows}
-                  sortByOptions={[
-                     "שם פרטי",
-                     "שם משפחה",
-                     "תעודת זהות",
-                     "כתובת אימייל",
-                  ]}
-               />
-               {CurrentPageData}
-               <div className={style.PaginationContainer}>
-                  <PaginationComp
-                     dataLength={users.length}
-                     rowsInPage={Number(numOfRows)}
-                     activePage={activePage}
-                     setActivePage={setActivePage}
+            <Table
+               data={users}
+               columns={columns}
+               actions={rowAction}
+               sortRow={
+                  <SortRow
+                     data={users}
+                     setData={setUsers}
+                     sortByOptions={columns}
                   />
-               </div>
-            </Table>
+               }
+            />
          </div>
       </>
    );

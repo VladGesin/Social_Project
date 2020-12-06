@@ -15,15 +15,16 @@ class API {
    };
 
    patch = async (path, data) => {
-      const response_data = await axios.patch(
-         `${this.base_url}\\${path}`,
-         data
-      );
+      const response_data = await axios.patch(`${this.base_url}${path}`, data);
       return response_data;
    };
 
    delete = async (path, data) => {
-      const response_data = await axios.delete(`${this.base_url}${path}`);
+      const response_data = await axios({
+         method: "DELETE",
+         url: `${this.base_url}${path}`,
+         data,
+      });
 
       return response_data;
    };

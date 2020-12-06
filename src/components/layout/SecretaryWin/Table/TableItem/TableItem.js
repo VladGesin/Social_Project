@@ -9,7 +9,7 @@ const TableItem = ({ row, rowAction, titles }) => {
                {titles.map((t) => (
                   <div className={style.col} key={t.title}>
                      <p>{t.title}</p>
-                     <p>{row[t.value]}</p>
+                     <p>{row[t.variableName]}</p>
                   </div>
                ))}
             </div>
