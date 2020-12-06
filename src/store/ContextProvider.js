@@ -24,9 +24,13 @@ const ContextProvider = (props) => {
          setAuthToken(token);
          //Get all user details by the token in the header
          const res = await api.get("user");
+   
          const user = res.data;
          const updatedUser = {
+            phone: user.phone,
+            userType: user.userType,
             birthday: user.birthday,
+            contactUser: user.contactUser,
             email: user.email,
             id: user.id,
             firstName: user.firstName,
