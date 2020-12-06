@@ -101,23 +101,25 @@ export class LoginCard extends Component {
                <Redirect to="/Social_Project" />
                <Form className="text-right">
                   <Form.Group controlId="formBasicID">
-                     <Form.Label>תעודת זהות</Form.Label>
                      <Form.Control
-                        placeholder='ת"ז המכילה ספרות 0-9 כולל ספרת ביקורת'
+                        placeholder='תעודת זהות'
                         onChange={(e) => this.handleInputID(e)}
                         type="text"
+                        
                      />
+                        <sapn> כולל ספרת ביקורת*</sapn>
                      {!this.state.id.isValid && (
                         <p style={{ color: "red" }}>{this.state.id.msgId}</p>
                      )}
                      <span id="IDError"></span>
                   </Form.Group>
-
+                  {/* <Form.Text className="text-muted">
+                        כולל ספרת ביקורת*
+                     </Form.Text> */}
                   <Form.Group controlId="formBasicPassword">
-                     <Form.Label>סיסמא</Form.Label>
                      <Form.Control
                         type="password"
-                        placeholder="הקלד את סיסמתך"
+                        placeholder="סיסמא"
                         onChange={(e) => this.handleInputPassword(e)}
                      />
                      {!this.state.password.isValid && (
@@ -126,11 +128,6 @@ export class LoginCard extends Component {
                         </p>
                      )}
                      <span id="passError"></span>
-                     <Form.Text className="text-muted">
-                        דרישות לסיסמא : *לא תכיל שם פרטי / משפחה *אורך 6 תווים
-                        לפחות *תכיל לפחות ספרה אחת, לפחות אות גדולה ואות קטנה
-                        באנגלית ותו מיוחד *תוקף הסיסמא 180 ימים
-                     </Form.Text>
                   </Form.Group>
                   {!this.state.isValidIdAndPassword && (
                      <p style={{ color: "red" }}>שם משתמש או סיסמא שגויים</p>
@@ -142,6 +139,8 @@ export class LoginCard extends Component {
                   >
                      כניסה
                   </Button>
+                  <p> שכחת <a href="#">?סיסמא</a>
+            </p>  
                </Form>
             </Fragment>
          );

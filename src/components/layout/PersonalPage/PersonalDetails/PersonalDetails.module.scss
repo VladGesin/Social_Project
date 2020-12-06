@@ -1,0 +1,92 @@
+.rootPersonalDetails {
+  box-sizing: border-box;
+  padding: 20px 30px;
+  border: 1px solid #635f5f59;
+  background: #f6fcfc;
+  height: 100%;
+
+  .header {
+    display: flex;
+    margin-bottom: 30px;
+
+    .avatarImg {
+      width: 100px;
+      height: 100px;
+      text-align: center;
+      margin: 0 0 0 30px;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-start;
+
+      .name {
+        font-size: 22px;
+      }
+
+      .changeImgBtn {
+        background: none;
+        border: none;
+        padding: 0;
+        color: #31c6ff;
+        font-weight: 500;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+  }
+
+  .main {
+    //max-width: 700px;
+    //width: 90%;
+  }
+}
+
+.changeImageModal.changeImageModal {
+  border: none;
+  text-align: center;
+  background: white;
+
+
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    height: 40px;
+    color: black;
+    font-weight: bold;
+    border-bottom: 1px solid #b9bbbe;
+    font-size: 16px;
+
+    &:active{
+      outline: none;
+    }
+
+    &:nth-of-type(1) {
+      cursor: default;
+      font-size: 18px;
+    }
+
+    &:nth-of-type(2) {
+      color: dodgerblue;
+    }
+
+    &:nth-of-type(3) {
+      color: red;
+    }
+
+    &:nth-of-type(4) {
+      color: #b9bbbe;
+    }
+
+    &:last-child{
+      border-bottom: none;
+    }
+  }
+}
