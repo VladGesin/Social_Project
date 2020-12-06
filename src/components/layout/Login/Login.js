@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import logo from '../../Icons/LoginLogo/loginlogoimg.png';
 import style from "./Login.module.scss"
-// import LoginCard from './LoginCard/LoginCard';
 import { Validation } from "../Validation/Validation";
 import Context from "../../../store/Context";
 
@@ -116,14 +115,3 @@ export class Login extends Component {
 
 export default Login;
 
-{/* <div className="container-fluid login" >
-          <div className="row">
-            <div className="col-sm">
-              <img src={logo} alt="logologin" ></img>
-            </div>
-            <div className="card text-right" >
-              <h1 className="card-header"  >ברוכים הבאים </h1>
-              <div className="card-body"><div className="col-sm"><LoginCard /></div></div>
-            </div>
-          </div>
-        </div> */}
