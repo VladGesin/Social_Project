@@ -72,7 +72,6 @@ const UserManagement = ({ msg, setMsg }) => {
          setUsers(users);
       })();
    }, []);
-   console.log(currentUser);
    return (
       <>
          {" "}

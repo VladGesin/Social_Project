@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import style from "./SortRow.module.scss";
 import downArrowIcon from "../../assets/down-arrow.svg";
 import { handleSortBy, handleOrder } from "./tableFunction";
+
 const SortRow = ({ data, setData, handleNumOfRows, sortByOptions }) => {
    const [sortByIsOpen, setSortByIsOpen] = useState(false);
    const [orderIsOpen, setOrderIsOpen] = useState(false);
@@ -9,12 +10,13 @@ const SortRow = ({ data, setData, handleNumOfRows, sortByOptions }) => {
    const [isAscending, setIsAscending] = useState(true);
    const [sortBy, setSortBy] = useState(() => sortByOptions[0].title);
    const [order, setOrder] = useState("סדר עולה");
+   const [flag, setFlag] = useState(false);
 
    return (
       <div className={style.sort}>
-         <p>מיון לפי</p>
+         <span>מיון לפי</span>
 
-         <p
+         <span
             onMouseEnter={() => {
                setSortByIsOpen((cur) => !cur);
                setOrderIsOpen(false);
@@ -31,14 +33,15 @@ const SortRow = ({ data, setData, handleNumOfRows, sortByOptions }) => {
                <div className={style.box}>
                   {sortByOptions.map((i) => {
                      return (
-                        <p
+                        <span
+                           key={i.title}
                            onClick={(e) => {
                               setSortByIsOpen(false);
                               setOrderIsOpen(false);
                               setNumOfRowsIsOpen(false);
                               setSortBy(e.currentTarget.textContent);
                               const sortedData = handleSortBy(
-                                 e,
+                                 e.currentTarget.textContent,
                                  data,
                                  { columns: i },
                                  order
@@ -47,14 +50,14 @@ const SortRow = ({ data, setData, handleNumOfRows, sortByOptions }) => {
                            }}
                         >
                            {i.title}
-                        </p>
+                        </span>
                      );
                   })}
                </div>
             )}
-         </p>
+         </span>
          <p className={style.separator}> | </p>
-         <p
+         <span
             onMouseEnter={() => {
                setSortByIsOpen(false);
                setOrderIsOpen((cur) => !cur);
@@ -71,7 +74,8 @@ const SortRow = ({ data, setData, handleNumOfRows, sortByOptions }) => {
                <div className={style.box}>
                   {["סדר עולה", "סדר יורד"].map((i) => {
                      return (
-                        <p
+                        <span
+                           key={i}
                            onClick={(e) => {
                               setSortByIsOpen(false);
                               setOrderIsOpen(false);
@@ -87,14 +91,14 @@ const SortRow = ({ data, setData, handleNumOfRows, sortByOptions }) => {
                            }}
                         >
                            {i}
-                        </p>
+                        </span>
                      );
                   })}
                </div>
             )}
-         </p>
+         </span>
          <p className={style.separator}> | </p>
-         <p
+         <span
             onMouseEnter={() => {
                setSortByIsOpen(false);
                setOrderIsOpen(false);
@@ -109,7 +113,7 @@ const SortRow = ({ data, setData, handleNumOfRows, sortByOptions }) => {
             מספר שורות בעמוד <img src={downArrowIcon} alt="downArrowIcon" />
             {numOfRowsIsOpen && (
                <div className={style.box}>
-                  <p
+                  <span
                      onClick={(e) => {
                         setSortByIsOpen(false);
                         setOrderIsOpen(false);
@@ -118,8 +122,8 @@ const SortRow = ({ data, setData, handleNumOfRows, sortByOptions }) => {
                      }}
                   >
                      5
-                  </p>
-                  <p
+                  </span>
+                  <span
                      onClick={(e) => {
                         setSortByIsOpen(false);
                         setOrderIsOpen(false);
@@ -128,8 +132,8 @@ const SortRow = ({ data, setData, handleNumOfRows, sortByOptions }) => {
                      }}
                   >
                      8
-                  </p>
-                  <p
+                  </span>
+                  <span
                      onClick={(e) => {
                         setSortByIsOpen(false);
                         setOrderIsOpen(false);
@@ -138,8 +142,8 @@ const SortRow = ({ data, setData, handleNumOfRows, sortByOptions }) => {
                      }}
                   >
                      11
-                  </p>
-                  <p
+                  </span>
+                  <span
                      onClick={(e) => {
                         setSortByIsOpen(false);
                         setOrderIsOpen(false);
@@ -148,10 +152,10 @@ const SortRow = ({ data, setData, handleNumOfRows, sortByOptions }) => {
                      }}
                   >
                      14
-                  </p>
+                  </span>
                </div>
             )}
-         </p>
+         </span>
       </div>
    );
 };

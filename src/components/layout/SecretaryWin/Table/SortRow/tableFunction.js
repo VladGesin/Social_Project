@@ -1,6 +1,7 @@
-export const handleSortBy = (e, data, { columns }, order) => {
+export const handleSortBy = (title, data, { columns }, order) => {
    let sortedUsers = [...data];
-   if (e.currentTarget.textContent === columns.title) {
+   console.log(title, columns);
+   if (title === columns.title) {
       sortedUsers = data.sort((a, b) => {
          return a[columns.variableName] > b[columns.variableName]
             ? 1
@@ -11,6 +12,8 @@ export const handleSortBy = (e, data, { columns }, order) => {
       if (order === "סדר יורד") sortedUsers = sortedUsers.reverse();
    }
 
+   console.log(sortedUsers);
+   console.log(data);
    return sortedUsers;
 };
 export const handleOrder = (

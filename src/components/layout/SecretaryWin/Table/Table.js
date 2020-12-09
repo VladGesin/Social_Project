@@ -24,7 +24,6 @@ const Table = ({ sortRow, data, actions = [], columns, children }) => {
       const rowActions = Object.keys(actions)
          .filter((i) => i !== "setCurrentData")
          .map((i) => {
-            console.log(actions[i]);
             return (
                <i
                   key={actions[i].name}
@@ -36,10 +35,9 @@ const Table = ({ sortRow, data, actions = [], columns, children }) => {
                ></i>
             );
          });
-
       return (
          <TableItem
-            key={row.user_id}
+            key={row[columns[0].variableName] + Math.random()}
             row={row}
             rowAction={rowActions}
             titles={columns}
@@ -49,7 +47,6 @@ const Table = ({ sortRow, data, actions = [], columns, children }) => {
    const sortRowCustom = React.cloneElement(sortRow, {
       handleNumOfRows: handleNumOfRows,
    });
-
    return (
       <div className={style.table}>
          {children}

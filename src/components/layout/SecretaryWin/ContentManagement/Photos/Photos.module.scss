@@ -6,6 +6,45 @@
       text-align: end;
       padding: 0.5rem;
    }
+   .safeDelete {
+      padding: 1rem;
+      position: fixed;
+      z-index: 2;
+      top: 50%;
+      left: 40%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      width: 40rem;
+      box-shadow: 0 0 20px 7px;
+      h3 {
+         font-size: 1.5rem;
+         text-align: start;
+         direction: rtl;
+         text-align: center;
+         color: rgb(100, 100, 100);
+         span {
+            color: rgb(25, 171, 216);
+         }
+      }
+      .btnContainer {
+         display: flex;
+         justify-content: center;
+      }
+      button {
+         height: 2rem;
+         margin: 1rem;
+         width: 10rem;
+         border: none;
+         border-radius: 0.5rem;
+         color: #fff;
+      }
+      .deleteBtn {
+         background-color: red;
+      }
+      .cancelBtn {
+         background-color: rgb(100, 100, 100);
+      }
+   }
    .spinner {
       position: absolute;
       top: 50%;
@@ -18,20 +57,27 @@
       display: flex;
       flex-wrap: wrap;
       .imageContainer {
+         outline: 1px solid black;
          position: relative;
-         width: 33%;
-         padding: 0.25rem;
+         width: 32%;
+         height: 15rem;
+         margin: 0.25rem;
+         overflow: hidden;
          i {
             position: absolute;
             top: 0.5rem;
             right: 0.5rem;
             color: rgb(255, 255, 255);
             font-size: 1.2rem;
+            cursor: pointer;
+            &:hover {
+               color: red;
+               transition: color 0.2s ease-in-out;
+            }
          }
          .image {
-            border: 1px solid black;
             width: 100%;
-            height: 15rem;
+            height: 100%;
             object-fit: cover;
          }
          .footer {
@@ -41,10 +87,10 @@
             position: absolute;
             flex-basis: content;
             height: 1.8rem;
-            width: calc(100% - 0.5rem);
-            bottom: 0.25rem;
-            left: 0.25rem;
-            z-index: 20;
+            width: 100%;
+            bottom: 0rem;
+            left: 0rem;
+            z-index: 1;
             background-color: rgba(40, 167, 70, 0.521);
             margin: 0;
             padding: 0;
@@ -55,6 +101,7 @@
             input {
                align-self: center;
                margin: 0 1rem;
+               cursor: pointer;
             }
          }
       }

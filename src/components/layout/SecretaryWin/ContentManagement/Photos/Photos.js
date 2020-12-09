@@ -7,6 +7,8 @@ import { Spin, Space } from "antd";
 const Photos = ({ setMsg }) => {
    const [imageList, setImageList] = useState([]);
    const [isLoading, setIsLoading] = useState(true);
+   const [imageToDelete, setImageToDelete] = useState(null);
+   const [isSafeDeleteOpen, setIsSafeDeleteOpen] = useState(false);
    const [imageToUpload, setImageToUpload] = useState([]);
 
    useEffect(() => {
@@ -53,11 +55,40 @@ const Photos = ({ setMsg }) => {
 
    const onDeleteImage = async (i) => {
       console.log(i);
-      const res = await api.delete("deleteImage", { path: i });
-      setImageToUpload([...imageList]);
+      setImageToDelete(i);
+      setIsSafeDeleteOpen(true);
    };
    return (
       <div className={style.container}>
+         {isSafeDeleteOpen && (
+            <div className={style.safeDelete}>
+               <div className="header">
+                  <h3>האם אתה בטוח שברצונך להסיר את התמונה?</h3>
+               </div>
+               <div className={style.btnContainer}>
+                  <button
+                     className={style.deleteBtn}
+                     onClick={async () => {
+                        const res = await api.delete("deleteImage", {
+                           path: imageToDelete,
+                        });
+                        setImageToUpload([...imageList]);
+                        setIsSafeDeleteOpen(false);
+                     }}
+                  >
+                     מחיקה
+                  </button>
+                  <button
+                     className={style.cancelBtn}
+                     onClick={() => {
+                        setIsSafeDeleteOpen(false);
+                     }}
+                  >
+                     ביטול
+                  </button>
+               </div>
+            </div>
+         )}
          <h2>ניהול תמונות</h2>
          {isLoading ? (
             <div className={style.spinner}>
@@ -68,9 +99,9 @@ const Photos = ({ setMsg }) => {
                {imageList.map(
                   (i, idx) =>
                      idx < 15 && (
-                        <div className={style.imageContainer}>
+                        <div className={style.imageContainer} key={idx}>
                            <i
-                              class="fas fa-times-circle"
+                              className="fas fa-times"
                               onClick={() => onDeleteImage(i.path)}
                            ></i>
 
@@ -92,7 +123,7 @@ const Photos = ({ setMsg }) => {
                )}
                <div className={style.uploadImage}>
                   <label htmlFor="file-upload">
-                     <i class="fas fa-plus"></i>
+                     <i className="fas fa-plus"></i>
                   </label>
                   <input
                      id="file-upload"

@@ -7,7 +7,7 @@ import ContactDetails from "../../modals/ContactDetails/ContactDetails";
 import MarkAsSpam from "../../modals/MarkAsSpam/MarkAsSpam";
 import AppealReply from "../../modals/AppealReply/AppealReply";
 import api from "../../../../../api";
-import { Menu, Dropdown, Button, Space } from "antd";
+import { Menu, Dropdown, Button } from "antd";
 
 const columns = [
    { title: "מספר פנייה", variableName: "appealNumber" },
@@ -128,7 +128,6 @@ const Committees = ({ setMsg }) => {
    }, []);
 
    const menu = (committeesNames) => {
-      console.log(committeesNames);
       const drop = (
          <Menu className={style.options}>
             {committeesNames.map((c) => (
