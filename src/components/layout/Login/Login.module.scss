@@ -1,57 +1,81 @@
-*{
-    margin:0px;
-}
-.login {
+.login{
+    position: absolute;
+    flex-direction: column;
+    justify-content: center;
+    left:40%;
+    img {
     display: flex;
-    flex-wrap: wrap;
-    margin:50px 100px;
-    justify-content: space-around;
-    align-items: center;
-	img {
-         width: 100%;
-	}
-	.loginCard {
-        justify-items:center;
-		display: grid;
-		width: 340px;
-        height: 400px;
-        padding:50px;
-        gap:10px;
-		border: 3px solid black;
-		border-radius: 5px;
-		h2 {
-			color:#095293;
-		}
-	}
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 120px;
+    justify-content: center;
+    height: 20rem;
+    width: 35rem;
+    transform: translate(-60%,1%);
+  }
 
-	.inputContainer {
-		input {
-            background-color: #e0dede;
-            text-align: right;
+.loginCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height:20rem;
+    width: 17rem;
+    border:1px solid black;
+    border-radius: 5px;
+    position: absolute;
+    left:70%;
+    top:50%;
+    transform: translate(-50%, -30%);
+    h2{
+        color:#095293;
+        text-align: center;
+    }
+}
+
+
+    .inputContainer{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+       
+        input{
+            background-color:#e0dede;
+            margin-top:1rem ;
+            direction: rtl;
+            width:80%;
             border-radius: 5px;
-			border: none;
-			// margin-top:1rem ;
-			// direction: rtl;
-			// width:80%;
+            border: none;
+            padding: 0.5rem 1rem;
 
-			// padding: 0.5rem 1rem;
-		}
-	}
-	.btnContainer {
-		button {
-			color: white;
-			background-color: #8ac73e;
-			border: none;
-			border-radius: 5px;
-		}
-	}
-	p {
-        margin:0px;
-        text-align: right;
-        font-size:0.9rem;
-	}
-	.p {
+        }
+    }
+    .btnContainer{
+        display: flex;
+        justify-content: center;
+        button{
+            color: white;
+            margin-top:1rem;
+            background-color:#8ac73e;
+            border:none;
+            padding: 0.5rem 1rem;
+            width:80%;
+            border-radius: 5px;
+
+        }
+    }
+    span{
+        margin-right:2rem ;
+        align-self: flex-end;
+        font-size:0.8rem;
+        direction: rtl;
+    }
+    p{
         color: red;
-        width:184px;
-	}
+        margin-right:2rem ;
+        align-self: flex-end;
+        font-size:0.8rem;
+        direction: rtl;
+
+    }
 }
