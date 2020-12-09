@@ -1,6 +1,6 @@
 import React from "react";
 import Modal from "react-bootstrap/Modal";
-import api from "../../../../api";
+import api from "../../../../../api";
 import style from "./DeleteUserModal.module.scss";
 const DeleteUserModal = ({
    isOpen,
@@ -23,7 +23,7 @@ const DeleteUserModal = ({
                : 0
          );
          setUsers(usersSorted);
-         setMsg(`${name} נמחק בהצלחה`);
+         setMsg({ msg: "המשתמש", name });
       }
 
       close();

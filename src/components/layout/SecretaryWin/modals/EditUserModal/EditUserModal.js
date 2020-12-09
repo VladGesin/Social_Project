@@ -1,18 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
 import Modal from "react-bootstrap/Modal";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import api from "../../../../api";
+import api from "../../../../../api";
 import style from "./EditUserModal.module.scss";
-const EditUserModal = ({ isOpen, close, id, setUsers, users }) => {
+const EditUserModal = ({ isOpen, close, id, setUsers, users, setMsg }) => {
    const [stage, setStage] = useState(1);
    const [emailIsValid, setEmailIsValid] = useState(true);
    const [phoneIsValid, setPhoneIsValid] = useState(true);
    const [committeesBoxItem, setCommitteesBoxItem] = useState([]);
+   const [imageName, setImageName] = useState("");
+
    const [formDetails, setFormDetails] = useState({
       firstName: "",
       lastName: "",
       email: "",
       phone: "",
+      phonePrefix: "054",
       id: "",
       birthday: "",
       userType: "a",
@@ -46,7 +49,8 @@ const EditUserModal = ({ isOpen, close, id, setUsers, users }) => {
                email,
                birthday,
                id,
-               phone: phoneNumber,
+               phone: phoneNumber.slice(3),
+               phonePrefix: phoneNumber.slice(0, 3),
             }));
             setStage(1);
          }
@@ -72,7 +76,7 @@ const EditUserModal = ({ isOpen, close, id, setUsers, users }) => {
          setEmailIsValid(false);
          return;
       }
-      if (isNaN(+formDetails.phone) || formDetails.phone.length !== 10) {
+      if (isNaN(+formDetails.phone) || formDetails.phone.length !== 7) {
          setPhoneIsValid(false);
          return;
       }
@@ -87,7 +91,7 @@ const EditUserModal = ({ isOpen, close, id, setUsers, users }) => {
          email: formDetails.email,
          type: formDetails.userType,
          birthday: formDetails.birthday,
-         phone: formDetails.phone,
+         phone: formDetails.phonePrefix + formDetails.phone,
          contactUser: true,
       };
       debugger
@@ -109,6 +113,10 @@ const EditUserModal = ({ isOpen, close, id, setUsers, users }) => {
       };
       setUsers(updateUsers);
       close();
+      setMsg({ msg: "פרטי המשתמש עודכנו בהצלחה" });
+   };
+   const onSelectImage = (e) => {
+      setImageName(e.target.files[0].name);
    };
    return (
       <Modal
@@ -121,7 +129,13 @@ const EditUserModal = ({ isOpen, close, id, setUsers, users }) => {
       >
          <div className={style.header}>
             <h3 className={style.title}>עריכת פרטי משתמש</h3>
-            <i className="fas fa-times" onClick={close}></i>
+            <i
+               className="fas fa-times"
+               onClick={() => {
+                  close();
+                  setStage(1);
+               }}
+            ></i>
          </div>
 
          <div className={style.body}>
@@ -239,13 +253,30 @@ const EditUserModal = ({ isOpen, close, id, setUsers, users }) => {
                      )}
                      <div>
                         <label>טלפון נייד</label>
-                        <input
-                           value={formDetails.phone}
-                           name="phone"
-                           type="text"
-                           onChange={onChange}
-                           ref={phoneRef}
-                        />
+                        <div className={style.phoneInput}>
+                           <input
+                              value={formDetails.phone}
+                              name="phone"
+                              type="text"
+                              onChange={onChange}
+                              ref={phoneRef}
+                           />
+                           <select
+                              value={formDetails.phonePrefix}
+                              onChange={onChange}
+                              name="phonePrefix"
+                           >
+                              <option>050</option>
+                              <option>052</option>
+                              <option>053</option>
+                              <option>054</option>
+                              <option>055</option>
+                              <option>056</option>
+                              <option>057</option>
+                              <option>058</option>
+                              <option>059</option>
+                           </select>
+                        </div>
                      </div>{" "}
                      {!phoneIsValid && (
                         <p className={style.invalidEmail}>* טלפון לא תקין</p>
@@ -254,8 +285,11 @@ const EditUserModal = ({ isOpen, close, id, setUsers, users }) => {
                         <label className={style.imageUpload}>
                            העלאת תמונת פרופיל
                            <i className="fa fa-cloud-upload"></i>
-                           <input type="file" />
+                           <input type="file" onChange={onSelectImage} />
                         </label>
+                        <p style={{ direction: "rtl" }}>
+                           {imageName !== "" && `שם התמונה : ${imageName}`}
+                        </p>
                         <p>תמונה זו תוצג בפרופיל המשתמש בלבד</p>
                      </div>
                   </>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
-import api from "../../../../api";
+import api from "../../../../../api";
 import style from "./RestPassword.module.scss";
 const RestPasswordModal = ({ isOpen, close, id }) => {
    const [passwordIsShown, setPasswordIsShown] = useState(false);

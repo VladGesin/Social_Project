@@ -105,6 +105,18 @@
          select {
             width: 15rem;
          }
+         .phoneInput {
+            display: flex;
+            flex-direction: row-reverse;
+            select {
+               padding: 0.125rem;
+               width: 4.5rem;
+               margin-right: 0.5rem;
+               text-align: center;
+               text-align-last: center;
+               cursor: pointer;
+            }
+         }
       }
    }
    .committeesBox {

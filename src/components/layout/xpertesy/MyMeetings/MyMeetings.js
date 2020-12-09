@@ -21,7 +21,7 @@ const MyMeetings = () => {
    const [isFiltered, setIsFiltered] = useState(false);
    const [filterForm, setFilterForm] = useState({
       fromDate: moment(),
-      toDate: moment(),
+      toDate: moment().endOf("month"),
       fromHour: moment(),
       toHour: moment({ hour: 23, minute: 59 }),
       numberOfRows: "6",
@@ -53,16 +53,7 @@ const MyMeetings = () => {
             filterForm.toDate.format().split("T")[0]
          } ${filterForm.toHour.format().split("T")[1].slice(0, 8)}`,
       };
-      // if (filterForm.toDate !== "")
-      //    reqObj.toDate = filterForm.toDate.toISOString();
-      // if (filterForm.fromHour !== "")
-      //    reqObj.fromDate = `${
-      //       filterForm.fromDate
-      //    }:${filterForm.fromHour.toISOString()}`;
-      // if (filterForm.toDate !== "")
-      //    reqObj.toDate = `${
-      //       filterForm.toDate
-      //    }:${filterForm.toHour.toISOString()}`;
+
       console.log(reqObj);
       console.log(filterForm.fromHour.format());
       const res = await api.post("/xpertesy/showrooms", reqObj);
@@ -181,21 +172,27 @@ const MyMeetings = () => {
             </Row>
          </Form>
          <Container>
-            <MeetingsTable
-               data={tableData}
-               activePage={activePage}
-               rowsAmount={Number(filterForm.numberOfRows)}
-               isFiltered={isFiltered}
-               filteredData={tableFilteredData}
-            />
-            <PaginationComp
-               dataLength={tableData.length}
-               isFiltered={isFiltered}
-               filteredDataLength={tableFilteredData.length}
-               rowsInPage={Number(filterForm.numberOfRows)}
-               activePage={activePage}
-               setActivePage={setActivePage}
-            />
+            {tableData.length === 0 ? (
+               <h2 style={{ textAlign: "center" }}>לא קיימות פגישות</h2>
+            ) : (
+               <>
+                  <MeetingsTable
+                     data={tableData}
+                     activePage={activePage}
+                     rowsAmount={Number(filterForm.numberOfRows)}
+                     isFiltered={isFiltered}
+                     filteredData={tableFilteredData}
+                  />
+                  <PaginationComp
+                     dataLength={tableData.length}
+                     isFiltered={isFiltered}
+                     filteredDataLength={tableFilteredData.length}
+                     rowsInPage={Number(filterForm.numberOfRows)}
+                     activePage={activePage}
+                     setActivePage={setActivePage}
+                  />
+               </>
+            )}
          </Container>
       </>
    );

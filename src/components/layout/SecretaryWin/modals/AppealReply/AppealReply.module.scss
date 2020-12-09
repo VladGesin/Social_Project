@@ -1,0 +1,18 @@
+.container {
+   border: none !important;
+   .header {
+      background-color: rgb(84, 111, 122) !important;
+      color: rgb(221, 231, 241);
+   }
+   .input {
+      background: #ffffff !important;
+   }
+   .btnContainer {
+      display: flex;
+      justify-content: center;
+      button {
+         margin: 0 1rem 1rem 1rem;
+         padding: 0.1rem 3rem;
+      }
+   }
+}

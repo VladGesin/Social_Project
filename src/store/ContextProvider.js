@@ -11,7 +11,7 @@ const initialUserState = {
    isAuth: false,
    loading: true,
    email: null,
-   birthday: null
+   birthday: null,
 };
 
 const ContextProvider = (props) => {
