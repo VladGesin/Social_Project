@@ -1,11 +1,9 @@
 import React, { Component, Fragment } from 'react';
-import logo from '../../Icons/LoginLogo/loginlogoimg.png';
 import style from './Login.module.scss';
 import { Validation } from '../Validation/Validation';
 import Context from '../../../store/Context';
-import { Link } from "react-router-dom";
 
-export class Login extends Component {
+export class ForgotPassword extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -70,33 +68,46 @@ export class Login extends Component {
 
 	render() {
 		return (
+			<Fragment>
 				<div className={style.login}>
-					<div>
-						<img src={logo} alt="logologin" />
-					</div>
 					<div className={style.loginCard}>
-						<h2>ברוכים הבאים</h2>
+						<h2>איפוס סיסמה</h2>
 						<div className={style.inputContainer}>
-							<input placeholder="תעודת זהות" onChange={(e) => this.handleInputID(e)} type="text" />
+							<input
+							    placeholder="הזן תעודת זהות"
+							    onChange={(e) => this.handleInputID(e)}
+							    type="text" />
+							<div className={style.textIDContainer}>כולל ספרת ביקורת</div>
 							{!this.state.id.isValid && <p className={style.p}>{this.state.id.msgId}</p>}
-							<p>כולל ספרת ביקורת</p>
-							<div id="IDError" />
+							<span id="IDError" />
 						</div>
 						<div className={style.inputContainer}>
-							<input type="password" placeholder="סיסמה" onChange={(e) => this.handleInputPassword(e)} />
+							<input
+								id="login"
+								type="password"
+								placeholder=" הסיסמה החדשה"
+								onChange={(e) => this.handleInputPassword(e)}
+							/>
+							{!this.state.password.isValid && <p className={style.p}>{this.state.password.msgPass}</p>}
+						</div>
+						<div className={style.inputContainer}>
+							<input
+								id="login"
+								type="password"
+								placeholder=" שוב הסיסמה החדשה"
+								onChange={(e) => this.handleInputPassword(e)}
+							/>
 							{!this.state.password.isValid && <p className={style.p}>{this.state.password.msgPass}</p>}
 						</div>
 						<div className={style.btnContainer}>
 							{!this.state.isValidIdAndPassword && <p className={style.p}>שם משתמש או סיסמה שגויים</p>}
-							<button onClick={this.ValidetionInputIdAndPassword}>כניסה</button>
-						</div>
-						<div>
-							<link to="src\components\layout\Login\ForgotPassword.js"> שכחתי סיסמה</link>
+							<button onClick={this.ValidetionInputIdAndPassword}>שמירת פרטים</button>
 						</div>
 					</div>
 				</div>
+			</Fragment>
 		);
 	}
 }
 
-export default Login;
+export default ForgotPassword;
