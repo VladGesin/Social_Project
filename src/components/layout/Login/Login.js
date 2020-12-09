@@ -1,8 +1,9 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component} from 'react';
 import logo from '../../Icons/LoginLogo/loginlogoimg.png';
 import style from './Login.module.scss';
 import { Validation } from '../Validation/Validation';
 import Context from '../../../store/Context';
+import { Link } from 'react-router-dom';
 
 export class Login extends Component {
 	constructor(props) {
@@ -77,8 +78,8 @@ export class Login extends Component {
 						<h2>ברוכים הבאים</h2>
 						<div className={style.inputContainer}>
 							<input placeholder="תעודת זהות" onChange={(e) => this.handleInputID(e)} type="text" />
-							{!this.state.id.isValid && <p className={style.p}>{this.state.id.msgId}</p>}
 							<p>כולל ספרת ביקורת</p>
+							{!this.state.id.isValid && <p className={style.p}>{this.state.id.msgId}</p>}
 							<div id="IDError" />
 						</div>
 						<div className={style.inputContainer}>
@@ -90,7 +91,8 @@ export class Login extends Component {
 							<button onClick={this.ValidetionInputIdAndPassword}>כניסה</button>
 						</div>
 						<div>
-							<a href="#"> שכחתי סיסמה</a>
+							{/* <Route path="src\components\layout\Login\ForgotPassword.js" component={ForgotPassword}/> */}
+							<Link to="src\components\layout\Login\ForgotPassword.js"> <div> שכחתי סיסמה </div> </Link> 
 						</div>
 					</div>
 				</div>
