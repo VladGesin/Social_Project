@@ -7,6 +7,9 @@ const MsgBox = ({ msg, name, clear }) => {
          left: 0,
          behavior: "smooth",
       });
+      setTimeout(() => {
+         clear();
+      }, 5000);
    }, []);
    return (
       <div className={style.container}>

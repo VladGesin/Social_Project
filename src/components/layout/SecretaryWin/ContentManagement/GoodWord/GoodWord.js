@@ -62,7 +62,7 @@ const GoodWord = ({ msg, setMsg }) => {
       },
       state: {
          name: "עריכת סטאטוס",
-         icon: "fas fa-pen",
+         icon: "fas fa-clipboard-check",
          isOpen: false,
          onClick: (data) => {
             setIsChangeStatusOpen(true);
