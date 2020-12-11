@@ -3,19 +3,19 @@ import Carousel from 'react-bootstrap/Carousel'
 import api from "../../../../../api";
 
 
-const GoodWordCarusel=()=> {
+const GoodWordCarusel=({goodWord})=> {
 
-const [goodWord,setGoodWord] = useState([]); //hook goodword
+// const [goodWord,setGoodWord] = useState([]); //hook goodword
 
 
-  useEffect(() => {
-    getGoodWord();
-  }, [])
+  // useEffect(() => {
+  //   getGoodWord();
+  // }, [])
 
-  function getGoodWord() {
-    api.get('goodWord').then(res=>setGoodWord(res.data)
-    );
-  }
+  // function getGoodWord() {
+  //   api.get('goodWord').then(res=>setGoodWord(res.data)
+  //   );
+  // }
   const dateConvert=(time)=>{
     
     let d = time.toString().slice(0, 10).split('-');   
