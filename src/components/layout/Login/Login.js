@@ -3,9 +3,18 @@ import logo from '../../Icons/LoginLogo/loginlogoimg.png';
 import style from './Login.module.scss';
 import { Validation } from '../Validation/Validation';
 import Context from '../../../store/Context';
-import { Link } from 'react-router-dom';
+import { Link,Switch,Route, Router, BrowserRouter } from 'react-router-dom';
+// import ForgotPassword from "../Login/ForgotPassword"
+// import { useHistory } from "react-router-dom";
+// import { ReactDOM } from "react-dom";
+// import App from '../../../App';
+// import { Navbar, Nav, NavDropdown } from "react-bootstrap";
+// import { NavLink } from "react-router-dom";
+// import "./navbar.css";
 
 export class Login extends Component {
+	
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -50,6 +59,12 @@ export class Login extends Component {
 			this.checkUserDetails();
 		}
 	};
+
+	// OnClickForgotPassword = (e) => {
+	// 	//e.preventDefault();
+	// 	useHistory().push("/ForgotPassword");
+
+	// };
 	invalidCredentials = () => {
 		this.setState({ isValidIdAndPassword: false });
 	};
@@ -70,6 +85,7 @@ export class Login extends Component {
 
 	render() {
 		return (
+				// <Route></Route>
 				<div className={style.login}>
 					<div>
 						<img src={logo} alt="logologin" />
@@ -91,13 +107,19 @@ export class Login extends Component {
 							<button onClick={this.ValidetionInputIdAndPassword}>כניסה</button>
 						</div>
 						<div>
-							{/* <Route path="src\components\layout\Login\ForgotPassword.js" component={ForgotPassword}/> */}
-							<Link to="src\components\layout\Login\ForgotPassword.js"> <div> שכחתי סיסמה </div> </Link> 
+							<Link to="/Social_Project/ForgotPassword"><div> שכחתי סיסמה </div></Link> 
 						</div>
+						{/* <Route path="\ForgotPassword" component={ForgotPassword}></Route> */}
 					</div>
+					{/* <BrowserRouter><render></render></BrowserRouter>	 */}
 				</div>
+				
+				
 		);
 	}
+
+	
 }
+// ReactDOM.render(<BrowserRouter><App></App></BrowserRouter>)
 
 export default Login;

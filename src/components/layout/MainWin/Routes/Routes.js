@@ -8,11 +8,13 @@ import NewMeeting from "../../xpertesy/NewMeeting/NewMeeting";
 import MyMeetings from "../../xpertesy/MyMeetings/MyMeetings";
 import {PersonalPage} from "../../PersonalPage/PersonalPage";
 import {MainCommitteesPage} from "../../MainCommitteesPage/MainCommitteesPage";
-import Login from "../../Login/Login"
+import Login from "../../Login/Login";
+import ForgotPassword from "../../Login/ForgotPassword";
 
 const routesData =
     [
         {component: Login, path: "/Social_Project/", exact: true},
+        {component: ForgotPassword, path: "/Social_Project/ForgotPassword"},
         {component: WelcomPage, path: "/Social_Project/MainWin"},
         {component: chairmanItems, path: "/Social_Project/chairmanItems/:item"},
         {component: secreturywin, path: "/Social_Project/secreturywin"},

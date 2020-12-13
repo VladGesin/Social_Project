@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 import style from './Login.module.scss';
 import { Validation } from '../Validation/Validation';
 import Context from '../../../store/Context';
+import {StaticRouter as Router,Route} from 'react-router-dom'
+// import Login from '../../layout/Login/Login'
 
 export class ForgotPassword extends Component {
 	constructor(props) {
@@ -12,7 +14,11 @@ export class ForgotPassword extends Component {
 				isValid: true,
 				msg: ''
 			},
-			password: {
+			password1: {
+				isValid: true,
+				msg: ''
+			},
+			password2: {
 				isValid: true,
 				msg: ''
 			}
@@ -32,19 +38,25 @@ export class ForgotPassword extends Component {
 
 		let validator = new Validation();
 		let [ isValidId, msgId ] = validator.isValidId(this.inputId);
-		let [ isValidPassword, msgPass ] = validator.isValidPassword(this.inputPassword);
+		let [ isValidPassword1, msgPass1 ] = validator.isValidPassword(this.inputPassword);
+		let [ isValidPassword2, msgPass2 ] = validator.isValidPassword(this.inputPassword);
 		this.setState({
 			id: {
 				isValid: isValidId,
 				msgId
 			},
-			password: {
-				isValid: isValidPassword,
-				msgPass
+			password1: {
+				isValid: isValidPassword1,
+				msgPass1
+			},
+			password2: {
+				isValid: isValidPassword2,
+				msgPass2
 			}
 		});
 
-		if (isValidId && isValidPassword) {
+		if (isValidId && isValidPassword1 && isValidPassword2 && isValidPassword1==isValidPassword2 ) {
+
 			this.checkUserDetails();
 		}
 	};
@@ -53,7 +65,7 @@ export class ForgotPassword extends Component {
 	};
 	checkUserDetails = async () => {
 		try {
-			this.context.login(this.inputId, this.inputPassword, this.invalidCredentials);
+			this.context.ForgotPassword(this.inputId, this.inputPassword, this.invalidCredentials);
 			sessionStorage.setItem(
 				'tempUser',
 				JSON.stringify({
@@ -68,6 +80,7 @@ export class ForgotPassword extends Component {
 
 	render() {
 		return (
+			<Router location="/ForgotPassword" context={this.staticContext}>
 			<Fragment>
 				<div className={style.login}>
 					<div className={style.loginCard}>
@@ -77,7 +90,7 @@ export class ForgotPassword extends Component {
 							    placeholder="הזן תעודת זהות"
 							    onChange={(e) => this.handleInputID(e)}
 							    type="text" />
-							<div className={style.textIDContainer}>כולל ספרת ביקורת</div>
+							<p>כולל ספרת ביקורת</p>
 							{!this.state.id.isValid && <p className={style.p}>{this.state.id.msgId}</p>}
 							<span id="IDError" />
 						</div>
@@ -85,27 +98,28 @@ export class ForgotPassword extends Component {
 							<input
 								id="login"
 								type="password"
-								placeholder=" הסיסמה החדשה"
+								placeholder="הסיסמה החדשה"
 								onChange={(e) => this.handleInputPassword(e)}
 							/>
-							{!this.state.password.isValid && <p className={style.p}>{this.state.password.msgPass}</p>}
+							{!this.state.password1.isValid && <p className={style.p}>{this.state.password.msgPass}</p>}
 						</div>
 						<div className={style.inputContainer}>
 							<input
 								id="login"
 								type="password"
-								placeholder=" שוב הסיסמה החדשה"
+								placeholder="שוב הסיסמה החדשה"
 								onChange={(e) => this.handleInputPassword(e)}
 							/>
-							{!this.state.password.isValid && <p className={style.p}>{this.state.password.msgPass}</p>}
+							{!this.state.password2.isValid && <p className={style.p}>{this.state.password.msgPass}</p>}
 						</div>
 						<div className={style.btnContainer}>
 							{!this.state.isValidIdAndPassword && <p className={style.p}>שם משתמש או סיסמה שגויים</p>}
-							<button onClick={this.ValidetionInputIdAndPassword}>שמירת פרטים</button>
+							<button onClick={this.ValidetionInputIdAndPassword}> שמירת פרטים וכניסה</button>
 						</div>
 					</div>
 				</div>
 			</Fragment>
+			</Router>
 		);
 	}
 }
