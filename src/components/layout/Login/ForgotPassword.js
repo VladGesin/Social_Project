@@ -3,7 +3,6 @@ import style from './Login.module.scss';
 import { Validation } from '../Validation/Validation';
 import Context from '../../../store/Context';
 import {StaticRouter as Router,Route} from 'react-router-dom'
-// import Login from '../../layout/Login/Login'
 
 export class ForgotPassword extends Component {
 	constructor(props) {

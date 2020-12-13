@@ -3,14 +3,7 @@ import logo from '../../Icons/LoginLogo/loginlogoimg.png';
 import style from './Login.module.scss';
 import { Validation } from '../Validation/Validation';
 import Context from '../../../store/Context';
-import { Link,Switch,Route, Router, BrowserRouter } from 'react-router-dom';
-// import ForgotPassword from "../Login/ForgotPassword"
-// import { useHistory } from "react-router-dom";
-// import { ReactDOM } from "react-dom";
-// import App from '../../../App';
-// import { Navbar, Nav, NavDropdown } from "react-bootstrap";
-// import { NavLink } from "react-router-dom";
-// import "./navbar.css";
+import { Link } from 'react-router-dom';
 
 export class Login extends Component {
 	
@@ -31,6 +24,16 @@ export class Login extends Component {
 	}
 
 	static contextType = Context;
+	componentDidMount() {
+		if (this.context.userState.isAuth) {
+		   this.props.history.push("/Social_Project/MainWin");
+		}
+	 }
+	 componentDidUpdate() {
+		if (this.context.userState.isAuth) {
+		   this.props.history.push("/Social_Project/MainWin");
+		}
+	 }
 
 	handleInputID = (e) => {
 		this.inputId = e.target.value;
@@ -60,11 +63,6 @@ export class Login extends Component {
 		}
 	};
 
-	// OnClickForgotPassword = (e) => {
-	// 	//e.preventDefault();
-	// 	useHistory().push("/ForgotPassword");
-
-	// };
 	invalidCredentials = () => {
 		this.setState({ isValidIdAndPassword: false });
 	};
@@ -85,7 +83,6 @@ export class Login extends Component {
 
 	render() {
 		return (
-				// <Route></Route>
 				<div className={style.login}>
 					<div>
 						<img src={logo} alt="logologin" />
@@ -109,17 +106,12 @@ export class Login extends Component {
 						<div>
 							<Link to="/Social_Project/ForgotPassword"><div> שכחתי סיסמה </div></Link> 
 						</div>
-						{/* <Route path="\ForgotPassword" component={ForgotPassword}></Route> */}
 					</div>
-					{/* <BrowserRouter><render></render></BrowserRouter>	 */}
 				</div>
 				
 				
 		);
 	}
-
-	
 }
-// ReactDOM.render(<BrowserRouter><App></App></BrowserRouter>)
 
 export default Login;

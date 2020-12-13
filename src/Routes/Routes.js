@@ -10,6 +10,7 @@ import MyMeetings from "../components/layout/xpertesy/MyMeetings/MyMeetings";
 import { PersonalPage } from "../components/layout/PersonalPage/PersonalPage";
 import { MainCommitteesPage } from "../components/layout/MainCommitteesPage/MainCommitteesPage";
 import Login from "../components/layout/Login/Login";
+import ForgotPassword from "../components/layout/Login/ForgotPassword"
 import { MapsPage } from "../components/layout/MapsPage/MapsPage";
 
 const routesData = [
@@ -27,6 +28,7 @@ const routesData = [
    },
    { component: commiteesWin, path: "/Social_Project/committees/:type" },
    { component: Login, path: "/Social_Project/", exact: true, public: true },
+   {component: ForgotPassword,path: "/Social_Project/ForgotPassword",public: true,},
 ];
 
 const Routes = () => {
