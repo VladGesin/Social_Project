@@ -64,7 +64,6 @@ const EditUserModal = ({ isOpen, close, id, setUsers, users, setMsg }) => {
    };
    const onUserTypeChange = (e) => {
       setUserType({ ...userType, [e.target.name]: e.target.checked });
-      console.log(e.target.checked);
    };
    const validateEmail = (email) => {
       var re = /\S+@\S+\.\S+/;
@@ -94,10 +93,10 @@ const EditUserModal = ({ isOpen, close, id, setUsers, users, setMsg }) => {
          phone: formDetails.phonePrefix + formDetails.phone,
          contactUser: true,
       };
-      debugger
+      debugger;
       const res = await api.patch(`users/${id}`, reqObj);
 
-      debugger
+      debugger;
 
       const user = res.data[0];
       const userIndex = users.findIndex((i) => i.user_id === user.ID);

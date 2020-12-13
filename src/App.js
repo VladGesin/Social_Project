@@ -9,11 +9,10 @@ import Context from "./store/Context";
 const App = () => {
    const context = useContext(Context);
    useEffect(() => {
-      if (sessionStorage.getItem("tempUser")) {
-         context.loadUser();
-      }
+      context.loadUser();
    }, []);
-   return <Router>{context.userState.isAuth ? <MainWin /> : <Login />}</Router>;
+
+   return <>{!context.userState.loading && <MainWin />}</>;
 };
 
 export default App;

@@ -21,7 +21,6 @@ const SearchUsers = ({ users, setUsers }) => {
             i.user_id.toLowerCase().includes(e.target.value.toLowerCase()) ||
             i.phone.toLowerCase().includes(e.target.value.toLowerCase())
       );
-      console.log(e.target.value);
       setUsers(filteredUsers);
    };
    return (

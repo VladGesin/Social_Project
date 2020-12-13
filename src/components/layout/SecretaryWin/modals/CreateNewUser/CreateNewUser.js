@@ -50,7 +50,6 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users, setMsg }) => {
          admin: false,
          [e.target.name]: e.target.checked,
       });
-      console.log(e.target.checked);
    };
 
    const onPrevStage = (e) => {
@@ -91,7 +90,6 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users, setMsg }) => {
    };
    const onSelectImage = (e) => {
       setImageName(e.target.files[0].name);
-      console.log(e.target.files);
       if (e.target.files && e.target.files[0]) {
          let reader = new FileReader();
          reader.onload = (e) => {

@@ -3,7 +3,6 @@ import "./EmailList.css";
 
 const EmailList = ({ emails, deleteParticipant }) => {
    const onDelete = (e) => {
-      console.log(e.currentTarget.id);
       deleteParticipant(e.currentTarget.id);
    };
 
