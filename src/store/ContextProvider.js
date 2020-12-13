@@ -18,13 +18,13 @@ const ContextProvider = (props) => {
    const [userState, setUserState] = useState(initialUserState);
 
    const loadUser = async () => {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
       if (token) {
          //Set the token in the headers request
          setAuthToken(token);
          //Get all user details by the token in the header
          const res = await api.get("user");
-   
+
          const user = res.data;
          const updatedUser = {
             phone: user.phone,
@@ -55,8 +55,7 @@ const ContextProvider = (props) => {
          });
          const token = res.data.token[0].token;
 
-         // Set the token in the localStorage
-         localStorage.setItem("token", token);
+         sessionStorage.setItem("token", token);
          loadUser();
       } catch (e) {
          console.log(e);
@@ -67,10 +66,11 @@ const ContextProvider = (props) => {
    };
 
    const logout = async () => {
-      localStorage.removeItem("token");
       sessionStorage.removeItem("tempUser");
       setUserState(initialUserState);
    };
+
+   const isLoggedIn = () => {};
 
    const register = async ({
       id,

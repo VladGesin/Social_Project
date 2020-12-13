@@ -54,11 +54,8 @@ const MyMeetings = () => {
          } ${filterForm.toHour.format().split("T")[1].slice(0, 8)}`,
       };
 
-      console.log(reqObj);
-      console.log(filterForm.fromHour.format());
       const res = await api.post("/xpertesy/showrooms", reqObj);
       setTableData(res.data.Data);
-      console.log(res.data.Data);
    };
 
    const searchHandler = (e) => {

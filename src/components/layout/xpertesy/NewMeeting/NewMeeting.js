@@ -98,7 +98,6 @@ const NewMeeting = () => {
 
    const createNewMeeting = async (data) => {
       try {
-         console.log("data", data);
          const res = await api.post("/xpertesy/createroom", data);
          return res;
       } catch (e) {

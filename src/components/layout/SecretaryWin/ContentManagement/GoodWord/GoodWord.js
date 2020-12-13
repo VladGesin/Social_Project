@@ -6,6 +6,7 @@ import style from "./GoodWord.module.scss";
 import GoodWordDetails from "../../modals/GoodWordDetails/GoodWordDetails";
 import ChangeStateGoodWord from "../../modals/ChangeStateGoodWord/ChangeStateGoodWord";
 import api from "../../../../../api";
+import { Spin } from "antd";
 
 const columns = [
    { title: "נשלח לועדה", variableName: "committee_name" },
@@ -21,6 +22,7 @@ const GoodWord = ({ msg, setMsg }) => {
    const [isViewModelOpen, setIsViewModelOpen] = useState(false);
    const [isChangeStatusOpen, setIsChangeStatusOpen] = useState(false);
    const [flag, setFlag] = useState(false);
+   const [isLoading, setIsLoading] = useState(true);
    useEffect(() => {
       (async () => {
          const allGoodWords = await api.get("goodWord");
@@ -47,6 +49,7 @@ const GoodWord = ({ msg, setMsg }) => {
                   : 0;
             })
          );
+         setIsLoading(false);
       })();
    }, [flag]);
 
@@ -90,18 +93,24 @@ const GoodWord = ({ msg, setMsg }) => {
             }}
          />
          <div className={style.table}>
-            <Table
-               data={data}
-               columns={columns}
-               actions={rowAction}
-               sortRow={
-                  <SortRow
-                     data={data}
-                     setData={setData}
-                     sortByOptions={columns}
-                  />
-               }
-            ></Table>
+            {isLoading ? (
+               <div className={style.spinner}>
+                  <Spin size="large" />
+               </div>
+            ) : (
+               <Table
+                  data={data}
+                  columns={columns}
+                  actions={rowAction}
+                  sortRow={
+                     <SortRow
+                        data={data}
+                        setData={setData}
+                        sortByOptions={columns}
+                     />
+                  }
+               ></Table>
+            )}
          </div>
       </>
    );

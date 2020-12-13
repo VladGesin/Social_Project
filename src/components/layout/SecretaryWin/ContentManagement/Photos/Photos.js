@@ -54,7 +54,6 @@ const Photos = ({ setMsg }) => {
    };
 
    const onDeleteImage = async (i) => {
-      console.log(i);
       setImageToDelete(i);
       setIsSafeDeleteOpen(true);
    };

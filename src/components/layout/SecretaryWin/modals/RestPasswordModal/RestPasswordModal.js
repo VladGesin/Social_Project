@@ -50,7 +50,6 @@ const RestPasswordModal = ({ isOpen, close, id }) => {
             password2: "",
          });
          close();
-         console.log(res);
       } catch (e) {
          console.log(e);
       }
