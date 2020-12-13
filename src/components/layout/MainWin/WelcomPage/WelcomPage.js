@@ -1,44 +1,30 @@
-import React, { Fragment,useEffect , useState ,useContext} from 'react';
+import React, { Fragment,useEffect , useState } from 'react';
 import Slider from './Slider/Slider';
 import Container from 'react-bootstrap/Container';
 import GoodWord from '../WelcomPage/GoodWord/GoodWord';
 import News from '../WelcomPage/News/News';
 import Birthday from '../WelcomPage/Birthdays/Birthday';
 import Teachers from '../WelcomPage/PrivateTeacher/PrivateTeacher';
-import axios from 'axios';
-import Context from '../../../../store/Context'
-
 
 import './WelcomPage.css';
+import api from "../../../../api";
 
 const WelcomPage = () => {
   const [users, setUsers] =useState([]); //hook 
   const [news, setNews] = useState([]); // hook news
-  const context = useContext(Context)
-
-  console.log(`Bearer ${context.userState.token}`)
-
 
   useEffect(() => {
     getUsers();
     getNews('תלמיד');
-
-  }, [users,news]);
+  }, []);
 
 
   function getUsers() {
-
-    axios.get('http://127.0.0.1:8080/users',{
-  }).then(res => 
-    setUsers(res.data),
-    )
+    api.get('users').then(res => setUsers(res.data));
   }
 
-  async function getNews(key) {
-
-    await axios.get(`http://127.0.0.1:8080/news?filterBy=${key}`,{
-  }).then(res => 
-    setNews(res.data))
+  function getNews(key) {
+    api.get('news?filterBy=${key}').then(res => setNews(res.data));
   }
 
   return (

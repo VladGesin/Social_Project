@@ -23,16 +23,24 @@ const MeetingsTable = ({
             <tr>
                <th>מארח</th>
                <th>נושא</th>
+               <th>משתתפים</th>
                <th>תאריך</th>
                <th>שעה</th>
                <th>לינק לפגישה</th>
             </tr>
          </thead>
          <tbody>
-            {currentPage.map((m) => (
-               <tr>
+            {currentPage.map((m, i) => (
+               <tr key={i}>
                   <td>{m.host_name}</td>
                   <td>{m.title}</td>
+                  <td>
+                     {m.participants.map((p, i) => (
+                        <span key={i}>
+                           {i !== m.participants.length - 1 ? `${p} , ` : p}
+                        </span>
+                     ))}
+                  </td>
                   <td>{m.value_date.slice(0, 10)}</td>
                   <td>{m.value_date.slice(11, 16)}</td>
 

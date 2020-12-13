@@ -10,20 +10,28 @@ const initialUserState = {
    token: null,
    isAuth: false,
    loading: true,
+   email: null,
+   birthday: null,
 };
 
 const ContextProvider = (props) => {
    const [userState, setUserState] = useState(initialUserState);
 
    const loadUser = async () => {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
       if (token) {
          //Set the token in the headers request
          setAuthToken(token);
          //Get all user details by the token in the header
          const res = await api.get("user");
+
          const user = res.data;
          const updatedUser = {
+            phone: user.phone,
+            userType: user.userType,
+            birthday: user.birthday,
+            contactUser: user.contactUser,
+            email: user.email,
             id: user.id,
             firstName: user.firstName,
             lastName: user.lastName,
@@ -47,8 +55,7 @@ const ContextProvider = (props) => {
          });
          const token = res.data.token[0].token;
 
-         // Set the token in the localStorage
-         localStorage.setItem("token", token);
+         sessionStorage.setItem("token", token);
          loadUser();
       } catch (e) {
          console.log(e);
@@ -59,13 +66,45 @@ const ContextProvider = (props) => {
    };
 
    const logout = async () => {
-      localStorage.removeItem("token");
       sessionStorage.removeItem("tempUser");
       setUserState(initialUserState);
    };
 
+   const isLoggedIn = () => {};
+
+   const register = async ({
+      id,
+      firstName,
+      lastName,
+      email,
+      password,
+      type,
+      birthday,
+      contactUser,
+      phone,
+   }) => {
+      try {
+         const res = await api.post("/users", {
+            id,
+            firstName,
+            lastName,
+            email,
+            password,
+            type,
+            birthday,
+            contactUser,
+            phone,
+         });
+         return res;
+      } catch (e) {
+         console.log(e);
+      }
+   };
+
    return (
-      <Context.Provider value={{ userState, login, loadUser, logout }}>
+      <Context.Provider
+         value={{ userState, login, loadUser, logout, register }}
+      >
          {props.children}
       </Context.Provider>
    );

@@ -1,62 +1,110 @@
-import React, { Fragment } from "react";
+import React, { Fragment,useEffect ,useContext} from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import "./GoodWord.css";
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
+import GoodWordCarusel from './GoodWordCarusel'
+import api from "../../../../../api";
+import Context from "../../../../../store/Context";
 
 
 const GoodWord = () => {
   const [show, setShow] = useState(false);
+  const [committees,setCommittees] = useState([]);
+  const context = useContext(Context);
+  const[erro,setErro]=useState(false);
 
-  const handleClose = () => setShow(false);
+useEffect(() => {
+  getCommittees()
+}, [])
+
+  function getCommittees(){
+    api.get('committees').then(res=>setCommittees(res.data)); //get committees
+  }
+
+  function handleClose(){
+    setShow(false) 
+    setErro(false)
+    setInput(false)};
+
   const handleShow = () => setShow(true);
+  const [input,setInput] = useState(false);
 
+  const handleSend =()=>{
+    if(document.getElementById('goodWordData').value !== ''){
+      //send data function
+
+      api.post('goodWord',{
+        sender_id:context.userState.id, 
+         reciever_id:"123456789",
+          committee_name:document.getElementById("committeSelection").value, 
+            content:document.getElementById('goodWordData').value 
+          })
+
+      handleClose()
+      setInput(false)
+      setErro(false)
+  }
+  else if(!input){
+      setInput(true)
+      // document.getElementById('modalBody').append("שגיאה");
+      setErro(true)
+  }
+
+}
 
   return (
     <Fragment >
-      <Card className="text-right">
-        <Card.Header as="h5">מילה טובה</Card.Header>
-        <Card.Body>
-          <Card.Title>כותרת המבזק</Card.Title>
-          <Card.Text>
-           מילה טובה תרוץ כאן
-                      </Card.Text>
+      <Card className="text-right h-100">
+        <Card.Header as="h5">מילה טובה
+        </Card.Header>
+        <Card.Body > 
+          <GoodWordCarusel indicators={false}/>
 
-          <Button variant="primary" onClick={handleShow}>
+          <Button id='goodWordBTN' variant="primary" onClick={handleShow}>
             הכנס מילה טובה
           </Button>
         </Card.Body>
       </Card>
 
       <Modal show={show} onHide={handleClose} animation={false} className="text-right">
-        <Modal.Header  dir="rtl">
-          <Modal.Title >מילה טובה חדשה</Modal.Title>
+        <Modal.Header className="d-flex justify-content-between"  dir="rtl">
+          <Modal.Title  > 
+           <div>מילה טובה</div>
+          </Modal.Title>
+          <button  type='submit' id = 'exitGoodword' onClick={handleClose}> 
+          <i className="fas fa-times"></i>
+          </button>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body id='modalBody'>
           <div>
              <form dir="rtl">
-               <div class="form-group">
-                <label for="exampleFormControlSelect1">לאיזה יו"ר ברצונך לשלוח מילה </label>
-                <select class="form-control" id="exampleFormControlSelect1" >
-                  <option>יו"ר 1</option>
-                  <option>יו"ר 2</option>
-                  <option>יו"ר 3</option>
+               <div className="form-group">
+                <label htmlFor="exampleFormControlSelect1">לאיזה יו"ר ברצונך לשלוח מילה </label>
+                <select className="form-control" id="committeSelection" >
+
+                {
+                  committees.map(committe=>(
+                  <option key={committe.name.toString()} value={committe.name}>{committe.name}</option>
+                  ))
+                }
                 </select>
               </div>
-                <div class="form-group">
-                <label for="exampleFormControlTextarea1">אנא הכנס תוכן של מילה טובה :</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
+                <div className="form-group">
+                <label htmlFor="exampleFormControlTextarea1">אנא הכנס תוכן של מילה טובה :</label>
+                <textarea className="form-control" id="goodWordData" rows="10"></textarea>
+                
+                  {erro && <div id='erro'>שגיאה לא ניתן לשלוח תוכן ריק</div>}
+                
               </div>
             </form>
           </div>
  
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            סגור
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
+        <Modal.Footer className='justify-content-start'>
+          <Button variant="primary" onClick={
+            handleSend}>
             שמור ושלח
           </Button>
         </Modal.Footer>

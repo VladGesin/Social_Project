@@ -1,0 +1,24 @@
+.btn {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 5%;
+   background-color: rgb(40, 167, 69);
+   border: 1px solid #ccc;
+   color: white;
+   &:focus {
+      outline: none;
+   }
+   &:hover {
+      transition: all 0.5s;
+      background-color: white;
+      i {
+         color: rgb(40, 167, 69);
+      }
+   }
+
+   i {
+      font-size: 2.2rem;
+      text-align: center;
+   }
+}

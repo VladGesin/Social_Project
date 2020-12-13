@@ -8,30 +8,33 @@ const News =({news})=> {
   const [newsList,setNewsList]= useState([])
 
   useEffect(() => {
-    setNewsList(news['news']);
-    spinnerOrNews();
+    setNewsList(news['news'])
+    spinnerOrNews()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [news])
 
   // Put spinner while loading the news, put the news in the card when loaded
   const spinnerOrNews = () =>{
     if (!newsList){
       return (<Card.Body className="align-items-center d-flex justify-content-center">
-            <Card.Text dir="rtl">
+            {/* <Card.Text dir="rtl"> */}
             <div className="justify-content-center d-flex">
-      <h4 className="pl-4">טוען</h4>
+            <h4 className="pl-4">
+            טוען
+            </h4>
             <Spinner animation="border" />
             </div>
-           </Card.Text>
+           {/* </Card.Text> */}
           </Card.Body>)
     }
-    else {
+    else 
+    {
       return (
-        <marquee behavior="scroll" direction="up" Scrollamount="2" loop="" overflow="hidden" display="inline-block">
+        <marquee behavior="scroll" direction="up" scrollamount="2" loop="" overflow="hidden" display="inline-block">
           <Card.Body>
             <Card.Text dir="rtl">
             {newsList.map(news=>(
                     <div>
-                      <p></p>
                       <a href={news.link}><h5><u>{news.name}</u></h5></a>
                       <div>
                         <h7>{news.summary}</h7>

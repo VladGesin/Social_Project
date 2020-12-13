@@ -1,0 +1,51 @@
+.SideBar {
+   display: flex;
+   flex-direction: column;
+   align-items: flex-end;
+   height: 100%;
+   width: 100%;
+   background-color: #fff;
+   padding: 2rem;
+   border: 1px solid #ccc;
+   h3 {
+      padding-bottom: 2rem;
+   }
+   .line {
+      display: flex;
+      font-size: 1.1rem;
+      flex-direction: row-reverse;
+      line-height: 1rem;
+      cursor: pointer;
+      img {
+         margin-left: 1rem;
+         height: 1rem;
+         width: 1rem;
+      }
+   }
+   .subMenu {
+      @keyframes scale-in-ver-top {
+         0% {
+            transform: translateY(-1.5rem);
+            opacity: 0;
+         }
+         100% {
+            transform: translateY(0);
+            opacity: 1;
+         }
+      }
+
+      animation: scale-in-ver-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      padding-right: 2.5rem;
+      p {
+         margin: 0;
+         cursor: pointer;
+      }
+   }
+   .active {
+      font-weight: 500;
+   }
+}

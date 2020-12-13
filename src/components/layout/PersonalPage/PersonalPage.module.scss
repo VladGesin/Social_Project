@@ -1,7 +1,55 @@
-.rootPersonalPage{
-  text-align: center;
+.rootPersonalPage {
+  display: flex;
+  direction: rtl;
+  text-align: right;
+  padding: 30px;
+  justify-content: space-between;
+  min-height: 80vh;
 
-  h1{
-    text-decoration: underline;
+  .menu {
+    padding: 15px;
+    border: 1px solid #635f5f59;
+    width: 20%;
+    background: #ffffff;
+    max-width: 260px;
+
+    @media screen and (max-width: 900px) {
+      max-width: initial;
+      width: 30%;
+    }
+
+    h2 {
+
+      margin: 0 0 20px;
+      line-height: 1;
+      font-size: 21px;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+
+      li {
+        cursor: pointer;
+        margin-bottom: 20px;
+        list-style: none;
+        display: flex;
+
+        &.selected {
+          font-weight: bold;
+        }
+
+        .icon {
+          margin-left: 15px;
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+  }
+
+  .main {
+    flex: 1;
+    margin-right: 10px;
   }
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -9,18 +9,21 @@ import PaginationComp from "./PaginationComp";
 import "./MyMeetings.css";
 import searchIcon from "./magnifying-glass.svg";
 import { DatePicker, TimePicker } from "antd";
+import Context from "../../../../store/Context";
 import "antd/dist/antd.css";
+import moment from "moment";
 import api from "../../../../api";
 
 const MyMeetings = () => {
+   const context = useContext(Context);
    const [tableData, setTableData] = useState([]);
    const [tableFilteredData, setTableFilteredData] = useState([]);
    const [isFiltered, setIsFiltered] = useState(false);
    const [filterForm, setFilterForm] = useState({
-      fromDate: "",
-      toDate: "",
-      fromHour: "",
-      toHour: "",
+      fromDate: moment(),
+      toDate: moment().endOf("month"),
+      fromHour: moment(),
+      toHour: moment({ hour: 23, minute: 59 }),
       numberOfRows: "6",
    });
    const [activePage, setActivePage] = useState(1);
@@ -42,12 +45,15 @@ const MyMeetings = () => {
    }, []);
 
    const filterTableHandler = async () => {
-      const currentDate = new Date().toISOString().split("T")[0];
       const reqObj = {
-         fromDate:
-            filterForm.fromDate === "" ? currentDate : filterForm.fromDate,
+         fromDate: `${
+            filterForm.fromDate.format().split("T")[0]
+         } ${filterForm.fromHour.format().split("T")[1].slice(0, 8)}`,
+         toDate: `${
+            filterForm.toDate.format().split("T")[0]
+         } ${filterForm.toHour.format().split("T")[1].slice(0, 8)}`,
       };
-      if (filterForm.toDate !== "") reqObj.toDate = filterForm.toDate;
+
       const res = await api.post("/xpertesy/showrooms", reqObj);
       setTableData(res.data.Data);
    };
@@ -62,11 +68,10 @@ const MyMeetings = () => {
    };
 
    const onChangeDateHandler = (e) => {
-      const currentDate = new Date().toISOString().split("T")[0];
       setFilterForm((cur) => ({
          ...cur,
-         fromDate: e ? e[0]._d : currentDate,
-         toDate: e ? e[1]._d : "",
+         fromDate: e ? e[0] : moment(),
+         toDate: e ? e[1] : moment(),
       }));
    };
 
@@ -84,7 +89,9 @@ const MyMeetings = () => {
                   </Col>
                   <Col dir="ltr">
                      <DateRangePicker
+                        defaultValue={[filterForm.fromDate, filterForm.toDate]}
                         className="range-input"
+                        format="DD-MM-YY"
                         onChange={onChangeDateHandler}
                         placeholder={["תאריך התחלה", "תאריך סיום "]}
                      />
@@ -98,12 +105,15 @@ const MyMeetings = () => {
                      <TimeRangePicker
                         className="range-input"
                         format={"HH:mm"}
+                        defaultValue={[filterForm.fromHour, filterForm.toHour]}
                         onChange={(e) => {
                            console.log(e);
                            setFilterForm((cur) => ({
                               ...cur,
-                              fromHour: e[0]._d,
-                              toHour: e[1]._d || null,
+                              fromHour: e ? e[0] : moment(),
+                              toHour: e
+                                 ? e[1]
+                                 : moment({ hour: 23, minute: 59 }),
                            }));
                         }}
                         placeholder={["שעת התחלה", "שעת סיום "]}
@@ -159,21 +169,27 @@ const MyMeetings = () => {
             </Row>
          </Form>
          <Container>
-            <MeetingsTable
-               data={tableData}
-               activePage={activePage}
-               rowsAmount={Number(filterForm.numberOfRows)}
-               isFiltered={isFiltered}
-               filteredData={tableFilteredData}
-            />
-            <PaginationComp
-               dataLength={tableData.length}
-               isFiltered={isFiltered}
-               filteredDataLength={tableFilteredData.length}
-               rowsInPage={Number(filterForm.numberOfRows)}
-               activePage={activePage}
-               setActivePage={setActivePage}
-            />
+            {tableData.length === 0 ? (
+               <h2 style={{ textAlign: "center" }}>לא קיימות פגישות</h2>
+            ) : (
+               <>
+                  <MeetingsTable
+                     data={tableData}
+                     activePage={activePage}
+                     rowsAmount={Number(filterForm.numberOfRows)}
+                     isFiltered={isFiltered}
+                     filteredData={tableFilteredData}
+                  />
+                  <PaginationComp
+                     dataLength={tableData.length}
+                     isFiltered={isFiltered}
+                     filteredDataLength={tableFilteredData.length}
+                     rowsInPage={Number(filterForm.numberOfRows)}
+                     activePage={activePage}
+                     setActivePage={setActivePage}
+                  />
+               </>
+            )}
          </Container>
       </>
    );
