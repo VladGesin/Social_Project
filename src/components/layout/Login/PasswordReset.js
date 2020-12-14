@@ -2,14 +2,22 @@ import React, { Component, Fragment } from 'react';
 import style from './Login.module.scss';
 import { Validation } from '../Validation/Validation';
 import Context from '../../../store/Context';
-import {StaticRouter as Router,Route} from 'react-router-dom'
+import {StaticRouter as Router} from 'react-router-dom'
 
-export class ForgotPassword extends Component {
+export class PasswordReset extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isValidIdAndEmail: true,
+			isValidIdAndPassword: true,
 			id: {
+				isValid: true,
+				msg: ''
+			},
+			password1: {
+				isValid: true,
+				msg: ''
+			},
+			password2: {
 				isValid: true,
 				msg: ''
 			}
@@ -31,19 +39,32 @@ export class ForgotPassword extends Component {
 	handleInputID = (e) => {
 		this.inputId = e.target.value;
 	};
-	ValidetionInputIdAndEmail = (e) => {
+	handleInputPassword = (e) => {
+		this.inputPassword = e.target.value;
+	};
+	ValidetionInputIdAndPassword = (e) => {
 		e.preventDefault();
 
 		let validator = new Validation();
 		let [ isValidId, msgId ] = validator.isValidId(this.inputId);
+		let [ isValidPassword1, msgPass1 ] = validator.isValidPassword(this.inputPassword);
+		let [ isValidPassword2, msgPass2 ] = validator.isValidPassword(this.inputPassword);
 		this.setState({
 			id: {
 				isValid: isValidId,
 				msgId
+			},
+			password1: {
+				isValid: isValidPassword1,
+				msgPass1
+			},
+			password2: {
+				isValid: isValidPassword2,
+				msgPass2
 			}
 		});
 
-		if (isValidId) {
+		if (isValidId && isValidPassword1 && isValidPassword2 && isValidPassword1==isValidPassword2 ) {
 
 			this.checkUserDetails();
 		}
@@ -59,12 +80,12 @@ export class ForgotPassword extends Component {
 			  },
 			  method: 'POST',
 			  body: JSON.stringify({
-				password: this.inputEmail,
+				password: this.inputPassword,
 				userID: this.inputId
 				})
 			  });
 			  console.log(response);
-			  console.log(this.inputId, this.inputEmail); 
+			  console.log(this.inputId, this.inputPassword); 
 			  const token = await response.json();
 			  console.log(token);
 			}
@@ -74,12 +95,12 @@ export class ForgotPassword extends Component {
 		}
 	checkUserDetails = async () => {
 		try {
-			this.context.ForgotPassword(this.inputId, this.inputEmail, this.invalidCredentials);
+			this.context.ForgotPassword(this.inputId, this.inputPassword, this.invalidCredentials);
 			sessionStorage.setItem(
 				'tempUser',
 				JSON.stringify({
 					id: this.inputId,
-					password: this.inputEmail
+					password: this.inputPassword
 				})
 			);
 		} catch (error) {
@@ -95,19 +116,26 @@ export class ForgotPassword extends Component {
 					<div className={style.loginCard}>
 						<h2>איפוס סיסמה</h2>
 						<div className={style.inputContainer}>
-							<p>יש להזין תעודת זהות על מנת לקבל מייל לאיפוס סיסמא</p>
-							<p> </p>
 							<input
-							    placeholder="תעודת זהות"
-							    onChange={(e) => this.handleInputID(e)}
-							    type="text" />
-							<p>כולל ספרת ביקורת</p>
-							{!this.state.id.isValid && <p className={style.p}>{this.state.id.msgId}</p>}
-							<span id="IDError" />
+								id="login"
+								type="password"
+								placeholder="סיסמה חדשה"
+								onChange={(e) => this.handleInputPassword(e)}
+							/>
+							{!this.state.password1.isValid && <p className={style.p}>{this.state.password1.msgPass1}</p>}
+						</div>
+						<div className={style.inputContainer}>
+							<input
+								id="login"
+								type="password"
+								placeholder="אימות סיסמה"
+								onChange={(e) => this.handleInputPassword(e)}
+							/>
+							{!this.state.password2.isValid && <p className={style.p}>{this.state.password2.msgPass2}</p>}
 						</div>
 						<div className={style.btnContainer}>
-							{!this.state.isValidIdAndEmail && <p className={style.p}>ת"ז שגויה</p>}
-							<button onClick={this.ValidetionInputIdAndEmail}> שליחת אימייל</button>
+							{!this.state.isValidIdAndPassword && <p className={style.p}>ת"ז או סיסמה שגויים</p>}
+							<button onClick={this.ValidetionInputIdAndPassword}> איפוס סיסמה</button>
 						</div>
 					</div>
 				</div>
@@ -117,4 +145,4 @@ export class ForgotPassword extends Component {
 	}
 }
 
-export default ForgotPassword;
+export default PasswordReset;

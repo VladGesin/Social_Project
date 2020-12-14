@@ -10,22 +10,38 @@
 	img {
 		 width: 100%;
 		 margin:20px;
-		}
-		.loginCard {
+	}
+	.loginCard {
 			justify-items:center;
 			display: grid;
 			width: 340px;
-			height: 430px;
+			height: 420px;
 			padding:50px;
 			
-        gap:10px;
+        gap:0px;
 		border: 2px solid #095293;
 		border-radius: 5px;
 		h2 {
 			color:#095293;
+			margin-top: 20px;
+			margin-bottom: -5px;
+		}
+		h6 {
+			color:#022849;
+			text-decoration: underline;
+			text-align: center;
+
 		}
 	}
-
+	/* If the screen size is 600px wide or less, hide the element */
+	@media screen and (max-width: 600px) {
+		img {
+			display: none;
+		   }
+		   .loginCard{ 
+			   border: none;
+			}
+	   }
 	.inputContainer {
 		input {
             background-color: #e0dede;
@@ -34,6 +50,7 @@
             border-radius: 5px;
 			border: none;
 			height: 35px;
+			width: 230px;
 		}
 	}
 	.btnContainer {
@@ -43,12 +60,12 @@
 			border: none;
 			border-radius: 5px;
 			height: 35px;
-			width: 186px;
+			width: 229px;
 		}
 	}
 	p {
 		margin:0px;
-		padding:5px;
+		padding:7px;
         text-align: right;
         font-size:0.9rem;
 	}

@@ -66,7 +66,9 @@ export class Login extends Component {
 	invalidCredentials = () => {
 		this.setState({ isValidIdAndPassword: false });
 	};
+	
 	checkUserDetails = async () => {
+		
 		try {
 			this.context.login(this.inputId, this.inputPassword, this.invalidCredentials);
 			sessionStorage.setItem(
@@ -100,12 +102,11 @@ export class Login extends Component {
 							{!this.state.password.isValid && <p className={style.p}>{this.state.password.msgPass}</p>}
 						</div>
 						<div className={style.btnContainer}>
-							{!this.state.isValidIdAndPassword && <p className={style.p}>שם משתמש או סיסמה שגויים</p>}
+							{!this.state.isValidIdAndPassword && <p className={style.p}>ת"ז או סיסמה שגויים</p>}
 							<button onClick={this.ValidetionInputIdAndPassword}>כניסה</button>
+							<Link to="/Social_Project/ForgotPassword"><p> שכחתי סיסמה </p></Link>
 						</div>
-						<div>
-							<Link to="/Social_Project/ForgotPassword"><div> שכחתי סיסמה </div></Link> 
-						</div>
+							 
 					</div>
 				</div>
 				
