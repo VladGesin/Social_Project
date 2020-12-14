@@ -5,6 +5,8 @@ import GoodWord from '../WelcomPage/GoodWord/GoodWord';
 import News from '../WelcomPage/News/News';
 import Birthday from '../WelcomPage/Birthdays/Birthday';
 import Teachers from '../WelcomPage/PrivateTeacher/PrivateTeacher';
+import { positions, Provider } from "react-alert";
+import AlertTemplate from "react-alert-template-basic";
 
 import './WelcomPage.css';
 import api from "../../../../api";
@@ -12,7 +14,10 @@ import api from "../../../../api";
 const WelcomPage = () => {
   const [users, setUsers] =useState([]); //hook 
   const [news, setNews] = useState([]); // hook news
-
+  const options = {
+    timeout: 3000,
+    position: positions.BOTTOM_CENTER
+  };
   useEffect(() => {
     getUsers();
     getNews('תלמיד');
@@ -29,6 +34,7 @@ const WelcomPage = () => {
 
   return (
     <Fragment>
+      <Provider template={AlertTemplate} {...options}>
       <Container>
         <div className="row justify-content-md-center">
           <div className="col-md-8 ">
@@ -46,6 +52,7 @@ const WelcomPage = () => {
           </div>
         </div>
       </Container>
+      </Provider>
     </Fragment>
   );
 };

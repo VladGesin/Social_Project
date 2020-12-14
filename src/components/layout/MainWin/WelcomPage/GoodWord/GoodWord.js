@@ -7,18 +7,28 @@ import Modal from "react-bootstrap/Modal";
 import GoodWordCarusel from './GoodWordCarusel'
 import api from "../../../../../api";
 import Context from "../../../../../store/Context";
+import { useAlert } from "react-alert";
 
 
 const GoodWord = () => {
   const [show, setShow] = useState(false);
   const [committees,setCommittees] = useState([]);
   const context = useContext(Context);
-  const[erro,setErro]=useState(false);
+  const [erro,setErro]=useState(false);
+  const [goodWord,setGoodWord] = useState([]); //hook goodword
+  const [sent,setSent] = useState(false);
+  const alert = useAlert();
+
 
 useEffect(() => {
-  getCommittees()
+  getCommittees();
+  getGoodWord();
 }, [])
 
+function getGoodWord() {
+  api.get('goodWord').then(res=>setGoodWord(res.data)
+  );
+}
   function getCommittees(){
     api.get('committees').then(res=>setCommittees(res.data)); //get committees
   }
@@ -26,6 +36,7 @@ useEffect(() => {
   function handleClose(){
     setShow(false) 
     setErro(false)
+    setSent(false)
     setInput(false)};
 
   const handleShow = () => setShow(true);
@@ -34,17 +45,20 @@ useEffect(() => {
   const handleSend =()=>{
     if(document.getElementById('goodWordData').value !== ''){
       //send data function
-
+      setSent(true);
       api.post('goodWord',{
         sender_id:context.userState.id, 
          reciever_id:"123456789",
           committee_name:document.getElementById("committeSelection").value, 
             content:document.getElementById('goodWordData').value 
-          })
-
-      handleClose()
-      setInput(false)
-      setErro(false)
+          }).then(()=>  getGoodWord()
+          
+          )
+      alert.show("מילה טובה נשלחה");
+      setErro(false);
+      handleClose();
+      setInput(false);
+      
   }
   else if(!input){
       setInput(true)
@@ -60,8 +74,7 @@ useEffect(() => {
         <Card.Header as="h5">מילה טובה
         </Card.Header>
         <Card.Body > 
-          <GoodWordCarusel indicators={false}/>
-
+          <GoodWordCarusel indicators={false} goodWord={goodWord}/>
           <Button id='goodWordBTN' variant="primary" onClick={handleShow}>
             הכנס מילה טובה
           </Button>
@@ -96,6 +109,7 @@ useEffect(() => {
                 <textarea className="form-control" id="goodWordData" rows="10"></textarea>
                 
                   {erro && <div id='erro'>שגיאה לא ניתן לשלוח תוכן ריק</div>}
+                  {sent && <dGoodWordAlert/>}
                 
               </div>
             </form>
