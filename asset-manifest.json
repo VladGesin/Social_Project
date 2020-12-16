@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/Social_Project/static/css/main.30f1c3b3.chunk.css",
-    "main.js": "/Social_Project/static/js/main.32b31104.chunk.js",
-    "main.js.map": "/Social_Project/static/js/main.32b31104.chunk.js.map",
+    "main.css": "/Social_Project/static/css/main.4c581635.chunk.css",
+    "main.js": "/Social_Project/static/js/main.6bcb79e6.chunk.js",
+    "main.js.map": "/Social_Project/static/js/main.6bcb79e6.chunk.js.map",
     "runtime-main.js": "/Social_Project/static/js/runtime-main.53aa5759.js",
     "runtime-main.js.map": "/Social_Project/static/js/runtime-main.53aa5759.js.map",
     "static/css/2.432f1e83.chunk.css": "/Social_Project/static/css/2.432f1e83.chunk.css",
-    "static/js/2.b05ec0af.chunk.js": "/Social_Project/static/js/2.b05ec0af.chunk.js",
-    "static/js/2.b05ec0af.chunk.js.map": "/Social_Project/static/js/2.b05ec0af.chunk.js.map",
+    "static/js/2.382c722b.chunk.js": "/Social_Project/static/js/2.382c722b.chunk.js",
+    "static/js/2.382c722b.chunk.js.map": "/Social_Project/static/js/2.382c722b.chunk.js.map",
     "index.html": "/Social_Project/index.html",
-    "precache-manifest.cbb57abd40fc8e50fc64515002023ca5.js": "/Social_Project/precache-manifest.cbb57abd40fc8e50fc64515002023ca5.js",
+    "precache-manifest.9a279663cecca5f409963bf1ec798d8f.js": "/Social_Project/precache-manifest.9a279663cecca5f409963bf1ec798d8f.js",
     "service-worker.js": "/Social_Project/service-worker.js",
     "static/css/2.432f1e83.chunk.css.map": "/Social_Project/static/css/2.432f1e83.chunk.css.map",
-    "static/css/main.30f1c3b3.chunk.css.map": "/Social_Project/static/css/main.30f1c3b3.chunk.css.map",
-    "static/js/2.b05ec0af.chunk.js.LICENSE.txt": "/Social_Project/static/js/2.b05ec0af.chunk.js.LICENSE.txt",
+    "static/css/main.4c581635.chunk.css.map": "/Social_Project/static/css/main.4c581635.chunk.css.map",
+    "static/js/2.382c722b.chunk.js.LICENSE.txt": "/Social_Project/static/js/2.382c722b.chunk.js.LICENSE.txt",
     "static/media/account_balance-black-18dp.svg": "/Social_Project/static/media/account_balance-black-18dp.f5235c6d.svg",
     "static/media/index.css": "/Social_Project/static/media/background-bright.1fbaa233.jpg",
     "static/media/down-arrow.svg": "/Social_Project/static/media/down-arrow.70ac1623.svg",
@@ -28,8 +28,8 @@
   "entrypoints": [
     "static/js/runtime-main.53aa5759.js",
     "static/css/2.432f1e83.chunk.css",
-    "static/js/2.b05ec0af.chunk.js",
-    "static/css/main.30f1c3b3.chunk.css",
-    "static/js/main.32b31104.chunk.js"
+    "static/js/2.382c722b.chunk.js",
+    "static/css/main.4c581635.chunk.css",
+    "static/js/main.6bcb79e6.chunk.js"
   ]
 }
