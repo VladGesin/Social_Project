@@ -37,19 +37,18 @@ function CommTable(props) {
     <Fragment>
       <Card className="text-right h-auto w-100">
         <Card.Header as="h5" dir="rtl">
-          חברי הוועדה:
+          חברי הוועדה
         </Card.Header>
         <Card.Body>
-          <Card.Title>להלן טבלה עם פרטי חברי הוועדה:</Card.Title>
           <Card.Text>
             <Table responsive="sm" dir="rtl">
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>שם:</th>
-                  <th>תפקיד:</th>
-                  <th>טלפון:</th>
-                  <th>E-mail:</th>
+                  <th>שם</th>
+                  <th>תפקיד</th>
+                  <th>טלפון</th>
+                  <th>דואר אלקטרוני</th>
                 </tr>
               </thead>
               <tbody>{PplArrMap}</tbody>
