@@ -3,6 +3,7 @@ import styles from "./PersonalPage.module.scss";
 import {PersonalDetails} from "./PersonalDetails/PersonalDetails";
 import { SettingOutlined, FileTextOutlined } from '@ant-design/icons';
 import {UsersContacts} from "./UsersContacts/UsersContacts";
+import {UpdatePassword} from "./UpdatePassword/UpdatePassword"
 
 export const PersonalPage = () => {
     const [indexCurrentMode, setIndexCurrentMode] = React.useState(0);
@@ -21,6 +22,13 @@ export const PersonalPage = () => {
                 icon: () => <FileTextOutlined />
             },
             mainComp: () => <UsersContacts/>
+        },
+        {
+            menu: {
+                label: 'עדכון סיסמא',
+                icon: () => <FileTextOutlined />
+            },
+            mainComp: () => <UpdatePassword/>
         },
     ]
 

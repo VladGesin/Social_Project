@@ -1,12 +1,13 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import styles from "./MainCommitteesPage.module.scss";
 import {NavLink} from "react-router-dom";
 import {committeesConfig} from "./committeesConfig";
 import {Input, Table} from 'antd';
-
+import api from '../../../api'
 const {Search} = Input;
 
 export const MainCommitteesPage = () => {
+    const [committeeData,setCommitteeData] = useState([])
 
     const columns = [
         {
@@ -23,7 +24,18 @@ export const MainCommitteesPage = () => {
             align: 'right',
         }
     ];
+    useEffect(()=>{
+        getCommitteeNames();
+    },[])
 
+    const getCommitteeNames = async ()=>{
+        const res = await api.get("committees");
+        const data = res.data;
+        data[0].desc="תיאור וועדה 1"
+        data[1].desc="תיאור וועדה 1"
+        data[2].desc="תיאור וועדה 1"
+        console.log(res.data);
+    }
     const _data = committeesConfig.map((item, i) => {
         return ({
             key: i + 1,

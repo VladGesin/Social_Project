@@ -1,9 +1,8 @@
-import React, {Fragment} from 'react';
+import React, {Fragment,useEffect} from 'react';
 import CommDescription from './commDescription/commDescription';
 import CommTable from './commTable/commTable';
 import {useParams} from 'react-router-dom';
 import {committeesConfig} from "../MainCommitteesPage/committeesConfig";
-
 
 const CommiteesWin = () => {
 

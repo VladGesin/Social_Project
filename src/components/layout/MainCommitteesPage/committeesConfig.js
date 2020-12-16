@@ -10,8 +10,13 @@ export const committeesConfig = [
         desc: 'פירוט רחב על כלל המידע הנוגע לועדה',
     },
     {
-        paramKey: "education",
+        paramKey: "culture",
         name: 'ועדת תרבות',
+        desc: 'פירוט רחב על כלל המידע הנוגע לועדה',
+    },
+    {
+        paramKey: "fun",
+        name: 'ועדת פנאי',
         desc: 'פירוט רחב על כלל המידע הנוגע לועדה',
     }
 ]
