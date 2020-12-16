@@ -10,10 +10,12 @@ import MyMeetings from "../../xpertesy/MyMeetings/MyMeetings";
 import { PersonalPage } from "../../PersonalPage/PersonalPage";
 import { MainCommitteesPage } from "../../MainCommitteesPage/MainCommitteesPage";
 import Login from "../../Login/Login";
+import ForgotPassword from "../../Login/ForgotPassword"
 import { MapsPage } from "../../MapsPage/MapsPage";
 
 const routesData = [
    { component: Login, path: "/Social_Project/", exact: true },
+   {component: ForgotPassword,path: "/Social_Project/ForgotPassword",public: true,},
    { component: WelcomPage, path: "/Social_Project/MainWin" },
    { component: chairmanItems, path: "/Social_Project/chairmanItems/:item" },
    { component: SecretaryWin, path: "/Social_Project/SecretaryWin" },
