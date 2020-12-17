@@ -1,6 +1,7 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
 import urlIcon from "./url.svg";
+import style from "./MyMeetings.module.scss";
 const MeetingsTable = ({
    data,
    rowsAmount,
@@ -18,7 +19,7 @@ const MeetingsTable = ({
    }
 
    return (
-      <Table responsive dir="rtl" className="meeting-table">
+      <Table responsive dir="rtl" className={style.meetingTable}>
          <thead>
             <tr>
                <th>מארח</th>

@@ -1,10 +1,14 @@
-.emailList-container {
+.title {
+   margin-right: 2rem;
+}
+.emailListContainer {
    width: 50%;
    border: 1px solid #ced4da;
    display: flex;
    flex-wrap: wrap;
    justify-content: flex-end;
    padding: 1rem 0;
+   margin-right: 1rem;
 }
 .emailItem {
    background-color: #ced4da;
