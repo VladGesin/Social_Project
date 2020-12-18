@@ -153,7 +153,7 @@ const NewMeeting = () => {
             height: "fit-content",
          }}
       >
-         <h2 className={`text-right  mr-5`}>יצירת פגישה חדשה</h2>
+         <h3 className={`text-right  mr-5`}>יצירת פגישה חדשה</h3>
          {messages.length > 0 && (
             <Container>
                {messages.map((e) => (

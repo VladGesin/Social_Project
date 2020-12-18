@@ -77,7 +77,7 @@ const MyMeetings = () => {
 
    return (
       <div className={style.container}>
-         <h2 className="text-right mr-5">צפייה בפגישות שלי</h2>
+         <h3 className="text-right mr-5">צפייה בפגישות שלי</h3>
 
          <Form className="p-5" dir="rtl">
             <Row className={style.rows}>
