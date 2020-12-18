@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import MeetingsTable from "./MeetingsTable";
 import PaginationComp from "./PaginationComp";
-import "./MyMeetings.css";
+import style from "./MyMeetings.module.scss";
 import searchIcon from "./magnifying-glass.svg";
 import { DatePicker, TimePicker } from "antd";
 import Context from "../../../../store/Context";
@@ -76,34 +76,34 @@ const MyMeetings = () => {
    };
 
    return (
-      <>
-         <h2 className="text-right m-3">צפייה בפגישות שלי</h2>
+      <div className={style.container}>
+         <h3 className="text-right mr-5">צפייה בפגישות שלי</h3>
 
          <Form className="p-5" dir="rtl">
-            <Row className="rows">
-               <Col className="d-flex col-3 section">
-                  <Col className="text-center col-1 hideOnMobile">
-                     <Form.Label sm="1" className="label">
+            <Row className={style.rows}>
+               <Col className={`d-flex col-3 ${style.section}`}>
+                  <Col className={`text-center col-2 ${style.hideOnMobile}`}>
+                     <Form.Label sm="1" className={style.label}>
                         תאריך
                      </Form.Label>
                   </Col>
                   <Col dir="ltr">
                      <DateRangePicker
                         defaultValue={[filterForm.fromDate, filterForm.toDate]}
-                        className="range-input"
+                        className={style.rangeInput}
                         format="DD-MM-YY"
                         onChange={onChangeDateHandler}
                         placeholder={["תאריך התחלה", "תאריך סיום "]}
                      />
                   </Col>
                </Col>
-               <Col className="d-flex  col-3 section">
-                  <Col className="text-center col-2 hideOnMobile">
-                     <Form.Label className="label">שעה</Form.Label>
+               <Col className={`d-flex  col-3 ${style.section}`}>
+                  <Col className={`text-center col-2 ${style.hideOnMobile}`}>
+                     <Form.Label className={style.label}>שעה</Form.Label>
                   </Col>
                   <Col dir="ltr">
                      <TimeRangePicker
-                        className="range-input"
+                        className={style.rangeInput}
                         format={"HH:mm"}
                         defaultValue={[filterForm.fromHour, filterForm.toHour]}
                         onChange={(e) => {
@@ -120,16 +120,16 @@ const MyMeetings = () => {
                      />
                   </Col>
                </Col>
-               <Col className="col-1 btn-container">
+               <Col className={`col-1 ${style.btnContainer}`}>
                   <Button variant="success" onClick={filterTableHandler}>
                      סינון
                   </Button>
                </Col>
             </Row>
             <Row className="mt-3">
-               <Col className="d-flex  col-3 oneLine">
+               <Col className={`d-flex  col-3 ${style.oneLine}`}>
                   <Col className="text-right col-9">
-                     <Form.Label className="label ">
+                     <Form.Label className={style.label}>
                         מספר שורות בעמוד
                      </Form.Label>
                   </Col>
@@ -138,7 +138,7 @@ const MyMeetings = () => {
                         name="numberOfRows"
                         value={filterForm.numberOfRows}
                         onChange={onChangeHandler}
-                        className="input row-amount"
+                        className={`${style.input} ${style.rowAmount}`}
                         type="number"
                         min={1}
                         max={
@@ -151,10 +151,10 @@ const MyMeetings = () => {
                </Col>
             </Row>
             <Row className="mt-3">
-               <Col className="d-flex  col-3 oneLine">
+               <Col className={`d-flex  col-3 ${style.oneLine}`}>
                   <Col className="relative">
                      <input
-                        className="input search"
+                        className={`${style.input} ${style.search}`}
                         type="text"
                         placeholder="חיפוש"
                         onChange={searchHandler}
@@ -162,7 +162,7 @@ const MyMeetings = () => {
                      <img
                         src={searchIcon}
                         alt="search"
-                        className="search-icon"
+                        className={style.searchIcon}
                      />
                   </Col>
                </Col>
@@ -191,7 +191,7 @@ const MyMeetings = () => {
                </>
             )}
          </Container>
-      </>
+      </div>
    );
 };
 export default MyMeetings;

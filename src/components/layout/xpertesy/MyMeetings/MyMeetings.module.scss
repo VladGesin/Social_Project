@@ -1,7 +1,13 @@
+.container {
+   background-color: rgb(246, 252, 252);
+   margin: 2rem;
+   padding: 2rem;
+   border: 1px solid #ccc;
+}
 .label {
    line-height: 2rem;
 }
-.row-amount {
+.rowAmount {
    min-width: 3.5rem;
 }
 
@@ -15,7 +21,7 @@
    margin: 0;
 }
 
-.btn-container {
+.btnContainer {
    display: flex;
    justify-content: flex-start;
    padding: 0;
@@ -29,13 +35,13 @@
 .search {
    padding-left: 5rem;
 }
-.search-icon {
+.searchIcon {
    height: 1.4rem;
    position: absolute;
    top: 0.5rem;
    left: 2rem;
 }
-.meeting-table {
+.meetingTable {
    text-align: center;
 }
 .pagination {
@@ -58,7 +64,7 @@
       text-align: center;
       display: none;
    }
-   .range-input {
+   .rangeInput {
       width: 100%;
    }
    .oneLine {
@@ -77,11 +83,11 @@
    .section .col {
       padding: 0;
    }
-   .btn-container {
+   .btnContainer {
       max-width: 100% !important;
       justify-content: center;
    }
-   .btn-container button {
+   .btnContainer button {
       margin: 0;
    }
 }

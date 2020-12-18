@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import EmailList from "./EmailList";
 import api from "../../../../api";
-
+import style from "./EmailList.module.scss";
 const NewMeeting = () => {
    const [formData, setFormData] = useState({
       roomName: "",
@@ -144,8 +144,16 @@ const NewMeeting = () => {
    }
 
    return (
-      <>
-         <h2 className="text-right m-3">יצירת פגישה חדשה</h2>
+      <div
+         style={{
+            backgroundColor: "#f6fcfc",
+            margin: "2rem",
+            padding: "2rem",
+            border: "1px solid #ccc",
+            height: "fit-content",
+         }}
+      >
+         <h3 className={`text-right  mr-5`}>יצירת פגישה חדשה</h3>
          {messages.length > 0 && (
             <Container>
                {messages.map((e) => (
@@ -183,7 +191,7 @@ const NewMeeting = () => {
             </Container>
          )}
          <Form className="p-5" dir="rtl" onSubmit={onSubmitHandler}>
-            <Form.Group as={Row}>
+            <Form.Group as={Row} className="pr-3">
                <Form.Label column sm="1" className="text-right">
                   שם חדר
                </Form.Label>
@@ -196,7 +204,7 @@ const NewMeeting = () => {
                   />
                </Col>
             </Form.Group>
-            <Form.Group as={Row}>
+            <Form.Group as={Row} className="pr-3">
                <Form.Label column sm="1" className="text-right">
                   שם מארח
                </Form.Label>
@@ -209,7 +217,7 @@ const NewMeeting = () => {
                   />
                </Col>
             </Form.Group>
-            <Form.Group as={Row}>
+            <Form.Group as={Row} className="pr-3">
                <Form.Label column sm="1" className="text-right">
                   תאריך התחלה
                </Form.Label>
@@ -253,7 +261,7 @@ const NewMeeting = () => {
                   />
                </Col>
             </Form.Group>
-            <Form.Group as={Row}>
+            <Form.Group as={Row} className="pr-3">
                <Form.Label column sm="1" className="text-right">
                   הזמנת משתתפים
                </Form.Label>
@@ -279,13 +287,13 @@ const NewMeeting = () => {
                emails={participants}
                deleteParticipant={deleteParticipant}
             />
-            <div className="btnContainer">
+            <div className={style.btnContainer}>
                <Button className="submitBtn" variant="success" type="submit">
                   יצירת פגישה
                </Button>
             </div>
          </Form>
-      </>
+      </div>
    );
 };
 

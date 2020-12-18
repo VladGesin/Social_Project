@@ -1,6 +1,6 @@
 import React from "react";
 import Pagination from "react-bootstrap/Pagination";
-
+import style from "./MyMeetings.module.scss";
 const PaginationComp = ({
    dataLength,
    rowsInPage,
@@ -31,7 +31,7 @@ const PaginationComp = ({
    }
 
    return (
-      <div className="pagination">
+      <div className={style.pagination}>
          <Pagination>{pages}</Pagination>
       </div>
    );

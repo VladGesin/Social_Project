@@ -1,5 +1,5 @@
 import React from "react";
-import "./EmailList.css";
+import style from "./EmailList.module.scss";
 
 const EmailList = ({ emails, deleteParticipant }) => {
    const onDelete = (e) => {
@@ -7,11 +7,11 @@ const EmailList = ({ emails, deleteParticipant }) => {
    };
 
    return (
-      <div className="emailList-container">
+      <div className={style.emailListContainer}>
          {emails.map((email) => (
-            <span className="emailItem" key={email}>
+            <span className={style.emailItem} key={email}>
                {email}
-               <span className="deleteBtn" onClick={onDelete} id={email}>
+               <span className={style.deleteBtn} onClick={onDelete} id={email}>
                   X
                </span>
             </span>
