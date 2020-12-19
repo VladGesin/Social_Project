@@ -87,6 +87,7 @@ const UserManagement = ({ msg, setMsg }) => {
             close={() => setResetPasswordIsOpen(false)}
             isOpen={resetPasswordIsOpen}
             id={currentUser.user_id}
+            setMsg={setMsg}
          />
          <EditUserModal
             close={() => setEditUserIsOpen(false)}

@@ -24,6 +24,7 @@ const SecretaryWin = () => {
                clear={() => {
                   setMsg({ msg: "" });
                }}
+               type={msg.type}
             />
          )}
 

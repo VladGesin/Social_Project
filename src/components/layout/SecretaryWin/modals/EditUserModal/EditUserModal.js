@@ -111,8 +111,9 @@ const EditUserModal = ({ isOpen, close, id, setUsers, users, setMsg }) => {
          user_id: user.ID,
       };
       setUsers(updateUsers);
+      setImageName("");
       close();
-      setMsg({ msg: "פרטי המשתמש עודכנו בהצלחה" });
+      setMsg({ msg: "פרטי המשתמש עודכנו בהצלחה", type: "success" });
    };
    const onSelectImage = (e) => {
       setImageName(e.target.files[0].name);
@@ -120,7 +121,10 @@ const EditUserModal = ({ isOpen, close, id, setUsers, users, setMsg }) => {
    return (
       <Modal
          show={isOpen}
-         onHide={close}
+         onHide={() => {
+            setImageName("");
+            close();
+         }}
          contentClassName={style.editUser}
          centered
          size="xl"
@@ -132,6 +136,7 @@ const EditUserModal = ({ isOpen, close, id, setUsers, users, setMsg }) => {
                className="fas fa-times"
                onClick={() => {
                   close();
+                  setImageName("");
                   setStage(1);
                }}
             ></i>

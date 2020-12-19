@@ -11,6 +11,7 @@ const ContactDetails = ({ isOpen, close }) => {
          size="lg"
          dir="rtl"
          contentClassName={style.container}
+         centered
       >
          <Card className={`text-right h-auto ${style.container}`}>
             <Card.Header as="h5" dir="rtl" className={style.header}>
