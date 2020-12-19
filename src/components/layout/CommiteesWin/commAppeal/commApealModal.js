@@ -97,7 +97,7 @@ const CommApealModal = (props) => {
         פניה לוועדה
       </Button>
       <Modal show={show} onHide={handleClose} size="lg" dir="rtl">
-        <Card className="text-right h-auto">
+        <Card className="text-right h-auto" height="fit-content !important">
           <Card.Header as="h5" dir="rtl">
             פניה ל{props.name}
           </Card.Header>
@@ -105,7 +105,7 @@ const CommApealModal = (props) => {
             <Form dir="rtl">
               <Form.Row>
                 <Form.Group as={Col} controlId="formGridAppeaKind">
-                  <Form.Label>סוג הפנייה:</Form.Label>
+                  <Form.Label>סוג הפנייה</Form.Label>
                   <Form.Control
                     as="select"
                     defaultValue="בקשה"
@@ -121,7 +121,7 @@ const CommApealModal = (props) => {
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridAppealUrgent">
-                  <Form.Label>דחיפות:</Form.Label>
+                  <Form.Label>דחיפות</Form.Label>
                   <Form.Control
                     as="select"
                     defaultValue="רגיל"
@@ -138,7 +138,7 @@ const CommApealModal = (props) => {
               </Form.Row>
 
               <Form.Group controlId="formGridAppealSubject">
-                <Form.Label>נושא הפנייה:</Form.Label>
+                <Form.Label>נושא הפנייה</Form.Label>
                 <Form.Control
                   placeholder="נושא הפנייה"
                   value={formData.subject}
@@ -148,7 +148,7 @@ const CommApealModal = (props) => {
               </Form.Group>
 
               <Form.Group controlId="formGridAppealDetails">
-                <Form.Label>פרטי הפנייה:</Form.Label>
+                <Form.Label>פרטי הפנייה</Form.Label>
                 <Form.Control
                   as="textarea"
                   placeholder="פירוט הפנייה כולל את כל גוף הפנייה ותוכן אליו תרצה/י שיתייחסו בפנייה. נא לכתוב כמה שיותר פרטים וכמה שיותר ברור על מנת שנוכל לסייע במהירות "
@@ -160,7 +160,7 @@ const CommApealModal = (props) => {
 
               <Form.Row>
                 <Form.Group as={Col} controlId="formGridName">
-                  <Form.Label>שם איש קשר:</Form.Label>
+                  <Form.Label>שם איש קשר</Form.Label>
                   <Form.Control
                     value={formData.name}
                     onChange={onChange}
@@ -169,7 +169,7 @@ const CommApealModal = (props) => {
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridPhone">
-                  <Form.Label>טלפון ליצירת קשר:</Form.Label>
+                  <Form.Label>טלפון ליצירת קשר</Form.Label>
                   <Form.Control
                     value={formData.inTel}
                     onChange={handleTellength}
@@ -199,7 +199,7 @@ const CommApealModal = (props) => {
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridContactMail">
-                  <Form.Label>דואר אלקטרוני:</Form.Label>
+                  <Form.Label>דואר אלקטרוני</Form.Label>
                   <Form.Control
                     type="email"
                     placeholder="name@example.com"
