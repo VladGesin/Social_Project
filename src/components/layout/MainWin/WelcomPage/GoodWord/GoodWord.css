@@ -1,6 +1,6 @@
 @media (min-width: 992px) {
 	.card {
-		height: 229px !important;
+		height: 229px;
 		direction: rtl;
 	}
 }
