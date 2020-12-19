@@ -97,7 +97,7 @@ const CommApealModal = (props) => {
         פניה לוועדה
       </Button>
       <Modal show={show} onHide={handleClose} size="lg" dir="rtl" height="fit-content !important">
-        <Card className={`text-right h-auto ${style.container}`}>
+        <Card className="text-right h-auto container">
           <Card.Header as="h5" dir="rtl">
             פניה ל{props.name}
           </Card.Header>
