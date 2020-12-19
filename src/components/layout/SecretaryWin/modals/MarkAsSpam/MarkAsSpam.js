@@ -11,6 +11,7 @@ const MarkAsSpam = ({ isOpen, close }) => {
          size="lg"
          dir="rtl"
          contentClassName={style.container}
+         centered
       >
          <Card className={`text-right h-auto ${style.container}`}>
             <Card.Body>

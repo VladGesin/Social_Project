@@ -139,8 +139,10 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users, setMsg }) => {
             userType: "",
             password: "",
          });
+         setImageName("");
+         setImagePath("");
          close();
-         setMsg({ msg: "המשתמש נוצר בהצלחה" });
+         setMsg({ msg: "המשתמש נוצר בהצלחה", type: "success" });
       } catch (e) {
          console.log(e.message);
       }
@@ -150,6 +152,8 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users, setMsg }) => {
          show={isOpen}
          onHide={() => {
             close();
+            setImageName("");
+            setImagePath("");
             setFormDetails({
                firstName: "",
                lastName: "",

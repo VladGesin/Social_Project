@@ -5,16 +5,19 @@
    height: 100%;
    width: 100%;
    background-color: #fff;
-   padding: 2rem;
    border: 1px solid #ccc;
+   padding: 15px;
+
    h3 {
-      padding-bottom: 2rem;
+      font-size: 21px;
+      margin: 0 0 20px;
+      line-height: 1;
    }
    .line {
       display: flex;
-      font-size: 1.1rem;
       flex-direction: row-reverse;
-      line-height: 1rem;
+      margin-bottom: 20px;
+      justify-content: flex-start;
       cursor: pointer;
       img {
          margin-left: 1rem;

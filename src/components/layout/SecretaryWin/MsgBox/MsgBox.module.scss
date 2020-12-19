@@ -22,16 +22,25 @@
       margin: 0 0.5rem;
       padding: 0;
       align-self: center;
-      color: rgb(236, 152, 144);
       cursor: pointer;
    }
-   &::before {
-      content: "";
+   .typeLine {
       position: absolute;
       top: 100%;
       transform: translateY(-100%);
       width: 100%;
       height: 0.3rem;
+   }
+   .greenColor {
+      color: rgb(40, 167, 69);
+   }
+   .redColor {
+      color: rgb(236, 152, 144);
+   }
+   .greenBackground {
+      background-color: rgb(40, 167, 69);
+   }
+   .redBackground {
       background-color: rgb(236, 152, 144);
    }
 }
