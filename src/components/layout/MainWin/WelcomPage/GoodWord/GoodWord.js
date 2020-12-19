@@ -9,7 +9,7 @@ import api from '../../../../../api';
 import Context from '../../../../../store/Context';
 import { useAlert } from 'react-alert';
 
-const GoodWord = () => {
+const GoodWord = ({ setMsg }) => {
 	const [ show, setShow ] = useState(false);
 	const [ committees, setCommittees ] = useState([]);
 	const context = useContext(Context);
@@ -60,7 +60,8 @@ const GoodWord = () => {
 					content: document.getElementById('goodWordData').value
 				})
 				.then(() => getGoodWord());
-			alert.show('מילה טובה נשלחה');
+			// alert.show('מילה טובה נשלחה'); //Err show
+			setMsg({ msg: 'מילה טובה נשלחה', type: 'success' });
 			setErro(false);
 			handleClose();
 			setInput(false);
@@ -82,9 +83,9 @@ const GoodWord = () => {
 	};
 	return (
 		<Fragment>
-			<Card className="text-right h-100">
+			<Card className="text-right h-100 cardH">
 				<Card.Header as="h5">מילה טובה</Card.Header>
-				<Card.Body className="cardH">
+				<Card.Body>
 					<GoodWordCarusel indicators={false} goodWord={goodWord} />
 
 					<Button id="goodWordBTN" variant="primary" onClick={handleShow}>
