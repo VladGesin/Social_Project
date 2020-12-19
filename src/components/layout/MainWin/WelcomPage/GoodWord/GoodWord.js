@@ -82,11 +82,9 @@ const GoodWord = () => {
 	};
 	return (
 		<Fragment>
-			{console.log(goodWord)}
-			{console.log(goGoodword)}
 			<Card className="text-right h-100">
 				<Card.Header as="h5">מילה טובה</Card.Header>
-				<Card.Body className="card">
+				<Card.Body className="cardH">
 					<GoodWordCarusel indicators={false} goodWord={goodWord} />
 
 					<Button id="goodWordBTN" variant="primary" onClick={handleShow}>
