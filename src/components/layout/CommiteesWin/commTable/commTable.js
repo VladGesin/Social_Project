@@ -1,10 +1,12 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
 import InfoCardMap from '../commTable/infoCardMap';
+import api from "../../../../api";
+import { updateIndexedAccessTypeNode } from 'typescript';
 
 function CommTable(props) {
-  const PplArr = {
+  /*const PplArr = {
     card: [
       {
         index: 1,
@@ -28,10 +30,31 @@ function CommTable(props) {
         mail: 'cofi@xmxm.com',
       },
     ],
-  };
+  };*/
+  const [committeeData, setCommitteeData] = useState([]);
+  useEffect(()=>{
+    getCommittees()
+  },[])
+  const getCommittees = async ()=>{
+        const res = await api.get(`committeeParticipants/${props.commItem.name}`);
+        const data = res.data.map((cur, i)=>{
+      return {
+        ...cur.user,
+        committeePosition: cur.committeePosition,
+        index: i+1
+        
+      }
+    })
+    setCommitteeData(data);
+        console.log(data)
+    }
 
-  const PplArrMap = PplArr.card.map((card) => (
-    <InfoCardMap card={card} key={card.name.toString} />
+    
+  
+
+  const PplArrMap = committeeData.map((card, index) => (
+    <InfoCardMap card={card}  />
+    //  <InfoCardMap card={card} key={card.name.toString} />
   ));
   return (
     <Fragment>

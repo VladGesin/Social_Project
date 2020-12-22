@@ -30,7 +30,6 @@ const CommApealModal = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData.email + formData.inTel);
     var re = /\S+@\S+\.\S+/;
     var ret = /^[0-9\b]+$/;
     if (!re.test(formData.email)) {
@@ -39,9 +38,19 @@ const CommApealModal = (props) => {
     if (!ret.test(formData.inTel) || formData.inTel.length < 7) {
       setPhoneIsValid(false);
     } else setPhoneIsValid(true);
-
-    console.log(
-      "this print from submit:" +
+    const reqObj = {
+      committeeName: formData.commName,
+      type: formData.typeOfAppeal,
+      priority: formData.urgency,
+      subject: formData.subject,
+      content: formData.content,
+      full_name: formData.name,
+      phone_number: formData.pre_Tel + formData.inTel,
+      email: formData.email,
+    };
+    if (re.test(formData.email) && ret.test(formData.inTel) && formData.inTel.length === 7) {
+      console.log(
+      "submited:" +
         "\n name of comm:" +
         formData.commName +
         "\ntypeOfAppeal: " +
@@ -56,32 +65,13 @@ const CommApealModal = (props) => {
         formData.name +
         "\n pre_Tel: " +
         formData.pre_Tel +
-        "\n in tel" +
+        "\n in tel " +
         formData.inTel +
-        "\n email:" +
+        "\n email: " +
         formData.email
     );
-
-    /* 
-    const validateEmail = (email) => {
-      var re = /\S+@\S+\.\S+/;
-      return re.test(email);
-   };
-    const validatePhone = (inTel) =>{
-      var ret = /^[0-9\b]+$/;
-      return ret.test(inTel);
-   }
-   let mailIsValid = validateEmail(formData.email);
-   let phoneIsValid = validatePhone(formData.inTel);
-   if(!mailIsValid)
-      setemailIsValid(false);
-   else
-      setemailIsValid(true);
-  if(!phoneIsValid)
-      setPhoneIsValid(false)
-  else
-      setPhoneIsValid(true);
-      */
+      handleClose();
+    }
   };
 
   const handleTellength = (e) => {
@@ -89,15 +79,22 @@ const CommApealModal = (props) => {
   };
 
   const onChange = (e) => {
-    setFormData({ formData, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   return (
+    
     <Fragment>
       <Button variant="primary float-left" onClick={handleShow} dir="rtl">
         פניה לוועדה
       </Button>
-      <Modal show={show} onHide={handleClose} size="lg" dir="rtl" height="fit-content !important">
-        <Card className={`text-right h-auto ${style.container}`}>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        size="lg"
+        dir="rtl"
+        height="fit-content !important"
+      >
+        <Card className="text-right h-auto container">
           <Card.Header as="h5" dir="rtl">
             פניה ל{props.name}
           </Card.Header>
@@ -144,6 +141,7 @@ const CommApealModal = (props) => {
                   value={formData.subject}
                   onChange={onChange}
                   name="subject"
+                  required
                 />
               </Form.Group>
 

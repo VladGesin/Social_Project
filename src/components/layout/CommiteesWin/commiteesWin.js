@@ -1,27 +1,43 @@
-import React, {Fragment,useEffect} from 'react';
-import CommDescription from './commDescription/commDescription';
-import CommTable from './commTable/commTable';
-import {useParams} from 'react-router-dom';
-import {committeesConfig} from "../MainCommitteesPage/committeesConfig";
+import React, { Fragment, useEffect, useState } from "react";
+import CommDescription from "./commDescription/commDescription";
+import CommTable from "./commTable/commTable";
+import { useParams } from "react-router-dom";
+import { committeesConfig } from "../MainCommitteesPage/committeesConfig";
+import api from "../../../api";
 
-const CommiteesWin = () => {
+const CommiteesWin = (props) => {
+  console.log(props.location.aboutProps);
+  const {name,desc}= props.location.aboutProps
+  useEffect(() => {
+    getCommittees();
+  }, []);
 
-    const {type} = useParams();
-    const committeeData = committeesConfig.find(({paramKey}) => paramKey === type);
+  const [committeeData, setCommitteeData] = useState([]);
 
-    return (
-        <Fragment>
-            <div className="container">
-                <div className="row">
-                    <CommDescription commItem={committeeData}/>
-                </div>
+  const getCommittees = async ()=>{
+        const res = await api.get(`committees`);
+        setCommitteeData(res.data);
+    }
+    const x = useParams();
+    console.log(x);
+  //const { type } = useParams();
+  /*const committee = committeeData.find(
+    ({ name }) => name === type
+  );*/
 
-                <div className="row">
-                    <CommTable/>
-                </div>
-            </div>
-        </Fragment>
-    );
+  return (
+    <Fragment>
+      <div className="container">
+        <div className="row">
+          <CommDescription commItem={props.location.aboutProps}  />
+        </div>
+
+        <div className="row">
+          <CommTable commItem={props.location.aboutProps} />
+        </div>
+      </div>
+    </Fragment>
+  );
 };
 
 export default CommiteesWin;
