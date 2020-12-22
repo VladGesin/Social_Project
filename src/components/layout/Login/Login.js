@@ -69,7 +69,25 @@ export class Login extends Component {
 	
 	checkUserDetails = async () => {
 		
-		try {
+		try { 
+			 //  const response = await fetch(
+         //     "https://www.hitprojectscenter.com/Social-api/changePassword/",
+         //     {
+         //        headers: {
+         //           "Content-Type": "application/json",
+         //        },
+         //        method: "GET",
+         //        body: JSON.stringify({
+         //           userID: this.inputId,
+         //        }),
+         //     }
+         //  );
+         //  console.log(response);
+         //  console.log(this.inputId);
+         //  const token = await response.json();
+		 //  console.log(daysSinceLastPasswordChange);
+		//  if(daysSinceLastPasswordChange == 180 || daysSinceLastPasswordChange <= 175){}
+		//  if(daysSinceLastPasswordChange <= 0 && daysSinceLastPasswordChange >= 175){}
 			this.context.login(this.inputId, this.inputPassword, this.invalidCredentials);
 			sessionStorage.setItem(
 				'tempUser',
@@ -78,6 +96,8 @@ export class Login extends Component {
 					password: this.inputPassword
 				})
 			);
+				
+		 
 		} catch (error) {
 			console.log(error);
 		}
@@ -85,7 +105,8 @@ export class Login extends Component {
 
 	render() {
 		return (
-				<div className={style.login}>
+				<div>
+					<form onSubmit={this.onKeyUp}  className={style.login}>
 					<div>
 						<img src={logo} alt="logologin" />
 					</div>
@@ -101,15 +122,16 @@ export class Login extends Component {
 							<input type="password" placeholder="סיסמה" onChange={(e) => this.handleInputPassword(e)} />
 							{!this.state.password.isValid && <p className={style.p}>{this.state.password.msgPass}</p>}
 						</div>
+						<div className={style.inputContainer}>
 						<div className={style.btnContainer}>
 							{!this.state.isValidIdAndPassword && <p className={style.p}>ת"ז או סיסמה שגויים</p>}
 							<button onClick={this.ValidetionInputIdAndPassword}>כניסה</button>
-							<Link to="/Social_Project/ForgotPassword"><p> שכחתי סיסמה </p></Link>
-						</div>
-							 
+							<Link to="/Social_Project/ForgotPassword"><p> שכחתי סיסמה </p></Link></div>
+						</div>	 
 					</div>
+				 </form>
 				</div>
-				
+			
 				
 		);
 	}
