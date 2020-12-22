@@ -67,6 +67,7 @@ export class ForgotPassword extends Component {
 			  console.log(this.inputId, this.inputEmail); 
 			  const token = await response.json();
 			  console.log(token);
+			  
 			}
 			catch(error){
 			  console.log(error);
@@ -92,7 +93,7 @@ export class ForgotPassword extends Component {
 			<Router location="/ForgotPassword" context={this.staticContext}>
 			<Fragment>
 				<div className={style.login}>
-					<div className={style.loginCard}>
+					<div className={style.PassCard}>
 						<h2>איפוס סיסמה</h2>
 						<div className={style.inputContainer}>
 							<p>יש להזין תעודת זהות על מנת לקבל מייל לאיפוס סיסמא</p>

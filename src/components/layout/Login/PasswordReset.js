@@ -113,7 +113,7 @@ export class PasswordReset extends Component {
 			<Router location="/ForgotPassword" context={this.staticContext}>
 			<Fragment>
 				<div className={style.login}>
-					<div className={style.loginCard}>
+					<div className={style.PassCard}>
 						<h2>איפוס סיסמה</h2>
 						<div className={style.inputContainer}>
 							<input
