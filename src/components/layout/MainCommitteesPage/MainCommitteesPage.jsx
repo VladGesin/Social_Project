@@ -15,7 +15,7 @@ export const MainCommitteesPage = () => {
             dataIndex: 'name',
             key: 'name',
             align: 'right',
-            render: (text, {url}) => <NavLink to={url}>{text}</NavLink>
+            render: (text, {url, desc, name}) => <NavLink to={{pathname:url, aboutProps:{ name, desc}}}>{text}</NavLink>
         },
         {
             title: 'פירוט',
@@ -25,29 +25,27 @@ export const MainCommitteesPage = () => {
         }
     ];
     useEffect(()=>{
-        getCommitteeNames();
+        getCommittees();
     },[])
 
-    const getCommitteeNames = async ()=>{
-        const res = await api.get("committees");
-        const data = res.data;
-        data[0].desc="תיאור וועדה 1"
-        data[1].desc="תיאור וועדה 1"
-        data[2].desc="תיאור וועדה 1"
-        console.log(res.data);
+    const getCommittees = async ()=>{
+        const res = await api.get(`committees`);
+        setCommitteeData(res.data);
+        
     }
-    const _data = committeesConfig.map((item, i) => {
+    const _data = committeeData.map((item, i) => {
         return ({
             key: i + 1,
             name: item.name,
             desc: item.desc,
-            url: `/Social_Project/committees/${item.paramKey}`
+            url: `/Social_Project/committees/${item.name}`
         });
     })
 
-    const onSearch = value => console.log(value);
+   // const onSearch = value => console.log(value);
 
     return (
+        
         <div className={styles.rootMainCommitteesPage}>
             <h2>מסך ועדות ראשי</h2>
 

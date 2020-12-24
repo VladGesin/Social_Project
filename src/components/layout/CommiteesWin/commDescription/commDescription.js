@@ -1,8 +1,10 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import CommApealModal from '../commAppeal/commApealModal';
 
 const CommDescription = (props) => {
+  const [committeeDetails, setCommitteeDetails]= useState({});
+ 
 
   return (
     <Fragment>
