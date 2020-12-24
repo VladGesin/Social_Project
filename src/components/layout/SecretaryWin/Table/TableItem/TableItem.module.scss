@@ -28,6 +28,9 @@
          justify-content: center;
          align-items: flex-end;
          margin: 0 2rem;
+         .spam {
+            color: #e57373 !important;
+         }
          p:first-child {
             color: rgb(148, 148, 148);
             font-size: 0.9rem;
