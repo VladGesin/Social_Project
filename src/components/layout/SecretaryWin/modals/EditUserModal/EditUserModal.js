@@ -9,7 +9,6 @@ const EditUserModal = ({ isOpen, close, id, setUsers, users, setMsg }) => {
    const [phoneIsValid, setPhoneIsValid] = useState(true);
    const [committeesBoxItem, setCommitteesBoxItem] = useState([]);
    const [imageName, setImageName] = useState("");
-
    const [formDetails, setFormDetails] = useState({
       firstName: "",
       lastName: "",
@@ -18,20 +17,37 @@ const EditUserModal = ({ isOpen, close, id, setUsers, users, setMsg }) => {
       phonePrefix: "054",
       id: "",
       birthday: "",
-      userType: "a",
+      userType: "",
    });
    const [userType, setUserType] = useState({
-      parent: false,
-      committeeMember: false,
-      committeeHead: false,
+      user: false,
+      committee: false,
+      chairman: false,
       admin: false,
    });
    const emailRef = useRef(null);
    const phoneRef = useRef(null);
+
+   const resetState = () => {
+      setFormDetails({
+         firstName: "",
+         lastName: "",
+         email: "",
+         phone: "",
+         phonePrefix: "054",
+         id: "",
+         birthday: "",
+         userType: "",
+      });
+      setStage(1);
+      setCommitteesBoxItem([]);
+      setImageName("");
+   };
    useEffect(() => {
       (async function () {
          if (id !== undefined) {
             const res = await api.get(`user/${id}`);
+            console.log(res);
             const {
                firstName,
                lastName,
@@ -40,7 +56,14 @@ const EditUserModal = ({ isOpen, close, id, setUsers, users, setMsg }) => {
                birthday,
                phoneNumber,
             } = res.data[0];
-
+            console.log(userType);
+            setUserType({
+               user: false,
+               committee: false,
+               chairman: false,
+               admin: false,
+               [userType]: true,
+            });
             setFormDetails((cur) => ({
                ...cur,
                firstName,
@@ -56,12 +79,15 @@ const EditUserModal = ({ isOpen, close, id, setUsers, users, setMsg }) => {
          }
       })();
    }, [id]);
+
    useEffect(() => {
       if (!emailIsValid) emailRef.current.focus();
    }, [emailIsValid]);
+
    const onChange = (e) => {
       setFormDetails({ ...formDetails, [e.target.name]: e.target.value });
    };
+
    const onUserTypeChange = (e) => {
       setUserType({ ...userType, [e.target.name]: e.target.checked });
    };
@@ -93,10 +119,8 @@ const EditUserModal = ({ isOpen, close, id, setUsers, users, setMsg }) => {
          phone: formDetails.phonePrefix + formDetails.phone,
          contactUser: true,
       };
-      debugger;
+      console.log(reqObj);
       const res = await api.patch(`users/${id}`, reqObj);
-
-      debugger;
 
       const user = res.data[0];
       const userIndex = users.findIndex((i) => i.user_id === user.ID);
@@ -112,6 +136,7 @@ const EditUserModal = ({ isOpen, close, id, setUsers, users, setMsg }) => {
       };
       setUsers(updateUsers);
       setImageName("");
+      setStage(1);
       close();
       setMsg({ msg: "פרטי המשתמש עודכנו בהצלחה", type: "success" });
    };
@@ -207,8 +232,8 @@ const EditUserModal = ({ isOpen, close, id, setUsers, users, setMsg }) => {
                                  className={style.userTypeCheckBox}
                                  type="checkbox"
                                  onChange={onUserTypeChange}
-                                 name="committeeHead"
-                                 checked={userType.committeeHead}
+                                 name="chairman"
+                                 checked={userType.chairman}
                               />
                            </div>
                         </div>
@@ -219,18 +244,18 @@ const EditUserModal = ({ isOpen, close, id, setUsers, users, setMsg }) => {
                                  className={style.userTypeCheckBox}
                                  type="checkbox"
                                  onChange={onUserTypeChange}
-                                 name="parent"
-                                 checked={userType.parent}
+                                 name="user"
+                                 checked={userType.user}
                               />
                            </div>
                            <div>
                               <label>חבר ועדה</label>
                               <input
-                                 checked={userType.committeeMember}
+                                 checked={userType.committee}
                                  className={style.userTypeCheckBox}
                                  type="checkbox"
                                  onChange={onUserTypeChange}
-                                 name="committeeMember"
+                                 name="committee"
                               />
                            </div>
                         </div>

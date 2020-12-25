@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import api from "../../../../../api";
 import style from "./CreateNewUser.module.scss";
@@ -13,7 +13,7 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users, setMsg }) => {
       phonePrefix: "054",
       id: "",
       birthday: "",
-      userType: "",
+      userType: "parent",
       password: "",
    });
    const [validation, setValidation] = useState({
@@ -29,24 +29,31 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users, setMsg }) => {
       passwordIsValid: true,
    });
    const [userType, setUserType] = useState({
-      parent: true,
-      committeeMember: false,
-      committeeHead: false,
+      user: true,
+      committee: false,
+      chairman: false,
       admin: false,
    });
    const [passwordIsShown, setPasswordIsShown] = useState(false);
+   const [committees, setCommittees] = useState([]);
    const [committeesBoxItem, setCommitteesBoxItem] = useState([]);
    const [imageName, setImageName] = useState("");
    const [imagePath, setImagePath] = useState("");
-
+   const [chairMan, setChairMan] = useState("");
+   useEffect(() => {
+      (async () => {
+         const res = await api.get("committees");
+         setCommittees(res.data);
+      })();
+   }, []);
    const onChange = (e) => {
       setFormDetails({ ...formDetails, [e.target.name]: e.target.value });
    };
    const onUserTypeChange = (e) => {
       setUserType({
-         parent: false,
-         committeeMember: false,
-         committeeHead: false,
+         user: false,
+         committee: false,
+         chairman: false,
          admin: false,
          [e.target.name]: e.target.checked,
       });
@@ -101,8 +108,8 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users, setMsg }) => {
    const onSave = async (e) => {
       try {
          e.preventDefault();
-
          if (!validateStage3(formDetails, setValidation)) {
+            console.log("no valid");
             return;
          }
          const userTypes = Object.keys(userType);
@@ -119,8 +126,25 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users, setMsg }) => {
             birthday: formDetails.birthday,
             phone: formDetails.phonePrefix + formDetails.phone,
          };
-         const res = await api.post(`users`, reqObj);
+         console.log(reqObj);
 
+         await api.post(`users`, reqObj);
+         for (let c of committees) {
+            if (chairMan === c.name && (userType.admin || userType.chairman)) {
+               await api.post("committees", {
+                  userID: formDetails.id,
+                  committeeName: c.name,
+                  role: "יושב ראש",
+               });
+            } else {
+               await api.post("committees", {
+                  userID: formDetails.id,
+                  committeeName: c.name,
+                  role: "חבר ועדה",
+               });
+            }
+         }
+         //
          setValidation((cur) => ({
             ...cur,
             idIsAlreadyExist: false,
@@ -388,8 +412,8 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users, setMsg }) => {
                                  className={style.userTypeCheckBox}
                                  type="checkbox"
                                  onChange={onUserTypeChange}
-                                 name="committeeHead"
-                                 checked={userType.committeeHead}
+                                 name="chairman"
+                                 checked={userType.chairman}
                               />
                            </div>
                         </div>
@@ -400,18 +424,18 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users, setMsg }) => {
                                  className={style.userTypeCheckBox}
                                  type="checkbox"
                                  onChange={onUserTypeChange}
-                                 name="parent"
-                                 checked={userType.parent}
+                                 name="user"
+                                 checked={userType.user}
                               />
                            </div>
                            <div>
                               <label>חבר ועדה</label>
                               <input
-                                 checked={userType.committeeMember}
+                                 checked={userType.committee}
                                  className={style.userTypeCheckBox}
                                  type="checkbox"
                                  onChange={onUserTypeChange}
-                                 name="committeeMember"
+                                 name="committee"
                               />
                            </div>
                         </div>
@@ -421,11 +445,20 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users, setMsg }) => {
                   <div className={style.leftSection}>
                      <div>
                         <label>שיוך יושב ראש לועדה</label>
-                        <select dir="rtl">
+                        <select
+                           dir="rtl"
+                           disabled={
+                              userType.chairman || userType.admin ? false : true
+                           }
+                           onChange={(e) => {
+                              setChairMan(e.target.value);
+                           }}
+                           value={chairMan}
+                        >
                            <option></option>
-                           <option>ועדת קישוט בית ספר</option>
-                           <option>ועדת הווי ובידור</option>
-                           <option>ועדת פיתוח אתרים</option>
+                           {committees.map((c) => (
+                              <option>{c.name}</option>
+                           ))}
                         </select>
                      </div>
                      <div>
@@ -446,12 +479,9 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users, setMsg }) => {
                         >
                            {" "}
                            <option></option>
-                           <option>ועדת קישוט בית ספר</option>
-                           <option>ועדת הווי ובידור</option>
-                           <option>ועדת פיתוח אתרים</option>
-                           <option>ועדת 1</option>
-                           <option>ועדת 2</option>
-                           <option>ועדת 3</option>
+                           {committees.map((c) => (
+                              <option>{c.name}</option>
+                           ))}
                         </select>
                      </div>
                      <div className={style.committeesBox}>
