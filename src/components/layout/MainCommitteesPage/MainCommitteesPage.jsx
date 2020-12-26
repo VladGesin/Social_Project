@@ -1,10 +1,9 @@
 import React,{useEffect,useState} from "react";
 import styles from "./MainCommitteesPage.module.scss";
 import {NavLink} from "react-router-dom";
-import {committeesConfig} from "./committeesConfig";
-import {Input, Table} from 'antd';
+import {Table} from 'antd';
 import api from '../../../api'
-const {Search} = Input;
+//const {Search} = Input;
 
 export const MainCommitteesPage = () => {
     const [committeeData,setCommitteeData] = useState([])
