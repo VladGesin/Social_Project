@@ -71,12 +71,12 @@ export class Login extends Component {
 		
 		try { 
 			 //  const response = await fetch(
-         //     "https://www.hitprojectscenter.com/Social-api/changePassword/",
+         //     "https://www.hitprojectscenter.com/Social-api/loginManager/passwordExceeded/",
          //     {
          //        headers: {
          //           "Content-Type": "application/json",
          //        },
-         //        method: "GET",
+         //        method: "POST",
          //        body: JSON.stringify({
          //           userID: this.inputId,
          //        }),
