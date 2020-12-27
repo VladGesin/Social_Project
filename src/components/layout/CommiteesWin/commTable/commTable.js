@@ -7,27 +7,23 @@ import { useParams } from "react-router-dom";
 
 
 function CommTable(props) {
-  const name = useParams().type;
-  const [commName, setCommName] = useState(name);
+  const commName = useParams().type;
   const [committeeData, setCommitteeData] = useState([]);
   useEffect(()=>{
+    const getCommittees = async ()=>{
+      const res = await api.get(`committeeParticipants/${commName}`);
+      const data = res.data.map((cur, i)=>{
+    return {
+      ...cur.user,
+      committeePosition: cur.committeePosition,
+      index: i+1
+      
+    }
+  })
+  setCommitteeData(data);
+  }
     getCommittees()
   },[])
-  const getCommittees = async ()=>{
-        const res = await api.get(`committeeParticipants/${commName}`);
-        const data = res.data.map((cur, i)=>{
-      return {
-        ...cur.user,
-        committeePosition: cur.committeePosition,
-        index: i+1
-        
-      }
-    })
-    setCommitteeData(data);
-    }
-
-    
-  
 
   const PplArrMap = committeeData.map((card, index) => (
     <InfoCardMap card={card} key={index} />
