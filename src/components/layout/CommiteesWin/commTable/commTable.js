@@ -3,40 +3,18 @@ import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
 import InfoCardMap from '../commTable/infoCardMap';
 import api from "../../../../api";
-import { updateIndexedAccessTypeNode } from 'typescript';
+import { useParams } from "react-router-dom";
+
 
 function CommTable(props) {
-  /*const PplArr = {
-    card: [
-      {
-        index: 1,
-        name: 'ישראל ישראלי',
-        position: 'יו״ר וועדה',
-        phone: '054222222',
-        mail: 'gas@gfdv.com',
-      },
-      {
-        index: 2,
-        name: 'ילוני אלמוני',
-        position: 'יו״ר וועדהגן יו"ר הוועדה',
-        phone: '054222222',
-        mail: 'HHHH@MMm.com',
-      },
-      {
-        index: 3,
-        name: 'גודי גודיד',
-        position: 'מזכירת היו״ר',
-        phone: '054222222',
-        mail: 'cofi@xmxm.com',
-      },
-    ],
-  };*/
+  const name = useParams().type;
+  const [commName, setCommName] = useState(name);
   const [committeeData, setCommitteeData] = useState([]);
   useEffect(()=>{
     getCommittees()
   },[])
   const getCommittees = async ()=>{
-        const res = await api.get(`committeeParticipants/${props.commItem.name}`);
+        const res = await api.get(`committeeParticipants/${commName}`);
         const data = res.data.map((cur, i)=>{
       return {
         ...cur.user,
@@ -46,14 +24,13 @@ function CommTable(props) {
       }
     })
     setCommitteeData(data);
-        console.log(data)
     }
 
     
   
 
   const PplArrMap = committeeData.map((card, index) => (
-    <InfoCardMap card={card}  />
+    <InfoCardMap card={card} key={index} />
     //  <InfoCardMap card={card} key={card.name.toString} />
   ));
   return (
@@ -63,8 +40,8 @@ function CommTable(props) {
           חברי הוועדה
         </Card.Header>
         <Card.Body>
-          <Card.Text>
-            <Table responsive="sm" dir="rtl">
+         
+            <Table responsive="sm" dir="rtl" hover>
               <thead>
                 <tr>
                   <th>#</th>
@@ -76,7 +53,7 @@ function CommTable(props) {
               </thead>
               <tbody>{PplArrMap}</tbody>
             </Table>
-          </Card.Text>
+         
         </Card.Body>
       </Card>
     </Fragment>
