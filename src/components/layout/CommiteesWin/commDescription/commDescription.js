@@ -10,7 +10,7 @@ const CommDescription = (props) => {
         <Card.Body>
           <Card.Title>קצת על הוועדה</Card.Title>
           <Card.Text>{props.commItem.desc}</Card.Text>
-          <CommApealModal name={props.commItem.name}/>
+          <CommApealModal />
         </Card.Body>
       </Card>
     </Fragment>

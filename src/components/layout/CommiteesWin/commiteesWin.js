@@ -7,25 +7,25 @@ import api from "../../../api";
 export const CommiteesWin = (props) => {
   //const {name ,desc} = props.location.aboutProps
   //console.log(props)
+  const [commObj, setCommObj] = useState({});
+  const commName = useParams().type;
+
   useEffect(() => {
+    const getCommittees = async () => {
+      //return all committees;
+      try {
+        const res = await api.get(`committees`);
+        const obj = res.data.find(({ name }) => name === commName);
+        setCommObj(obj);
+        //setCommitteeData(res.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
     getCommittees();
   }, []);
 
   //const [committeeData, setCommitteeData] = useState([]);
-  const [commObj, setCommObj] = useState({});
-  const [commName, setCommName] = useState(useParams().type);
-
-  const getCommittees = async () => {
-    //return all committees;
-    try {
-      const res = await api.get(`committees`);
-      const obj = res.data.find(({ name }) => name === commName);
-      setCommObj(obj);
-      //setCommitteeData(res.data);
-    } catch (e) {
-      console.log(e);
-    }
-  };
 
   //const { type } = useParams();
 

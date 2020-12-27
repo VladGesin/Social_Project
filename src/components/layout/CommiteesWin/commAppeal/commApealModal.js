@@ -7,13 +7,13 @@ import api from "../../../../api";
 import MsgBox from "../../SecretaryWin/MsgBox/MsgBox";
 import { useParams } from "react-router-dom";
 
-const CommApealModal = (props) => {
+const CommApealModal = () => {
+  const commName = useParams().type;
   const [show, setShow] = useState(false);
   const [emailIsValid, setEmailIsValid] = useState(true);
   const [phoneIsValid, setPhoneIsValid] = useState(true);
   const [contentIsValid, setContentIsValid] = useState(true);
   const [subjectIsValid, setSubjectIsValid] = useState(true);
-  const [commName, setCommName] = useState(useParams().type);
   const [nameIsValid, setNameIsValid] = useState(true);
   const [msg, setMsg] = useState({ msg: "" });
 
@@ -133,11 +133,10 @@ const CommApealModal = (props) => {
         onHide={handleClose}
         size="lg"
         dir="rtl"
-        height="fit-content !important"
       >
-        <Card className="text-right h-auto container">
+        <Card className="text-right h-auto container" height="fit-content !important">
           <Card.Header as="h5" dir="rtl">
-            פניה ל{props.name}
+            פניה ל{commName}  
           </Card.Header>
           <Card.Body>
             <Form dir="rtl">
