@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from "./UsersContacts.module.scss";
 import Context from "../../../../store/Context";
 import searchIcon from "../../SecretaryWin/assets/search.svg";
 import {Menu, Dropdown} from 'antd';
 import {DownOutlined} from '@ant-design/icons';
+import api from "../../../../api";
 
 const MIN_numberOfRowInPage = 2;
 const MAX_numberOfRowInPage = 7;
@@ -73,6 +74,7 @@ const itemIncludeInCurrentSearch = (item, searchQuery) => {
 export const UsersContacts = () => {
 
     const {userState} = React.useContext(Context);
+    const [contacts, setContacts] = useState(null);
 
     const [searchQuery, setSearchQuery] = React.useState('');
     const [pageNumber, setPageNumber] = React.useState(0);
@@ -80,7 +82,14 @@ export const UsersContacts = () => {
     const [orderSort, setOrderSort] = React.useState('down');
     const [numberOfRowInPage, setNumberOfRowInPage] = React.useState(4);
 
-    console.log('22222', fieldTypeSort)
+    useEffect(() => {
+
+        api.get(`/inbox/getBySenderId/${userState.id}`)
+            .then(({data}) =>setContacts(data))
+            .catch(err =>{
+                debugger
+            })
+    } ,[]);
 
     const getCurrentPageData = (arr) => {
         return arr.reduce((acc, item, i) => {
@@ -101,7 +110,7 @@ export const UsersContacts = () => {
                 return itemIncludeInCurrentSearch(item, searchQuery) ? [...acc, item] : acc;
             }, [])
 
-            
+
         return notSortData.sort((a, b) =>  {
             if (fieldTypeSort === 'id'){
                 return orderSort === 'down' ? b.id - a.id : a.id - b.id
@@ -127,7 +136,7 @@ export const UsersContacts = () => {
                 return 0;
             }
 
-            
+
         })
     }
 
@@ -197,7 +206,7 @@ export const UsersContacts = () => {
                 <div className={styles.dropdownWrapper}>
                     <Dropdown overlay={menuFieldType}>
                         <div>
-                        
+
                             <span>{fields_map[fieldTypeSort]}</span>
                             <DownOutlined/>
                         </div>
@@ -207,7 +216,7 @@ export const UsersContacts = () => {
                 <div className={styles.dropdownWrapper}>
                     <Dropdown overlay={menuOrder}>
                         <div>
-                            
+
                             <span>סדר {orderSort === 'down' ? 'יורד' : 'עולה'}</span>
                             <DownOutlined/>
                         </div>
