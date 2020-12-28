@@ -31,11 +31,11 @@ function CommTable(props) {
   ));
   return (
     <Fragment>
-      <Card className="text-right h-auto w-100">
+      <Card className="text-right h-auto w-100" style={{height: 'auto important!'}}>
         <Card.Header as="h5" dir="rtl">
           חברי הוועדה
         </Card.Header>
-        <Card.Text>
+        <Card.Body>
          
             <Table responsive="sm" dir="rtl" hover>
               <thead>
@@ -50,7 +50,7 @@ function CommTable(props) {
               <tbody>{PplArrMap}</tbody>
             </Table>
          
-        </Card.Text>
+        </Card.Body>
       </Card>
     </Fragment>
   );
