@@ -31,7 +31,7 @@ function CommTable(props) {
   ));
   return (
     <Fragment>
-      <Card className="text-right h-auto w-100" style={{height: 'auto !important'}}>
+      <Card className="text-right h-auto w-100" style="height: auto !important">
         <Card.Header as="h5" dir="rtl">
           חברי הוועדה
         </Card.Header>
