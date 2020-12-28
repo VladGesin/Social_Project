@@ -35,7 +35,7 @@ function CommTable(props) {
         <Card.Header as="h5" dir="rtl">
           חברי הוועדה
         </Card.Header>
-        <Card.Body>
+        <Card.Text>
          
             <Table responsive="sm" dir="rtl" hover>
               <thead>
@@ -50,7 +50,7 @@ function CommTable(props) {
               <tbody>{PplArrMap}</tbody>
             </Table>
          
-        </Card.Body>
+        </Card.Text>
       </Card>
     </Fragment>
   );
