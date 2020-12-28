@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/Social_Project/static/css/main.1f476b66.chunk.css",
+    "main.css": "/Social_Project/static/css/main.124ab9ee.chunk.css",
     "main.js": "/Social_Project/static/js/main.ff20039b.chunk.js",
     "main.js.map": "/Social_Project/static/js/main.ff20039b.chunk.js.map",
     "runtime-main.js": "/Social_Project/static/js/runtime-main.53aa5759.js",
@@ -9,10 +9,10 @@
     "static/js/2.dc754d4f.chunk.js": "/Social_Project/static/js/2.dc754d4f.chunk.js",
     "static/js/2.dc754d4f.chunk.js.map": "/Social_Project/static/js/2.dc754d4f.chunk.js.map",
     "index.html": "/Social_Project/index.html",
-    "precache-manifest.77666525a2da08b9b306a7d063488113.js": "/Social_Project/precache-manifest.77666525a2da08b9b306a7d063488113.js",
+    "precache-manifest.871bf8075e4523ea2f47ebdfb2bb4746.js": "/Social_Project/precache-manifest.871bf8075e4523ea2f47ebdfb2bb4746.js",
     "service-worker.js": "/Social_Project/service-worker.js",
     "static/css/2.432f1e83.chunk.css.map": "/Social_Project/static/css/2.432f1e83.chunk.css.map",
-    "static/css/main.1f476b66.chunk.css.map": "/Social_Project/static/css/main.1f476b66.chunk.css.map",
+    "static/css/main.124ab9ee.chunk.css.map": "/Social_Project/static/css/main.124ab9ee.chunk.css.map",
     "static/js/2.dc754d4f.chunk.js.LICENSE.txt": "/Social_Project/static/js/2.dc754d4f.chunk.js.LICENSE.txt",
     "static/media/account_balance-black-18dp.svg": "/Social_Project/static/media/account_balance-black-18dp.f5235c6d.svg",
     "static/media/index.css": "/Social_Project/static/media/background-bright.1fbaa233.jpg",
@@ -29,7 +29,7 @@
     "static/js/runtime-main.53aa5759.js",
     "static/css/2.432f1e83.chunk.css",
     "static/js/2.dc754d4f.chunk.js",
-    "static/css/main.1f476b66.chunk.css",
+    "static/css/main.124ab9ee.chunk.css",
     "static/js/main.ff20039b.chunk.js"
   ]
 }
