@@ -10,62 +10,18 @@ const MIN_numberOfRowInPage = 2;
 const MAX_numberOfRowInPage = 7;
 
 const fields_map = {
-    id: 'מספר פניה',
-    destination: 'נמען',
+    inbox_id: 'מספר פניה',
+    committee_name: 'שם ועדה',
+    contact_full_name: 'נמען',
     subject: 'נושא הפנייה',
-    time: 'תאריך ושעת פנייה',
-    status: 'סטטוס'
+    inbox_sending_time: 'תאריך הפנייה',
+    is_open: 'סטטוס'
 }
-
-const mock_data = [
-    {
-        id: '1234',
-        destination: 'שם נמען1',
-        subject: 'נושא הפנייה 123',
-        time: '3453453453',
-        status: 'פתוח'
-    },
-    {
-        id: '5678',
-        destination: 'שם נמען2',
-        subject: 'נושא הפנייה 456',
-        time: '3453453453',
-        status: 'סגור'
-    },
-    {
-        id: '9101',
-        destination: 'שם נמען3',
-        subject: 'נושא הפנייה 789',
-        time: '3453453453',
-        status: 'פתוח'
-    },
-    {
-        id: '1213',
-        destination: 'שם נמען4',
-        subject: 'נושא הפנייה 000',
-        time: '3453453453',
-        status: 'סגור'
-    },
-    {
-        id: '1213',
-        destination: 'שם נמען5',
-        subject: 'נושא הפנייה 000',
-        time: '3453453453',
-        status: 'סגור'
-    },
-    {
-        id: '1213',
-        destination: 'שם נמען6',
-        subject: 'נושא הפנייה 000',
-        time: '3453453453',
-        status: 'סגור'
-    },
-]
 
 const itemIncludeInCurrentSearch = (item, searchQuery) => {
     if (searchQuery === '') return true;
 
-    if (item.id.includes(searchQuery) || item.destination.includes(searchQuery) || item.subject.includes(searchQuery)) {
+    if (item.inbox_id.includes(searchQuery) || item.committee_name.includes(searchQuery) || item.subject.includes(searchQuery)) {
         return true;
     }
     return false;
@@ -78,14 +34,17 @@ export const UsersContacts = () => {
 
     const [searchQuery, setSearchQuery] = React.useState('');
     const [pageNumber, setPageNumber] = React.useState(0);
-    const [fieldTypeSort, setFieldTypeSort] = React.useState('id');
+    const [fieldTypeSort, setFieldTypeSort] = React.useState('inbox_id');
     const [orderSort, setOrderSort] = React.useState('down');
     const [numberOfRowInPage, setNumberOfRowInPage] = React.useState(4);
 
     useEffect(() => {
 
         api.get(`/inbox/getBySenderId/${userState.id}`)
-            .then(({data}) =>setContacts(data))
+            .then(({data}) => {
+                console.log(data)
+                setContacts(data)
+            })
             .catch(err =>{
                 debugger
             })
@@ -105,15 +64,15 @@ export const UsersContacts = () => {
     const getCountPages = (arr) => Math.ceil(arr.length / numberOfRowInPage);
 
     const getAllData = () => {
-        const notSortData =  searchQuery === '' ? mock_data :
-            mock_data.reduce((acc, item) => {
+        const notSortData =  searchQuery === '' ? contacts :
+            contacts.reduce((acc, item) => {
                 return itemIncludeInCurrentSearch(item, searchQuery) ? [...acc, item] : acc;
             }, [])
 
 
         return notSortData.sort((a, b) =>  {
-            if (fieldTypeSort === 'id'){
-                return orderSort === 'down' ? b.id - a.id : a.id - b.id
+            if (fieldTypeSort === 'inbox_id'){
+                return orderSort === 'down' ? b.inbox_id - a.inbox_id : a.inbox_id - b.inbox_id
             }
             var nameA = a[fieldTypeSort].toUpperCase(); // ignore upper and lowercase
             var nameB = b[fieldTypeSort].toUpperCase(); // ignore upper and lowercase
@@ -245,7 +204,16 @@ export const UsersContacts = () => {
                                         מספר פנייה
                                     </label>
                                     <label className={styles.value}>
-                                        {item.id}
+                                        {item.inbox_id}
+                                    </label>
+                                </div>
+
+                                <div className={styles.field}>
+                                    <label className={styles.label}>
+                                        שם ועדה
+                                    </label>
+                                    <label className={styles.value}>
+                                        {item.committee_name}
                                     </label>
                                 </div>
 
@@ -254,7 +222,7 @@ export const UsersContacts = () => {
                                         נמען
                                     </label>
                                     <label className={styles.value}>
-                                        {item.destination}
+                                        {item.contact_full_name}
                                     </label>
                                 </div>
 
@@ -272,7 +240,7 @@ export const UsersContacts = () => {
                                         תאריך ושעת פניה
                                     </label>
                                     <label className={styles.value}>
-                                        {item.time}
+                                        {new Date(item.inbox_sending_time).toLocaleDateString('he-IL')}
                                     </label>
                                 </div>
 
@@ -281,7 +249,7 @@ export const UsersContacts = () => {
                                         סטטוס
                                     </label>
                                     <label className={styles.value}>
-                                        {item.status}
+                                        {item.is_open ?  'פתוח': 'סגור'}
                                     </label>
                                 </div>
                             </div>
@@ -313,13 +281,13 @@ export const UsersContacts = () => {
         );
     }
 
-    const allData = getAllData();
+    const allData = contacts ? getAllData() : [];
     const currentData = getCurrentPageData(allData)
     const countPages = getCountPages(allData);
 
     return (
         <div className={styles.rootUsersContacts}>
-            <div className={styles.wrapperSearchInput}>
+            {currentData.length >0 && <div className={styles.wrapperSearchInput}>
                 <img src={searchIcon}/>
                 <input
                     onChange={handleChangeSearch}
@@ -329,11 +297,24 @@ export const UsersContacts = () => {
                 />
             </div>
 
+            }
+
+
 
             <div className={styles.main}>
-                {renderSortContainer()}
-                {renderContactsTable()}
-                {countPages > 1 && renderPagination()}
+                {contacts === null && <div>טוען</div> }
+
+                {currentData.length >0?
+                    <React.Fragment>
+                        {renderSortContainer()}
+                        {renderContactsTable()}
+                        {countPages > 1 && renderPagination()}
+                    </React.Fragment>
+                    :
+                    <div>לא קיימות פניות!</div>
+
+                }
+
             </div>
 
         </div>
