@@ -3,6 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import api from "../../../../../api";
 import style from "./CreateNewUser.module.scss";
 import { validateStage1, validateStage3 } from "./validation";
+
 const CreateNewUser = ({ isOpen, close, id, setUsers, users, setMsg }) => {
    const [stage, setStage] = useState(1);
    const [formDetails, setFormDetails] = useState({

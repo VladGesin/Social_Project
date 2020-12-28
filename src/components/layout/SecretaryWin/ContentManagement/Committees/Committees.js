@@ -7,7 +7,7 @@ import ContactDetails from "../../modals/ContactDetails/ContactDetails";
 import MarkAsSpam from "../../modals/MarkAsSpam/MarkAsSpam";
 import AppealReply from "../../modals/AppealReply/AppealReply";
 import api from "../../../../../api";
-import { Menu, Dropdown, Button } from "antd";
+import { Spin, Menu, Dropdown, Button } from "antd";
 
 const columns = [
    { title: "מספר פנייה", variableName: "inbox_id" },
@@ -32,6 +32,7 @@ const Committees = ({ setMsg }) => {
    const [selectedCommittee, setSelectedCommittee] = useState();
    const [appeals, setAppeals] = useState([]);
    const [currentAppeal, setCurrentAppeal] = useState();
+   const [isLoading, setIsLoading] = useState(true);
 
    const rowAction = {
       setCurrentData: setCurrentAppeal,
@@ -96,6 +97,7 @@ const Committees = ({ setMsg }) => {
    };
    useEffect(() => {
       getAppealsForCommittee();
+      setIsLoading(false);
    }, [selectedCommittee]);
 
    const menu = (committeesNames) => {
@@ -141,35 +143,41 @@ const Committees = ({ setMsg }) => {
             getAppealsForCommittee={getAppealsForCommittee}
          />
          <div className={style.table}>
-            <Table
-               data={appeals}
-               columns={columns}
-               actions={rowAction}
-               sortRow={
-                  <SortRow
-                     data={appeals}
-                     setData={setAppeals}
-                     sortByOptions={columns}
-                  />
-               }
-            >
-               <div className={style.selectContainer}>
-                  <Dropdown
-                     overlay={() => menu(committeesNames)}
-                     placement="bottomCenter"
-                  >
-                     <Button>
-                        {selectedCommittee}
-                        <i className="fas fa-chevron-down"></i>
-                     </Button>
-                  </Dropdown>
-                  {/* <select>
+            {isLoading ? (
+               <div className={style.spinner}>
+                  <Spin size="large" />
+               </div>
+            ) : (
+               <Table
+                  data={appeals}
+                  columns={columns}
+                  actions={rowAction}
+                  sortRow={
+                     <SortRow
+                        data={appeals}
+                        setData={setAppeals}
+                        sortByOptions={columns}
+                     />
+                  }
+               >
+                  <div className={style.selectContainer}>
+                     <Dropdown
+                        overlay={() => menu(committeesNames)}
+                        placement="bottomCenter"
+                     >
+                        <Button>
+                           {selectedCommittee}
+                           <i className="fas fa-chevron-down"></i>
+                        </Button>
+                     </Dropdown>
+                     {/* <select>
                      {committeesNames.map((c) => (
                         <option> {c.name}</option>
                      ))}
                   </select> */}
-               </div>
-            </Table>
+                  </div>
+               </Table>
+            )}
          </div>
       </>
    );

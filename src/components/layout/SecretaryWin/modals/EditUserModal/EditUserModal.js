@@ -3,12 +3,27 @@ import Modal from "react-bootstrap/Modal";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import api from "../../../../../api";
 import style from "./EditUserModal.module.scss";
-const EditUserModal = ({ isOpen, close, id, setUsers, users, setMsg }) => {
+
+const EditUserModal = ({
+   isOpen,
+   close,
+   id,
+   setUsers,
+   users,
+   setMsg,
+   getAndStoreUsers,
+}) => {
    const [stage, setStage] = useState(1);
    const [emailIsValid, setEmailIsValid] = useState(true);
    const [phoneIsValid, setPhoneIsValid] = useState(true);
    const [committeesBoxItem, setCommitteesBoxItem] = useState([]);
-   const [imageName, setImageName] = useState("");
+   const [image, setImage] = useState({
+      name: "",
+      path: "",
+   });
+   const emailRef = useRef(null);
+   const phoneRef = useRef(null);
+   const [committee, setCommittee] = useState([]);
    const [formDetails, setFormDetails] = useState({
       firstName: "",
       lastName: "",
@@ -25,83 +40,90 @@ const EditUserModal = ({ isOpen, close, id, setUsers, users, setMsg }) => {
       chairman: false,
       admin: false,
    });
-   const emailRef = useRef(null);
-   const phoneRef = useRef(null);
 
-   const resetState = () => {
-      setFormDetails({
-         firstName: "",
-         lastName: "",
-         email: "",
-         phone: "",
-         phonePrefix: "054",
-         id: "",
-         birthday: "",
-         userType: "",
-      });
-      setStage(1);
-      setCommitteesBoxItem([]);
-      setImageName("");
+   const getAndStoreUserData = async () => {
+      try {
+         const res = await api.get(`user/${id}`);
+         console.log(res);
+         const {
+            firstName,
+            lastName,
+            userType,
+            email,
+            birthday,
+            phoneNumber,
+         } = res.data[0];
+
+         setUserType({
+            user: false,
+            committee: false,
+            chairman: false,
+            admin: false,
+            [userType]: true,
+         });
+         setFormDetails((cur) => ({
+            ...cur,
+            firstName,
+            lastName,
+            userType,
+            email,
+            birthday,
+            id,
+            phone: phoneNumber.slice(3),
+            phonePrefix: phoneNumber.slice(0, 3),
+         }));
+         setStage(1);
+      } catch (err) {
+         alert(err);
+      }
    };
+   const getAndStoreCommittees = async () => {
+      let _committees = await api.get("committees");
+      _committees = _committees.data.map((c) => c.name);
+      setCommittee(_committees);
+   };
+
    useEffect(() => {
-      (async function () {
-         if (id !== undefined) {
-            const res = await api.get(`user/${id}`);
-            console.log(res);
-            const {
-               firstName,
-               lastName,
-               userType,
-               email,
-               birthday,
-               phoneNumber,
-            } = res.data[0];
-            console.log(userType);
-            setUserType({
-               user: false,
-               committee: false,
-               chairman: false,
-               admin: false,
-               [userType]: true,
-            });
-            setFormDetails((cur) => ({
-               ...cur,
-               firstName,
-               lastName,
-               userType,
-               email,
-               birthday,
-               id,
-               phone: phoneNumber.slice(3),
-               phonePrefix: phoneNumber.slice(0, 3),
-            }));
-            setStage(1);
-         }
-      })();
+      if (!id) return;
+      getAndStoreUserData();
    }, [id]);
 
    useEffect(() => {
       if (!emailIsValid) emailRef.current.focus();
    }, [emailIsValid]);
 
+   useEffect(() => {
+      getAndStoreCommittees();
+   }, []);
+
    const onChange = (e) => {
       setFormDetails({ ...formDetails, [e.target.name]: e.target.value });
    };
 
    const onUserTypeChange = (e) => {
-      setUserType({ ...userType, [e.target.name]: e.target.checked });
-   };
-   const validateEmail = (email) => {
-      var re = /\S+@\S+\.\S+/;
-      return re.test(email);
+      setUserType({
+         user: false,
+         committee: false,
+         chairman: false,
+         admin: false,
+         [e.target.name]: e.target.checked,
+      });
    };
 
    const onNextStage = () => {
+      const validateEmail = (email) => {
+         var re = /\S+@\S+\.\S+/;
+         return re.test(email);
+      };
+      const validatePhone = (phoneNumber, numbersAmount = 7) => {
+         return !(isNaN(+phoneNumber) || phoneNumber.length !== numbersAmount);
+      };
+
       if (!validateEmail(formDetails.email)) {
          setEmailIsValid(false);
          return;
       }
-      if (isNaN(+formDetails.phone) || formDetails.phone.length !== 7) {
+      if (!validatePhone(formDetails.phone)) {
          setPhoneIsValid(false);
          return;
       }
@@ -110,44 +132,47 @@ const EditUserModal = ({ isOpen, close, id, setUsers, users, setMsg }) => {
       setStage(2);
    };
    const onSave = async (e) => {
-      const reqObj = {
+      const type = Object.keys(userType).filter((t) => userType[t])[0];
+      console.log(type);
+      await api.patch(`users/${id}`, {
          firstName: formDetails.firstName,
          lastName: formDetails.lastName,
          email: formDetails.email,
-         type: formDetails.userType,
+         type: type,
          birthday: formDetails.birthday,
          phone: formDetails.phonePrefix + formDetails.phone,
          contactUser: true,
-      };
-      console.log(reqObj);
-      const res = await api.patch(`users/${id}`, reqObj);
-
-      const user = res.data[0];
-      const userIndex = users.findIndex((i) => i.user_id === user.ID);
-      const updateUsers = [...users];
-      updateUsers[userIndex] = {
-         birth_date: user.birthDay,
-         contacts: user.contactUser,
-         email: user.email,
-         first_name: user.firstName,
-         last_name: user.lastName,
-         phone: user.phone,
-         user_id: user.ID,
-      };
-      setUsers(updateUsers);
-      setImageName("");
+      });
+      getAndStoreUsers();
+      setUsers(users);
+      setImage({ path: "", name: "" });
       setStage(1);
       close();
       setMsg({ msg: "פרטי המשתמש עודכנו בהצלחה", type: "success" });
    };
    const onSelectImage = (e) => {
-      setImageName(e.target.files[0].name);
+      const _img = { name: e.target.files[0].name };
+      if (e.target.files && e.target.files[0]) {
+         let reader = new FileReader();
+         reader.onload = (e) => {
+            _img.path = e.target.result;
+            setImage(_img);
+         };
+         reader.readAsDataURL(e.target.files[0]);
+      }
    };
    return (
       <Modal
          show={isOpen}
          onHide={() => {
-            setImageName("");
+            setImage({ path: "", name: "" });
+            setUserType({
+               user: false,
+               committee: false,
+               chairman: false,
+               admin: false,
+               [formDetails.userType]: true,
+            });
             close();
          }}
          contentClassName={style.editUser}
@@ -161,7 +186,14 @@ const EditUserModal = ({ isOpen, close, id, setUsers, users, setMsg }) => {
                className="fas fa-times"
                onClick={() => {
                   close();
-                  setImageName("");
+                  setUserType({
+                     user: false,
+                     committee: false,
+                     chairman: false,
+                     admin: false,
+                     [formDetails.userType]: true,
+                  });
+                  setImage({ path: "", name: "" });
                   setStage(1);
                }}
             ></i>
@@ -316,10 +348,20 @@ const EditUserModal = ({ isOpen, close, id, setUsers, users, setMsg }) => {
                            <i className="fa fa-cloud-upload"></i>
                            <input type="file" onChange={onSelectImage} />
                         </label>
-                        <p style={{ direction: "rtl" }}>
-                           {imageName !== "" && `שם התמונה : ${imageName}`}
-                        </p>
+
                         <p>תמונה זו תוצג בפרופיל המשתמש בלבד</p>
+                        {image.name !== "" && (
+                           <>
+                              <p style={{ direction: "rtl" }}>
+                                 {`שם התמונה : ${image.name}`}
+                              </p>
+                              <img
+                                 src={image.path}
+                                 alt=""
+                                 className={style.imagePreview}
+                              />
+                           </>
+                        )}
                      </div>
                   </>
                ) : (
@@ -327,11 +369,16 @@ const EditUserModal = ({ isOpen, close, id, setUsers, users, setMsg }) => {
                      {" "}
                      <div>
                         <label>שיוך יושב ראש לועדה</label>
-                        <select dir="rtl">
+                        <select
+                           disabled={
+                              userType.chairman || userType.admin ? false : true
+                           }
+                           dir="rtl"
+                        >
                            <option></option>
-                           <option>ועדת קישוט בית ספר</option>
-                           <option>ועדת הווי ובידור</option>
-                           <option>ועדת פיתוח אתרים</option>
+                           {committee.map((c) => (
+                              <option>{c}</option>
+                           ))}
                         </select>
                      </div>
                      <div>
@@ -352,12 +399,9 @@ const EditUserModal = ({ isOpen, close, id, setUsers, users, setMsg }) => {
                         >
                            {" "}
                            <option></option>
-                           <option>ועדת קישוט בית ספר</option>
-                           <option>ועדת הווי ובידור</option>
-                           <option>ועדת פיתוח אתרים</option>
-                           <option>ועדת 1</option>
-                           <option>ועדת 2</option>
-                           <option>ועדת 3</option>
+                           {committee.map((c) => (
+                              <option>{c}</option>
+                           ))}
                         </select>
                      </div>
                      <div className={style.committeesBox}>

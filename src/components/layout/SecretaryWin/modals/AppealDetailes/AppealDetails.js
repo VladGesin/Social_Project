@@ -5,6 +5,7 @@ import style from "./AppealDetails.module.scss";
 import api from "../../../../../api";
 
 const AppealDetails = ({ isOpen, close, data }) => {
+   console.log(data);
    return (
       <Modal
          show={isOpen}
