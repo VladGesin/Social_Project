@@ -29,6 +29,7 @@ const ChangeStateGoodWord = ({ isOpen, close, data, reRender, setMsg }) => {
          size="sm"
          dir="rtl"
          contentClassName={style.container}
+         centered
       >
          <Card className={`text-right h-auto ${style.container}`}>
             <Card.Header as="h5" dir="rtl" className={style.header}>

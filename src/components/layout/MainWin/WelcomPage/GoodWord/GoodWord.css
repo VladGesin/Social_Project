@@ -1,23 +1,29 @@
 @media (min-width: 992px) {
-  .card {
-    height: 229px !important;
-    direction: rtl;
-  }
+	.card {
+		height: 229px;
+		direction: rtl;
+	}
 }
 
 #erro {
-  color: red;
+	color: red;
 }
 #exitGoodword {
-  background: none;
-  color: inherit;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
 }
 
+.cardH {
+	height: fit-content !important;
+}
+#goodWordBTN {
+	width: 25%;
+}
 /*@media (min-width: 768px) and (max-width: 991.98px) {
 
   .card {

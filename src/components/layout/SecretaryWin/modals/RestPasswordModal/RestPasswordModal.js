@@ -6,9 +6,7 @@ import api from "../../../../../api";
 import style from "./RestPassword.module.scss";
 import ResetPassword from "./RestPassword";
 
-
-const RestPasswordModal = ({ isOpen, close}) => {
-
+const RestPasswordModal = ({ isOpen, close, setMsg }) => {
    return (
       <Modal
          show={isOpen}
@@ -23,7 +21,7 @@ const RestPasswordModal = ({ isOpen, close}) => {
             <i className="fas fa-times" onClick={close}></i>
          </div>
 
-         <ResetPassword close={close}/>
+         <ResetPassword close={close} setMsg={setMsg} />
       </Modal>
    );
 };

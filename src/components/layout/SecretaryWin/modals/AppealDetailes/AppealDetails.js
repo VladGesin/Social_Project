@@ -4,7 +4,8 @@ import Modal from "react-bootstrap/Modal";
 import style from "./AppealDetails.module.scss";
 import api from "../../../../../api";
 
-const AppealDetails = ({ isOpen, close }) => {
+const AppealDetails = ({ isOpen, close, data }) => {
+   console.log(data);
    return (
       <Modal
          show={isOpen}
@@ -12,10 +13,11 @@ const AppealDetails = ({ isOpen, close }) => {
          size="lg"
          dir="rtl"
          contentClassName={style.container}
+         centered
       >
          <Card className={`text-right h-auto ${style.container}`}>
             <Card.Header as="h5" dir="rtl" className={style.header}>
-               צפייה בפנייה מספר 123456
+               צפייה בפנייה מספר {data?.inbox_id}
             </Card.Header>
             <Card.Body>
                <Form dir="rtl">
@@ -26,7 +28,7 @@ const AppealDetails = ({ isOpen, close }) => {
                            className={style.input}
                            disabled
                            disabled
-                           placeholder="נושא הפנייה"
+                           placeholder={data?.subject}
                         />
                      </Form.Group>
 
@@ -35,7 +37,7 @@ const AppealDetails = ({ isOpen, close }) => {
                         <Form.Control
                            className={style.input}
                            disabled
-                           defaultValue="רגיל"
+                           defaultValue={data?.priority}
                         ></Form.Control>
                      </Form.Group>
                   </Form.Row>
@@ -47,7 +49,7 @@ const AppealDetails = ({ isOpen, close }) => {
                         className={style.input}
                         disabled
                         as="textarea"
-                        placeholder="פירוט הפנייה כולל את כל גוף הפנייה ותוכן אליו תרצה/י שיתייחסו בפנייה. נא לכתוב כמה שיותר פרטים וכמה שיותר ברור על מנת שנוכל לסייע במהירות "
+                        placeholder={data?.inbox_content}
                      />
                   </Form.Group>
                   <Form.Group>
@@ -57,7 +59,7 @@ const AppealDetails = ({ isOpen, close }) => {
                         className={style.input}
                         disabled
                         as="textarea"
-                        placeholder="פירוט הפנייה כולל את כל גוף הפנייה ותוכן אליו תרצה/י שיתייחסו בפנייה. נא לכתוב כמה שיותר פרטים וכמה שיותר ברור על מנת שנוכל לסייע במהירות "
+                        placeholder={data?.reply_content}
                      />
                   </Form.Group>
                </Form>
