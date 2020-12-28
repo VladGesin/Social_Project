@@ -58,19 +58,15 @@ const UserManagement = ({ msg, setMsg }) => {
          },
       },
    };
-
+   const getAndStoreUsers = async () => {
+      const res = await api.get("users/");
+      const users = res.data.sort((a, b) =>
+         a.first_name > b.first_name ? 1 : a.first_name < b.first_name ? -1 : 0
+      );
+      setUsers(users);
+   };
    useEffect(() => {
-      (async function () {
-         const res = await api.get("users/");
-         const users = res.data.sort((a, b) =>
-            a.first_name > b.first_name
-               ? 1
-               : a.first_name < b.first_name
-               ? -1
-               : 0
-         );
-         setUsers(users);
-      })();
+      getAndStoreUsers();
    }, []);
    return (
       <>
@@ -96,6 +92,7 @@ const UserManagement = ({ msg, setMsg }) => {
             id={currentUser.user_id}
             users={users}
             setMsg={setMsg}
+            getAndStoreUsers={getAndStoreUsers}
          />
          <CreateNewUser
             close={() => setIsNewUserOpen(false)}
