@@ -4,20 +4,21 @@ import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import "./commApealModal.css";
 import api from "../../../../api";
+import MsgBox from "../../SecretaryWin/MsgBox/MsgBox";
+import { useParams } from "react-router-dom";
 
-const CommApealModal = (props) => {
+const CommApealModal = () => {
+  const commName = useParams().type;
   const [show, setShow] = useState(false);
-  const handleClose = () => {
-    setPhoneIsValid(true);
-    setEmailIsValid(true);
-    setShow(false);
-    setFormData("בקשה", "רגיל", "", "", "", "050", "", "");
-  };
-  const handleShow = () => setShow(true);
   const [emailIsValid, setEmailIsValid] = useState(true);
   const [phoneIsValid, setPhoneIsValid] = useState(true);
+  const [contentIsValid, setContentIsValid] = useState(true);
+  const [subjectIsValid, setSubjectIsValid] = useState(true);
+  const [nameIsValid, setNameIsValid] = useState(true);
+  const [msg, setMsg] = useState({ msg: "" });
+
   const [formData, setFormData] = useState({
-    commName: props.name,
+    commName: commName,
     typeOfAppeal: "בקשה",
     urgency: "רגיל",
     subject: "",
@@ -28,7 +29,31 @@ const CommApealModal = (props) => {
     email: "",
   });
 
-  const handleSubmit = (e) => {
+  const handleClose = () => {
+    setPhoneIsValid(true);
+    setEmailIsValid(true);
+    setNameIsValid(true);
+    setPhoneIsValid(true);
+    setContentIsValid(true);
+    setSubjectIsValid(true);
+    setShow(false);
+    //init form
+    setFormData({
+      commName: commName,
+      typeOfAppeal: "בקשה",
+      urgency: "רגיל",
+      subject: "",
+      content: "",
+      name: "",
+      pre_Tel: "050",
+      inTel: "",
+      email: "",
+    });
+  };
+
+  const handleShow = () => setShow(true);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     var re = /\S+@\S+\.\S+/;
     var ret = /^[0-9\b]+$/;
@@ -38,8 +63,18 @@ const CommApealModal = (props) => {
     if (!ret.test(formData.inTel) || formData.inTel.length < 7) {
       setPhoneIsValid(false);
     } else setPhoneIsValid(true);
+    if (formData.subject === "") {
+      setSubjectIsValid(false);
+    } else setSubjectIsValid(true);
+    if (formData.content === "") {
+      setContentIsValid(false);
+    } else setContentIsValid(true);
+    if (formData.name === "") {
+      setNameIsValid(false);
+    } else setNameIsValid(true);
+
     const reqObj = {
-      committeeName: formData.commName,
+      committeeName: commName,
       type: formData.typeOfAppeal,
       priority: formData.urgency,
       subject: formData.subject,
@@ -48,28 +83,25 @@ const CommApealModal = (props) => {
       phone_number: formData.pre_Tel + formData.inTel,
       email: formData.email,
     };
-    if (re.test(formData.email) && ret.test(formData.inTel) && formData.inTel.length === 7) {
-      console.log(
-      "submited:" +
-        "\n name of comm:" +
-        formData.commName +
-        "\ntypeOfAppeal: " +
-        formData.typeOfAppeal +
-        "\n urgency:" +
-        formData.urgency +
-        "\n subject: " +
-        formData.subject +
-        "\n content: " +
-        formData.content +
-        "\n name: " +
-        formData.name +
-        "\n pre_Tel: " +
-        formData.pre_Tel +
-        "\n in tel " +
-        formData.inTel +
-        "\n email: " +
-        formData.email
-    );
+
+    if (
+      re.test(formData.email) &&
+      ret.test(formData.inTel) &&
+      formData.inTel.length === 7 &&
+      (formData.subject && formData.content && formData.name) !==""
+    ) {
+      await api
+        .post(`inbox`, reqObj)
+        .then((res) => {
+          setMsg({
+            msg: "פנייתך התקבלה. מספר הפנייה: " + res.data.inbox_id,
+            type: "success",
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
       handleClose();
     }
   };
@@ -82,8 +114,17 @@ const CommApealModal = (props) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   return (
-    
     <Fragment>
+      {msg.msg !== "" && (
+        <MsgBox
+          name={msg.name}
+          msg={msg.msg}
+          clear={() => {
+            setMsg({ msg: "" });
+          }}
+          type={msg.type}
+        />
+      )}
       <Button variant="primary float-left" onClick={handleShow} dir="rtl">
         פניה לוועדה
       </Button>
@@ -92,11 +133,10 @@ const CommApealModal = (props) => {
         onHide={handleClose}
         size="lg"
         dir="rtl"
-        height="fit-content !important"
       >
-        <Card className="text-right h-auto container">
+        <Card className="text-right h-auto container" height="fit-content !important">
           <Card.Header as="h5" dir="rtl">
-            פניה ל{props.name}
+            פניה ל{commName}  
           </Card.Header>
           <Card.Body>
             <Form dir="rtl">
@@ -105,7 +145,6 @@ const CommApealModal = (props) => {
                   <Form.Label>סוג הפנייה</Form.Label>
                   <Form.Control
                     as="select"
-                    defaultValue="בקשה"
                     value={formData.typeOfAppeal}
                     onChange={onChange}
                     name="typeOfAppeal"
@@ -121,7 +160,6 @@ const CommApealModal = (props) => {
                   <Form.Label>דחיפות</Form.Label>
                   <Form.Control
                     as="select"
-                    defaultValue="רגיל"
                     value={formData.urgency}
                     onChange={onChange}
                     name="urgency"
@@ -135,18 +173,22 @@ const CommApealModal = (props) => {
               </Form.Row>
 
               <Form.Group controlId="formGridAppealSubject">
-                <Form.Label>נושא הפנייה</Form.Label>
+                <Form.Label>
+                  נושא הפנייה<span className="validate">*</span>
+                </Form.Label>
                 <Form.Control
                   placeholder="נושא הפנייה"
                   value={formData.subject}
                   onChange={onChange}
                   name="subject"
-                  required
                 />
+                {!subjectIsValid && <p className="validate">*שדה חובה</p>}
               </Form.Group>
 
               <Form.Group controlId="formGridAppealDetails">
-                <Form.Label>פרטי הפנייה</Form.Label>
+                <Form.Label>
+                  פרטי הפנייה<span className="validate">*</span>
+                </Form.Label>
                 <Form.Control
                   as="textarea"
                   placeholder="פירוט הפנייה כולל את כל גוף הפנייה ותוכן אליו תרצה/י שיתייחסו בפנייה. נא לכתוב כמה שיותר פרטים וכמה שיותר ברור על מנת שנוכל לסייע במהירות "
@@ -154,24 +196,31 @@ const CommApealModal = (props) => {
                   onChange={onChange}
                   name="content"
                 />
+                {!contentIsValid && <p className="validate">*שדה חובה</p>}
               </Form.Group>
 
               <Form.Row>
                 <Form.Group as={Col} controlId="formGridName">
-                  <Form.Label>שם איש קשר</Form.Label>
+                  <Form.Label>
+                    שם איש קשר<span className="validate">*</span>
+                  </Form.Label>
                   <Form.Control
                     value={formData.name}
                     onChange={onChange}
                     name="name"
                   />
+                  {!nameIsValid && <p className="validate">*שדה חובה</p>}
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridPhone">
-                  <Form.Label>טלפון ליצירת קשר</Form.Label>
+                  <Form.Label>
+                    טלפון ליצירת קשר<span className="validate">*</span>
+                  </Form.Label>
                   <Form.Control
                     value={formData.inTel}
                     onChange={handleTellength}
                     name="inTel"
+                    type="number"
                   />
                   {!phoneIsValid && (
                     <p className="validate">*מספר הטלפון אינו תקין</p>
@@ -181,7 +230,6 @@ const CommApealModal = (props) => {
                   <Form.Label style={{ opacity: "0" }}>.</Form.Label>
                   <Form.Control
                     as="select"
-                    defaultValue="050"
                     value={formData.pre_Tel}
                     onChange={onChange}
                     name="pre_Tel"
@@ -197,13 +245,16 @@ const CommApealModal = (props) => {
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridContactMail">
-                  <Form.Label>דואר אלקטרוני</Form.Label>
+                  <Form.Label>
+                    דואר אלקטרוני<span className="validate">*</span>
+                  </Form.Label>
                   <Form.Control
                     type="email"
                     placeholder="name@example.com"
                     value={formData.email}
                     onChange={onChange}
                     name="email"
+                    dir="ltr"
                   />
                   {!emailIsValid && (
                     <p className="validate">*כתובת דואר אלקטרוני לא תקינה</p>
