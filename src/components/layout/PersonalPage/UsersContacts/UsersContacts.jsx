@@ -39,15 +39,8 @@ export const UsersContacts = () => {
     const [numberOfRowInPage, setNumberOfRowInPage] = React.useState(4);
 
     useEffect(() => {
-
         api.get(`/inbox/getBySenderId/${userState.id}`)
-            .then(({data}) => {
-                console.log(data)
-                setContacts(data)
-            })
-            .catch(err =>{
-                debugger
-            })
+            .then(({data}) => setContacts(data))
     } ,[]);
 
     const getCurrentPageData = (arr) => {
@@ -74,8 +67,8 @@ export const UsersContacts = () => {
             if (fieldTypeSort === 'inbox_id'){
                 return orderSort === 'down' ? b.inbox_id - a.inbox_id : a.inbox_id - b.inbox_id
             }
-            var nameA = a[fieldTypeSort].toUpperCase(); // ignore upper and lowercase
-            var nameB = b[fieldTypeSort].toUpperCase(); // ignore upper and lowercase
+            var nameA = a[fieldTypeSort].toString().toUpperCase(); // ignore upper and lowercase
+            var nameB = b[fieldTypeSort].toString().toUpperCase(); // ignore upper and lowercase
 
             if (orderSort === 'down' ){
                 if (nameA < nameB) {
@@ -237,7 +230,7 @@ export const UsersContacts = () => {
 
                                 <div className={styles.field}>
                                     <label className={styles.label}>
-                                        תאריך ושעת פניה
+                                        תאריך הפניה
                                     </label>
                                     <label className={styles.value}>
                                         {new Date(item.inbox_sending_time).toLocaleDateString('he-IL')}
