@@ -140,6 +140,7 @@ const Committees = ({ setMsg }) => {
             isOpen={appealReplyIsOpen}
             setMsg={setMsg}
             data={currentAppeal}
+            _reply={currentAppeal}
             getAppealsForCommittee={getAppealsForCommittee}
          />
          <div className={style.table}>

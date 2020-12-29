@@ -4,7 +4,14 @@ import Modal from "react-bootstrap/Modal";
 import style from "./AppealReply.module.scss";
 import api from "../../../../../api";
 
-const AppealReply = ({ isOpen, close, data, getAppealsForCommittee }) => {
+const AppealReply = ({
+   isOpen,
+   close,
+   data,
+   getAppealsForCommittee,
+   setMsg,
+   _reply,
+}) => {
    const [reply, setReply] = useState("");
 
    const onSave = async () => {
@@ -17,7 +24,9 @@ const AppealReply = ({ isOpen, close, data, getAppealsForCommittee }) => {
          close();
          getAppealsForCommittee();
       } catch (error) {
-         console.log(error);
+         console.log();
+         if (error.response.data.message == "Reply Already Exist")
+            setMsg({ msg: "כבר קיימת תגובה לפנייה " });
       }
    };
    return (
@@ -40,8 +49,11 @@ const AppealReply = ({ isOpen, close, data, getAppealsForCommittee }) => {
                      <Form.Control
                         className={style.input}
                         as="textarea"
-                        value={reply}
+                        value={
+                           _reply?.reply_content ? _reply?.reply_content : reply
+                        }
                         onChange={(e) => setReply(e.target.value)}
+                        disabled={_reply?.reply_content ? true : false}
                      />
                   </Form.Group>
                </Form>

@@ -48,7 +48,7 @@ export const MainCommitteesPage = () => {
   // const onSearch = value => console.log(value);
 
   return (
-    <Card className="text-right h-auto mx-auto " style={{ width: "50rem" }}>
+    <Card className="text-right h-auto mx-auto " height="fit-content !important" style={{ width: "50rem" }}>
       <div className={styles.rootMainCommitteesPage}>
         <Card.Header>
           <h2>מסך ועדות ראשי</h2>{" "}
@@ -63,11 +63,11 @@ export const MainCommitteesPage = () => {
         {/*        onPressEnter={() => alert('enter')}*/}
         {/*    />*/}
         {/*</div>*/}
-        <Card.Text>
+        <Card.Body>
           <div className={styles.tableWrapper} dir={"rtl"}>
             <Table pagination={false} columns={columns} dataSource={_data} />
           </div>{" "}
-        </Card.Text>
+        </Card.Body>
       </div>
     </Card>
   );
