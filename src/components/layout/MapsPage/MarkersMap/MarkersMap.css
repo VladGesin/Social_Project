@@ -19,7 +19,7 @@
 }
 
 .popup .leaflet-popup-content {
-    padding: 5px;
+    padding: 15px;
     margin: 0px;
     background: rgba(256, 256, 256, 0);
 }
