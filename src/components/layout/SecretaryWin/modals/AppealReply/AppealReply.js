@@ -47,9 +47,12 @@ const AppealReply = ({ isOpen, close, data, getAppealsForCommittee }) => {
                </Form>
             </Card.Body>
             <div className={style.btnContainer}>
-               <Button variant="secondary" onClick={onSave}>
-                  אישור{" "}
-               </Button>
+               {!_reply?.reply_content && (
+                  <Button variant="secondary" onClick={onSave}>
+                     אישור{" "}
+                  </Button>
+               )}
+
                <Button onClick={close} variant="danger">
                   ביטול
                </Button>
