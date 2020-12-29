@@ -4,9 +4,10 @@ import Context from "../../../../store/Context";
 import api from "../../../../api";
 import {Formik} from "formik";
 
-export const UpdateDetailsForm = () => {
+export const UpdateDetailsForm = ({callbackChangeDetails}) => {
 
     const {userState} = React.useContext(Context);
+
 
     const handleSubmit = (values, {setSubmitting}) => {
         const reqObj = {
@@ -23,7 +24,7 @@ export const UpdateDetailsForm = () => {
         api.patch(`users/${userState.id}`, reqObj)
             .then((res) => {
                 setSubmitting(false);
-                alert('update details!');
+                callbackChangeDetails()
             })
             .catch(_ => {
                 alert('error!');
