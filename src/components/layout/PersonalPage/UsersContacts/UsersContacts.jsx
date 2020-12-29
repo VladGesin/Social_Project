@@ -21,7 +21,7 @@ const fields_map = {
 const itemIncludeInCurrentSearch = (item, searchQuery) => {
     if (searchQuery === '') return true;
 
-    if (item.inbox_id.includes(searchQuery) || item.committee_name.includes(searchQuery) || item.subject.includes(searchQuery)) {
+    if (item.inbox_id.toString().includes(searchQuery) || item.committee_name.includes(searchQuery) || item.subject.includes(searchQuery)) {
         return true;
     }
     return false;
@@ -280,7 +280,7 @@ export const UsersContacts = () => {
 
     return (
         <div className={styles.rootUsersContacts}>
-            {currentData.length >0 && <div className={styles.wrapperSearchInput}>
+            {contacts && <div className={styles.wrapperSearchInput}>
                 <img src={searchIcon}/>
                 <input
                     onChange={handleChangeSearch}
