@@ -126,7 +126,7 @@ export class Login extends Component {
 						<div className={style.btnContainer}>
 							{!this.state.isValidIdAndPassword && <p className={style.p}>ת"ז או סיסמה שגויים</p>}
 							<button onClick={this.ValidetionInputIdAndPassword}>כניסה</button>
-							<Link to="/Social_Project/PasswordReset"><p> שכחתי סיסמה </p></Link></div>
+							<Link to="/Social_Project/ForgotPassword"><p> שכחתי סיסמה </p></Link></div>
 						</div>	 
 					</div>
 				 </form>
