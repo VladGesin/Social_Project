@@ -9,7 +9,16 @@ const TableItem = ({ row, rowAction, titles }) => {
                {titles.map((t) => (
                   <div className={style.col} key={t.title}>
                      <p>{t.title}</p>
-                     <p>{row[t.variableName]}</p>
+                     <p
+                        className={
+                           t?.color?.spam == "red" &&
+                           row[t.variableName] == "ספאם"
+                              ? style.spam
+                              : ""
+                        }
+                     >
+                        {row[t.variableName]}
+                     </p>
                   </div>
                ))}
             </div>

@@ -3,7 +3,59 @@ import { Form, Col, Button, Card } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import style from "./ContactDetails.module.scss";
 import api from "../../../../../api";
-const ContactDetails = ({ isOpen, close }) => {
+
+/*
+inbox_id
+:
+1
+sender_id
+:
+"555555555"
+committee_name
+:
+"CoName"
+subject
+:
+"Hello this is a test subject"
+inbox_content
+:
+"test content"
+inbox_sending_time
+:
+"2020-12-17"
+is_open
+:
+"פתוח"
+is_spam
+:
+true
+
+contact_email
+:
+"test@gmail.com"
+contact_phone
+:
+"05012546345"
+priority
+:
+null
+type
+:
+"some type"
+contact_full_name
+:
+"Amit Shalev"
+handler_id
+:
+"555555555"
+reply_content
+:
+"some reply content"
+reply_time
+:
+
+*/
+const ContactDetails = ({ isOpen, close, data }) => {
    return (
       <Modal
          show={isOpen}
@@ -11,6 +63,7 @@ const ContactDetails = ({ isOpen, close }) => {
          size="lg"
          dir="rtl"
          contentClassName={style.container}
+         centered
       >
          <Card className={`text-right h-auto ${style.container}`}>
             <Card.Header as="h5" dir="rtl" className={style.header}>
@@ -21,12 +74,15 @@ const ContactDetails = ({ isOpen, close }) => {
                   <Form.Row>
                      <Form.Group as={Col} controlId="formGridName">
                         <Form.Label>שם איש קשר:</Form.Label>
-                        <Form.Control disabled />
+                        <Form.Control
+                           disabled
+                           value={data?.contact_full_name}
+                        />
                      </Form.Group>
 
                      <Form.Group as={Col} controlId="formGridPhone">
                         <Form.Label>טלפון ליצירת קשר:</Form.Label>
-                        <Form.Control disabled />
+                        <Form.Control disabled value={data?.contact_phone} />
                      </Form.Group>
 
                      <Form.Group as={Col} controlId="formGridContactMail">
@@ -34,7 +90,7 @@ const ContactDetails = ({ isOpen, close }) => {
                         <Form.Control
                            disabled
                            type="email"
-                           placeholder="name@example.com"
+                           value={data?.contact_email}
                         />
                      </Form.Group>
                   </Form.Row>

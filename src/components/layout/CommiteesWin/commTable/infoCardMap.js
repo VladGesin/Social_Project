@@ -5,10 +5,10 @@ const InfoCardMap = (props) => {
     <Fragment>
       <tr>
         <td>{props.card.index}</td>
-        <td>{props.card.name}</td>
-        <td>{props.card.position}</td>
+        <td>{props.card.firstName} {props.card.lastName}</td>
+        <td>{props.card.committeePosition}</td>
         <td>{props.card.phone}</td>
-        <td><a href={`mailto:${props.card.mail}`}>{props.card.mail}</a></td>
+        <td><a href={`mailto:${props.card.email}`}>{props.card.email}</a></td>
       </tr>
     </Fragment>
   );

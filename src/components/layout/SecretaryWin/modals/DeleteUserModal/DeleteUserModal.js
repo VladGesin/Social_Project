@@ -11,9 +11,8 @@ const DeleteUserModal = ({
    setMsg,
 }) => {
    const deleteHandle = async () => {
-      const res = await api.delete(`/users/${user_id}`);
-
-      if (res.data) {
+      try {
+         const res = await api.delete(`/users/${user_id}`);
          const users = await api.get("users/");
          const usersSorted = users.data.sort((a, b) =>
             a.first_name > b.first_name
@@ -23,9 +22,11 @@ const DeleteUserModal = ({
                : 0
          );
          setUsers(usersSorted);
-         setMsg({ msg: "המשתמש", name });
+         setMsg({ msg: "המשתמש", name, type: "success" });
+      } catch (error) {
+         console.log(error.response.data.message);
+         setMsg({ msg: "לא ניתן למחוק משתמש עם פעיליות פתוחות" });
       }
-
       close();
    };
 

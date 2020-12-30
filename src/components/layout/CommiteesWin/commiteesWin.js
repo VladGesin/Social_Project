@@ -1,27 +1,50 @@
-import React, {Fragment,useEffect} from 'react';
-import CommDescription from './commDescription/commDescription';
-import CommTable from './commTable/commTable';
-import {useParams} from 'react-router-dom';
-import {committeesConfig} from "../MainCommitteesPage/committeesConfig";
+import React, { Fragment, useEffect, useState } from "react";
+import CommDescription from "./commDescription/commDescription";
+import CommTable from "./commTable/commTable";
+import { useParams } from "react-router-dom";
+import api from "../../../api";
 
-const CommiteesWin = () => {
+export const CommiteesWin = (props) => {
+  //const {name ,desc} = props.location.aboutProps
+  //console.log(props)
+  const [commObj, setCommObj] = useState({});
+  const commName = useParams().type;
 
-    const {type} = useParams();
-    const committeeData = committeesConfig.find(({paramKey}) => paramKey === type);
+  useEffect(() => {
+    const getCommittees = async () => {
+      //return all committees;
+      try {
+        const res = await api.get(`committees`);
+        const obj = res.data.find(({ name }) => name === commName);
+        setCommObj(obj);
+        //setCommitteeData(res.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getCommittees();
+  }, []);
 
-    return (
-        <Fragment>
-            <div className="container">
-                <div className="row">
-                    <CommDescription commItem={committeeData}/>
-                </div>
+  //const [committeeData, setCommitteeData] = useState([]);
 
-                <div className="row">
-                    <CommTable/>
-                </div>
-            </div>
-        </Fragment>
-    );
+  //const { type } = useParams();
+
+  //console.log(type);
+  //const committee = committeeData.find(({ name }) => name === commName);
+
+  return (
+    <Fragment>
+      <div className="container">
+        <div className="row">
+          <CommDescription commItem={commObj} />
+        </div>
+
+        <div className="row">
+          <CommTable commItem={commObj} />
+        </div>
+      </div>
+    </Fragment>
+  );
 };
 
 export default CommiteesWin;

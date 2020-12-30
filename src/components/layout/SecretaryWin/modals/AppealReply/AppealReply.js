@@ -1,10 +1,34 @@
-import React, { Fragment } from "react";
+import React, { useState } from "react";
 import { Form, Col, Button, Card } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import style from "./AppealReply.module.scss";
 import api from "../../../../../api";
 
-const AppealReply = ({ isOpen, close }) => {
+const AppealReply = ({
+   isOpen,
+   close,
+   data,
+   getAppealsForCommittee,
+   setMsg,
+   _reply,
+}) => {
+   const [reply, setReply] = useState("");
+
+   const onSave = async () => {
+      try {
+         if (reply == "") return;
+         const res = await api.post("inbox/response", {
+            inbox_id: data.inbox_id,
+            content: reply,
+         });
+         close();
+         getAppealsForCommittee();
+      } catch (error) {
+         console.log();
+         if (error.response.data.message == "Reply Already Exist")
+            setMsg({ msg: "כבר קיימת תגובה לפנייה " });
+      }
+   };
    return (
       <Modal
          show={isOpen}
@@ -12,27 +36,32 @@ const AppealReply = ({ isOpen, close }) => {
          size="lg"
          dir="rtl"
          contentClassName={style.container}
+         centered
       >
          <Card className={`text-right h-auto ${style.container}`}>
             <Card.Header as="h5" dir="rtl" className={style.header}>
-               מענה לפנייה מספר 123456
+               מענה לפנייה מספר {data?.inbox_id}
             </Card.Header>
             <Card.Body>
                <Form dir="rtl">
                   <Form.Group>
                      <Form.Label>מענה הפנייה:</Form.Label>
                      <Form.Control
-                        disabled
                         className={style.input}
-                        disabled
                         as="textarea"
-                        placeholder="פירוט הפנייה כולל את כל גוף הפנייה ותוכן אליו תרצה/י שיתייחסו בפנייה. נא לכתוב כמה שיותר פרטים וכמה שיותר ברור על מנת שנוכל לסייע במהירות "
+                        value={
+                           _reply?.reply_content ? _reply?.reply_content : reply
+                        }
+                        onChange={(e) => setReply(e.target.value)}
+                        disabled={_reply?.reply_content ? true : false}
                      />
                   </Form.Group>
                </Form>
             </Card.Body>
             <div className={style.btnContainer}>
-               <Button variant="secondary">אישור </Button>
+               <Button variant="secondary" onClick={onSave}>
+                  אישור{" "}
+               </Button>
                <Button onClick={close} variant="danger">
                   ביטול
                </Button>

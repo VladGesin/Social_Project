@@ -11,6 +11,7 @@ const GoodWordDetails = ({ isOpen, close, data }) => {
          size="lg"
          dir="rtl"
          contentClassName={style.container}
+         centered
       >
          <Card className={`text-right h-auto ${style.container}`}>
             <Card.Header as="h5" dir="rtl" className={style.header}>
