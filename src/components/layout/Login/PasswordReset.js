@@ -106,8 +106,6 @@ export class PasswordReset extends Component {
 
 	render() {
 		return (
-			//<Router location="/ForgotPassword" context={this.staticContext}>
-			//<Fragment>
 				<div>
 					<form onSubmit={this.onKeyUp}  className={style.login}>
 					<div className={style.PassCard}>
@@ -138,8 +136,6 @@ export class PasswordReset extends Component {
 					</div>
 				 </form>
 			 </div>
-			//</Fragment>
-			//</Router>
 		);
 	}
 }
