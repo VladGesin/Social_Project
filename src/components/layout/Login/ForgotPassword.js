@@ -51,29 +51,25 @@ export class ForgotPassword extends Component {
 	invalidCredentials = () => {
 		this.setState({ isValidIdAndPassword: false });
 	};
-	checkPasswordDetails = async () => {
-			try{
-			  const response = await fetch('http://localhost:8080//changePassword/:id.', {
-			  headers:{
-				'Content-Type': 'application/json'
-			  },
-			  method: 'POST',
-			  body: JSON.stringify({
-				password: this.inputEmail,
-				userID: this.inputId
-				})
-			  });
-			  console.log(response);
-			  console.log(this.inputId, this.inputEmail); 
-			  const token = await response.json();
-			  console.log(token);
-			}
-			catch(error){
-			  console.log(error);
-			}
-		}
+
 	checkUserDetails = async () => {
 		try {
+			 //  const response = await fetch(
+         //     "https://www.hitprojectscenter.com/Social-api//loginManager/passwordExceeded/",
+         //     {
+         //        headers: {
+         //           "Content-Type": "application/json",
+         //        },
+         //        method: "POST",
+         //        body: JSON.stringify({
+         //           userID: this.inputId,
+         //        }),
+         //     }
+         //  );
+         //  console.log(response);
+         //  console.log(this.inputId);
+         //  const token = await response.json();
+		 //  console.log(daysSinceLastPasswordChange);
 			this.context.ForgotPassword(this.inputId, this.inputEmail, this.invalidCredentials);
 			sessionStorage.setItem(
 				'tempUser',
@@ -89,10 +85,9 @@ export class ForgotPassword extends Component {
 
 	render() {
 		return (
-			<Router location="/ForgotPassword" context={this.staticContext}>
-			<Fragment>
-				<div className={style.login}>
-					<div className={style.loginCard}>
+				<div>
+				<form onSubmit={this.onKeyUp}  className={style.login}>
+					<div className={style.PassCard}>
 						<h2>איפוס סיסמה</h2>
 						<div className={style.inputContainer}>
 							<p>יש להזין תעודת זהות על מנת לקבל מייל לאיפוס סיסמא</p>
@@ -105,14 +100,14 @@ export class ForgotPassword extends Component {
 							{!this.state.id.isValid && <p className={style.p}>{this.state.id.msgId}</p>}
 							<span id="IDError" />
 						</div>
+						<div className={style.inputContainer}>
 						<div className={style.btnContainer}>
 							{!this.state.isValidIdAndEmail && <p className={style.p}>ת"ז שגויה</p>}
-							<button onClick={this.ValidetionInputIdAndEmail}> שליחת אימייל</button>
+							<button onClick={this.ValidetionInputIdAndEmail}> שליחת אימייל</button></div>
 						</div>
 					</div>
+				 </form>
 				</div>
-			</Fragment>
-			</Router>
 		);
 	}
 }
