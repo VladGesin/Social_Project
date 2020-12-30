@@ -7,8 +7,8 @@ const News = ({ news }) => {
 
 	useEffect(
 		() => {
-			setNewsList(news['news']);
-			spinnerOrNews();
+			//setNewsList(news['news']);
+			//spinnerOrNews();
 			// eslint-disable-next-line react-hooks/exhaustive-deps
 		},
 		[ news ]
@@ -65,7 +65,7 @@ const News = ({ news }) => {
 		<div>
 			<Card className="text-right">
 				<Card.Header as="h5">מבזקי חדשות</Card.Header>
-				{spinnerOrNews()}
+				{/*spinnerOrNews()*/}
 			</Card>
 		</div>
 	);
