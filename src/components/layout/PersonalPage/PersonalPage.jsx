@@ -4,9 +4,11 @@ import {PersonalDetails} from "./PersonalDetails/PersonalDetails";
 import { SettingOutlined, FileTextOutlined } from '@ant-design/icons';
 import {UsersContacts} from "./UsersContacts/UsersContacts";
 import {UpdatePassword} from "./UpdatePassword/UpdatePassword"
+import MsgBox from "../SecretaryWin/MsgBox/MsgBox";
 
 export const PersonalPage = () => {
     const [indexCurrentMode, setIndexCurrentMode] = React.useState(0);
+    const [showAlert, setShowAlert] = React.useState(false);
 
     const data = [
         {
@@ -14,7 +16,7 @@ export const PersonalPage = () => {
                 label: 'פרטים איישים',
                 icon: () => <SettingOutlined />
             },
-            mainComp: () => <PersonalDetails/>
+            mainComp: () => <PersonalDetails callbackChangeDetails={() => setShowAlert(true)}/>
         },
         {
             menu: {
@@ -50,6 +52,12 @@ export const PersonalPage = () => {
             </div>
 
             <div className={styles.main}>
+                {showAlert && <MsgBox
+                    wrapperStyle={{top: 0, width: "40%"}}
+                    msg={"פרטייך האישיים שונו בהצלחה!"}
+                    clear={() => setShowAlert(false)}
+                    type={"success"}
+                />}
                 {data[indexCurrentMode].mainComp()}
             </div>
         </div>

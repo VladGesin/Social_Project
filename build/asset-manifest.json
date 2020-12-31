@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/Social_Project/static/css/main.ce584145.chunk.css",
+    "main.js": "/Social_Project/static/js/main.a6b8aab2.chunk.js",
+    "main.js.map": "/Social_Project/static/js/main.a6b8aab2.chunk.js.map",
+    "runtime-main.js": "/Social_Project/static/js/runtime-main.53aa5759.js",
+    "runtime-main.js.map": "/Social_Project/static/js/runtime-main.53aa5759.js.map",
+    "static/css/2.432f1e83.chunk.css": "/Social_Project/static/css/2.432f1e83.chunk.css",
+    "static/js/2.bc69299b.chunk.js": "/Social_Project/static/js/2.bc69299b.chunk.js",
+    "static/js/2.bc69299b.chunk.js.map": "/Social_Project/static/js/2.bc69299b.chunk.js.map",
+    "index.html": "/Social_Project/index.html",
+    "precache-manifest.d93d827aae04d30a631dfffa48afe11b.js": "/Social_Project/precache-manifest.d93d827aae04d30a631dfffa48afe11b.js",
+    "service-worker.js": "/Social_Project/service-worker.js",
+    "static/css/2.432f1e83.chunk.css.map": "/Social_Project/static/css/2.432f1e83.chunk.css.map",
+    "static/css/main.ce584145.chunk.css.map": "/Social_Project/static/css/main.ce584145.chunk.css.map",
+    "static/js/2.bc69299b.chunk.js.LICENSE.txt": "/Social_Project/static/js/2.bc69299b.chunk.js.LICENSE.txt",
+    "static/media/account_balance-black-18dp.svg": "/Social_Project/static/media/account_balance-black-18dp.f5235c6d.svg",
+    "static/media/index.css": "/Social_Project/static/media/background-bright.1fbaa233.jpg",
+    "static/media/down-arrow.svg": "/Social_Project/static/media/down-arrow.70ac1623.svg",
+    "static/media/loginlogoimg.png": "/Social_Project/static/media/loginlogoimg.f13b25b6.png",
+    "static/media/magnifying-glass.svg": "/Social_Project/static/media/magnifying-glass.1f42ab86.svg",
+    "static/media/multiple-users-silhouette.svg": "/Social_Project/static/media/multiple-users-silhouette.2aa64ca8.svg",
+    "static/media/school-black-18dp.svg": "/Social_Project/static/media/school-black-18dp.90a06e09.svg",
+    "static/media/search.svg": "/Social_Project/static/media/search.ecef733a.svg",
+    "static/media/settings.svg": "/Social_Project/static/media/settings.7e19eab3.svg",
+    "static/media/url.svg": "/Social_Project/static/media/url.3473cffc.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.53aa5759.js",
+    "static/css/2.432f1e83.chunk.css",
+    "static/js/2.bc69299b.chunk.js",
+    "static/css/main.ce584145.chunk.css",
+    "static/js/main.a6b8aab2.chunk.js"
+  ]
+}

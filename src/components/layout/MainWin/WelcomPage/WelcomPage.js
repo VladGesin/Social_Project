@@ -24,7 +24,7 @@ const WelcomPage = () => {
   };
   useEffect(() => {
     getUsers();
-    getNews("תלמיד");
+    //getNews("תלמיד");
   }, []);
 
   function getUsers() {

@@ -26,7 +26,7 @@ function isValidIsraeliID(id) {
       let isValid = false;
       let message = '';
       if (inputId == "" || inputId == null) {
-        message = 'ת"ז ריקה, אנא מלא 9 ספרות חוקיות';
+        message = 'שדה חובה';
       }
       else if (!/^[0-9]+$/.test(inputId)) 
       {
@@ -54,7 +54,7 @@ function isValidIsraeliID(id) {
       var regularExpression = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])([a-zA-Z0-9@$!%*?&])$";
       
       if (inputPassword == "" || inputPassword == null) {
-        message ='סיסמתך לא יכולה להיות ריקה';
+        message ='שדה חובה';
       } 
       else if (!validator.isLength(inputPassword, { min: 6 })) 
       {

@@ -1,12 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styles from "./UpdateDetailsForm.module.scss";
 import Context from "../../../../store/Context";
 import api from "../../../../api";
 import {Formik} from "formik";
 
-export const UpdateDetailsForm = () => {
+export const UpdateDetailsForm = ({callbackChangeDetails}) => {
 
-    const {userState} = React.useContext(Context);
+    const {userState, loadUser} = React.useContext(Context);
+
 
     const handleSubmit = (values, {setSubmitting}) => {
         const reqObj = {
@@ -23,7 +24,8 @@ export const UpdateDetailsForm = () => {
         api.patch(`users/${userState.id}`, reqObj)
             .then((res) => {
                 setSubmitting(false);
-                alert('update details!');
+                callbackChangeDetails();
+                loadUser();
             })
             .catch(_ => {
                 alert('error!');

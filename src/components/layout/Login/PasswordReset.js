@@ -72,29 +72,25 @@ export class PasswordReset extends Component {
 	invalidCredentials = () => {
 		this.setState({ isValidIdAndPassword: false });
 	};
-	checkPasswordDetails = async () => {
-			try{
-			  const response = await fetch('http://localhost:8080//changePassword/:id.', {
-			  headers:{
-				'Content-Type': 'application/json'
-			  },
-			  method: 'POST',
-			  body: JSON.stringify({
-				password: this.inputPassword,
-				userID: this.inputId
-				})
-			  });
-			  console.log(response);
-			  console.log(this.inputId, this.inputPassword); 
-			  const token = await response.json();
-			  console.log(token);
-			}
-			catch(error){
-			  console.log(error);
-			}
-		}
+	
 	checkUserDetails = async () => {
 		try {
+			 //  const response = await fetch(
+         //     "https://www.hitprojectscenter.com/Social-api//users/:id",
+         //     {
+         //        headers: {
+         //           "Content-Type": "application/json",
+         //        },
+         //        method: "PATCH",
+         //        body: JSON.stringify({
+         //           userID: this.inputId,
+         //        }),
+         //     }
+         //  );
+         //  console.log(response);
+         //  console.log(this.inputId);
+         //  const token = await response.json();
+		 //  console.log(daysSinceLastPasswordChange);
 			this.context.ForgotPassword(this.inputId, this.inputPassword, this.invalidCredentials);
 			sessionStorage.setItem(
 				'tempUser',
@@ -110,10 +106,9 @@ export class PasswordReset extends Component {
 
 	render() {
 		return (
-			<Router location="/ForgotPassword" context={this.staticContext}>
-			<Fragment>
-				<div className={style.login}>
-					<div className={style.loginCard}>
+				<div>
+					<form onSubmit={this.onKeyUp}  className={style.login}>
+					<div className={style.PassCard}>
 						<h2>איפוס סיסמה</h2>
 						<div className={style.inputContainer}>
 							<input
@@ -133,14 +128,14 @@ export class PasswordReset extends Component {
 							/>
 							{!this.state.password2.isValid && <p className={style.p}>{this.state.password2.msgPass2}</p>}
 						</div>
+						<div className={style.inputContainer}>
 						<div className={style.btnContainer}>
 							{!this.state.isValidIdAndPassword && <p className={style.p}>ת"ז או סיסמה שגויים</p>}
-							<button onClick={this.ValidetionInputIdAndPassword}> איפוס סיסמה</button>
+							<button onClick={this.ValidetionInputIdAndPassword}> איפוס סיסמה</button></div>
 						</div>
 					</div>
-				</div>
-			</Fragment>
-			</Router>
+				 </form>
+			 </div>
 		);
 	}
 }

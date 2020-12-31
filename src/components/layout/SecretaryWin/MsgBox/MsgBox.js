@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import style from "./MsgBox.module.scss";
-const MsgBox = ({ msg, name, clear, type }) => {
+const MsgBox = ({ msg, name, clear, type , wrapperStyle= {}}) => {
    useEffect(() => {
       window.scrollTo({
          top: 0,
@@ -12,7 +12,7 @@ const MsgBox = ({ msg, name, clear, type }) => {
       }, 5000);
    }, []);
    return (
-      <div className={`${style.container} `}>
+      <div style={wrapperStyle} className={`${style.container} `}>
          <p>{`${msg} ${name != undefined ? `${name} נמחק בהצלחה` : ""}`}</p>
          <i
             className={`fas fa-times-circle ${

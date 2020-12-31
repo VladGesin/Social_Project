@@ -5,7 +5,7 @@ import Context from "../../../../store/Context";
 import {UpdateDetailsForm} from "../UpdateDetailsForm/UpdateDetailsForm";
 import avatar from './avatar-icon.png';
 
-export const PersonalDetails = () => {
+export const PersonalDetails = ({callbackChangeDetails}) => {
     const {userState} = React.useContext(Context);
     const [changeImageModalIsOpen, setChangeImageModalIsOpen] = React.useState(false);
     return (
@@ -24,7 +24,7 @@ export const PersonalDetails = () => {
             </div>
 
             <div className={styles.main}>
-                <UpdateDetailsForm/>
+                <UpdateDetailsForm callbackChangeDetails={callbackChangeDetails}/>
             </div>
 
             <Modal
