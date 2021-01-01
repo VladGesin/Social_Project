@@ -28,7 +28,7 @@ const SecretaryWin = () => {
             />
          )}
 
-         <div className={style.sideBar}>
+         <div className={`${style.sideBar} ${style.hideOnMobile}`}>
             <SecretaryWinSideBar
                activePage={activePage}
                setActivePage={setActivePage}

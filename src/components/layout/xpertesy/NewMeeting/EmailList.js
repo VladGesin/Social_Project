@@ -10,7 +10,7 @@ const EmailList = ({ emails, deleteParticipant }) => {
       <div className={style.emailListContainer}>
          {emails.map((email) => (
             <span className={style.emailItem} key={email}>
-               {email}
+               <span>{email}</span>
                <span className={style.deleteBtn} onClick={onDelete} id={email}>
                   X
                </span>

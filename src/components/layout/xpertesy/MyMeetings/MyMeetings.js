@@ -79,7 +79,7 @@ const MyMeetings = () => {
       <div className={style.container}>
          <h3 className="text-right mr-5">צפייה בפגישות שלי</h3>
 
-         <Form className="p-5" dir="rtl">
+         <Form className={` ${style.formContainer}`} dir="rtl">
             <Row className={style.rows}>
                <Col className={`d-flex col-3 ${style.section}`}>
                   <Col className={`text-center col-2 ${style.hideOnMobile}`}>

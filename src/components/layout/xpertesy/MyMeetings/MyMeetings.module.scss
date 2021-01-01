@@ -4,6 +4,9 @@
    padding: 2rem;
    border: 1px solid #ccc;
 }
+.formContainer {
+   padding: 3rem;
+}
 .label {
    line-height: 2rem;
 }
@@ -54,6 +57,10 @@
       max-width: 100%;
       overflow-x: hidden;
    }
+   .container {
+      padding: 1rem 0;
+      margin: 1rem;
+   }
    .rows {
       display: flex;
       flex-direction: column;
@@ -89,5 +96,8 @@
    }
    .btnContainer button {
       margin: 0;
+   }
+   .formContainer {
+      padding: 1rem;
    }
 }

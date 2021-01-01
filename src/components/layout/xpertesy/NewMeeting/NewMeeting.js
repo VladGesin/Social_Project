@@ -152,6 +152,7 @@ const NewMeeting = () => {
             border: "1px solid #ccc",
             height: "fit-content",
          }}
+         className={style.pageContainer}
       >
          <h3 className={`text-right  mr-5`}>יצירת פגישה חדשה</h3>
          {messages.length > 0 && (
@@ -190,8 +191,12 @@ const NewMeeting = () => {
                ))}
             </Container>
          )}
-         <Form className="p-5" dir="rtl" onSubmit={onSubmitHandler}>
-            <Form.Group as={Row} className="pr-3">
+         <Form
+            className={`p-5 ${style.formContainer} `}
+            dir="rtl"
+            onSubmit={onSubmitHandler}
+         >
+            <Form.Group as={Row} className={`pr-3 ${style.section}`}>
                <Form.Label column sm="1" className="text-right">
                   שם חדר
                </Form.Label>
@@ -204,7 +209,7 @@ const NewMeeting = () => {
                   />
                </Col>
             </Form.Group>
-            <Form.Group as={Row} className="pr-3">
+            <Form.Group as={Row} className={`pr-3 ${style.section}`}>
                <Form.Label column sm="1" className="text-right">
                   שם מארח
                </Form.Label>
@@ -217,7 +222,7 @@ const NewMeeting = () => {
                   />
                </Col>
             </Form.Group>
-            <Form.Group as={Row} className="pr-3">
+            <Form.Group as={Row} className={`pr-3 ${style.section}`}>
                <Form.Label column sm="1" className="text-right">
                   תאריך התחלה
                </Form.Label>
@@ -239,7 +244,6 @@ const NewMeeting = () => {
                      }}
                   />
                </Col>
-
                <Form.Label column sm="1" className="text-right">
                   שעת התחלה
                </Form.Label>
@@ -261,7 +265,7 @@ const NewMeeting = () => {
                   />
                </Col>
             </Form.Group>
-            <Form.Group as={Row} className="pr-3">
+            <Form.Group as={Row} className={`pr-3 ${style.section}`}>
                <Form.Label column sm="1" className="text-right">
                   הזמנת משתתפים
                </Form.Label>

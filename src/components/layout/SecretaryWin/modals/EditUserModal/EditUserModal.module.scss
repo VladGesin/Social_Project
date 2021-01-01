@@ -1,5 +1,6 @@
 .editUser {
    border: none !important;
+
    .header {
       background-color: rgb(84, 111, 122);
       h3 {
@@ -177,5 +178,11 @@
             background-color: rgb(150, 150, 150);
          }
       }
+   }
+}
+
+@media screen and (max-width: 576px) {
+   .body {
+      overflow-x: scroll;
    }
 }
