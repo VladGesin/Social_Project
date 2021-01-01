@@ -4,3 +4,8 @@
    left: 40%;
    transform: translate(-50%, -50%);
 }
+@media screen and (max-width: 576px) {
+   .spinner {
+      left: 50%;
+   }
+}

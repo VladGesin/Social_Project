@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
@@ -6,7 +6,8 @@ import api from "../../../../../api";
 import style from "./RestPassword.module.scss";
 import ResetPassword from "./RestPassword";
 
-const RestPasswordModal = ({ isOpen, close, setMsg }) => {
+const RestPasswordModal = ({ isOpen, close, setMsg, id }) => {
+   useEffect(() => {});
    return (
       <Modal
          show={isOpen}
@@ -21,7 +22,7 @@ const RestPasswordModal = ({ isOpen, close, setMsg }) => {
             <i className="fas fa-times" onClick={close}></i>
          </div>
 
-         <ResetPassword close={close} setMsg={setMsg} />
+         <ResetPassword close={close} setMsg={setMsg} id={id} />
       </Modal>
    );
 };

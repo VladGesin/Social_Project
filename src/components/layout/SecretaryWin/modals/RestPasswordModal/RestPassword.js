@@ -1,26 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import api from "../../../../../api";
 import style from "./RestPassword.module.scss";
 import Context from "../../../../../store/Context";
 
-const RestPassword = ({ close, setMsg }) => {
-   const { userState } = React.useContext(Context);
-
+const RestPassword = ({ close, setMsg, id }) => {
    const [passwordIsShown, setPasswordIsShown] = useState(false);
    const [passwordIsEmpty, setPasswordIsEmpty] = useState(true);
+   const [isValidPassword, setIsValidPassword] = useState(true);
+   const [isPasswordMatch, setIsPasswordMatch] = useState(true);
    const [newPassword, setNewPassword] = useState({
       password1: "",
       password2: "",
    });
-   const [isValidPassword, setIsValidPassword] = useState(true);
-   const [isPasswordMatch, setIsPasswordMatch] = useState(true);
+
+   useEffect(() => {
+      if (newPassword.password1 !== "") setPasswordIsEmpty(false);
+      else setPasswordIsEmpty(true);
+   }, [newPassword.password1]);
 
    const handlePassword = (e) => {
       setNewPassword({ ...newPassword, [e.target.name]: e.target.value });
-      if (e.target.value !== "") setPasswordIsEmpty(false);
-      else setPasswordIsEmpty(true);
    };
 
    const validatePassword = (password) => {
@@ -45,7 +46,7 @@ const RestPassword = ({ close, setMsg }) => {
          setIsValidPassword(true);
       }
       try {
-         const res = await api.post(`changePassword/${userState.id}`, {
+         const res = await api.post(`changePassword/${id}`, {
             password: newPassword.password1,
          });
          setNewPassword({
@@ -54,7 +55,6 @@ const RestPassword = ({ close, setMsg }) => {
          });
          close && close();
          setMsg({ msg: "הסיסמא אופסה בהצלחה", type: "success" });
-         console.log("here");
       } catch (e) {
          console.log(e);
       }
@@ -64,7 +64,7 @@ const RestPassword = ({ close, setMsg }) => {
          <div className={style.body}>
             <div className={style.userId}>
                <label>תעודת זהות</label>
-               <input readOnly value={userState.id} type="text" />
+               <input readOnly value={id} type="text" />
             </div>
             <div className={style.newPassword}>
                {passwordIsShown ? (

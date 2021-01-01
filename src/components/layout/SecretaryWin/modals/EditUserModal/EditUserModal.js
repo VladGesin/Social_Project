@@ -74,7 +74,7 @@ const EditUserModal = ({
          }));
          setStage(1);
       } catch (err) {
-         alert(err);
+         console.log(err);
       }
    };
    const getAndStoreCommittees = async () => {
