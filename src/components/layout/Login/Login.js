@@ -4,10 +4,11 @@ import style from './Login.module.scss';
 import { Validation } from '../Validation/Validation';
 import Context from '../../../store/Context';
 import { Link } from 'react-router-dom';
+import api from '../../../../src/api';
 
+let daysSinceLastPasswordChange=0;
 export class Login extends Component {
 	
-
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -70,24 +71,39 @@ export class Login extends Component {
 	checkUserDetails = async () => {
 		
 		try { 
-			 //  const response = await fetch(
-         //     "https://www.hitprojectscenter.com/Social-api/loginManager/passwordExceeded/",
-         //     {
-         //        headers: {
-         //           "Content-Type": "application/json",
-         //        },
-         //        method: "POST",
-         //        body: JSON.stringify({
-         //           userID: this.inputId,
-         //        }),
-         //     }
-         //  );
-         //  console.log(response);
-         //  console.log(this.inputId);
-         //  const token = await response.json();
-		 //  console.log(daysSinceLastPasswordChange);
-		//  if(daysSinceLastPasswordChange == 180 || daysSinceLastPasswordChange <= 175){}
-		//  if(daysSinceLastPasswordChange <= 0 && daysSinceLastPasswordChange >= 175){}
+			    // Get token if credentials are valid
+				const res = await api.post("/loginManager/login/", {
+					password:this.inputPasseord,
+					userID:this.inputId,
+
+			  });
+			  const token = res.data.token[0].token;
+		 
+			  const response = await fetch(
+             "https://www.hitprojectscenter.com/Social-api/loginManager/passwordExceeded/",
+             {
+                headers: {
+                   "Content-Type": "application/json",
+                },
+                method: "POST",
+                body: JSON.stringify({
+                   userID: this.inputId,
+                }),
+             }
+          );
+          console.log(response);
+          console.log(this.inputId);
+		//   const token = await response.json();
+		  const daysSinceLastPasswordChange = await response.json();
+		  console.log(daysSinceLastPasswordChange);
+		  
+		 if(daysSinceLastPasswordChange == 180 || daysSinceLastPasswordChange <= 175)
+		 {
+			alert("הסיסמה שלך עומדת לפוג תוקף, נא שנה אותה ");
+			this.props.history.push('/Social_Project/ForgotPassword');
+		 }
+		 else
+		 {
 			this.context.login(this.inputId, this.inputPassword, this.invalidCredentials);
 			sessionStorage.setItem(
 				'tempUser',
@@ -96,7 +112,7 @@ export class Login extends Component {
 					password: this.inputPassword
 				})
 			);
-				
+		 }	
 		 
 		} catch (error) {
 			console.log(error);
