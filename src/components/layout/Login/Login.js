@@ -101,7 +101,7 @@ export class Login extends Component {
 
          if (
             daysSinceLastPasswordChange == 180 ||
-            daysSinceLastPasswordChange <= 175
+            daysSinceLastPasswordChange >= 175
          ) {
             alert("הסיסמה שלך עומדת לפוג תוקף, נא שנה אותה ");
             this.props.history.push("/Social_Project/ForgotPassword");
@@ -156,7 +156,7 @@ export class Login extends Component {
                         <button onClick={this.ValidetionInputIdAndPassword}>
                            כניסה
                         </button>
-                        <Link to="/Social_Project/PasswordReset">
+                        <Link to="/Social_Project/ForgotPassword">
                            <p> שכחתי סיסמה </p>
                         </Link>
                      </div>
