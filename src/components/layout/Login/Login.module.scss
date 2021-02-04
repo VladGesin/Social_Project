@@ -9,7 +9,8 @@
     align-items: center;
 	img {
 		 width: 100%;
-		 margin:20px;
+		 margin: -14px;
+		 margin-block: 15px;
 	}
 	h2 {
 		color:#095293;
@@ -18,12 +19,11 @@
 		margin-bottom: -5px;
 	}
 	.loginCard {
-			justify-items:center;
-			display: grid;
-			width: 340px;
-			height: 420px;
-			padding:30px;
-			
+		justify-items:center;
+		display: grid;
+		width: 340px;
+		height: 420px;
+		padding:30px;	
         gap:0px;
 		border: 2px solid #095293;
 		border-radius: 5px;
@@ -35,11 +35,10 @@
 		width: 340px;
 		height: 420px;
 		padding:50px;
-		
-	gap:0px;
-	border: 2px solid #095293;
-	border-radius: 5px;
-}
+		gap:0px;
+		border: 2px solid #095293;
+		border-radius: 5px;
+	}
 	
 	/* If the screen size is 600px wide or less, hide the element */
 	@media screen and (max-width: 600px) {
