@@ -90,7 +90,7 @@ export class ForgotPassword extends Component {
 					<div className={style.PassCard}>
 						<h2>איפוס סיסמה</h2>
 						<div className={style.inputContainer}>
-							<p>יש להזין תעודת זהות על מנת לקבל מייל לאיפוס סיסמא</p>
+							<p>יש להזין תעודת זהות על מנת לקבל מייל לאיפוס סיסמה</p>
 							<p> </p>
 							<input
 							    placeholder="תעודת זהות"
