@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import style from './Login.module.scss';
 import { Validation } from '../Validation/Validation';
 import Context from '../../../store/Context';
-import {StaticRouter as Router,Route} from 'react-router-dom'
+import { StaticRouter as Router, Route } from 'react-router-dom';
 import { Message } from 'semantic-ui-react';
 // import login from '../Login'
 import ReactDOM from 'react-dom';
@@ -24,14 +24,14 @@ export class ForgotPassword extends Component {
 	static contextType = Context;
 	componentDidMount() {
 		if (this.context.userState.isAuth) {
-		   this.props.history.push("/Social_Project/MainWin");
+			this.props.history.push('/Social_Project/MainWin');
 		}
-	 }
-	 componentDidUpdate() {
+	}
+	componentDidUpdate() {
 		if (this.context.userState.isAuth) {
-		   this.props.history.push("/Social_Project/MainWin");
+			this.props.history.push('/Social_Project/MainWin');
 		}
-	 }
+	}
 
 	handleInputID = (e) => {
 		this.inputId = e.target.value;
@@ -49,16 +49,14 @@ export class ForgotPassword extends Component {
 		});
 
 		if (isValidId) {
-
 			this.checkUserDetails();
 		}
 	};
 	invalidCredentials = () => {
 		this.setState({ isValidIdAndPassword: false });
 	};
-	isExpiredPassword =  async () =>{
+	isExpiredPassword = async () => {
 		try {
-
 			let response = await fetch('https://www.hitprojectscenter.com/Social-api/loginManager/passwordExceeded/', {
 				headers: {
 					'Content-Type': 'application/json'
@@ -76,39 +74,37 @@ export class ForgotPassword extends Component {
 			const daysSinceLastPasswordChange = response[0].daysSinceLastPasswordChange;
 			console.log(daysSinceLastPasswordChange);
 
-         if (daysSinceLastPasswordChange <= 180 || daysSinceLastPasswordChange <= 175) 
-         {
-            this.setState({ isExpired: true });
+			if (daysSinceLastPasswordChange <= 180 || daysSinceLastPasswordChange <= 175) {
+				this.setState({ isExpired: true });
 			}
 		} catch (error) {
 			console.log(error);
 		}
-
-	}
+	};
 
 	checkUserDetails = async () => {
 		try {
-			 //  const response = await fetch(
-         //     "https://www.hitprojectscenter.com/Social-api//loginManager/passwordExceeded/",
-         //     {
-         //        headers: {
-         //           "Content-Type": "application/json",
-         //        },
-         //        method: "POST",
-         //        body: JSON.stringify({
-         //           userID: this.inputId,
-         //        }),
-         //     }
-         //  );
-         //  console.log(response);
-         //  console.log(this.inputId);
-         //  const token = await response.json();
-		 //  console.log(daysSinceLastPasswordChange);
+			//  const response = await fetch(
+			//     "https://www.hitprojectscenter.com/Social-api//loginManager/passwordExceeded/",
+			//     {
+			//        headers: {
+			//           "Content-Type": "application/json",
+			//        },
+			//        method: "POST",
+			//        body: JSON.stringify({
+			//           userID: this.inputId,
+			//        }),
+			//     }
+			//  );
+			//  console.log(response);
+			//  console.log(this.inputId);
+			//  const token = await response.json();
+			//  console.log(daysSinceLastPasswordChange);
 			this.context.ForgotPassword(this.inputId, this.invalidCredentials);
 			sessionStorage.setItem(
 				'tempUser',
 				JSON.stringify({
-					id: this.inputId,
+					id: this.inputId
 				})
 			);
 		} catch (error) {
@@ -117,37 +113,36 @@ export class ForgotPassword extends Component {
 	};
 
 	render() {
-		return ( 
-				<div>
-					 {/* {this.props.forgotPassword}
-					{this.state.isExpired && (
-								<p>
-									{this.state.password.msgExpired}
-									<Message><span>סיסמתך פגה תוקף, יש שנות סיסמה </span>
-									</Message>
-								</p>
-							)} */}
-				<form onSubmit={this.onKeyUp}  className={style.login}>
+		return (
+			<div>
+				{/* {this.props.forgotPassword}*/}
+				{this.state.isExpired && (
+					<p>
+						{this.state.password.msgExpired}
+						<Message>
+							<span>סיסמתך פגה תוקף, יש שנות סיסמה </span>
+						</Message>
+					</p>
+				)}
+				<form onSubmit={this.onKeyUp} className={style.login}>
 					<div className={style.PassCard}>
 						<h2>איפוס סיסמה</h2>
 						<div className={style.inputContainer}>
 							<p>יש להזין תעודת זהות על מנת לקבל מייל לאיפוס סיסמא</p>
 							<p> </p>
-							<input
-							    placeholder="תעודת זהות"
-							    onChange={(e) => this.handleInputID(e)}
-							    type="text" />
+							<input placeholder="תעודת זהות" onChange={(e) => this.handleInputID(e)} type="text" />
 							<p>כולל ספרת ביקורת</p>
 							{!this.state.id.isValid && <p className={style.p}>{this.state.id.msgId}</p>}
 						</div>
 						<div className={style.inputContainer}>
-						<div className={style.btnContainer}>
-							{!this.state.isValidId && <p className={style.p}>ת"ז שגויה</p>}
-							<button onClick={this.ValidetionInputId}> שליחת אימייל</button></div>
+							<div className={style.btnContainer}>
+								{!this.state.isValidId && <p className={style.p}>ת"ז שגויה</p>}
+								<button onClick={this.ValidetionInputId}> שליחת אימייל</button>
+							</div>
 						</div>
 					</div>
-				 </form>
-				</div>
+				</form>
+			</div>
 		);
 	}
 }

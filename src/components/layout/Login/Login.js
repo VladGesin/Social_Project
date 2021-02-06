@@ -3,7 +3,7 @@ import logo from '../../Icons/LoginLogo/loginlogoimg.png';
 import style from './Login.module.scss';
 import { Validation } from '../Validation/Validation';
 import Context from '../../../store/Context';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import api from '../../../../src/api';
 import ForgotPassword from './ForgotPassword'
 import ReactDOM from 'react-dom';
@@ -103,8 +103,8 @@ export class Login extends Component {
 
          if (daysSinceLastPasswordChange <= 180 || daysSinceLastPasswordChange <= 175) 
          {
-            // this.props.history.push("/Social_Project/ForgotPassword");
-            this.setState({ isExpired: true });
+            this.props.history.push("/Social_Project/ForgotPassword");
+            // this.setState({ isExpired: true });
 				// this.state.password.isExpired = true;
 			} else {
 				this.context.login(this.inputId, this.inputPassword, this.invalidCredentials);
@@ -141,12 +141,16 @@ export class Login extends Component {
 									<p> שכחתי סיסמה </p>
 								</Link>
 							</div>
-                     {this.state.isExpired && (
+                     {/* {this.state.isExpired && (
                      <p> {this.state.password.msgExpired}
-                     <Message><span>סיסמתך פגה תוקף, יש לשנות סיסמה </span></Message></p>)}
+                     <Message><span>סיסמתך פגה תוקף, יש לשנות סיסמה </span></Message></p>)} */}
                      
                       {/* {this.state.isExpired &&( <p>{this.state.password.msgExpired}
                       <PasswordReset passwordReset ={this.state.data}/> </p>)} */}
+                      {this.state.isExpired && (
+                     <p> {this.state.password.msgExpired}
+                      <Redirect to={{ pathname: "/Social_Project/ForgotPassword",
+                                      state: { isExpired:true } }} /> </p>)}
                       
 						</div>
 					</div>
