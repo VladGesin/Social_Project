@@ -12,6 +12,7 @@ const initialUserState = {
    loading: true,
    email: null,
    birthday: null,
+   isExpired: false,
 };
 
 const ContextProvider = (props) => {
@@ -101,9 +102,23 @@ const ContextProvider = (props) => {
       }
    };
 
+   const isExpired = () => {
+      return userState.isExpired;
+   };
+   const setIsExpired = (val) => {
+      setUserState({ ...userState, isExpired: val });
+   };
    return (
       <Context.Provider
-         value={{ userState, login, loadUser, logout, register }}
+         value={{
+            userState,
+            login,
+            loadUser,
+            logout,
+            register,
+            isExpired,
+            setIsExpired,
+         }}
       >
          {props.children}
       </Context.Provider>
