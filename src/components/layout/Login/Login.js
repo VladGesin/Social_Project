@@ -91,11 +91,12 @@ export class Login extends Component {
 			response = await response.json();
 			const daysSinceLastPasswordChange = response[0].daysSinceLastPasswordChange;
 			console.log(daysSinceLastPasswordChange);
-			if (daysSinceLastPasswordChange <= 175 || daysSinceLastPasswordChange < 180) {
+			if (daysSinceLastPasswordChange >= 175 && daysSinceLastPasswordChange < 180) {
 				this.context.setIsExpired(true);
 				this.context.login(this.inputId, this.inputPassword, this.invalidCredentials);
 			}
-			if (daysSinceLastPasswordChange >= 180) {
+			if (daysSinceLastPasswordChange <= 180) //>=180
+			{
 				this.context.setIsExpired(true);
 				this.props.history.push('/Social_Project/ForgotPassword');
 			} else {
