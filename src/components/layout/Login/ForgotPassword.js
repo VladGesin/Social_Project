@@ -4,8 +4,6 @@ import { Validation } from '../Validation/Validation';
 import Context from '../../../store/Context';
 import { Message } from 'semantic-ui-react';
 
-
-import ReactDOM from 'react-dom';
 export class ForgotPassword extends Component {
 	constructor(props) {
 		super(props);
