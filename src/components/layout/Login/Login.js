@@ -103,16 +103,23 @@ export class Login extends Component {
 
          if (daysSinceLastPasswordChange <= 180 || daysSinceLastPasswordChange <= 175) 
          {
+			this.context.setIsExpired(true)
             this.props.history.push("/Social_Project/ForgotPassword");
             // this.setState({ isExpired: true });
-				// this.state.password.isExpired = true;
+			// this.state.password.isExpired = true;
 			} else {
 				this.context.login(this.inputId, this.inputPassword, this.invalidCredentials);
 			}
-		} catch (error) {
+		} catch (error) { 
 			console.log(error);
 		}
 	};
+	changeIsExpired = () => {
+		this.context.setIsExpired(false);
+		console.log(this.context.setIsExpired(false));
+	};
+
+
 
 	render() {
 		return (
@@ -137,20 +144,13 @@ export class Login extends Component {
 							<div className={style.btnContainer}>
 								{!this.state.isValidIdAndPassword && <p className={style.p}>ת"ז או סיסמה שגויים</p>}
 								<button onClick={this.ValidetionInputIdAndPassword}>כניסה</button>
-								<Link to="/Social_Project/ForgotPassword">
+								<Link onClick={this.changeIsExpired} to="/Social_Project/ForgotPassword" >
 									<p> שכחתי סיסמה </p>
 								</Link>
 							</div>
-                     {/* {this.state.isExpired && (
-                     <p> {this.state.password.msgExpired}
-                     <Message><span>סיסמתך פגה תוקף, יש לשנות סיסמה </span></Message></p>)} */}
-                     
-                      {/* {this.state.isExpired &&( <p>{this.state.password.msgExpired}
-                      <PasswordReset passwordReset ={this.state.data}/> </p>)} */}
-                      {this.state.isExpired && (
-                     <p> {this.state.password.msgExpired}
-                      <Redirect to={{ pathname: "/Social_Project/ForgotPassword",
-                                      state: { isExpired:true } }} /> </p>)}
+                      {/* {this.context.isExpired && (
+                     <p> {this.state.password.msgExpired} </p>)} */}
+                      
                       
 						</div>
 					</div>
@@ -166,4 +166,6 @@ export class Login extends Component {
 //       </Message>
 //    </p>
 // )}
+{/* <Redirect to={{ pathname: "/Social_Project/ForgotPassword",
+                                      state: { isExpired:true } }} />  */}
 export default Login;
