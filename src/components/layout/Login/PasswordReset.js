@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import style from './Login.module.scss';
 import { Validation } from '../Validation/Validation';
 import Context from '../../../store/Context';
-import {StaticRouter as Router} from 'react-router-dom'
 
 export class PasswordReset extends Component {
 	constructor(props) {
@@ -27,14 +26,14 @@ export class PasswordReset extends Component {
 	static contextType = Context;
 	componentDidMount() {
 		if (this.context.userState.isAuth) {
-		   this.props.history.push("/Social_Project/MainWin");
+			this.props.history.push('/Social_Project/MainWin');
 		}
-	 }
-	 componentDidUpdate() {
+	}
+	componentDidUpdate() {
 		if (this.context.userState.isAuth) {
-		   this.props.history.push("/Social_Project/MainWin");
+			this.props.history.push('/Social_Project/MainWin');
 		}
-	 }
+	}
 
 	handleInputID = (e) => {
 		this.inputId = e.target.value;
@@ -64,33 +63,32 @@ export class PasswordReset extends Component {
 			}
 		});
 
-		if (isValidId && isValidPassword1 && isValidPassword2 && isValidPassword1==isValidPassword2 ) {
-
+		if (isValidId && isValidPassword1 && isValidPassword2 && isValidPassword1 == isValidPassword2) {
 			this.checkUserDetails();
 		}
 	};
 	invalidCredentials = () => {
 		this.setState({ isValidIdAndPassword: false });
 	};
-	
+
 	checkUserDetails = async () => {
 		try {
-			 //  const response = await fetch(
-         //     "https://www.hitprojectscenter.com/Social-api//users/:id",
-         //     {
-         //        headers: {
-         //           "Content-Type": "application/json",
-         //        },
-         //        method: "PATCH",
-         //        body: JSON.stringify({
-         //           userID: this.inputId,
-         //        }),
-         //     }
-         //  );
-         //  console.log(response);
-         //  console.log(this.inputId);
-         //  const token = await response.json();
-		 //  console.log(daysSinceLastPasswordChange);
+			//  const response = await fetch(
+			//     "https://www.hitprojectscenter.com/Social-api//users/:id",
+			//     {
+			//        headers: {
+			//           "Content-Type": "application/json",
+			//        },
+			//        method: "PATCH",
+			//        body: JSON.stringify({
+			//           userID: this.inputId,
+			//        }),
+			//     }
+			//  );
+			//  console.log(response);
+			//  console.log(this.inputId);
+			//  const token = await response.json();
+			//  console.log(daysSinceLastPasswordChange);
 			this.context.ForgotPassword(this.inputId, this.inputPassword, this.invalidCredentials);
 			sessionStorage.setItem(
 				'tempUser',
@@ -106,8 +104,8 @@ export class PasswordReset extends Component {
 
 	render() {
 		return (
-				<div>
-					<form onSubmit={this.onKeyUp}  className={style.login}>
+			<div>
+				<form onSubmit={this.onKeyUp} className={style.login}>
 					<div className={style.PassCard}>
 						<h2>איפוס סיסמה</h2>
 						<div className={style.inputContainer}>
@@ -117,7 +115,9 @@ export class PasswordReset extends Component {
 								placeholder="סיסמה חדשה"
 								onChange={(e) => this.handleInputPassword(e)}
 							/>
-							{!this.state.password1.isValid && <p className={style.p}>{this.state.password1.msgPass1}</p>}
+							{!this.state.password1.isValid && (
+								<p className={style.p}>{this.state.password1.msgPass1}</p>
+							)}
 						</div>
 						<div className={style.inputContainer}>
 							<input
@@ -126,16 +126,19 @@ export class PasswordReset extends Component {
 								placeholder="אימות סיסמה"
 								onChange={(e) => this.handleInputPassword(e)}
 							/>
-							{!this.state.password2.isValid && <p className={style.p}>{this.state.password2.msgPass2}</p>}
+							{!this.state.password2.isValid && (
+								<p className={style.p}>{this.state.password2.msgPass2}</p>
+							)}
 						</div>
 						<div className={style.inputContainer}>
-						<div className={style.btnContainer}>
-							{!this.state.isValidIdAndPassword && <p className={style.p}>ת"ז או סיסמה שגויים</p>}
-							<button onClick={this.ValidetionInputIdAndPassword}> איפוס סיסמה</button></div>
+							<div className={style.btnContainer}>
+								{!this.state.isValidIdAndPassword && <p className={style.p}>ת"ז או סיסמה שגויים</p>}
+								<button onClick={this.ValidetionInputIdAndPassword}> איפוס סיסמה</button>
+							</div>
 						</div>
 					</div>
-				 </form>
-			 </div>
+				</form>
+			</div>
 		);
 	}
 }
