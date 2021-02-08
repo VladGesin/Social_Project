@@ -3,11 +3,9 @@ import logo from '../../Icons/LoginLogo/loginlogoimg.png';
 import style from './Login.module.scss';
 import { Validation } from '../Validation/Validation';
 import Context from '../../../store/Context';
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import api from '../../../../src/api';
 
-
-let daysSinceLastPasswordChange = 0;
 export class Login extends Component {
 	constructor(props) {
 		super(props);
@@ -17,7 +15,7 @@ export class Login extends Component {
 				isValid: true,
 				msg: ''
 			},
-         isExpired: false,
+			isExpired: false,
 			password: {
 				isValid: true,
 				msg: ''
@@ -53,7 +51,7 @@ export class Login extends Component {
 			id: {
 				isValid: isValidId,
 				msgId
-         },
+			},
 			password: {
 				isValid: isValidPassword,
 				msgPass
@@ -93,15 +91,17 @@ export class Login extends Component {
 			response = await response.json();
 			const daysSinceLastPasswordChange = response[0].daysSinceLastPasswordChange;
 			console.log(daysSinceLastPasswordChange);
-
-         if (daysSinceLastPasswordChange <= 180 || daysSinceLastPasswordChange <= 175) 
-         {
-			this.context.setIsExpired(true)
-            this.props.history.push("/Social_Project/ForgotPassword");
+			if (daysSinceLastPasswordChange <= 175 || daysSinceLastPasswordChange < 180) {
+				this.context.setIsExpired(true);
+				this.context.login(this.inputId, this.inputPassword, this.invalidCredentials);
+			}
+			if (daysSinceLastPasswordChange >= 180) {
+				this.context.setIsExpired(true);
+				this.props.history.push('/Social_Project/ForgotPassword');
 			} else {
 				this.context.login(this.inputId, this.inputPassword, this.invalidCredentials);
 			}
-		} catch (error) { 
+		} catch (error) {
 			console.log(error);
 		}
 	};
@@ -109,8 +109,6 @@ export class Login extends Component {
 		this.context.setIsExpired(false);
 		console.log(this.context.setIsExpired(false));
 	};
-
-
 
 	render() {
 		return (
@@ -135,7 +133,7 @@ export class Login extends Component {
 							<div className={style.btnContainer}>
 								{!this.state.isValidIdAndPassword && <p className={style.p}>ת"ז או סיסמה שגויים</p>}
 								<button onClick={this.ValidetionInputIdAndPassword}>כניסה</button>
-								<Link onClick={this.changeIsExpired} to="/Social_Project/ForgotPassword" >
+								<Link onClick={this.changeIsExpired} to="/Social_Project/ForgotPassword">
 									<p> שכחתי סיסמה </p>
 								</Link>
 							</div>
