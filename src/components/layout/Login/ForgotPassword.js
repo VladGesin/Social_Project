@@ -86,7 +86,7 @@ export class ForgotPassword extends Component {
 			<div>
 				<form onSubmit={this.onKeyUp} className={style.login}>
 					<div className={style.PassCard}>
-						{this.context.isExpired && (
+						{this.context.isExpired() && (
 							<p>
 								<Message>
 									<h14>

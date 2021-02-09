@@ -108,7 +108,7 @@ export class Login extends Component {
 	};
 	changeIsExpired = () => {
 		this.context.setIsExpired(false);
-		console.log(this.context.setIsExpired(false));
+		console.log(this.context.isExpired());
 	};
 
 	render() {
