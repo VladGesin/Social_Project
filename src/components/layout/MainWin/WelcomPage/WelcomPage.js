@@ -44,6 +44,15 @@ const WelcomPage = () => {
               <div className="row d-block ">
                 <Slider />
               </div>
+              {this.context.isExpired() && (
+							<p>
+								<Message>
+									<h14>
+										<span> הסיסמא עומדת לפוג בעוד .. ימים. לחץ כאן לשנות סיסמה.  </span>
+									</h14>
+								</Message>
+							</p>
+						)}
               {msg.msg !== "" && (
                 <MsgBox
                   name={msg.name}
