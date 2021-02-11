@@ -11,6 +11,7 @@ import MsgBox from "../../SecretaryWin/MsgBox/MsgBox";
 import { Link } from "react-router-dom";
 import { Message } from "semantic-ui-react";
 import Context from "../../../../store/Context";
+// import style from "./Login.module.css";
 
 import "./WelcomPage.css";
 import api from "../../../../api";
@@ -41,6 +42,25 @@ const WelcomPage = () => {
 
    return (
       <Fragment>
+			 <div>
+				   {context.isExpired() && (
+                        <p>
+                           <Message>
+                              <h14>
+                                 <b>
+                                    לשינוי סיסמה
+                                    {console.log(context.isExpiredIn())}
+                                    <Link to="/Social_Project/ForgotPassword">
+                                       <p> לחץ כאן </p>
+                                    </Link>
+                                   סיסמתך עומדת לפוג בעוד{" "}
+                                    {context.isExpiredIn()} ימים
+                                 </b>
+                              </h14>
+                           </Message>
+                        </p>
+                     )}
+			 </div>
          <Provider template={AlertTemplate} {...options}>
             <Container>
                <div className="row justify-content-md-center">
@@ -48,23 +68,7 @@ const WelcomPage = () => {
                      <div className="row d-block ">
                         <Slider />
                      </div>
-                     {context.isExpired() && (
-                        <p>
-                           <Message>
-                              <h14>
-                                 <span>
-                                    {console.log(context.isExpiredIn())}
-                                    הסיסמא עומדת לפוג בעוד{" "}
-                                    {context.isExpiredIn()} ימים.
-                                    <Link to="/Social_Project/ForgotPassword">
-                                       <p> לחץ כאן </p>
-                                    </Link>
-                                    לשנות סיסמה.
-                                 </span>
-                              </h14>
-                           </Message>
-                        </p>
-                     )}
+                     
                      {msg.msg !== "" && (
                         <MsgBox
                            name={msg.name}

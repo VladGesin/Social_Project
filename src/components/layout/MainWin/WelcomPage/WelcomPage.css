@@ -1,3 +1,17 @@
 /* .InfoCard {
   height: 229px;
 } */
+
+b{
+  margin: 399px;
+  margin-block: 15px;
+  width: 454px;
+  height: 41px;
+  display: flex;
+  justify-content: space-around;	
+  background: rgb(253, 214, 214);
+  color: rgb(6, 11, 87);
+  border:1.5px solid #930909;
+  border-radius: 5px;
+  padding:5px;
+};
