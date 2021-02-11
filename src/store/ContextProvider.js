@@ -13,10 +13,15 @@ const initialUserState = {
    email: null,
    birthday: null,
    isExpired: false,
+   isExpiredIn: null,
 };
-
+const initialUserPassword = {
+   isExpired: false,
+   isExpiredIn: null,
+};
 const ContextProvider = (props) => {
    const [userState, setUserState] = useState(initialUserState);
+   const [passwordExpired, setPasswordExpired] = useState(initialUserPassword);
 
    const loadUser = async () => {
       const token = sessionStorage.getItem("token");
@@ -103,10 +108,16 @@ const ContextProvider = (props) => {
    };
 
    const isExpired = () => {
-      return userState.isExpired;
+      return passwordExpired.isExpired;
    };
    const setIsExpired = (val) => {
-      setUserState({ ...userState, isExpired: val });
+      setPasswordExpired({ ...passwordExpired, isExpired: val });
+   };
+   const isExpiredIn = () => {
+      return passwordExpired.isExpiredIn;
+   };
+   const setIsExpiredIn = (val) => {
+      setPasswordExpired({ ...passwordExpired, isExpiredIn: val });
    };
    return (
       <Context.Provider
@@ -118,6 +129,8 @@ const ContextProvider = (props) => {
             register,
             isExpired,
             setIsExpired,
+            isExpiredIn,
+            setIsExpiredIn,
          }}
       >
          {props.children}
