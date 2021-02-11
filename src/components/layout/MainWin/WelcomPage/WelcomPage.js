@@ -47,7 +47,7 @@ const WelcomPage = () => {
 							<div className="row d-block ">
 								<Slider />
 							</div>
-							{this.context.isExpired() && (
+							{/* {this.context.isExpired() && (
 								<p>
 									<Message>
 										<h14>
@@ -61,7 +61,7 @@ const WelcomPage = () => {
 										</h14>
 									</Message>
 								</p>
-							)}
+							)} */}
 							{msg.msg !== '' && (
 								<MsgBox
 									name={msg.name}

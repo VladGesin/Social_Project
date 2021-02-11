@@ -92,8 +92,8 @@ export class Login extends Component {
 			const daysSinceLastPasswordChange = response[0].daysSinceLastPasswordChange;
 			console.log(daysSinceLastPasswordChange);
 			//תנאים הפוכים לצורך בדיקת כניסה לדף הבית
+			//>=180
 			if (daysSinceLastPasswordChange <= 180) {
-				//>=180
 				this.context.setIsExpired(true);
 				this.context.login(this.inputId, this.inputPassword, this.invalidCredentials);
 			}
