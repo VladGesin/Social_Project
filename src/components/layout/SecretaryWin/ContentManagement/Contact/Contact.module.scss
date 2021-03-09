@@ -1,0 +1,73 @@
+.container {
+   background-color: #f6fcfc;
+   height: 100%;
+   border: 1px solid #ccc;
+   display: flex;
+   flex-direction: column;
+   overflow-y: auto;
+   overflow-x: hidden;
+   .header {
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row-reverse;
+      h3 {
+         display: flex;
+         flex-direction: row-reverse;
+      }
+      .addContact {
+         font-size: 2rem;
+         color: #7bca8d;
+         &:hover {
+            cursor: pointer;
+            transform: scale(1.3);
+         }
+         transition: all 0.3s;
+      }
+   }
+   .table {
+      box-shadow: 0px 0px 16px -10px #0000009c;
+      transform: scale(1.005);
+
+      .row {
+         background-color: rgb(255, 255, 255);
+         border-bottom: 1px solid #ccc;
+         height: 3rem;
+         display: flex;
+         flex-direction: row-reverse;
+         .col {
+            width: 16.66%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .moreContainer {
+               height: fit-content;
+               position: relative;
+
+               .moveRight {
+                  transform: translateX(6rem);
+                  transition: all 0.1s;
+               }
+               .moveLeft {
+                  transform: translateX(0);
+                  transition: all 0.3s;
+               }
+            }
+            .hoverBox {
+               position: absolute;
+               top: 50%;
+               transform: translateY(-50%);
+               display: flex;
+               justify-content: space-between;
+               width: 4rem;
+            }
+            i:nth-child(1) {
+               font-size: 1.2rem;
+               color: #5c5c5ccc;
+               cursor: pointer;
+            }
+         }
+      }
+   }
+}
