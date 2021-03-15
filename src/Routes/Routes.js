@@ -13,6 +13,7 @@ import Login from "../components/layout/Login/Login";
 import ForgotPassword from "../components/layout/Login/ForgotPassword"
 import PasswordReset from "../components/layout/Login/PasswordReset";
 import { MapsPage } from "../components/layout/MapsPage/MapsPage";
+import CommInquiryManagement from "../components/CommInquiryManagement/CommInquiryManagement"
 
 const routesData = [
    { component: WelcomPage, path: "/Social_Project/MainWin" },
@@ -28,6 +29,7 @@ const routesData = [
       exact: true,
    },
    { component: commiteesWin, path: "/Social_Project/committees/:type" },
+   { component: CommInquiryManagement, path: "/Social_Project/CommInquiryManagement" },
    { component: Login, path: "/Social_Project/", exact: true, public: true },
    {component: ForgotPassword,path: "/Social_Project/ForgotPassword",public: true,},
    {component: PasswordReset,path: "/Social_Project/PasswordReset",public: true,},
