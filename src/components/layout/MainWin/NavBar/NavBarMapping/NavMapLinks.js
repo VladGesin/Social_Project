@@ -11,7 +11,7 @@ const NavMapLinks = (props) => {
                {/* NavLink */}
                <NavLink
                   to={{
-                     pathname: `${props.link.path}/:${props.link.item}`,
+                     pathname: `${props.link.path}`,
                      state: { item: props.link.item },
                   }}
                >

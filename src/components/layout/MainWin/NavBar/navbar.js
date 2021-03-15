@@ -9,21 +9,23 @@ const XpertesyItems = {
       {
          name: "יצירת פגישה חדשה",
          path: "/Social_Project/newmeeting",
-         item: "test",
       },
-      { name: "הפגישות שלי", path: "/Social_Project/mymeetings", item: "test" },
+      { name: "הפגישות שלי", path: "/Social_Project/mymeetings" },
    ],
 };
 
 const ComitteeItems = {
    link: [
-      { name: "ועדות ראשי", path: "/Social_Project/committees"},
-      { name: "ניהול פניות לועדה", path: "/Social_Project/CommInquiryManagement"},
-      { name: "סיכומי ישיבות", path: "/Social_Project/", item: "test" },
-      { name: "סקרים", path: "/Social_Project/", item: "test" },
-      { name: "צפייה בועדה", path: "/Social_Project/", item: "test" },
-      { name: "ניהול ועדה", path: "/Social_Project/", item: "test" }
-   ]
+      { name: "ועדות ראשי", path: "/Social_Project/committees" },
+      {
+         name: "ניהול פניות לועדה",
+         path: "/Social_Project/CommInquiryManagement",
+      },
+      { name: "סיכומי ישיבות", path: "/Social_Project/" },
+      { name: "סקרים", path: "/Social_Project/" },
+      { name: "צפייה בועדה", path: "/Social_Project/" },
+      { name: "ניהול ועדה", path: "/Social_Project/" },
+   ],
 };
 
 const navbar = () => {
@@ -40,12 +42,11 @@ const navbar = () => {
          <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="m-auto links-container">
                {/* <NavLink to="/Social_Project/committees">וועדות</NavLink> */}
-               <NavDropdown               
+               <NavDropdown
                   title="ועדות"
                   id="collasible-nav-dropdown"
                   dir="rtl"
                   className="text-center"
-                  onClick= {()=> <Link to="/Social_Project/committees"></Link>}
                >
                   {ComitteeItems.link.map((item) => (
                      <NavMapLinks link={item} key={item.name} />
