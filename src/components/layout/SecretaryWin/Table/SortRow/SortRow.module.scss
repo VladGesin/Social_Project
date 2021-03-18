@@ -69,3 +69,16 @@
       height: calc(100% + 10rem);
    }
 }
+@media screen and (max-width: 576px) {
+   .sort {
+      margin: 1rem;
+      width: 58rem !important;
+      justify-content: center;
+      flex-direction: row;
+
+      span,
+      p {
+         flex-direction: row;
+      }
+   }
+}

@@ -14,8 +14,10 @@ export class Birthday extends Component {
 
 		return (
 			<div>
-				<Card className="text-right" className="mt-2">
-					<Card.Header as="h5">ימי הולדת</Card.Header>
+				<Card className="mt-2">
+					<Card.Header as="h5" className="text-right">
+						ימי הולדת
+					</Card.Header>
 					<marquee
 						behavior="scroll"
 						direction="up"

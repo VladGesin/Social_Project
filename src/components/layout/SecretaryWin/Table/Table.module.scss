@@ -68,3 +68,12 @@
       margin-left: 5%;
    }
 }
+@media screen and (max-width: 576px) {
+   .table {
+      overflow-x: scroll;
+      direction: rtl;
+   }
+   .sort {
+      width: fit-content !important;
+   }
+}

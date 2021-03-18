@@ -58,3 +58,17 @@
       }
    }
 }
+@media screen and (max-width: 576px) {
+   .table {
+      width: fit-content;
+   }
+   .item {
+      width: 58rem !important;
+      margin: 1rem !important;
+      flex-direction: row !important;
+
+      .userData {
+         flex-direction: row !important;
+      }
+   }
+}
