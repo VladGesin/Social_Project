@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import avatar from "../../../Icons/Avatars/avatar.png";
 import "./header.css";
 import { Link } from "react-router-dom";
-import NavBar from "../NavBar/navbar";
+import NavBar from "../NavBar/MainNavBar";
 import Context from "../../../../store/Context";
 const Header = () => {
    const context = useContext(Context);

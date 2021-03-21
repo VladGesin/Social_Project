@@ -10,6 +10,8 @@ export const CommiteesWin = (props) => {
   const [commObj, setCommObj] = useState({});
   const commName = useParams().type;
 
+  const [committeeData, setCommitteeData] = useState([]);
+
   useEffect(() => {
     const getCommittees = async () => {
       //return all committees;
@@ -22,7 +24,21 @@ export const CommiteesWin = (props) => {
         console.log(e);
       }
     };
+
+    const getCommitteesData = async ()=>{
+      const res = await api.get(`committeeParticipants/${commName}`);
+      const data = res.data.map((cur, i)=>{
+    return {
+      ...cur.user,
+      committeePosition: cur.committeePosition,
+      index: i+1
+    }
+  })
+  setCommitteeData(data);
+  }
+    getCommitteesData()
     getCommittees();
+    
   }, []);
 
   //const [committeeData, setCommitteeData] = useState([]);
@@ -40,7 +56,7 @@ export const CommiteesWin = (props) => {
         </div>
 
         <div className="row">
-          <CommTable commItem={commObj} />
+          <CommTable commItem={commObj} committeeData={committeeData} />
         </div>
       </div>
     </Fragment>

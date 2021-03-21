@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
-import "./navbar.css";
+import "./MainNavBar.css";
 import NavMapLinks from "./NavBarMapping/NavMapLinks";
+import Context from '../../../../store/Context';
 
 const XpertesyItems = {
    link: [
@@ -16,19 +17,22 @@ const XpertesyItems = {
 
 const ComitteeItems = {
    link: [
-      { name: "ועדות ראשי", path: "/Social_Project/committees" },
+      { name: "ועדות ראשי", path: "/Social_Project/committees", userType: 'user, committee, chairman, admin' },
       {
          name: "ניהול פניות לועדה",
          path: "/Social_Project/CommInquiryManagement",
+         userType: 'user, committee, chairman, admin'
       },
-      { name: "סיכומי ישיבות", path: "/Social_Project/" },
-      { name: "סקרים", path: "/Social_Project/" },
-      { name: "צפייה בועדה", path: "/Social_Project/" },
-      { name: "ניהול ועדה", path: "/Social_Project/" },
+      { name: "סיכומי ישיבות", path: "/Social_Project/", userType: 'user, committee, chairman, admin' },
+      { name: "סקרים", path: "/Social_Project/", userType: 'user, committee, chairman, admin' },
+      { name: "צפייה בועדה", path: "/Social_Project/", userType: 'user, committee, chairman, admin' },
+      { name: "ניהול ועדה", path: "/Social_Project/", userType: 'user, committee, chairman, admin' },
    ],
 };
 
-const navbar = () => {
+const MainNavBar = () => {
+   const context = useContext(Context);
+   
    return (
       <Navbar
          collapseOnSelect
@@ -49,7 +53,7 @@ const navbar = () => {
                   className="text-center"
                >
                   {ComitteeItems.link.map((item) => (
-                     <NavMapLinks link={item} key={item.name} />
+                     item.userType.includes(context.userState.userType) && <NavMapLinks link={item} key={item.name} />
                   ))}
                </NavDropdown>
                <NavLink to="/Social_Project/maps">מפות</NavLink>
@@ -71,4 +75,4 @@ const navbar = () => {
    );
 };
 
-export default navbar;
+export default MainNavBar;

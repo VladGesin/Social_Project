@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import Card from 'react-bootstrap/Card';
 import CommApealModal from '../commAppeal/commApealModal';
+import CommAddMember from '../commAddMember/CommAddMember';
 
 const CommDescription = (props) => {
   return (
@@ -11,6 +12,7 @@ const CommDescription = (props) => {
           <Card.Title>קצת על הוועדה</Card.Title>
           <Card.Text>{props.commItem.desc}</Card.Text>
           <CommApealModal />
+          <CommAddMember />
         </Card.Body>
       </Card>
     </Fragment>
