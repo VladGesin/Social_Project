@@ -1,122 +1,147 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { Form, Col, Button, Card } from "react-bootstrap";
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import api from "../../../../api";
+import MsgBox from "../../SecretaryWin/MsgBox/MsgBox";
 import { useParams } from "react-router-dom";
-const CommAddMember = () => {
+const CommAddMember = (props) => {
+    const commName = useParams().type;
     const [showAdd, setShowAdd] = useState(false);
+    const [emailIsValid, setEmailIsValid] = useState(true);
+    const [phoneIsValid, setPhoneIsValid] = useState(true);
+    const [firstNameIsValid, setFirstNameIsValid] = useState(true);
+    const [lastNameIsValid, setLastNameIsValid] = useState(true);
+    const [msg, setMsg] = useState({ msg: "" });
+    const [usersData, setUsersData] = useState([]);
+
+    useEffect(() => {
+      getAllUsers();
+   }, []);
+
+   const getAllUsers = async () => {
+      const res = await api.get("/users/");
+      console.log('idan')
+      console.log(res.data)
+      setUsersData(res.data);
+   };
+
+    const [formData, setFormData] = useState({
+        userType: "משתמש קצה",
+        firstName: "",
+        lastName: "",
+        pre_Tel: "050",
+        inTel: "",
+        email: ""
+    });
+
+    const handleClose = () => {
+      setPhoneIsValid(true);
+      setEmailIsValid(true);
+      setFirstNameIsValid(true);
+      setLastNameIsValid(true);
+      setPhoneIsValid(true);
+      setShowAdd(false);
+      //init form
+      setFormData({
+        userType: "משתמש קצה",
+        firstName: "",
+        lastName: "",
+        pre_Tel: "050",
+        inTel: "",
+        email: ""
+      });
+    };
+
+    const isEmailExist = () => {
+        for(let user of usersData) {
+        if(user.email === formData.email){
+          return user;
+        }
+      }
+      return null;
+    }
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      var re = /\S+@\S+\.\S+/;
+      var ret = /^[0-9\b]+$/;
+      if (!re.test(formData.email)) {
+        setEmailIsValid(false);
+      } else setEmailIsValid(true);
+      if (!ret.test(formData.inTel) || formData.inTel.length < 7) {
+        setPhoneIsValid(false);
+      } else setPhoneIsValid(true);
+      if (formData.firstName === "") {
+        setFirstNameIsValid(false);
+      } else setFirstNameIsValid(true);
+      if (formData.lastName === "") {
+        setLastNameIsValid(false);
+      } else setLastNameIsValid(true);
+
+      const TableObj = {
+        committee: {},
+        committeePosition: "",
+        user: {}
+      };
+      const memberToAdd = isEmailExist();
+      if (
+        re.test(formData.email) &&
+        ret.test(formData.inTel) &&
+        formData.inTel.length === 7 &&
+        (formData.firstName && formData.lastName) !=="" &&
+        memberToAdd
+        ) {
+          debugger
+        await api
+          .post(`committees`, {
+            userID: parseInt(memberToAdd.user_id),
+            committeeName: commName,
+            role: (memberToAdd.type === 'admin' || 'chairman')? "יושב ראש" : "חבר ועדה"
+          })
+          .then((res) => {
+            setMsg({
+              msg: "חבר הועדה התווסף בהצלחה",
+              type: "success",
+            });
+            TableObj.committee = {
+              committeeName: res.data.data[0].committee.committee_name,
+              committeeInformation: res.data.data[0].committee.committee_information
+            }
+            TableObj.committeePosition = res.data.data[0].committeePosition;
+            TableObj.user = memberToAdd;
+            props.setCommitteeData([...props.committeeData, TableObj]);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+
+        handleClose();
+      }
+    };
+
+    const handleTellength = (e) => {
+      if (e.target.value.length < 8) onChange(e);
+    };
+
+    const onChange = (e) => {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
 
     const handleShowAdd = () => setShowAdd(true);
 
-    const commName = useParams().type;
-  const [show, setShow] = useState(false);
-  const [emailIsValid, setEmailIsValid] = useState(true);
-  const [phoneIsValid, setPhoneIsValid] = useState(true);
-  const [contentIsValid, setContentIsValid] = useState(true);
-  const [subjectIsValid, setSubjectIsValid] = useState(true);
-  const [nameIsValid, setNameIsValid] = useState(true);
-  const [msg, setMsg] = useState({ msg: "" });
-
-  const [formData, setFormData] = useState({
-    commName: commName,
-    typeOfAppeal: "בקשה",
-    urgency: "רגיל",
-    subject: "",
-    content: "",
-    name: "",
-    pre_Tel: "050",
-    inTel: "",
-    email: "",
-  });
-
-  const handleClose = () => {
-    setPhoneIsValid(true);
-    setEmailIsValid(true);
-    setNameIsValid(true);
-    setPhoneIsValid(true);
-    setContentIsValid(true);
-    setSubjectIsValid(true);
-    setShow(false);
-    //init form
-    setFormData({
-      commName: commName,
-      typeOfAppeal: "בקשה",
-      urgency: "רגיל",
-      subject: "",
-      content: "",
-      name: "",
-      pre_Tel: "050",
-      inTel: "",
-      email: "",
-    });
-  };
-
-  const handleShow = () => setShow(true);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    var re = /\S+@\S+\.\S+/;
-    var ret = /^[0-9\b]+$/;
-    if (!re.test(formData.email)) {
-      setEmailIsValid(false);
-    } else setEmailIsValid(true);
-    if (!ret.test(formData.inTel) || formData.inTel.length < 7) {
-      setPhoneIsValid(false);
-    } else setPhoneIsValid(true);
-    if (formData.subject === "") {
-      setSubjectIsValid(false);
-    } else setSubjectIsValid(true);
-    if (formData.content === "") {
-      setContentIsValid(false);
-    } else setContentIsValid(true);
-    if (formData.name === "") {
-      setNameIsValid(false);
-    } else setNameIsValid(true);
-
-    const reqObj = {
-      committeeName: commName,
-      type: formData.typeOfAppeal,
-      priority: formData.urgency,
-      subject: formData.subject,
-      content: formData.content,
-      full_name: formData.name,
-      phone_number: formData.pre_Tel + formData.inTel,
-      email: formData.email,
-    };
-
-    if (
-      re.test(formData.email) &&
-      ret.test(formData.inTel) &&
-      formData.inTel.length === 7 &&
-      (formData.subject && formData.content && formData.name) !==""
-    ) {
-      await api
-        .post(`inbox`, reqObj)
-        .then((res) => {
-          setMsg({
-            msg: "פנייתך התקבלה. מספר הפנייה: " + res.data.inbox_id,
-            type: "success",
-          });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-
-      handleClose();
-    }
-  };
-
-  const handleTellength = (e) => {
-    if (e.target.value.length < 8) onChange(e);
-  };
-
-  const onChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
     return (
         <Fragment>
+        {msg.msg !== "" && (
+        <MsgBox
+          name={msg.name}
+          msg={msg.msg}
+          clear={() => {
+            setMsg({ msg: "" });
+          }}
+          type={msg.type}
+        />
+      )}
         <Button variant="success float-left" style={{marginLeft: "1em"}} onClick={handleShowAdd} dir="rtl">
         הוספת חבר ועדה
         </Button>
@@ -138,20 +163,26 @@ const CommAddMember = () => {
                     שם פרטי<span className="validate">*</span>
                   </Form.Label>
                   <Form.Control
-                    value={formData.name}
+                    value={formData.firstName}
                     onChange={onChange}
-                    name="name"
+                    name="firstName"
                   />
+                  {!firstNameIsValid && (
+                    <p className="validate">*שם פרטי לא תקין</p>
+                  )}
                   </Form.Group>
                   <Form.Group as={Col} controlId="formGridName">
                   <Form.Label>
                     שם משפחה<span className="validate">*</span>
                   </Form.Label>
                   <Form.Control
-                    value={formData.name}
+                    value={formData.lastName}
                     onChange={onChange}
-                    name="name"
+                    name="lastName"
                   />
+                  {!lastNameIsValid && (
+                    <p className="validate">*שם משפחה לא תקין</p>
+                  )}
                   </Form.Group>
               </Form.Row>
               <Form.Row>
@@ -159,9 +190,9 @@ const CommAddMember = () => {
                   <Form.Label>תפקיד</Form.Label>
                   <Form.Control
                     as="select"
-                    value={formData.typeOfAppeal}
+                    value={formData.userType}
                     onChange={onChange}
-                    name="typeOfAppeal"
+                    name="userType"
                   >
                     <option>משתמש קצה</option>
                     <option>חבר ועדה</option>
@@ -232,7 +263,6 @@ const CommAddMember = () => {
               >
                 ביטול
               </Button>
-
               </Form>
           </Card.Body>
         </Card>

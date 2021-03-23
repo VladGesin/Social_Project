@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 
 
 function CommTable(props) {
-  // const commName = useParams().type;
+  const commName = useParams().type;
   // const [committeeData, setCommitteeData] = useState([]);
   // useEffect(()=>{
   //   const getCommittees = async ()=>{
@@ -29,8 +29,29 @@ function CommTable(props) {
   //   getCommittees()
   // },[])
 
+  const editCommMember = async (member) => {
+    debugger
+    await api.patch(`committees/${commName}`, {
+      userID: parseInt(member.userID),
+      role: member.type
+    }).then((res) => {
+      console.log(res);
+      props.setCommitteeData([...props.committeeData, res.data[0].user]);
+    });  
+  };
+
+  const deleteCommMember = async (member) => {
+    debugger
+    await api.delete(`committees/${commName}`, {userID: parseInt(member.userID)})
+    .then((res) => {
+      console.log(res);
+      const newArrayAfterDelete = props.committeeData.filter(item => item.user.userID !== member.userID);
+      props.setCommitteeData(newArrayAfterDelete);
+    });  
+  }
+
   const PplArrMap = props.committeeData.map((card, index) => (
-    <InfoCardMap card={card} key={index} />
+    <InfoCardMap card={card} key={index} editCommMember={editCommMember} deleteCommMember={deleteCommMember}/>
     //  <InfoCardMap card={card} key={card.name.toString} />
   ));
   return (

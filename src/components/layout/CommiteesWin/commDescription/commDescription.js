@@ -12,7 +12,7 @@ const CommDescription = (props) => {
           <Card.Title>קצת על הוועדה</Card.Title>
           <Card.Text>{props.commItem.desc}</Card.Text>
           <CommApealModal />
-          <CommAddMember />
+          <CommAddMember commItem={props.commItem} committeeData={props.committeeData} setCommitteeData={props.setCommitteeData}/>
         </Card.Body>
       </Card>
     </Fragment>

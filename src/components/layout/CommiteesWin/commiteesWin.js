@@ -27,6 +27,7 @@ export const CommiteesWin = (props) => {
 
     const getCommitteesData = async ()=>{
       const res = await api.get(`committeeParticipants/${commName}`);
+      console.log(res.data)
       const data = res.data.map((cur, i)=>{
     return {
       ...cur.user,
@@ -52,11 +53,11 @@ export const CommiteesWin = (props) => {
     <Fragment>
       <div className="container">
         <div className="row">
-          <CommDescription commItem={commObj} />
+          <CommDescription commItem={commObj} committeeData={committeeData} setCommitteeData={setCommitteeData}/>
         </div>
 
         <div className="row">
-          <CommTable commItem={commObj} committeeData={committeeData} />
+          <CommTable commItem={commObj} committeeData={committeeData} setCommitteeData={setCommitteeData}/>
         </div>
       </div>
     </Fragment>
