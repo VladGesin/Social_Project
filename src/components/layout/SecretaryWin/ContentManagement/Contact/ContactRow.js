@@ -5,12 +5,13 @@ const ContactRow = (props) => {
    const [isClicked, setIsClicked] = useState(false);
    return (
       <div className={style.row}>
-         <div className={style.col}>{firstName}</div>
-         <div className={style.col}>{lastName}</div>
-         <div className={style.col}>{role}</div>
-         <div className={style.col}>{email}</div>
-         <div className={style.col}>{phone}</div>
          <div className={style.col}>
+            {firstName} {lastName}
+         </div>
+         {/* <div className={style.col}>{role}</div>
+         <div className={style.col}>{email}</div> */}
+         <div className={style.col}>{phone}</div>
+         {/* <div className={style.col}>
             <div
                className={style.moreContainer}
                onClick={() => setIsClicked(!isClicked)}
@@ -27,7 +28,7 @@ const ContactRow = (props) => {
                   </div>
                )}
             </div>
-         </div>
+         </div> */}
       </div>
    );
 };
