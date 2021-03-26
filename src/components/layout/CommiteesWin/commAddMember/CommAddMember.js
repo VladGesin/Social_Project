@@ -79,7 +79,7 @@ const CommAddMember = (props) => {
         setLastNameIsValid(false);
       } else setLastNameIsValid(true);
 
-      const TableObj = {
+      const tableObject = {
         committee: {},
         committeePosition: "",
         user: {}
@@ -90,7 +90,7 @@ const CommAddMember = (props) => {
         ret.test(formData.inTel) &&
         formData.inTel.length === 7 &&
         (formData.firstName && formData.lastName) !=="" &&
-        memberToAdd
+        (memberToAdd)
         ) {
           debugger
         await api
@@ -104,18 +104,17 @@ const CommAddMember = (props) => {
               msg: "חבר הועדה התווסף בהצלחה",
               type: "success",
             });
-            TableObj.committee = {
+            tableObject.committee = {
               committeeName: res.data.data[0].committee.committee_name,
               committeeInformation: res.data.data[0].committee.committee_information
             }
-            TableObj.committeePosition = res.data.data[0].committeePosition;
-            TableObj.user = memberToAdd;
-            props.setCommitteeData([...props.committeeData, TableObj]);
+            tableObject.committeePosition = res.data.data[0].committeePosition;
+            tableObject.user = memberToAdd;
+            props.setCommitteeData([...props.committeeData, tableObject]);
           })
           .catch((error) => {
             console.log(error);
           });
-
         handleClose();
       }
     };
