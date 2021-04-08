@@ -42,14 +42,7 @@ const WelcomPage = () => {
          <Provider template={AlertTemplate} {...options}>
             <div className={style.container}>
                <div className={style.right}>
-                  <Card style={{ height: "50vh", overflowY: "auto" }}>
-                     <Card.Header as="h5" style={{ textAlign: "right" }}>
-                        אנשי קשר
-                     </Card.Header>
-                     <Card.Body>
-                        <Contact />
-                     </Card.Body>
-                  </Card>
+                  <Contact />
                </div>
                <div className={style.center}>
                   <div className="row d-block ">
