@@ -1,0 +1,25 @@
+.container {
+   border: none !important;
+   height: fit-content !important;
+
+   .header {
+      background-color: rgb(84, 111, 122) !important;
+      color: rgb(221, 231, 241);
+   }
+   .input {
+      background: #ffffff !important;
+   }
+   .option {
+      padding: 0;
+   }
+   .prefix {
+      margin-top: 0.5rem;
+   }
+   .actions {
+      display: flex;
+      justify-content: center;
+      button {
+         margin: 0.5rem;
+      }
+   }
+}
