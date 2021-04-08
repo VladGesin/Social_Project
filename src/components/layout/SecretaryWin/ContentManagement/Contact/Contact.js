@@ -162,7 +162,7 @@ const Contact = () => {
                                        <p>דוא"ל : {c.email}</p>
                                     </div>
                                     <div className={style.actions}>
-                                       {context.userState.userType !=
+                                       {context.userState.userType ==
                                           "admin" && (
                                           <Button
                                              variant="danger"

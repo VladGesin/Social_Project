@@ -13,10 +13,66 @@ const AddContact = ({ isOpen, close, setReRender, reRender }) => {
       role: "",
       prefix: "050",
    });
+   const [validation, setValidation] = useState({
+      first_name: null,
+      last_name: null,
+      email: null,
+      phone: null,
+      role: null,
+   });
    const handleChange = (e) =>
       setFormData({ ...formData, [e.target.name]: e.target.value });
-
+   const clearValidation = () => {
+      setValidation({
+         first_name: null,
+         last_name: null,
+         email: null,
+         phone: null,
+         role: null,
+      });
+   };
    const onSubmit = async (e) => {
+      let validationObj = {
+         first_name: null,
+         last_name: null,
+         email: null,
+         phone: null,
+         role: null,
+      };
+      if (formData.first_name.length == 0) {
+         validationObj = { ...validationObj, first_name: false };
+      } else {
+         validationObj = { ...validationObj, first_name: true };
+      }
+      if (formData.last_name.length == 0) {
+         validationObj = { ...validationObj, last_name: false };
+      } else {
+         validationObj = { ...validationObj, last_name: true };
+      }
+      if (formData.role.length == 0) {
+         validationObj = { ...validationObj, role: false };
+      } else {
+         validationObj = { ...validationObj, role: true };
+      }
+      if (formData.phone.length != 7) {
+         validationObj = { ...validationObj, phone: false };
+      } else {
+         validationObj = { ...validationObj, phone: true };
+      }
+      const validateEmail = (email) => {
+         var re = /\S+@\S+\.\S+/;
+         return re.test(email);
+      };
+      if (!validateEmail(formData.email)) {
+         validationObj = { ...validationObj, email: false };
+         console.log("false");
+      } else {
+         validationObj = { ...validationObj, email: true };
+         console.log("true");
+      }
+      setValidation(validationObj);
+      if (Object.values(validation).some((v) => v == false || v == null))
+         return;
       const res = await api.post("contacts", {
          firstName: formData.first_name,
          lastName: formData.last_name,
@@ -49,6 +105,9 @@ const AddContact = ({ isOpen, close, setReRender, reRender }) => {
                            onChange={handleChange}
                            name="first_name"
                         />
+                        {validation.first_name == false && (
+                           <p className={style.errorMsg}>שם פרטי לא תקין</p>
+                        )}
                      </Form.Group>
 
                      <Form.Group as={Col}>
@@ -58,6 +117,9 @@ const AddContact = ({ isOpen, close, setReRender, reRender }) => {
                            onChange={handleChange}
                            name="last_name"
                         ></Form.Control>
+                        {validation.last_name == false && (
+                           <p className={style.errorMsg}>שם משפחה לא תקין</p>
+                        )}
                      </Form.Group>
                      <Form.Group as={Col}>
                         <Form.Label>תפקיד</Form.Label>
@@ -66,6 +128,9 @@ const AddContact = ({ isOpen, close, setReRender, reRender }) => {
                            onChange={handleChange}
                            name="role"
                         ></Form.Control>
+                        {validation.role == false && (
+                           <p className={style.errorMsg}>תפקיד לא תקין</p>
+                        )}
                      </Form.Group>
                   </Form.Row>
 
@@ -77,6 +142,9 @@ const AddContact = ({ isOpen, close, setReRender, reRender }) => {
                            onChange={handleChange}
                            name="email"
                         />
+                        {validation.email == false && (
+                           <p className={style.errorMsg}>דוא"ל לא תקין</p>
+                        )}
                      </Form.Group>
 
                      <Form.Group as={Col}>
@@ -86,6 +154,9 @@ const AddContact = ({ isOpen, close, setReRender, reRender }) => {
                            onChange={handleChange}
                            name="phone"
                         ></Form.Control>
+                        {validation.phone == false && (
+                           <p className={style.errorMsg}>טלפון לא תקין</p>
+                        )}
                      </Form.Group>
                      <Form.Group as={Col} className={`col-1 ${style.prefix}`}>
                         <Form.Label> </Form.Label>
@@ -106,7 +177,13 @@ const AddContact = ({ isOpen, close, setReRender, reRender }) => {
                      <Button variant="success" onClick={onSubmit}>
                         שמור
                      </Button>
-                     <Button variant="danger" onClick={() => close()}>
+                     <Button
+                        variant="danger"
+                        onClick={() => {
+                           close();
+                           clearValidation();
+                        }}
+                     >
                         ביטול
                      </Button>
                   </div>
