@@ -1,14 +1,17 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState, useContext } from "react";
 import CommDescription from "./commDescription/commDescription";
 import CommTable from "./commTable/commTable";
 import { useParams } from "react-router-dom";
 import api from "../../../api";
 import uuid from "react-uuid";
+import Context from '../../../store/Context';
 
 export const CommiteesWin = (props) => {
    //const {name ,desc} = props.location.aboutProps
    //console.log(props)
+   const context = useContext(Context);
    const [commObj, setCommObj] = useState({});
+   const [isAllowed, setIsAllowed] = useState(false);
    const commName = useParams().type;
 
    const [committeeData, setCommitteeData] = useState([]);
@@ -39,9 +42,16 @@ export const CommiteesWin = (props) => {
          setCommitteeData(data);
       };
 
+      isAllowedAddOrRemoveCommMember();
       getCommitteesData();
       getCommittees();
    }, [reRender]);
+   
+   const isAllowedAddOrRemoveCommMember = () => {
+      if(context.userState.userType === 'chairman') {
+         setIsAllowed(true);
+      }
+   }
 
    //const [committeeData, setCommitteeData] = useState([]);
 
@@ -60,6 +70,7 @@ export const CommiteesWin = (props) => {
                   setCommitteeData={setCommitteeData}
                   setReRender={setReRender}
                   reRender={reRender}
+                  isAllowed={isAllowed}
                />
             </div>
 
@@ -69,6 +80,7 @@ export const CommiteesWin = (props) => {
                   committeeData={committeeData}
                   setCommitteeData={setCommitteeData}
                   setReRender={setReRender}
+                  isAllowed={isAllowed}
                />
             </div>
          </div>

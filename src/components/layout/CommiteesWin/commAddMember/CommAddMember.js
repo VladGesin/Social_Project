@@ -9,9 +9,9 @@ const CommAddMember = (props) => {
    const commName = useParams().type;
    const [showAdd, setShowAdd] = useState(false);
    const [emailIsValid, setEmailIsValid] = useState(true);
-   const [phoneIsValid, setPhoneIsValid] = useState(true);
-   const [firstNameIsValid, setFirstNameIsValid] = useState(true);
-   const [lastNameIsValid, setLastNameIsValid] = useState(true);
+   // const [phoneIsValid, setPhoneIsValid] = useState(true);
+   // const [firstNameIsValid, setFirstNameIsValid] = useState(true);
+   // const [lastNameIsValid, setLastNameIsValid] = useState(true);
    const [msg, setMsg] = useState({ msg: "" });
    const [usersData, setUsersData] = useState([]);
 
@@ -27,28 +27,28 @@ const CommAddMember = (props) => {
    };
 
    const [formData, setFormData] = useState({
-      userType: "משתמש קצה",
-      firstName: "",
-      lastName: "",
-      pre_Tel: "050",
-      inTel: "",
+      // userType: "משתמש קצה",
+      // firstName: "",
+      // lastName: "",
+      // pre_Tel: "050",
+      // inTel: "",
       email: "",
    });
 
    const handleClose = () => {
-      setPhoneIsValid(true);
+      // setPhoneIsValid(true);
       setEmailIsValid(true);
-      setFirstNameIsValid(true);
-      setLastNameIsValid(true);
-      setPhoneIsValid(true);
+      // setFirstNameIsValid(true);
+      // setLastNameIsValid(true);
+      // setPhoneIsValid(true);
       setShowAdd(false);
       //init form
       setFormData({
-         userType: "משתמש קצה",
-         firstName: "",
-         lastName: "",
-         pre_Tel: "050",
-         inTel: "",
+         // userType: "משתמש קצה",
+         // firstName: "",
+         // lastName: "",
+         // pre_Tel: "050",
+         // inTel: "",
          email: "",
       });
    };
@@ -69,15 +69,15 @@ const CommAddMember = (props) => {
       if (!re.test(formData.email)) {
          setEmailIsValid(false);
       } else setEmailIsValid(true);
-      if (!ret.test(formData.inTel) || formData.inTel.length < 7) {
-         setPhoneIsValid(false);
-      } else setPhoneIsValid(true);
-      if (formData.firstName === "") {
-         setFirstNameIsValid(false);
-      } else setFirstNameIsValid(true);
-      if (formData.lastName === "") {
-         setLastNameIsValid(false);
-      } else setLastNameIsValid(true);
+      // if (!ret.test(formData.inTel) || formData.inTel.length < 7) {
+      //    setPhoneIsValid(false);
+      // } else setPhoneIsValid(true);
+      // if (formData.firstName === "") {
+      //    setFirstNameIsValid(false);
+      // } else setFirstNameIsValid(true);
+      // if (formData.lastName === "") {
+      //    setLastNameIsValid(false);
+      // } else setLastNameIsValid(true);
 
       const tableObject = {
          committee: {},
@@ -87,12 +87,11 @@ const CommAddMember = (props) => {
       const memberToAdd = isEmailExist();
       if (
          re.test(formData.email) &&
-         ret.test(formData.inTel) &&
-         formData.inTel.length === 7 &&
-         (formData.firstName && formData.lastName) !== "" &&
+         // ret.test(formData.inTel) &&
+         // formData.inTel.length === 7 &&
+         // (formData.firstName && formData.lastName) !== "" &&
          memberToAdd
       ) {
-         debugger;
          await api
             .post(`committees`, {
                userID: parseInt(memberToAdd.user_id),
@@ -121,8 +120,12 @@ const CommAddMember = (props) => {
             .catch((error) => {
                console.log(error);
             });
-         handleClose();
-      }
+         }
+         else {
+            setMsg({
+               msg: "דואר אלקטרוני לא קיים"});
+            }
+            handleClose();
    };
 
    const handleTellength = (e) => {
@@ -147,14 +150,14 @@ const CommAddMember = (props) => {
                type={msg.type}
             />
          )}
-         <Button
+         {props.isAllowed && <Button
             variant="success float-left"
             style={{ marginLeft: "1em" }}
             onClick={handleShowAdd}
             dir="rtl"
          >
             הוספת חבר ועדה
-         </Button>
+         </Button>}
          <Modal show={showAdd} onHide={handleClose} size="lg" dir="rtl">
             <Card
                className="text-right h-auto container"
@@ -165,7 +168,7 @@ const CommAddMember = (props) => {
                </Card.Header>
                <Card.Body>
                   <Form dir="rtl">
-                     <Form.Row>
+                     {/* <Form.Row>
                         <Form.Group as={Col} controlId="formGridName">
                            <Form.Label>
                               שם פרטי<span className="validate">*</span>
@@ -192,9 +195,9 @@ const CommAddMember = (props) => {
                               <p className="validate">*שם משפחה לא תקין</p>
                            )}
                         </Form.Group>
-                     </Form.Row>
+                     </Form.Row> */}
                      <Form.Row>
-                        <Form.Group as={Col} controlId="formGridAppeaKind">
+                        {/* <Form.Group as={Col} controlId="formGridAppeaKind">
                            <Form.Label>תפקיד</Form.Label>
                            <Form.Control
                               as="select"
@@ -207,7 +210,7 @@ const CommAddMember = (props) => {
                               <option>יושב ראש</option>
                               <option>מנהל</option>
                            </Form.Control>
-                        </Form.Group>
+                        </Form.Group> */}
                         <Form.Group as={Col} controlId="formGridContactMail">
                            <Form.Label>
                               דואר אלקטרוני<span className="validate">*</span>
@@ -228,7 +231,7 @@ const CommAddMember = (props) => {
                         </Form.Group>
                      </Form.Row>
 
-                     <Form.Row>
+                     {/* <Form.Row>
                         <Form.Group as={Col} controlId="formGridPhone">
                            <Form.Label>
                               טלפון<span className="validate">*</span>
@@ -260,7 +263,7 @@ const CommAddMember = (props) => {
                               <option>058</option>
                            </Form.Control>
                         </Form.Group>
-                     </Form.Row>
+                     </Form.Row> */}
 
                      <Button
                         variant="success"

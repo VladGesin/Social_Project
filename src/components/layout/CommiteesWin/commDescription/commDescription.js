@@ -17,6 +17,7 @@ const CommDescription = (props) => {
                   committeeData={props.committeeData}
                   setCommitteeData={props.setCommitteeData}
                   setReRender={props.setReRender}
+                  isAllowed={props.isAllowed}
                />
             </Card.Body>
          </Card>

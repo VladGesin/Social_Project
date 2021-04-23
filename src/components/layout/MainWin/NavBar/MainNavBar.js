@@ -21,12 +21,10 @@ const ComitteeItems = {
       {
          name: "ניהול פניות לועדה",
          path: "/Social_Project/CommInquiryManagement",
-         userType: 'user, committee, chairman, admin'
+         userType: 'committee, chairman'
       },
-      { name: "סיכומי ישיבות", path: "/Social_Project/", userType: 'user, committee, chairman, admin' },
-      { name: "סקרים", path: "/Social_Project/", userType: 'user, committee, chairman, admin' },
-      { name: "צפייה בועדה", path: "/Social_Project/", userType: 'user, committee, chairman, admin' },
-      { name: "ניהול ועדה", path: "/Social_Project/", userType: 'user, committee, chairman, admin' },
+      { name: "סיכומי ישיבות", path: "/Social_Project/", userType: 'committee, chairman' },
+      { name: "סקרים", path: "/Social_Project/", userType: 'user, committee, chairman, admin' }
    ],
 };
 

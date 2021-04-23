@@ -12,9 +12,9 @@ const InfoCardMap = (props) => {
         {/* <td>
           <i className="fas fa-edit" onClick={() => props.editCommMember(props.card)}></i>
         </td> */}
-        <td>
+        {props.isAllowed && <td>
           <i className="far fa-trash-alt" onClick={() => props.onDelete(props.card)}></i>
-        </td>
+        </td>}
       </tr>
     </Fragment>
   );
