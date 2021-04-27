@@ -18,16 +18,19 @@ export const SurveysList = () => {
             })
     }, [showActiveOnly]);
 
-    const handleChangeOnlyActiveFilter = (e) => {
-        setShowActiveOnly(e.target.checked)
-    }
+    const handleChangeOnlyActiveFilter = (e) => setShowActiveOnly(e.target.checked)
     return (
         <div>
-            <h1>רשימת סקרים:</h1>
+            <h2>רשימת סקרים:</h2>
 
             <div>
                 <label>פעילים בלבד</label>
-                <input disabled={isLoading} type={'checkbox'} checked={showActiveOnly} onChange={handleChangeOnlyActiveFilter}/>
+                <input
+                    type={'checkbox'}
+                    disabled={isLoading}
+                    checked={showActiveOnly}
+                    onChange={handleChangeOnlyActiveFilter}
+                />
             </div>
 
             <div>
