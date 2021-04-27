@@ -42,6 +42,7 @@ const navbar = () => {
                </NavDropdown>
 
                <NavLink to="/Social_Project/SecretaryWin">מסך ניהול</NavLink>
+               <NavLink to="/Social_Project/Surveys">סקרים והצבעות</NavLink>
             </Nav>
          </Navbar.Collapse>
       </Navbar>
