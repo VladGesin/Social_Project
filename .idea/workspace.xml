@@ -2,37 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="59e5e2e8-24de-483b-9fff-1138c6a98ac4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Social_Project.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/layout/SurveysPage/AddNewSurvey/index.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/layout/SurveysPage/AddNewSurvey/styles.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/layout/SurveysPage/SurveysList/index.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/layout/SurveysPage/SurveysList/styles.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/layout/SurveysPage/index.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/layout/SurveysPage/styles.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/asset-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/precache-manifest.871bf8075e4523ea2f47ebdfb2bb4746.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/precache-manifest.a547fca3ace641547250ccfe69de4005.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/service-worker.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/service-worker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/css/main.124ab9ee.chunk.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/css/main.124ab9ee.chunk.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/css/main.ce584145.chunk.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/css/main.ce584145.chunk.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/2.bc69299b.chunk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/2.bc69299b.chunk.js.LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/2.bc69299b.chunk.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/2.dc754d4f.chunk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/2.dc754d4f.chunk.js.LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/2.dc754d4f.chunk.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/main.6672442f.chunk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/main.6672442f.chunk.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/main.ff20039b.chunk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/main.ff20039b.chunk.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Routes/Routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes/Routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/MainWin/NavBar/navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/MainWin/NavBar/navbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layout/SurveysPage/SurveysList/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/SurveysPage/SurveysList/index.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +89,7 @@
       <updated>1609280182296</updated>
       <workItem from="1609280184483" duration="3238000" />
       <workItem from="1616026693153" duration="511000" />
-      <workItem from="1619548740313" duration="6154000" />
+      <workItem from="1619548740313" duration="7234000" />
     </task>
     <task id="LOCAL-00001" summary="fix sort by status">
       <created>1609281369384</created>
@@ -162,7 +133,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616027524118</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="add survey">
+      <created>1619555632315</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1619555632315</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -182,6 +160,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fix sort by status" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix sort by status" />
+    <MESSAGE value="add survey" />
+    <option name="LAST_COMMIT_MESSAGE" value="add survey" />
   </component>
 </project>
