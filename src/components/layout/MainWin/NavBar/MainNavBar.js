@@ -17,14 +17,14 @@ const XpertesyItems = {
 
 const ComitteeItems = {
    link: [
-      { name: "ועדות ראשי", path: "/Social_Project/committees", userType: 'user, committee, chairman, admin' },
+      { name: "ועדות ראשי", path: "/Social_Project/committees", userType: 'user, committee, chairperson, admin' },
       {
          name: "ניהול פניות לועדה",
          path: "/Social_Project/CommInquiryManagement",
-         userType: 'committee, chairman'
+         userType: 'committee, chairperson'
       },
-      { name: "סיכומי ישיבות", path: "/Social_Project/", userType: 'committee, chairman' },
-      { name: "סקרים", path: "/Social_Project/", userType: 'user, committee, chairman, admin' }
+      { name: "סיכומי ישיבות", path: "/Social_Project/", userType: 'committee, chairperson' },
+      { name: "סקרים", path: "/Social_Project/", userType: 'user, committee, chairperson, admin' }
    ],
 };
 

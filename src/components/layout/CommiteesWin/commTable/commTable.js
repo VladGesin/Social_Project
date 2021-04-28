@@ -71,7 +71,6 @@ function CommTable(props) {
       setDeleteWindowIsOpen(true);
       setMemberToDelete(member);
    };
-   debugger;
    const PplArrMap = props.committeeData.map((card, index) => (
       <InfoCardMap card={card} key={index} onDelete={onDelete} isAllowed={props.isAllowed} />
       //  <InfoCardMap card={card} key={card.name.toString} />

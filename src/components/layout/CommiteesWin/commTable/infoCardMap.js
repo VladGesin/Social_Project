@@ -9,9 +9,6 @@ const InfoCardMap = (props) => {
         <td>{props.card.committeePosition}</td>
         <td>{props.card.phone}</td>
         <td><a href={`mailto:${props.card.email}`}>{props.card.email}</a></td>
-        {/* <td>
-          <i className="fas fa-edit" onClick={() => props.editCommMember(props.card)}></i>
-        </td> */}
         {props.isAllowed && <td>
           <i className="far fa-trash-alt" onClick={() => props.onDelete(props.card)}></i>
         </td>}

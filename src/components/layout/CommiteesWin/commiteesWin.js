@@ -48,7 +48,7 @@ export const CommiteesWin = (props) => {
    }, [reRender]);
    
    const isAllowedAddOrRemoveCommMember = () => {
-      if(context.userState.userType === 'chairman') {
+      if(context.userState.userType === 'chairperson') {
          setIsAllowed(true);
       }
    }
@@ -66,6 +66,7 @@ export const CommiteesWin = (props) => {
             <div className="row">
                <CommDescription
                   commItem={commObj}
+                  setCommItem={setCommObj}
                   committeeData={committeeData}
                   setCommitteeData={setCommitteeData}
                   setReRender={setReRender}
