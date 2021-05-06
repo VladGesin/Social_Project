@@ -264,7 +264,7 @@ const EditUserModal = ({
                                  className={style.userTypeCheckBox}
                                  type="checkbox"
                                  onChange={onUserTypeChange}
-                                 name="chairman"
+                                 name="chairperson"
                                  checked={userType.chairman}
                               />
                            </div>

@@ -10,19 +10,6 @@ const CommAddMember = (props) => {
    const [showAdd, setShowAdd] = useState(false);
    const [emailIsValid, setEmailIsValid] = useState(true);
    const [msg, setMsg] = useState({ msg: "" });
-   const [usersData, setUsersData] = useState([]);
-
-   useEffect(() => {
-      getAllUsers();
-   }, []);
-
-   const getAllUsers = async () => {
-      const res = await api.get("/users/");
-      console.log("idan");
-      console.log(res.data);
-      setUsersData(res.data);
-   };
-
    const [formData, setFormData] = useState({
       email: "",
    });
@@ -36,15 +23,6 @@ const CommAddMember = (props) => {
       });
    };
 
-   const isEmailExist = () => {
-      for (let user of usersData) {
-         if (user.email === formData.email) {
-            return user;
-         }
-      }
-      return null;
-   };
-
    const handleSubmit = async (e) => {
       e.preventDefault();
       var re = /\S+@\S+\.\S+/;
@@ -53,26 +31,14 @@ const CommAddMember = (props) => {
          setEmailIsValid(false);
       } else setEmailIsValid(true);
 
-      const tableObject = {
-         committee: {},
-         committeePosition: "",
-         user: {},
-      };
-      const memberToAdd = isEmailExist();
-      if (
-         re.test(formData.email) &&
-         memberToAdd
-      ) {
+         if(re.test(formData.email)) {
          await api
             .post(`committees`, {
-               userID: parseInt(memberToAdd.user_id),
+               email: formData.email,
                committeeName: commName,
-               role:
-                  memberToAdd.type === "admin" || "chairman"
-                     ? "יושב ראש"
-                     : "חבר ועדה",
+               role: "חבר ועדה"
             })
-            .then((res) => {
+            .then((res) => {               
                setMsg({
                   msg: "חבר הועדה התווסף בהצלחה",
                   type: "success",
@@ -80,15 +46,24 @@ const CommAddMember = (props) => {
                props.setReRender(!props.reRender);
             })
             .catch((error) => {
-               console.log(error);
+               if(error.response.status === 500) {
+                  setMsg({
+                     msg: "המשתמש כבר קיים בועדה!"                  
+                  });
+               }
+               else if (error.response.status === 404){
+                  setMsg({
+                     msg: "דואר אלקטרוני שגוי!"                  
+                  });
+               }
             });
-         }
-         else {
-            setMsg({
-               msg: "דואר אלקטרוני לא קיים"});
-            }
             handleClose();
-   };
+         }
+      };
+         // else {
+         //    setMsg({
+         //       msg: "דואר אלקטרוני לא קיים"});
+         //    }
 
    const onChange = (e) => {
       setFormData({ ...formData, [e.target.name]: e.target.value });

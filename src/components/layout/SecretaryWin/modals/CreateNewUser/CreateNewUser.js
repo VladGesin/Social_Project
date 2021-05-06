@@ -413,7 +413,7 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users, setMsg }) => {
                                  className={style.userTypeCheckBox}
                                  type="checkbox"
                                  onChange={onUserTypeChange}
-                                 name="chairman"
+                                 name="chairperson"
                                  checked={userType.chairman}
                               />
                            </div>
