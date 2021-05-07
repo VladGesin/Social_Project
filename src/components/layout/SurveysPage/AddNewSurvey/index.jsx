@@ -61,6 +61,7 @@ export const AddNewSurvey = () => {
     }
 
     const handleAddNewSurvey = () => {
+        debugger
         api.post('/survey/', surveyData)
             .then((res) => {
                 res.data ? setAddingIsCompleted(true) : alert('הסקר לא נוסף')
