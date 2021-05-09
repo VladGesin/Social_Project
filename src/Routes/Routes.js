@@ -1,5 +1,6 @@
 import React from "react";
 import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
 import WelcomPage from "../components/layout/MainWin/WelcomPage/WelcomPage";
 import commiteesWin from "../components/layout/CommiteesWin/commiteesWin";
 import { Route } from "react-router-dom";
@@ -10,15 +11,20 @@ import MyMeetings from "../components/layout/xpertesy/MyMeetings/MyMeetings";
 import { PersonalPage } from "../components/layout/PersonalPage/PersonalPage";
 import { MainCommitteesPage } from "../components/layout/MainCommitteesPage/MainCommitteesPage";
 import Login from "../components/layout/Login/Login";
-import ForgotPassword from "../components/layout/Login/ForgotPassword"
+import ForgotPassword from "../components/layout/Login/ForgotPassword";
 import PasswordReset from "../components/layout/Login/PasswordReset";
 import { MapsPage } from "../components/layout/MapsPage/MapsPage";
-import CommInquiryManagement from "../components/CommInquiryManagement/CommInquiryManagement"
+import CommInquiryManagement from "../components/CommInquiryManagement/CommInquiryManagement";
+import ChairPersonRoute from "./ChairPersonRoute";
 
 const routesData = [
    { component: WelcomPage, path: "/Social_Project/MainWin" },
    { component: chairmanItems, path: "/Social_Project/chairmanItems/:item" },
-   { component: SecretaryWin, path: "/Social_Project/SecretaryWin" },
+   {
+      component: SecretaryWin,
+      path: "/Social_Project/SecretaryWin",
+      admin: true,
+   },
    { component: NewMeeting, path: "/Social_Project/newmeeting" },
    { component: MyMeetings, path: "/Social_Project/mymeetings" },
    { component: PersonalPage, path: "/Social_Project/personal" },
@@ -29,10 +35,22 @@ const routesData = [
       exact: true,
    },
    { component: commiteesWin, path: "/Social_Project/committees/:type" },
-   { component: CommInquiryManagement, path: "/Social_Project/CommInquiryManagement" },
+   {
+      component: CommInquiryManagement,
+      path: "/Social_Project/CommInquiryManagement",
+      chairPerson: true,
+   },
    { component: Login, path: "/Social_Project/", exact: true, public: true },
-   {component: ForgotPassword,path: "/Social_Project/ForgotPassword",public: true,},
-   {component: PasswordReset,path: "/Social_Project/PasswordReset",public: true,},
+   {
+      component: ForgotPassword,
+      path: "/Social_Project/ForgotPassword",
+      public: true,
+   },
+   {
+      component: PasswordReset,
+      path: "/Social_Project/PasswordReset",
+      public: true,
+   },
 ];
 
 const Routes = () => {
@@ -40,6 +58,10 @@ const Routes = () => {
    routesData.forEach((route) => {
       route.public
          ? routes.push(<Route key={route.path} {...route} />)
+         : route.admin
+         ? routes.push(<AdminRoute key={route.path} {...route} />)
+         : route.chairPerson
+         ? routes.push(<ChairPersonRoute key={route.path} {...route} />)
          : routes.push(<PrivateRoute key={route.path} {...route} />);
    });
    return routes;

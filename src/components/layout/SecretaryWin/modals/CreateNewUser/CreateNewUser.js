@@ -32,7 +32,7 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users, setMsg }) => {
    const [userType, setUserType] = useState({
       user: true,
       committee: false,
-      chairman: false,
+      chairperson: false,
       admin: false,
    });
    const [passwordIsShown, setPasswordIsShown] = useState(false);
@@ -40,7 +40,7 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users, setMsg }) => {
    const [committeesBoxItem, setCommitteesBoxItem] = useState([]);
    const [imageName, setImageName] = useState("");
    const [imagePath, setImagePath] = useState("");
-   const [chairMan, setChairMan] = useState("");
+   const [chairperson, setchairperson] = useState("");
    useEffect(() => {
       (async () => {
          const res = await api.get("committees");
@@ -54,7 +54,7 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users, setMsg }) => {
       setUserType({
          user: false,
          committee: false,
-         chairman: false,
+         chairperson: false,
          admin: false,
          [e.target.name]: e.target.checked,
       });
@@ -131,19 +131,28 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users, setMsg }) => {
 
          await api.post(`users`, reqObj);
          for (let c of committees) {
-            if (chairMan === c.name && (userType.admin || userType.chairman)) {
-               await api.post("committees", {
-                  userID: formDetails.id,
-                  committeeName: c.name,
-                  role: "יושב ראש",
-               });
-            } else {
-               await api.post("committees", {
-                  userID: formDetails.id,
-                  committeeName: c.name,
-                  role: "חבר ועדה",
-               });
-            }
+            await api.post("committees", {
+               userID: formDetails.id,
+               committeeName: c.name,
+               email: reqObj.email,
+            });
+
+            // if (
+            //    chairperson === c.name &&
+            //    (userType.admin || userType.chairperson)
+            // ) {
+            //    await api.post("committees", {
+            //       userID: formDetails.id,
+            //       committeeName: c.name,
+            //       role: "יושב ראש",
+            //    });
+            // } else {
+            //    await api.post("committees", {
+            //       userID: formDetails.id,
+            //       committeeName: c.name,
+            //       role: "חבר ועדה",
+            //    });
+            // }
          }
          //
          setValidation((cur) => ({
@@ -414,7 +423,7 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users, setMsg }) => {
                                  type="checkbox"
                                  onChange={onUserTypeChange}
                                  name="chairperson"
-                                 checked={userType.chairman}
+                                 checked={userType.chairperson}
                               />
                            </div>
                         </div>
@@ -449,12 +458,14 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users, setMsg }) => {
                         <select
                            dir="rtl"
                            disabled={
-                              userType.chairman || userType.admin ? false : true
+                              userType.chairperson || userType.admin
+                                 ? false
+                                 : true
                            }
                            onChange={(e) => {
-                              setChairMan(e.target.value);
+                              setchairperson(e.target.value);
                            }}
-                           value={chairMan}
+                           value={chairperson}
                         >
                            <option></option>
                            {committees.map((c) => (
