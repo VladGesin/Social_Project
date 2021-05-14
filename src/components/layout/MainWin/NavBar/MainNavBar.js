@@ -1,9 +1,9 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import "./MainNavBar.css";
 import NavMapLinks from "./NavBarMapping/NavMapLinks";
-import Context from '../../../../store/Context';
+import Context from "../../../../store/Context";
 
 const XpertesyItems = {
    link: [
@@ -17,20 +17,32 @@ const XpertesyItems = {
 
 const ComitteeItems = {
    link: [
-      { name: "ועדות ראשי", path: "/Social_Project/committees", userType: 'user, committee, chairperson, admin' },
+      {
+         name: "ועדות ראשי",
+         path: "/Social_Project/committees",
+         userType: "user, committee, chairperson, admin",
+      },
       {
          name: "ניהול פניות לועדה",
          path: "/Social_Project/CommInquiryManagement",
-         userType: 'committee, chairperson'
+         userType: "committee, chairperson",
       },
-      { name: "סיכומי ישיבות", path: "/Social_Project/", userType: 'committee, chairperson' },
-      { name: "סקרים", path: "/Social_Project/", userType: 'user, committee, chairperson, admin' }
+      {
+         name: "סיכומי ישיבות",
+         path: "/Social_Project/MeetingSummary",
+         userType: "committee, chairperson",
+      },
+      {
+         name: "סקרים",
+         path: "/Social_Project/",
+         userType: "user, committee, chairperson, admin",
+      },
    ],
 };
 
 const MainNavBar = () => {
    const context = useContext(Context);
-   
+
    return (
       <Navbar
          collapseOnSelect
@@ -50,9 +62,12 @@ const MainNavBar = () => {
                   dir="rtl"
                   className="text-center"
                >
-                  {ComitteeItems.link.map((item) => (
-                     item.userType.includes(context.userState.userType) && <NavMapLinks link={item} key={item.name} />
-                  ))}
+                  {ComitteeItems.link.map(
+                     (item) =>
+                        item.userType.includes(context.userState.userType) && (
+                           <NavMapLinks link={item} key={item.name} />
+                        )
+                  )}
                </NavDropdown>
                <NavLink to="/Social_Project/maps">מפות</NavLink>
                <NavDropdown

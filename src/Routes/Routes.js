@@ -16,6 +16,7 @@ import PasswordReset from "../components/layout/Login/PasswordReset";
 import { MapsPage } from "../components/layout/MapsPage/MapsPage";
 import CommInquiryManagement from "../components/CommInquiryManagement/CommInquiryManagement";
 import ChairPersonRoute from "./ChairPersonRoute";
+import MeetingSummary from "../components/layout/MeetingSummary/MeetingSummary";
 
 const routesData = [
    { component: WelcomPage, path: "/Social_Project/MainWin" },
@@ -49,6 +50,11 @@ const routesData = [
    {
       component: PasswordReset,
       path: "/Social_Project/PasswordReset",
+      public: true,
+   },
+   {
+      component: MeetingSummary,
+      path: "/Social_Project/MeetingSummary",
       public: true,
    },
 ];
