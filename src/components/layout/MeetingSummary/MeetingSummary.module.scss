@@ -26,6 +26,20 @@
       margin-bottom: 1rem;
       .drop {
          direction: rtl;
+         min-width: 8rem;
+      }
+      .filters{
+         display: flex;
+         align-items: end;
+         .radio {
+            margin-right: 2rem;
+            label {
+               margin-left: 1rem;
+            }
+            input {
+               margin-left: 0.5rem;
+            }
+         }
       }
    }
 }

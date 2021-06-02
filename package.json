@@ -39,6 +39,7 @@
         "reactstrap": "^8.7.1",
         "sass-loader": "^10.1.0",
         "typescript": "^3.9.7",
+        "uuid": "^8.3.2",
         "validator": "^13.1.17"
     },
     "scripts": {

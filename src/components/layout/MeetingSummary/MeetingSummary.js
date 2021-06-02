@@ -1,14 +1,29 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import style from "./MeetingSummary.module.scss";
 import { Form, Col, Button, Card } from "react-bootstrap";
 import Context from "../../../store/Context";
+import { v4 as uuidv4 } from 'uuid';
 
 const MeetingSummary = () => {
   const [isModelOpen, setIsOpenModel] = useState(false);
   const context = useContext(Context);
   const [form, setForm] = useState({title:"", description: "", file: ""});
+  const [selectedCommittee, setSelectedCommittee] = useState();
+  const [selectedRadio, setSelectedRadio] = useState('waiting'); // waiting  , approved, denied
+  const [filesList, setFilesList] = useState([{key: 1, approved: true, committeeName: 'א'}, {key: 2, approved: null, committeeName: 'א'}, {key: 3, approved: false, committeeName: 'א'}, {key: 4, approved: true, committeeName: 'ב'}, {key: 5, approved: null, committeeName: 'ב'},
+  {key: 6, approved: undefined, committeeName: 'ב'}, {key: 7, approved: false, committeeName: 'ב'}, {key: 8, approved: false, committeeName: 'ב'}, {key: 9, approved: true ,committeeName: 'ב'}, {key: 10, approved: true, committeeName: 'ב'},
+  {key: 11, approved: null, committeeName: 'ג'}, {key: 12, approved: true, committeeName: 'ג'}]);
+  
 
+  useEffect(() => {
+    setFilesList(filesList.map(f => {return{
+      ...f, approvedRadio: f.approved === true? 'approved' : f.approved === false? 'denied' : 'waiting'
+    }}));
+    const uniqueCommittees = getUniqueCommitteeNames();
+    setSelectedCommittee(uniqueCommittees[0]);
+    console.log(filesList)
+  }, [])
   // Todo change card type according to user type
    // approved/ denied functions
    // filtering card list by committee
@@ -72,6 +87,24 @@ const onUploadSummarySubmit = async (e) => {
    }   
 }
 
+const getUniqueCommitteeNames = () => {
+  const committeeNames = filesList.map(f => f.committeeName);
+  return Array.from(new Set(committeeNames));
+};
+
+const renderSelectMenu = () => {
+  const uniqeCommittees = getUniqueCommitteeNames();
+  return uniqeCommittees.map(f => <option key={uuidv4()}>{f}</option>);
+};
+
+const onSelectChange = (e) => {
+  setSelectedCommittee(e.target.value);
+};
+
+const onRadioChange = (e) => {
+  setSelectedRadio(e.target.value);
+};
+
   return (
     <div className={style.container}>
       <div className={style.topMenu}>
@@ -84,11 +117,21 @@ const onUploadSummarySubmit = async (e) => {
         >
           העלת סיכום שיחה
         </Button>
+        <div className={style.filters}>
+        <div className={style.radio}>
+        <label>נדחה</label>
+        <input type="radio" name="status" value='denied' onChange={onRadioChange} checked={selectedRadio === 'denied'}/>
+        <label>אושר</label>
+        <input type="radio" name="status" value='approved' onChange={onRadioChange} checked={selectedRadio === 'approved'}/>
+        <label>ממתין לאישור</label>
+        <input type="radio" name="status" value='waiting' onChange={onRadioChange} checked={selectedRadio === 'waiting'}/>
+        </div>
 
-        <select className={style.drop}>
-          <option>סיכום שיחות</option>
-          <option>שיחות ממתינות לאישור</option>
+        <select className={style.drop} onChange={onSelectChange} value={selectedCommittee}>
+          {renderSelectMenu()}
         </select>
+        </div>
+
       </div>
       <Modal
         show={isModelOpen}
@@ -156,10 +199,8 @@ const onUploadSummarySubmit = async (e) => {
           </Card.Body>
         </Card>
       </Modal>
-      {[{key: 1, approved: true}, {key: 2, approved: null}, {key: 3, approved: false}, {key: 4, approved: true}, {key: 5, approved: null},
-       {key: 6, approved: undefined}, {key: 7, approved: false}, {key: 8, approved: false}, {key: 9, approved: true}, {key: 10, approved: true},
-       {key: 11, approved: null}, {key: 12, approved: true}].map((c) => (
-        <div className={style.cardContainer}>
+      {filesList.map((c) => ((c.committeeName === selectedCommittee && c.approvedRadio === selectedRadio) && 
+      <div className={style.cardContainer} key={c.key}>
           <Card
             bg="Light"
             key={c.key}
@@ -177,7 +218,7 @@ const onUploadSummarySubmit = async (e) => {
               }}
             >
               {c.approved? <i className="fas fa-check-circle"></i>: c.approved === null || c.approved == undefined? <i className="fas fa-spinner"></i> : <i className="fas fa-window-close"></i>}
-              <span>שם הועדה</span>
+              <span>{c.committeeName}</span>
             </Card.Header>
             <Card.Body>
               <Card.Title style={{ textAlign: "right", direction: "rtl" }}>
