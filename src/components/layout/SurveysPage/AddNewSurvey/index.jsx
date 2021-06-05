@@ -1,132 +1,216 @@
 import React, {useState} from "react";
 import styles from "./styles.module.scss";
 import api from "../../../../api";
+import TextField from '@material-ui/core/TextField';
+import {makeStyles} from '@material-ui/core/styles';
 
-export const AddNewSurvey = () => {
+const useStyles = makeStyles((theme) => ({
+    container: {
+        display: 'flex',
+        flexWrap: 'wrap',
+    },
+    textField: {
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        // width: "100%",
+    },
+}));
+
+export const AddNewSurvey = ({callback, closePopup}) => {
+    const classes = useStyles();
 
     const [surveyData, setSurveyData] = useState({
         title: "",
         description: "",
-        committee: "",
-        startTime: "",
-        endTime: "",
-        answers: [
-            {
-                answer: "",
-            },
-            {
-                answer: "",
-            }
-        ]
+        start_time: "",
+        end_time: "",
+        answers: ["", ""]
     })
-
-    const [addingIsCompleted, setAddingIsCompleted] = useState(false)
+    const [newOptionValue, setNewOptionValue] = useState('')
 
     const handleChange = (value, key) => {
+        console.log('value', value)
         setSurveyData((prevState) => ({
             ...prevState,
             [key]: value
         }))
     }
-
     const handleUpdateAnswer = (answerIndex, value) => {
         setSurveyData(prevState => {
             let newAnswers = prevState.answers
-            newAnswers[answerIndex] = {
-                answer: value
-            }
+            newAnswers[answerIndex] = value
             return ({
                 ...prevState,
                 answers: newAnswers
             })
         })
     }
-
-    const addNewAnswer = () => {
-        setSurveyData(prevState => ({
-            ...prevState,
-            answers: [
-                ...prevState.answers,
-                {
-                    answer: ""
-                }
-            ]
-        }))
-    }
-
     const getIsSurveyDataValid = () => {
         const {answers, ...newSurveyData} = surveyData;
 
-        return answers.every(({answer}) => !!answer) && Object.keys(newSurveyData).every((key) => !!newSurveyData[key])
-    }
+        const allAnswersIsValid = answers.every(answer => !!answer);
+        const surveyDetailsIsValid = Object.keys(newSurveyData).every(key => !!newSurveyData[key])
 
+        return allAnswersIsValid && surveyDetailsIsValid;
+    }
     const handleAddNewSurvey = () => {
-        debugger
-        api.post('/survey/', surveyData)
+        const _surveyData = {
+            ...surveyData,
+            start_time: `${surveyData.start_time} 00:00:00-07`,
+            end_time: `${surveyData.end_time} 23:59:00-07`,
+        }
+
+        api.post('/survey/', _surveyData)
             .then((res) => {
-                res.data ? setAddingIsCompleted(true) : alert('הסקר לא נוסף')
+                !res.data && alert('הסקר לא נוסף')
+                callback()
+
             })
             .catch((err) => {
                 alert('הסקר לא נוסף - שגיאה')
             })
     }
+    const renderOptions = () => {
+        const newOptionIsAvailable = surveyData.answers.length < 4
+        const validToRemoveOption = surveyData.answers.length > 2
+
+        const handleRemoveOption = (indexOption) => {
+            setSurveyData(prevState => {
+                const newOptions = [...prevState.answers]
+                newOptions.splice(indexOption, 1);
+                return {
+                    ...prevState,
+                    answers: newOptions
+                }
+            })
+        }
+
+        const handleAddNewOption = () => {
+            if (!!newOptionValue) {
+                setSurveyData(prevState => ({
+                    ...prevState,
+                    answers: [
+                        ...prevState.answers,
+                        newOptionValue
+                    ]
+                }))
+
+                setNewOptionValue("")
+            }
+
+        }
+
+        return (
+            <div>
+                {
+                    surveyData.answers.map((answer, i) => {
+                        return (
+                            <div key={i} className={styles.optionContainer}>
+                                <button
+                                    onClick={() => handleRemoveOption(i)}
+                                    disabled={!validToRemoveOption}
+                                >
+                                    X
+                                </button>
+                                <input
+                                    type={'text'}
+                                    value={answer}
+                                    placeholder={` אפשרות ${i + 1} `}
+                                    onChange={(e) => handleUpdateAnswer(i, e.target.value)}
+                                />
+
+                            </div>
+                        );
+                    })
+                }
+
+                {newOptionIsAvailable && (
+                    <input
+                        style={{width: "92.5%", marginLeft: "auto"}}
+                        onChange={(e) => setNewOptionValue(e.target.value)}
+                        value={newOptionValue}
+                        type={'text'}
+                        placeholder={"הוספת אפשרות"}
+                        onBlur={handleAddNewOption}
+                    />
+                )}
+
+            </div>
+        );
+    }
 
     return (
         <div className={styles.rootAddNewSurvey}>
-            <h2>הוספת סקר:</h2>
+            <div className={styles.header}>
+                <button onClick={closePopup}>X</button>
+                <label style={{fontSize: 22}}>הוספת סקר חדש</label>
+            </div>
 
-            {
-                !addingIsCompleted ?
-                    <React.Fragment>
-                        <div>
-                            <label>כותרת</label>
-                            <input type={'text'} onChange={(e) => handleChange(e.target.value, "title")}/>
-                        </div>
-                        <div>
-                            <label>תיאור</label>
-                            <input type={'text'} onChange={(e) => handleChange(e.target.value, "description")}/>
-                        </div>
-                        <div>
-                            <label>וועדה</label>
-                            <input type={'text'} onChange={(e) => handleChange(e.target.value, "committee")}/>
-                        </div>
-                        <div>
-                            <label>כותרת</label>
-                            <input type={'date'} onChange={(e) => handleChange(e.target.value, "startTime")}/>
-                        </div>
-                        <div>
-                            <label>כותרת</label>
-                            <input type={'date'} onChange={(e) => handleChange(e.target.value, "endTime")}/>
-                        </div>
-                        <div>
-                            <label>תשובות</label>
-                            <button onClick={addNewAnswer}>+</button>
-                            {
-                                surveyData.answers.map((answer, i) => {
-                                    return (
-                                        <div key={i}>
-                                            <label> {i} תשובה </label>
-                                            <input
-                                                type={'text'}
-                                                onChange={(e) => handleUpdateAnswer(i, e.target.value)}/>
-                                        </div>
-                                    );
-                                })
-                            }
-                        </div>
+            <div className={styles.main}>
 
-                        <button disabled={!getIsSurveyDataValid()} onClick={handleAddNewSurvey}>יצירה</button>
-                    </React.Fragment>
-                    :
-                    <div>
-                        הסקר נוסף בהצלחה!
-                    </div>
-            }
+                <input
+                    type={'text'}
+                    onChange={(e) => handleChange(e.target.value, "title")}
+                    placeholder={'כותרת הסקר'}
+                />
 
 
-            {/*<pre>*/}
-            {/*    {JSON.stringify(surveyData, null, 2)}*/}
-            {/*</pre>*/}
+                <input
+                    type={'text'}
+                    onChange={(e) => handleChange(e.target.value, "description")}
+                    placeholder={'תיאור הסקר'}
+                />
+
+                <h5 style={{marginTop: 30}}>תשובות אפשריות לסקר</h5>
+
+                {renderOptions()}
+
+                <h5 style={{marginTop: 30}}>תוקף הסקר</h5>
+                <h6 style={{fontSize: 12, color: "#6c757d"}}>הגדרת טווח הזמנים שניתן להצביע לסקר</h6>
+
+                <div style={{display: "flex", flexDirection: 'column'}}>
+                    <label>התחלה</label>
+                    <TextField
+                        id="datetime-local1"
+                        // label="Next appointment"
+                        type="datetime-local"
+                        // defaultValue="2017-05-24T10:30"
+                        className={classes.textField}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        fullWidth={true}
+                        onChange={e => handleChange(e.target.value, "start_time")}
+                    />
+                </div>
+                <div style={{display: "flex", flexDirection: 'column'}}>
+                    <label>סיום</label>
+                    <TextField
+                        fullWidth={true}
+                        id="datetime-local2"
+                        // label="Next appointment"
+                        type="datetime-local"
+                        // defaultValue="2017-05-24T10:30"
+                        className={classes.textField}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        onChange={e => handleChange(e.target.value, "end_time")}
+                    />
+                </div>
+
+
+                <div style={{display: "flex", justifyContent: "center", marginTop: 30}}>
+                    <button
+                        disabled={!getIsSurveyDataValid()}
+                        onClick={handleAddNewSurvey}
+                        className={styles.addButton}
+                    >
+                        הוספת סקר
+                    </button>
+                </div>
+
+            </div>
         </div>
     );
 }

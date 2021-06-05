@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from "react";
 import styles from "./styles.module.scss";
-import Context from "../../../../store/Context";
 import api from "../../../../api";
+import {Survey} from "./Survey";
 
-export const SurveysList = () => {
-    const {userState: {token}} = React.useContext(Context);
+export const SurveysList = ({fetchDep}) => {
 
     const [surveysList, setSurveysList] = useState([])
-    const [showActiveOnly, setShowActiveOnly] = useState(false)
+    const [showActiveOnly, setShowActiveOnly] = useState(true)
     const [isLoading, setIsLoading] = useState(true)
+    const [fetchDep2, setFetchDep2] = useState(0)
 
 
     useEffect(() => {
@@ -18,14 +18,17 @@ export const SurveysList = () => {
                 setIsLoading(false)
                 setSurveysList(data)
             })
-    }, [showActiveOnly]);
+    }, [showActiveOnly, fetchDep, fetchDep2]);
+
+    const doFetch = () => setFetchDep2(prevState => prevState + 1)
+
 
     const handleChangeOnlyActiveFilter = (e) => setShowActiveOnly(e.target.checked)
-    return (
-        <div>
-            <h2>:רשימת סקרים</h2>
 
-            <div>
+    return (
+        <div style={{paddingTop: 50}}>
+
+            <div style={{marginBottom : 30}}>
                 <label>פעילים בלבד</label>
                 <input
                     type={'checkbox'}
@@ -38,26 +41,9 @@ export const SurveysList = () => {
             <div>
                 {
                     !isLoading ?
-                        <div>
-                            {surveysList.map(({title, description, committee, owner_id, answers}, i) => {
-                                return (
-                                    <div key={i} className={styles.surveyItem}>
-                                        <label>{title} :שם </label>
-                                        <label>{description} :תיאור </label>
-                                        <label>{committee} :וועדה </label>
-                                        <label>{owner_id} :יוצר הסקר </label>
-                                        <div>
-                                            <label>:תשובות</label>
-                                            {answers.map(({answer_counter, answers_content}, j) => {
-                                                return (
-                                                    <div>
-                                                        {answer_counter} - {answers_content}
-                                                    </div>
-                                                );
-                                            })}
-                                        </div>
-                                    </div>
-                                );
+                        <div className={styles.list}>
+                            {surveysList.map((item, i) => {
+                                return <Survey item={item} key={i} doFetch={doFetch}/>
                             })}
                         </div>
                         :

@@ -1,39 +1,46 @@
 import React, {useState} from "react";
 import styles from "./styles.module.scss";
-import {AddNewSurvey} from "./AddNewSurvey";
 import {SurveysList} from "./SurveysList";
+import Modal from "react-bootstrap/Modal";
+import {AddNewSurvey} from "./AddNewSurvey";
+import Context from "../../../store/Context";
 
 export const SurveysPage = () => {
+    const {userState} = React.useContext(Context);
 
-    const [mode, setMode] = useState('add')
+    const [showAddNewSurveyPopup, setShowAddNewSurveyPopup] = useState(false)
+    const [counterFetch, setCounterFetch] = useState(0)
 
-    const getMainComp = () =>{
-        switch (mode){
-            case 'add':
-                return <AddNewSurvey/>
-            case 'list':
-                return <SurveysList/>
-            case 'vote':
-                return <div>הצבעות</div>
-
-        }
+    const callbackAddNewSurvey = () => {
+        setShowAddNewSurveyPopup(false)
+        setCounterFetch(prevState => prevState + 1)
     }
+
+    const isAdmin = userState.userType === 'admin'
 
     return (
         <div className={styles.rootSurveysPage}>
-            <h1>סקרים והצבעות</h1>
-
-            <div className={styles.mainPage}>
-                <div className={styles.main}>{getMainComp()}</div>
-
-                <div className={styles.menu}>
-                    <button onClick={() => setMode('add')}>הוספת סקר</button>
-                    <button onClick={() => setMode('list')}>צפייה בסקרים</button>
-                    <button onClick={() => setMode('vote')}>הצבעה בסקר</button>
-                </div>
-            </div>
+            <h1 style={{marginBottom: 30}}>סקרים והצבעות</h1>
+            {isAdmin && <button
+                className={styles.addNewSurveyButton}
+                onClick={() => setShowAddNewSurveyPopup(true)}
+            >
+                הוספת סקר חדש +
+            </button>}
 
 
+                <SurveysList fetchDep={counterFetch}/>
+
+
+            <Modal
+                show={showAddNewSurveyPopup}
+                // contentClassName={styles.changeImageModal}
+                centered
+                size="s.m"
+                backdrop={"static"}
+            >
+                <AddNewSurvey closePopup={() => setShowAddNewSurveyPopup(false)} callback={callbackAddNewSurvey}/>
+            </Modal>
         </div>
     );
 }

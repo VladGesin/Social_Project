@@ -3,24 +3,8 @@
   padding: 0 30px;
 
   .mainPage {
-    display: flex;
-    justify-content: flex-end;
-
-    .menu{
-      height: 360px;
-      border: 1px solid;
-      display: flex;
-      flex-direction: column;
-      padding: 50px;
-
-      button{
-        margin-bottom: 20px;
-      }
-    }
-
-    .main{
-      padding: 20px 50px;
+    .addNewSurveyButton{
+      margin-bottom: 50px;
     }
   }
-
 }

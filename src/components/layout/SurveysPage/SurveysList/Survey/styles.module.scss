@@ -1,0 +1,87 @@
+.surveyItem {
+  border: 1px solid black;
+  border-radius: 4px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 350px;
+  height: 550px;
+  padding: 20px 0;
+  background: white;
+  position: relative;
+  margin-left: 30px;
+
+  .voteButton{
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 4px;
+
+    &:disabled{
+      color: #b9bbbe;
+    }
+
+  }
+
+  .headerItem {
+    width: 100%;
+    text-align: end;
+    padding: 0 30px;
+    margin-bottom: 30px;
+  }
+
+  .options {
+
+    width: 100%;
+
+    .headerOptions {
+      display: flex;
+      flex-direction: row-reverse;
+      padding-right: 30px;
+      margin-bottom: 20px;
+
+      h4 {
+        margin-left: 20px;
+      }
+    }
+
+
+    .optionContainer {
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      margin-bottom: 20px;
+
+      .answerCounter{
+        margin: 0;
+        padding-right: 50px;
+      }
+
+      .progress {
+        display: flex;
+        justify-content: flex-end;
+        padding: 0 15px;
+        flex: 1;
+        border: 1px solid black;
+        position: relative;
+
+        .progressLoading{
+          position: absolute;
+          left: 0;
+          height: 100%;
+          top: 0;
+          background: #a2c3ff87;
+        }
+      }
+
+      .voteInput {
+        cursor: pointer;
+        margin-left: 20px;
+      }
+
+    }
+  }
+}
