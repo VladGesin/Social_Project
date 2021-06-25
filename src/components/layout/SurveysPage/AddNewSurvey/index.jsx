@@ -54,22 +54,22 @@ export const AddNewSurvey = ({callback, closePopup}) => {
         return allAnswersIsValid && surveyDetailsIsValid;
     }
     const handleAddNewSurvey = () => {
-        const _surveyData = {
-            ...surveyData,
-            start_time: `${surveyData.start_time} 00:00:00-07`,
-            end_time: `${surveyData.end_time} 23:59:00-07`,
-        }
-
-        api.post('/survey/', _surveyData)
+        api.post('/survey/', surveyData)
             .then((res) => {
-                !res.data && alert('הסקר לא נוסף')
-                callback()
-
+                if (!res.data.data) {
+                    alert('הסקר לא נוסף');
+                } else {
+                    callback();
+                }
             })
-            .catch((err) => {
-                alert('הסקר לא נוסף - שגיאה')
+            .catch(err => {
+                alert('הסקר לא נוסף - שגיאה');
+            })
+            .finally(() =>{
+                closePopup();
             })
     }
+
     const renderOptions = () => {
         const newOptionIsAvailable = surveyData.answers.length < 4
         const validToRemoveOption = surveyData.answers.length > 2

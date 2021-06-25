@@ -2,33 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="59e5e2e8-24de-483b-9fff-1138c6a98ac4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/layout/SurveysPage/SurveysList/Survey/index.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/layout/SurveysPage/SurveysList/Survey/styles.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/asset-manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/service-worker.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/css/2.432f1e83.chunk.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/css/2.432f1e83.chunk.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/runtime-main.53aa5759.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/runtime-main.53aa5759.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/account_balance-black-18dp.f5235c6d.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/background-bright.1fbaa233.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/down-arrow.70ac1623.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/loginlogoimg.f13b25b6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/magnifying-glass.1f42ab86.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/multiple-users-silhouette.2aa64ca8.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/school-black-18dp.90a06e09.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/search.ecef733a.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/settings.7e19eab3.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/url.3473cffc.svg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/layout/Login/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/Login/Login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/layout/SurveysPage/AddNewSurvey/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/SurveysPage/AddNewSurvey/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/SurveysPage/AddNewSurvey/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/SurveysPage/AddNewSurvey/styles.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layout/SurveysPage/SurveysList/Survey/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/SurveysPage/SurveysList/Survey/index.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/layout/SurveysPage/SurveysList/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/SurveysPage/SurveysList/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/SurveysPage/SurveysList/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/SurveysPage/SurveysList/styles.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/layout/SurveysPage/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/SurveysPage/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/SurveysPage/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/SurveysPage/styles.module.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,8 +89,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.start" />
-        <item itemvalue="npm.build" />
         <item itemvalue="npm.deploy" />
+        <item itemvalue="npm.build" />
       </list>
     </recent_temporary>
   </component>
@@ -145,6 +124,10 @@
       <workItem from="1622891781856" duration="835000" />
       <workItem from="1622893593161" duration="1239000" />
       <workItem from="1622895404324" duration="1454000" />
+      <workItem from="1622897222330" duration="893000" />
+      <workItem from="1624613722000" duration="1740000" />
+      <workItem from="1624615557405" duration="1894000" />
+      <workItem from="1624620450680" duration="286000" />
     </task>
     <task id="LOCAL-00001" summary="fix sort by status">
       <created>1609281369384</created>
@@ -223,7 +206,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620396879119</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="add survey">
+      <created>1622897516041</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1622897516041</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

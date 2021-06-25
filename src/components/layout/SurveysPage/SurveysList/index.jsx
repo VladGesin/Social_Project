@@ -25,6 +25,11 @@ export const SurveysList = ({fetchDep}) => {
 
     const handleChangeOnlyActiveFilter = (e) => setShowActiveOnly(e.target.checked)
 
+    const sortedList = !isLoading && surveysList.sort((a, b) => {
+        return b.isActive - a.isActive;
+    })
+
+
     return (
         <div style={{paddingTop: 50}}>
 
@@ -42,8 +47,8 @@ export const SurveysList = ({fetchDep}) => {
                 {
                     !isLoading ?
                         <div className={styles.list}>
-                            {surveysList.map((item, i) => {
-                                return <Survey item={item} key={i} doFetch={doFetch}/>
+                            {sortedList.map((item, i) => {
+                                return <Survey item={item} key={i} doFetch={doFetch} activeMode={showActiveOnly}/>
                             })}
                         </div>
                         :

@@ -12,7 +12,6 @@ export const SurveysPage = () => {
     const [counterFetch, setCounterFetch] = useState(0)
 
     const callbackAddNewSurvey = () => {
-        setShowAddNewSurveyPopup(false)
         setCounterFetch(prevState => prevState + 1)
     }
 
