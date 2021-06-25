@@ -4,6 +4,7 @@ import style from "./MeetingSummary.module.scss";
 import { Form, Col, Button, Card } from "react-bootstrap";
 import Context from "../../../store/Context";
 import { v4 as uuidv4 } from 'uuid';
+import api from "../../../api";
 
 const MeetingSummary = () => {
   const [isModelOpen, setIsOpenModel] = useState(false);
@@ -14,6 +15,8 @@ const MeetingSummary = () => {
   const [filesList, setFilesList] = useState([{key: 1, approved: true, committeeName: 'א'}, {key: 2, approved: null, committeeName: 'א'}, {key: 3, approved: false, committeeName: 'א'}, {key: 4, approved: true, committeeName: 'ב'}, {key: 5, approved: null, committeeName: 'ב'},
   {key: 6, approved: undefined, committeeName: 'ב'}, {key: 7, approved: false, committeeName: 'ב'}, {key: 8, approved: false, committeeName: 'ב'}, {key: 9, approved: true ,committeeName: 'ב'}, {key: 10, approved: true, committeeName: 'ב'},
   {key: 11, approved: null, committeeName: 'ג'}, {key: 12, approved: true, committeeName: 'ג'}]);
+
+  const [myCommittees, setMyCommittees] = useState([]);
   
 
   useEffect(() => {
@@ -22,12 +25,19 @@ const MeetingSummary = () => {
     }}));
     const uniqueCommittees = getUniqueCommitteeNames();
     setSelectedCommittee(uniqueCommittees[0]);
-    console.log(filesList)
+    fetchMyCommittees();
   }, [])
   // Todo change card type according to user type
    // approved/ denied functions
    // filtering card list by committee
    // download file button
+
+
+   const fetchMyCommittees = async () => {
+    const res = await api.get(`committees/`);
+    const filteredCommittees = res.data.map(c => c.name);
+    setMyCommittees(filteredCommittees);
+   }
 
    const fileDownload = (file) => {
      // file download
