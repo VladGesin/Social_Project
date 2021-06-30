@@ -83,7 +83,7 @@ export const Survey = ({item, doFetch, activeMode}) => {
                     </label>
                     :
                     <label style={{direction: "rtl"}}>
-                        סקר לא פעיל!
+                        סקר לא פעיל, זמן ההצבעה עבר :)
                     </label>
                 }
             </div>
@@ -113,7 +113,7 @@ export const Survey = ({item, doFetch, activeMode}) => {
                                     />}
 
                                 </div>
-                                <label className={styles.answerCounter}>הצבעות {answer_counter}</label>
+                                <label className={styles.answerCounter}> {answer_counter} הצבעות </label>
                             </div>
                         );
                     })}

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="59e5e2e8-24de-483b-9fff-1138c6a98ac4" name="Default Changelist" comment="">
+    <list default="true" id="59e5e2e8-24de-483b-9fff-1138c6a98ac4" name="Default Changelist" comment="add survey">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/layout/Login/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/Login/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/SurveysPage/AddNewSurvey/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/SurveysPage/AddNewSurvey/index.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/layout/SurveysPage/SurveysList/Survey/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/SurveysPage/SurveysList/Survey/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/SurveysPage/SurveysList/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/SurveysPage/SurveysList/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layout/SurveysPage/SurveysList/Survey/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/SurveysPage/SurveysList/Survey/styles.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/layout/SurveysPage/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/SurveysPage/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layout/SurveysPage/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/SurveysPage/styles.module.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,7 +127,9 @@
       <workItem from="1622897222330" duration="893000" />
       <workItem from="1624613722000" duration="1740000" />
       <workItem from="1624615557405" duration="1894000" />
-      <workItem from="1624620450680" duration="286000" />
+      <workItem from="1624620450680" duration="1073000" />
+      <workItem from="1624920257167" duration="80000" />
+      <workItem from="1625067310699" duration="1221000" />
     </task>
     <task id="LOCAL-00001" summary="fix sort by status">
       <created>1609281369384</created>
@@ -213,7 +215,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622897516041</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="add survey">
+      <created>1624621034322</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1624621034322</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

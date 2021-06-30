@@ -20,12 +20,19 @@ export const SurveysPage = () => {
     return (
         <div className={styles.rootSurveysPage}>
             <h1 style={{marginBottom: 30}}>סקרים והצבעות</h1>
-            {isAdmin && <button
-                className={styles.addNewSurveyButton}
-                onClick={() => setShowAddNewSurveyPopup(true)}
-            >
-                הוספת סקר חדש +
-            </button>}
+            {isAdmin &&
+                <div style={{display: "flex",
+                    justifyContent:"flex-end"}}>
+                    <button
+                        className={styles.addNewSurveyButton}
+                        onClick={() => setShowAddNewSurveyPopup(true)}
+                    >
+                        <span style={{marginRight: 10, fontSize: 26}}>הוספת סקר חדש </span>
+                        <i className="fas fa-plus"></i>
+                    </button>
+                </div>
+
+            }
 
 
                 <SurveysList fetchDep={counterFetch}/>

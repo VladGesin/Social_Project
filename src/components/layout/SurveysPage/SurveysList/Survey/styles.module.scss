@@ -1,5 +1,6 @@
 .surveyItem {
-  border: 1px solid black;
+  box-shadow: 0 2px 5px #bdbdbd;
+  border: 1px solid #ccc2c273;
   border-radius: 4px;
   margin-bottom: 30px;
   display: flex;
@@ -58,6 +59,7 @@
       .answerCounter{
         margin: 0;
         padding-right: 50px;
+        direction: rtl;
       }
 
       .progress {
@@ -65,10 +67,12 @@
         justify-content: flex-end;
         padding: 0 15px;
         flex: 1;
-        border: 1px solid black;
+        border: 1px solid #b9b8b8;
         position: relative;
+        border-radius: 4px;
 
         .progressLoading{
+          border-radius: 4px;
           position: absolute;
           left: 0;
           height: 100%;
