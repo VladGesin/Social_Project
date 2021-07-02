@@ -273,7 +273,7 @@ const MeetingSummary = () => {
                               <i className="fas fa-check-circle" style={{color:"green"}}></i>
                            ) : c.approved === null ||
                              c.approved == undefined ? (
-                              <i className="fas fa-clock" style={{color:"#E95724"}}></i>
+                              <i className="fas fa-clock" style={{color:"#ffb74d"}}></i>
                            ) : (
                               <i className="fas fa-ban" style={{color:"red"}}></i>
                            )}
@@ -298,6 +298,7 @@ const MeetingSummary = () => {
                                           download
                                        >
                                           <i
+                                             style={{ color: "#01579b"}}
                                              className="fas fa-download"
                                              onClick={() => fileDownload(c)}
                                           ></i>
@@ -325,16 +326,16 @@ const MeetingSummary = () => {
                               }}
                            >
                               <Button
-                                 variant="danger"
+                                 style={{ backgroundColor: "#e57373" , borderColor: "#e57373"}}
                                  onClick={() => onSummaryDecision(c, false)}
                               >
-                                 דחה
+                                 דחיה
                               </Button>
                               <Button
-                                 variant="success"
+                                 style={{ backgroundColor: "#81c784" , borderColor: "#81c784"}}
                                  onClick={() => onSummaryDecision(c, true)}
                               >
-                                 אשר
+                                 אישור
                               </Button>
                            </div>
                         )}
