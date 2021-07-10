@@ -20,9 +20,12 @@ export const SurveysPage = () => {
     return (
         <div className={styles.rootSurveysPage}>
             <h1 style={{marginBottom: 30}}>סקרים והצבעות</h1>
-            {isAdmin &&
-                <div style={{display: "flex",
-                    justifyContent:"flex-end"}}>
+
+            {isAdmin && (
+                <div style={{
+                    display: "flex",
+                    justifyContent: "flex-end"
+                }}>
                     <button
                         className={styles.addNewSurveyButton}
                         onClick={() => setShowAddNewSurveyPopup(true)}
@@ -32,10 +35,9 @@ export const SurveysPage = () => {
                     </button>
                 </div>
 
-            }
+            )}
 
-
-                <SurveysList fetchDep={counterFetch}/>
+            <SurveysList fetchDep={counterFetch}/>
 
 
             <Modal

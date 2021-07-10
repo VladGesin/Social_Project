@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import styles from "./styles.module.scss";
 import api from "../../../../api";
 import {Survey} from "./Survey";
+import Switch from '@material-ui/core/Switch';
 
 export const SurveysList = ({fetchDep}) => {
 
@@ -35,11 +36,12 @@ export const SurveysList = ({fetchDep}) => {
 
             <div style={{marginBottom : 30}}>
                 <label>פעילים בלבד</label>
-                <input
-                    type={'checkbox'}
-                    disabled={isLoading}
+                <Switch
                     checked={showActiveOnly}
                     onChange={handleChangeOnlyActiveFilter}
+                    color="primary"
+                    name="checkedB"
+                    inputProps={{ 'aria-label': 'primary checkbox' }}
                 />
             </div>
 
@@ -52,7 +54,7 @@ export const SurveysList = ({fetchDep}) => {
                             })}
                         </div>
                         :
-                        <div>Loading...</div>
+                        <div>טוען נתונים</div>
                 }
             </div>
 

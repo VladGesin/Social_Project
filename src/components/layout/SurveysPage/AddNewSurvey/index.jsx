@@ -3,6 +3,7 @@ import styles from "./styles.module.scss";
 import api from "../../../../api";
 import TextField from '@material-ui/core/TextField';
 import {makeStyles} from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -65,7 +66,7 @@ export const AddNewSurvey = ({callback, closePopup}) => {
             .catch(err => {
                 alert('הסקר לא נוסף - שגיאה');
             })
-            .finally(() =>{
+            .finally(() => {
                 closePopup();
             })
     }
@@ -200,14 +201,20 @@ export const AddNewSurvey = ({callback, closePopup}) => {
                 </div>
 
 
-                <div style={{display: "flex", justifyContent: "center", marginTop: 30}}>
-                    <button
-                        disabled={!getIsSurveyDataValid()}
+                <div style={{
+                    display: "flex",
+                    marginTop: 30,
+                    justifyContent: "center",
+                }}>
+                    <Button
+                        color="primary"
+                        variant="contained"
                         onClick={handleAddNewSurvey}
+                        disabled={!getIsSurveyDataValid()}
                         className={styles.addButton}
                     >
                         הוספת סקר
-                    </button>
+                    </Button>
                 </div>
 
             </div>

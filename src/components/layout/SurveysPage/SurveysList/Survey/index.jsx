@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import styles from "./styles.module.scss";
 import api from "../../../../../api";
+import Button from '@material-ui/core/Button';
 
 export const Survey = ({item, doFetch, activeMode}) => {
 
@@ -26,9 +27,9 @@ export const Survey = ({item, doFetch, activeMode}) => {
 
         api.patch(`voting/`, params)
             .then(res => {
-                if (res.data.data.status === "failed"){
+                if (res.data.data.status === "failed") {
                     alert(res.data.data.description === "User already voted for this survey" ? "המשתמש הנוכחי כבר הצביע עבור סקר זה!" : res.data.data.description);
-                }else {
+                } else {
                     doFetch();
                 }
 
@@ -36,7 +37,7 @@ export const Survey = ({item, doFetch, activeMode}) => {
             .catch(err => {
                 alert('שגיאה - לא בוצעה הצבעה!');
             })
-            .finally(() =>{
+            .finally(() => {
                 setIsLoading(false);
                 setIndexSelectedAnswer(-1);
             })
@@ -65,7 +66,7 @@ export const Survey = ({item, doFetch, activeMode}) => {
 
     const totalVotes = getTotalVotes(answers)
 
-    const sortedAnswers = answers.sort((a, b) =>{
+    const sortedAnswers = answers.sort((a, b) => {
         return b.answer_counter - a.answer_counter;
     })
 
@@ -120,13 +121,17 @@ export const Survey = ({item, doFetch, activeMode}) => {
                 </>
             </div>
 
-            {isActiveSurvey && <button
-                className={styles.voteButton}
-                disabled={indexSelectedAnswer < 0 || isLoading}
-                onClick={handleVote}
-            >
-                הצבעה
-            </button>}
+            {isActiveSurvey && (
+                <Button
+                    variant="contained"
+                    color="primary"
+                    disabled={indexSelectedAnswer < 0 || isLoading}
+                    onClick={handleVote}
+                    className={styles.voteButton}
+                >
+                    הצבעה
+                </Button>
+            )}
         </div>
     );
 }
