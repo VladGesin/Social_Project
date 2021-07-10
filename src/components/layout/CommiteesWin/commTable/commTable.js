@@ -56,6 +56,7 @@ function CommTable(props) {
             );
             props.setCommitteeData(newArrayAfterDelete);
             close();
+            props.setReRender(curr => !curr);
             setMsg({
                msg: "חבר הועדה נמחק בהצלחה",
                type: "delete",

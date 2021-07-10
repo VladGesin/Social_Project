@@ -130,7 +130,7 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users, setMsg }) => {
          console.log(reqObj);
 
          await api.post(`users`, reqObj);
-         for (let c of committees) {
+         for (let c of committeesBoxItem) {
             await api.post("committees", {
                userID: formDetails.id,
                committeeName: c.name,

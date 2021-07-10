@@ -6,7 +6,7 @@ const InfoCardMap = (props) => {
       <tr>
         <td>{props.card.index}</td>
         <td>{props.card.firstName} {props.card.lastName}</td>
-        <td>{props.card.committeePosition}</td>
+        <td>{props.card.type === 'admin'? "מנהל מערכת" : props.card.type === 'chairperson'? "יושב ראש" : props.card.type === 'committee'? "חבר ועדה" : "הורה"}</td>
         <td>{props.card.phone}</td>
         <td><a href={`mailto:${props.card.email}`}>{props.card.email}</a></td>
         {props.isAllowed && <td>

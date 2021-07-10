@@ -16,6 +16,7 @@ export const CommiteesWin = (props) => {
 
    const [committeeData, setCommitteeData] = useState([]);
    const [reRender, setReRender] = useState(false);
+
    useEffect(() => {
       const getCommittees = async () => {
          //return all committees;
@@ -31,6 +32,7 @@ export const CommiteesWin = (props) => {
 
       const getCommitteesData = async () => {
          const res = await api.get(`committeeParticipants/${commName}`);
+         console.log('idannnnn')
          console.log(res.data);
          const data = res.data.map((cur, i) => {
             return {
@@ -39,6 +41,8 @@ export const CommiteesWin = (props) => {
                index: i + 1,
             };
          });
+         console.log('after idannn')
+         console.log(res.data);
          setCommitteeData(data);
       };
 

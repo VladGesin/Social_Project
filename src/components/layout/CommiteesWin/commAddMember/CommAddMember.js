@@ -12,7 +12,7 @@ const CommAddMember = (props) => {
    const [msg, setMsg] = useState({ msg: "" });
    const [formData, setFormData] = useState({
       email: "",
-   });
+   });   
 
    const handleClose = () => {
       setEmailIsValid(true);
@@ -43,7 +43,7 @@ const CommAddMember = (props) => {
                   msg: "חבר הועדה התווסף בהצלחה",
                   type: "success",
                });
-               props.setReRender(!props.reRender);
+               props.setReRender(curr => !curr);
             })
             .catch((error) => {
                if(error.response.status === 500) {
@@ -95,6 +95,7 @@ const CommAddMember = (props) => {
             <Card
                className="text-right h-auto container"
                height="fit-content !important"
+               style={{padding:"inherit"}}
             >
                <Card.Header as="h5" dir="rtl">
                   הוספת חבר ועדה

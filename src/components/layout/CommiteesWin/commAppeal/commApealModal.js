@@ -135,7 +135,7 @@ const CommApealModal = () => {
         dir="rtl"
       >
         
-        <Card className="text-right h-auto container" height="fit-content !important">
+        <Card className="text-right h-auto container" height="fit-content !important" style={{padding:"inherit"}}>
           <Card.Header as="h5" dir="rtl">
             פניה ל{commName}  
           </Card.Header>

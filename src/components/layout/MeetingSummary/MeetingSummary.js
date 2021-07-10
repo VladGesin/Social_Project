@@ -37,7 +37,8 @@ const MeetingSummary = () => {
    useEffect(() => {
       (async () => {
          const res = await api.get(`/meetingSummary/${selectedCommittee}`);
-
+         console.log('ddd')
+         console.log(res.data)
          setFilesList(
             res.data.map((f) => {
                return {
@@ -59,8 +60,10 @@ const MeetingSummary = () => {
    // download file button
 
    const fetchMyCommittees = async () => {
-      const res = await api.get(`committees/`);
-      const filteredCommittees = res.data.map((c) => c.name);
+      const res = await api.get(`committees/${context.userState.id}`);
+      console.log('ddd')
+      console.log(res.data)
+      const filteredCommittees = res.data.map((c) => c.committee_name);
       setSelectedCommittee(filteredCommittees[0]);
       setMyCommittees(filteredCommittees);
       const docs = await api.get(`/meetingSummary/${filteredCommittees[0]}`);
@@ -250,8 +253,8 @@ const MeetingSummary = () => {
          </div>
          <div className={style.cardsContainer}>
             {filesList.map(
-               (c) =>
-                  c.approvedRadio === selectedRadio && (
+               (c) =>{               
+                  return ((c.approvedRadio === selectedRadio && c.approvedRadio !== 'waiting') || (c.approvedRadio === selectedRadio && c.approvedRadio === 'waiting' && c.created_by == context.userState.id)) && (
                      <div className={style.cardContainer} key={c.meeting_id}>
                         <Card
                            bg="Light"
@@ -337,8 +340,8 @@ const MeetingSummary = () => {
                                  {c.description}
                               </Card.Text>
                            </Card.Body>
-                           {(c.approved === null ||
-                              c.approved === undefined) && (
+                           {((c.approved === null ||
+                              c.approved === undefined) && context.userState.userType === 'chairperson') && (
                               <div
                                  className={style.btnContainer}
                                  style={{
@@ -369,12 +372,13 @@ const MeetingSummary = () => {
                         </Card>
                      </div>
                   )
-            )}
+                                 })}
          </div>
          <Modal show={isModelOpen} onHide={handleClose} size="lg" dir="rtl">
             <Card
                className="text-right h-auto container"
                height="fit-content !important"
+               style={{padding:"inherit"}}
             >
                <Card.Header as="h5" dir="rtl">
                   העלאת סיכום שיחה
