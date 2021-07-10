@@ -254,7 +254,9 @@ const MeetingSummary = () => {
          <div className={style.cardsContainer}>
             {filesList.map(
                (c) =>{               
-                  return ((c.approvedRadio === selectedRadio && c.approvedRadio !== 'waiting') || (c.approvedRadio === selectedRadio && c.approvedRadio === 'waiting' && c.created_by == context.userState.id)) && (
+                  return ((c.approvedRadio === selectedRadio && c.approvedRadio !== 'waiting') 
+                  || (c.approvedRadio === selectedRadio && c.approvedRadio === 'waiting' && c.created_by == context.userState.id) 
+                  ||(c.approvedRadio === selectedRadio && c.approvedRadio === 'waiting' && context.userState.userType === 'chairperson')) && (
                      <div className={style.cardContainer} key={c.meeting_id}>
                         <Card
                            bg="Light"
