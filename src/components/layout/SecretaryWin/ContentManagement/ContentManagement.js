@@ -10,7 +10,7 @@ const ContentManagement = ({ activePage, setMsg }) => {
          {activePage.photos && <Photos setMsg={setMsg} />}
          {activePage.committees && <Committees setMsg={setMsg} />}
          {activePage.goodWord && <GoodWord setMsg={setMsg} />}
-         {activePage.contactPageManagement && <Contact setMsg={setMsg} />}
+         {/* {activePage.contactPageManagement && <Contact setMsg={setMsg} />} */}
       </div>
    );
 };

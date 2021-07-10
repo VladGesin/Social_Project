@@ -90,7 +90,7 @@ const SecretaryWinSideBar = ({ activePage, setActivePage }) => {
                >
                   פניות לוועדות
                </p>
-               <p
+               {/* <p
                   className={`${
                      activePage.contactPageManagement && `${style.active}`
                   }`}
@@ -106,7 +106,7 @@ const SecretaryWinSideBar = ({ activePage, setActivePage }) => {
                   }
                >
                   ניהול דף קשר
-               </p>
+               </p> */}
             </div>
          )}
       </div>

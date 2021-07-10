@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Carousel, CarouselItem, CarouselControl } from "reactstrap";
 import "./Slider.css";
+import axios from "axios";
+
 import api from "../../../../../api";
 
 const Slider = () => {
@@ -30,10 +32,14 @@ const Slider = () => {
       setActiveIndex(nextIndex);
    };
 
-   const getPhotos = () => {
-      api.get("getAllImages").then((res) => {
-         setPhotos(res.data);
-      });
+   const getPhotos = async () => {
+      const res = await axios.get(
+         "https://www.hitprojectscenter.com/social-API/getAllImages"
+      );
+      setPhotos(res.data);
+      // api.get("getAllImages").then((res) => {
+      //    setPhotos(res.data);
+      // });
    };
 
    const getEnablePhotos = () => {

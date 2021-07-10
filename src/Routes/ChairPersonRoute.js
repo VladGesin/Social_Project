@@ -10,7 +10,8 @@ const ChairPersonRoute = ({ component: Component, ...rest }) => {
          {...rest}
          render={(props) => {
             return !context.userState.loading &&
-               context?.userState?.userType !== "chairperson" ? (
+               context?.userState?.userType !== "chairperson" &&
+               context?.userState?.userType !== "committee" ? (
                <Redirect to="/Social_Project/" />
             ) : (
                <Component {...props} />

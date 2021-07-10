@@ -55,7 +55,6 @@ const routesData = [
    {
       component: MeetingSummary,
       path: "/Social_Project/MeetingSummary",
-      public: true,
    },
 ];
 
