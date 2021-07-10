@@ -80,8 +80,9 @@ const MainNavBar = () => {
                      <NavMapLinks link={item} key={item.name} />
                   ))}
                </NavDropdown>
-
-               <NavLink to="/Social_Project/SecretaryWin">מסך ניהול</NavLink>
+               {context.userState.userType == "admin" && (
+                  <NavLink to="/Social_Project/SecretaryWin">מסך ניהול</NavLink>
+               )}
             </Nav>
          </Navbar.Collapse>
       </Navbar>

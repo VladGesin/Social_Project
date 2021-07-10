@@ -101,6 +101,12 @@ const NewMeeting = () => {
          const res = await api.post("/xpertesy/createroom", data);
          return res;
       } catch (e) {
+         if (e.response.status == 500) {
+            setMessages([
+               ...messages,
+               { msg: `כתובת המייל לא קיימת במערכת`, type: "warning" },
+            ]);
+         }
          console.log(e);
       }
    };
