@@ -34,7 +34,7 @@ const ComitteeItems = {
       },
       {
          name: "סקרים",
-         path: "/Social_Project/",
+         path: "/Social_Project/Surveys",
          userType: "user, committee, chairperson, admin",
       },
    ],
