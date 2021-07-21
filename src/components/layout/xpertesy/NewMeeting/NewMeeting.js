@@ -16,6 +16,7 @@ const NewMeeting = () => {
       startTime: "",
       participants: "",
    });
+
    const [participants, setParticipants] = useState([]);
    const [messages, setMessages] = useState([]);
    const urlRef = useRef(null);
@@ -107,6 +108,15 @@ const NewMeeting = () => {
                { msg: `כתובת המייל לא קיימת במערכת`, type: "warning" },
             ]);
          }
+
+         setTimeout(() => {
+            setMessages((cur) => {
+               const msgs = cur.slice(1);
+               return msgs;
+            });
+         }, 3000);
+
+         
          console.log(e);
       }
    };

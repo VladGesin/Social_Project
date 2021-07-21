@@ -38,7 +38,7 @@ const MeetingsTable = ({
                   <td>
                      {m.participants.map((p, i) => (
                         <span key={i}>
-                           {i !== m.participants.length - 1 ? `${p} , ` : p}
+                           {i !== m.participants.length - 1 ? `${p.email} , ` : p.email}
                         </span>
                      ))}
                   </td>

@@ -130,13 +130,17 @@ const CreateNewUser = ({ isOpen, close, id, setUsers, users, setMsg }) => {
          console.log(reqObj);
 
          await api.post(`users`, reqObj);
-         for (let c of committeesBoxItem) {
-            await api.post("committees", {
-               userID: formDetails.id,
-               committeeName: c.name,
+         for await (let c of committeesBoxItem) {
+            console.log(c)
+            const d = {
                email: reqObj.email,
-            });
-
+               committeeName: c,
+               role: "חבר ועדה"
+            }
+            console.log(d)
+             api.post(`committees`, d)
+               
+            
             // if (
             //    chairperson === c.name &&
             //    (userType.admin || userType.chairperson)
