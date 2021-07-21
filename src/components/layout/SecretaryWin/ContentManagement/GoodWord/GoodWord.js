@@ -28,11 +28,11 @@ const GoodWord = ({ msg, setMsg }) => {
          const allGoodWords = await api.get("goodWord");
          console.log(allGoodWords.data);
          for (let goodWord of allGoodWords.data) {
-            // const user = await api.get(`user/${goodWord.sender_id}`);
-            //  goodWord.full_name = `${user.data[0].firstName} ${user.data[0].lastName}`;
+            const user = await api.get(`user/${goodWord.sender_id}`);
+            goodWord.full_name = `${user.data[0].firstName} ${user.data[0].lastName}`;
             goodWord.time = new Date(goodWord.time).toLocaleDateString();
-            //goodWord.phone = user.data[0].phoneNumber;
-            // goodWord.email = user.data[0].email;
+            goodWord.phone = user.data[0].phoneNumber;
+            goodWord.email = user.data[0].email;
             goodWord.state =
                goodWord.state === null
                   ? "טרם טופל"
@@ -40,7 +40,6 @@ const GoodWord = ({ msg, setMsg }) => {
                   ? "אושר"
                   : "נדחה";
          }
-
          setData(
             allGoodWords.data.sort((a, b) => {
                return a.committee_name > b.committee_name

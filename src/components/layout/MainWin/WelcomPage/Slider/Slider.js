@@ -16,10 +16,6 @@ const Slider = () => {
       getPhotos();
    }, []);
 
-   useEffect(() => {
-      getEnablePhotos();
-   }, [photos]);
-
    const next = () => {
       if (animating) return;
       const nextIndex = activeIndex === slides.length - 1 ? 0 : activeIndex + 1;
@@ -34,25 +30,16 @@ const Slider = () => {
 
    const getPhotos = async () => {
       const res = await axios.get(
-         "https://www.hitprojectscenter.com/social-API/getAllImages"
+         "https://www.hitprojectscenter.com/social-API/getImagesByStatus/true"
       );
+      console.log(res.data);
       setPhotos(res.data);
       // api.get("getAllImages").then((res) => {
       //    setPhotos(res.data);
       // });
    };
 
-   const getEnablePhotos = () => {
-      if (goPhotos.length == 0) {
-         photos.map((photo) => {
-            if (photo.status) {
-               goPhotos.push(photo);
-            }
-         });
-      }
-   };
-
-   const slides = goPhotos.map((photo) => {
+   const slides = photos.map((photo) => {
       return (
          <CarouselItem key={photo.path}>
             <img
