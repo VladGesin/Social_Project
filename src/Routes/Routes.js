@@ -13,6 +13,7 @@ import { MainCommitteesPage } from "../components/layout/MainCommitteesPage/Main
 import Login from "../components/layout/Login/Login";
 import ForgotPassword from "../components/layout/Login/ForgotPassword";
 import PasswordReset from "../components/layout/Login/PasswordReset";
+import {SurveysPage} from "../components/layout/SurveysPage/index";
 import { MapsPage } from "../components/layout/MapsPage/MapsPage";
 import CommInquiryManagement from "../components/CommInquiryManagement/CommInquiryManagement";
 import ChairPersonRoute from "./ChairPersonRoute";
@@ -42,16 +43,10 @@ const routesData = [
       chairPerson: true,
    },
    { component: Login, path: "/Social_Project/", exact: true, public: true },
-   {
-      component: ForgotPassword,
-      path: "/Social_Project/ForgotPassword",
-      public: true,
-   },
-   {
-      component: PasswordReset,
-      path: "/Social_Project/PasswordReset",
-      public: true,
-   },
+
+   {component: ForgotPassword,path: "/Social_Project/ForgotPassword",public: true,},
+   {component: PasswordReset,path: "/Social_Project/PasswordReset",public: true,},
+   {component: SurveysPage, path: "/Social_Project/Surveys"},
    {
       component: MeetingSummary,
       path: "/Social_Project/MeetingSummary",
